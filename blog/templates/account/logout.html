@@ -4,43 +4,45 @@
 {% block title %}Sign Out — USA Content Hub{% endblock %}
 
 {% block content %}
-<div class="auth-page">
-    <div class="auth-card" style="max-width:400px;text-align:center;">
-        <div class="auth-header">
-            <div class="auth-logo">👋</div>
-            <h1>Sign Out</h1>
-            <p>Are you sure you want to sign out?</p>
+<div class="auth-page-wrap">
+    <canvas id="auth-canvas"></canvas>
+    <div class="logout-card">
+        <div class="logout-icon">
+            <div class="wave-circle"></div>
+            <span>👋</span>
         </div>
+        <h1>Leaving so soon?</h1>
+        <p>Are you sure you want to sign out of your account?</p>
         <form method="post" action="{% url 'account_logout' %}">
             {% csrf_token %}
-            <button type="submit" class="auth-submit-btn">Yes, Sign Out</button>
+            <div class="logout-actions">
+                <a href="{% url 'blog:home' %}" class="btn-stay">Stay Signed In</a>
+                <button type="submit" class="btn-logout">Yes, Sign Out</button>
+            </div>
         </form>
-        <div class="auth-footer">
-            <p><a href="{% url 'blog:home' %}">← Back to Home</a></p>
-        </div>
     </div>
 </div>
 
 <style>
-.auth-page {
-    display:flex; flex-direction:column; align-items:center; justify-content:center;
-    min-height:60vh; padding:2rem 1rem; grid-column:1/-1;
-}
-.auth-card {
-    width:100%; background:var(--card-bg); border:1px solid var(--border);
-    border-radius:16px; padding:2.5rem 2rem; box-shadow:0 8px 30px rgba(0,0,0,.08);
-}
-.auth-header { text-align:center; margin-bottom:1.75rem; }
-.auth-logo { font-size:2.5rem; margin-bottom:.5rem; }
-.auth-header h1 { font-size:1.6rem; margin:0 0 .4rem; color:var(--text); }
-.auth-header p { font-size:.9rem; color:var(--text-light); margin:0; }
-.auth-submit-btn {
-    width:100%; padding:13px; background:#dc2626; color:#fff;
-    border:none; border-radius:10px; cursor:pointer;
-    font-size:.95rem; font-weight:700; transition:all .2s;
-}
-.auth-submit-btn:hover { background:#b91c1c; }
-.auth-footer { text-align:center; margin-top:1.5rem; font-size:.9rem; color:var(--text-light); }
-.auth-footer a { color:var(--primary); font-weight:600; text-decoration:none; }
+.auth-page-wrap{position:relative;min-height:70vh;display:flex;align-items:center;justify-content:center;padding:2rem 1rem;grid-column:1/-1;overflow:hidden}
+#auth-canvas{position:absolute;top:0;left:0;width:100%;height:100%;z-index:0;pointer-events:none}
+.logout-card{position:relative;z-index:1;max-width:420px;width:100%;text-align:center;background:var(--card-bg,#0d1117);border:1px solid rgba(255,255,255,.06);border-radius:24px;padding:3rem 2.5rem;box-shadow:0 25px 60px rgba(0,0,0,.3)}
+.logout-icon{position:relative;width:80px;height:80px;margin:0 auto 1.5rem;display:flex;align-items:center;justify-content:center}
+.logout-icon span{font-size:2.5rem;position:relative;z-index:1;animation:wave 2s ease-in-out infinite}
+@keyframes wave{0%,100%{transform:rotate(0)}25%{transform:rotate(20deg)}50%{transform:rotate(-10deg)}75%{transform:rotate(15deg)}}
+.wave-circle{position:absolute;width:80px;height:80px;border-radius:50%;background:radial-gradient(circle,rgba(251,191,36,.1),transparent);animation:pulse 2s ease-in-out infinite}
+@keyframes pulse{0%,100%{transform:scale(1);opacity:.5}50%{transform:scale(1.3);opacity:0}}
+.logout-card h1{font-size:1.5rem;font-weight:800;color:var(--text);margin:0 0 .5rem}
+.logout-card p{font-size:.9rem;color:var(--text-light);margin:0 0 2rem}
+.logout-actions{display:flex;gap:.75rem}
+.btn-stay{flex:1;padding:12px;background:var(--bg);border:1px solid var(--border);border-radius:12px;color:var(--text);font-size:.9rem;font-weight:600;text-decoration:none;text-align:center;transition:all .25s}
+.btn-stay:hover{border-color:var(--primary);background:rgba(37,99,235,.05)}
+.btn-logout{flex:1;padding:12px;background:linear-gradient(135deg,#dc2626,#b91c1c);border:none;border-radius:12px;color:#fff;font-size:.9rem;font-weight:700;cursor:pointer;transition:all .25s}
+.btn-logout:hover{transform:translateY(-2px);box-shadow:0 8px 25px rgba(220,38,38,.3)}
+@media(max-width:480px){.logout-card{padding:2rem 1.5rem}.logout-actions{flex-direction:column}}
 </style>
+
+<script>
+!function(){const c=document.getElementById('auth-canvas');if(!c)return;const x=c.getContext('2d');let W,H,P=[];function R(){W=c.width=c.offsetWidth;H=c.height=c.offsetHeight}R();window.addEventListener('resize',R);class Pt{constructor(){this.x=Math.random()*W;this.y=Math.random()*H;this.vx=(Math.random()-.5)*.3;this.vy=(Math.random()-.5)*.3;this.r=Math.random()*1.5+.5;this.o=Math.random()*.3+.05;this.c='251,191,36'}update(){this.x+=this.vx;this.y+=this.vy;if(this.x<0||this.x>W)this.vx*=-1;if(this.y<0||this.y>H)this.vy*=-1}draw(){x.beginPath();x.arc(this.x,this.y,this.r,0,Math.PI*2);x.fillStyle=`rgba(${this.c},${this.o})`;x.fill()}}for(let i=0;i<40;i++)P.push(new Pt);!function a(){x.clearRect(0,0,W,H);P.forEach(p=>{p.update();p.draw()});requestAnimationFrame(a)}()}();
+</script>
 {% endblock %}

@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en-US" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Contact — The Trading Blueprint</title>
+    <meta name="description" content="Get in touch with The Trading Blueprint">
+    <meta name="robots" content="index, follow">
+    <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="style.css">
+    <script>(function(){var t=localStorage.getItem('theme');if(t)document.documentElement.setAttribute('data-theme',t);})();</script>
+</head>
+<body>
+    <a href="#main-content" class="skip-link">Skip to content</a>
+    <!-- Platform Top Bar -->
+    <nav class="platform-bar" aria-label="Platform navigation">
+        <div class="platform-bar-inner">
+            <a href="https://Tusharlimbasiya-200-silveroak.github.io/blog-platform/" class="platform-home">📚 USA Content Hub</a>
+            <button class="menu-toggle" onclick="document.querySelector('.platform-links').classList.toggle('open')" aria-label="Toggle navigation menu">☰</button>
+            <div class="platform-links" role="navigation">
+                <a href="https://Tusharlimbasiya-200-silveroak.github.io/tech-gadget-hub/">💻 Tech</a>
+                <a href="https://Tusharlimbasiya-200-silveroak.github.io/health-wellness-daily/">🏃 Health</a>
+                <a href="https://Tusharlimbasiya-200-silveroak.github.io/smart-money-guide/">💰 Money</a>
+                <a href="https://Tusharlimbasiya-200-silveroak.github.io/usa-travel-explorer/">✈️ Travel</a>
+                <a href="https://Tusharlimbasiya-200-silveroak.github.io/recipe-kitchen-usa/">🍳 Recipes</a>
+                <a href="https://Tusharlimbasiya-200-silveroak.github.io/usa-news-digest/">📰 News</a>
+                <a href="https://Tusharlimbasiya-200-silveroak.github.io/the-trading-blueprint/">📈 Trading</a>
+            </div>
+            <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle dark mode">
+                <span class="icon" id="themeIcon">🌙</span>
+            </button>
+        </div>
+    </nav>
+
+    <main id="main-content" class="about-layout">
+        <div class="about-container">
+            <div class="about-header">
+                <span class="about-icon">📬</span>
+                <h1>Contact Us</h1>
+                <p class="about-tagline">We'd love to hear from you</p>
+            </div>
+
+            <section class="about-section">
+                <h2>Get in touch</h2>
+                <p>Have a question about trading, a topic suggestion, or feedback? Reach out and we'll get back to you.</p>
+                <form class="newsletter-form" action="https://formsubmit.co/200203041018@silveroakuni.ac.in" method="POST" style="max-width: 600px;">
+                    <input type="text" name="name" placeholder="Your name" required aria-label="Name" style="margin-bottom: 12px;">
+                    <input type="email" name="email" placeholder="Your email" required aria-label="Email">
+                    <textarea name="message" placeholder="Your message" required aria-label="Message" rows="5" style="width:100%;padding:12px;border:1px solid var(--border);border-radius:var(--radius);font-family:inherit;font-size:1rem;background:var(--bg);color:var(--text);margin-bottom:12px;resize:vertical;"></textarea>
+                    <input type="hidden" name="_subject" value="📬 Contact — The Trading Blueprint">
+                    <input type="hidden" name="_captcha" value="true">
+                    <input type="hidden" name="_template" value="table">
+                    <input type="hidden" name="_next" value="https://Tusharlimbasiya-200-silveroak.github.io/the-trading-blueprint/contact.html?sent=true">
+                    <button type="submit">Send Message →</button>
+                </form>
+            </section>
+        </div>
+    </main>
+
+    <footer class="site-footer" role="contentinfo">
+        <div class="container">
+            <p>&copy; 2026 The Trading Blueprint. All rights reserved.</p>
+            <nav aria-label="Footer navigation">
+                <a href="index.html">Home</a>
+                <a href="about.html">About</a>
+                <a href="sitemap.xml">Sitemap</a>
+            </nav>
+        </div>
+    </footer>
+
+    <script>
+    function toggleTheme(){
+        var h=document.documentElement;
+        var c=h.getAttribute('data-theme');
+        var n=(c==='dark')?'light':'dark';
+        if(!c){n=getComputedStyle(document.body).backgroundColor==='rgb(255, 255, 255)'?'dark':'light';}
+        h.setAttribute('data-theme',n);
+        localStorage.setItem('theme',n);
+        updateThemeIcon(n);
+    }
+    function updateThemeIcon(t){
+        var i=document.getElementById('themeIcon');
+        if(i) i.textContent=(t==='dark')?'☀️':'🌙';
+    }
+    (function(){
+        var t=localStorage.getItem('theme');
+        if(!t&&window.matchMedia('(prefers-color-scheme:dark)').matches) t='dark';
+        updateThemeIcon(t||'light');
+    })();
+    </script>
+</body>
+</html>

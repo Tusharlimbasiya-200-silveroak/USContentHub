@@ -30,6 +30,9 @@ SITES = [
     {"folder": "usa-news-digest", "name": "USA News Digest", "icon": "📰",
      "desc": "Breaking down US news, trends, and issues that matter to Americans",
      "color": "#6366f1", "tags": ["news", "politics", "economy", "trends"]},
+    {"folder": "the-trading-blueprint", "name": "The Trading Blueprint", "icon": "📈",
+     "desc": "Stock market strategies, technical analysis, and trading psychology for American traders",
+     "color": "#059669", "tags": ["trading", "stocks", "forex", "technical-analysis"]},
 ]
 
 

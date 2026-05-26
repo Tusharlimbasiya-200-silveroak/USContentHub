@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en-US" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>About The Trading Blueprint — USA Content Hub</title>
+    <meta name="description" content="Stock market strategies, technical analysis, and trading psychology for American traders">
+    <meta name="robots" content="index, follow">
+    <meta property="og:title" content="About The Trading Blueprint">
+    <meta property="og:description" content="Stock market strategies, technical analysis, and trading psychology for American traders">
+    <meta property="og:type" content="website">
+    <link rel="preconnect" href="https://picsum.photos" crossorigin>
+    <link rel="dns-prefetch" href="https://picsum.photos">
+    <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="style.css">
+    <script>(function(){var t=localStorage.getItem('theme');if(t)document.documentElement.setAttribute('data-theme',t);})();</script>
+</head>
+<body>
+    <a href="#main-content" class="skip-link">Skip to content</a>
+
+    <!-- Platform Top Bar -->
+    <nav class="platform-bar" aria-label="Platform navigation">
+        <div class="platform-bar-inner">
+            <a href="https://Tusharlimbasiya-200-silveroak.github.io/blog-platform/" class="platform-home">📚 USA Content Hub</a>
+            <button class="menu-toggle" onclick="document.querySelector('.platform-links').classList.toggle('open')" aria-label="Toggle navigation menu">☰</button>
+            <div class="platform-links" role="navigation">
+                <a href="https://Tusharlimbasiya-200-silveroak.github.io/tech-gadget-hub/">💻 Tech</a>
+                <a href="https://Tusharlimbasiya-200-silveroak.github.io/health-wellness-daily/">🏃 Health</a>
+                <a href="https://Tusharlimbasiya-200-silveroak.github.io/smart-money-guide/">💰 Money</a>
+                <a href="https://Tusharlimbasiya-200-silveroak.github.io/usa-travel-explorer/">✈️ Travel</a>
+                <a href="https://Tusharlimbasiya-200-silveroak.github.io/recipe-kitchen-usa/">🍳 Recipes</a>
+                <a href="https://Tusharlimbasiya-200-silveroak.github.io/usa-news-digest/">📰 News</a>
+                <a href="https://Tusharlimbasiya-200-silveroak.github.io/the-trading-blueprint/">📈 Trading</a>
+            </div>
+            <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle dark mode">
+                <span class="icon" id="themeIcon">🌙</span>
+            </button>
+        </div>
+    </nav>
+
+    <main id="main-content" class="about-layout">
+        <div class="about-container">
+            <div class="about-header">
+                <span class="about-icon">📈</span>
+                <h1>The Trading Blueprint</h1>
+                <p class="about-tagline">Your blueprint for smarter trading</p>
+            </div>
+
+            <section class="about-section">
+                <h2>About this publication</h2>
+                <p>Stock market strategies, technical analysis, and trading psychology for American traders. We cover everything from stock market basics to advanced technical analysis, options strategies, forex trading, crypto markets, and the psychology that separates profitable traders from the rest.</p>
+            </section>
+
+            <section class="about-section">
+                <h2>What we cover</h2>
+                <p><strong>Niche:</strong> Trading & Market Analysis</p>
+                <p><strong>Target Audience:</strong> US adults interested in active trading, from beginners to intermediate traders aged 20-50</p>
+                <div class="about-tags">
+                    <span class="tag-pill">trading</span>
+                    <span class="tag-pill">stocks</span>
+                    <span class="tag-pill">technical-analysis</span>
+                    <span class="tag-pill">options</span>
+                    <span class="tag-pill">forex</span>
+                    <span class="tag-pill">crypto</span>
+                    <span class="tag-pill">day-trading</span>
+                    <span class="tag-pill">risk-management</span>
+                </div>
+            </section>
+
+            <section class="about-section">
+                <h2>Our approach</h2>
+                <p>No hype. No "guaranteed returns." No trading guru nonsense. Just honest, research-backed trading education that focuses on risk management first, strategy second, and discipline always. Every article is written to help you make better decisions with your own money.</p>
+            </section>
+
+            <section class="about-section">
+                <h2>Disclaimer</h2>
+                <p>This publication is for educational purposes only. Nothing here constitutes financial advice. All trading involves risk. Past performance does not guarantee future results. Always do your own research and consider consulting a licensed financial advisor before making investment decisions.</p>
+            </section>
+        </div>
+    </main>
+
+    <footer class="site-footer" role="contentinfo">
+        <div class="container">
+            <p>&copy; 2026 The Trading Blueprint. All rights reserved.</p>
+            <nav aria-label="Footer navigation">
+                <a href="index.html">Home</a>
+                <a href="about.html">About</a>
+                <a href="sitemap.xml">Sitemap</a>
+            </nav>
+        </div>
+    </footer>
+
+    <script>
+    function toggleTheme(){
+        var h=document.documentElement;
+        var c=h.getAttribute('data-theme');
+        var n=(c==='dark')?'light':'dark';
+        if(!c){n=getComputedStyle(document.body).backgroundColor==='rgb(255, 255, 255)'?'dark':'light';}
+        h.setAttribute('data-theme',n);
+        localStorage.setItem('theme',n);
+        updateThemeIcon(n);
+    }
+    function updateThemeIcon(t){
+        var i=document.getElementById('themeIcon');
+        if(i) i.textContent=(t==='dark')?'☀️':'🌙';
+    }
+    (function(){
+        var t=localStorage.getItem('theme');
+        if(!t&&window.matchMedia('(prefers-color-scheme:dark)').matches) t='dark';
+        updateThemeIcon(t||'light');
+    })();
+    </script>
+</body>
+</html>
