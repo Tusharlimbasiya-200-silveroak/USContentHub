@@ -11,11 +11,13 @@
     <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📚</text></svg>">
     <link rel="preconnect" href="https://picsum.photos" crossorigin>
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="alternate" type="application/rss+xml" title="USA Content Hub RSS" href="{% url 'blog:rss_feed' %}">
+    <link rel="alternate" type="application/atom+xml" title="USA Content Hub Atom" href="{% url 'blog:atom_feed' %}">
     <meta property="og:title" content="{% block og_title %}USA Content Hub{% endblock %}">
     <meta property="og:description" content="{% block og_description %}Tech, Health, Finance, Travel, Recipes & News{% endblock %}">
     <meta property="og:type" content="{% block og_type %}website{% endblock %}">
     <meta property="og:image" content="{% block og_image %}https://picsum.photos/seed/usacontenthub/1200/630{% endblock %}">
-    <link rel="stylesheet" href="{% static 'blog/style.css' %}?v=4">
+    <link rel="stylesheet" href="{% static 'blog/style.css' %}?v=5">
     <script>
     (function(){var t=localStorage.getItem('theme');if(t)document.documentElement.setAttribute('data-theme',t);})();
     </script>
@@ -23,6 +25,8 @@
 </head>
 <body>
     <a href="#main-content" class="skip-link">Skip to content</a>
+
+    <div class="reading-progress" id="readingProgress"></div>
 
     <nav class="platform-bar" aria-label="Platform navigation">
         <div class="platform-bar-inner">
@@ -32,10 +36,12 @@
                 {% for pub in publications %}
                 <a href="{% url 'blog:publication' pub.slug %}">{{ pub.icon }} {{ pub.name|truncatewords:1 }}</a>
                 {% endfor %}
+                <a href="{% url 'blog:reading_list' %}" class="reading-list-nav" title="Reading List">📑 <span class="rl-count" id="rlNavCount"></span></a>
             </div>
             <form action="{% url 'blog:search' %}" method="get" style="display:inline">
                 <input type="search" name="q" placeholder="Search..." value="{{ q|default:'' }}" class="search-input" style="padding:4px 10px;border-radius:20px;border:1px solid rgba(255,255,255,0.15);background:rgba(255,255,255,0.08);color:#e2e8f0;font-size:.8rem;width:120px;">
             </form>
+            <div id="google_translate_element" style="margin-left:4px;"></div>
             <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle dark mode">
                 <span class="icon" id="themeIcon">🌙</span>
             </button>
@@ -76,6 +82,8 @@
                         <li><a href="{% url 'blog:home' %}">Home</a></li>
                         <li><a href="{% url 'blog:explore' %}">Explore</a></li>
                         <li><a href="{% url 'blog:search' %}">Search</a></li>
+                        <li><a href="{% url 'blog:reading_list' %}">📑 Reading List</a></li>
+                        <li><a href="{% url 'blog:rss_feed' %}">📡 RSS Feed</a></li>
                     </ul>
                 </div>
             </div>
@@ -86,6 +94,7 @@
     <button class="back-to-top" id="backToTop" aria-label="Back to top">&uarr;</button>
 
     <script>
+    /* Theme toggle */
     function toggleTheme(){
         var html=document.documentElement;
         var cur=html.getAttribute('data-theme');
@@ -98,6 +107,8 @@
         var icon=document.getElementById('themeIcon');
         if(icon&&document.documentElement.getAttribute('data-theme')==='dark')icon.textContent='☀️';
     })();
+
+    /* Back to top */
     var backBtn=document.getElementById('backToTop');
     var ticking=false;
     window.addEventListener('scroll',function(){
@@ -107,7 +118,56 @@
         });ticking=true;}
     },{passive:true});
     backBtn.addEventListener('click',function(){window.scrollTo({top:0,behavior:'smooth'});});
+
+    /* Reading progress bar */
+    (function(){
+        var prog=document.getElementById('readingProgress');
+        var body=document.querySelector('.article-body');
+        if(!body){prog.style.display='none';return;}
+        var ticking2=false;
+        window.addEventListener('scroll',function(){
+            if(!ticking2){requestAnimationFrame(function(){
+                var rect=body.getBoundingClientRect();
+                var total=body.scrollHeight;
+                var scrolled=Math.max(0,(-rect.top)/(total-window.innerHeight)*100);
+                prog.style.width=Math.min(100,scrolled)+'%';
+                ticking2=false;
+            });ticking2=true;}
+        },{passive:true});
+    })();
+
+    /* Reading List (localStorage) */
+    var RL={
+        key:'uch_reading_list',
+        get:function(){try{return JSON.parse(localStorage.getItem(this.key))||[];}catch(e){return[];}},
+        set:function(list){localStorage.setItem(this.key,JSON.stringify(list));this.updateCount();},
+        add:function(slug,title){var l=this.get();if(!l.find(function(x){return x.slug===slug;})){l.push({slug:slug,title:title});this.set(l);}},
+        remove:function(slug){var l=this.get().filter(function(x){return x.slug!==slug;});this.set(l);},
+        has:function(slug){return this.get().some(function(x){return x.slug===slug;});},
+        updateCount:function(){
+            var c=this.get().length;
+            var el=document.getElementById('rlNavCount');
+            if(el)el.textContent=c>0?c:'';
+            var navLink=document.querySelector('.reading-list-nav');
+            if(navLink)navLink.href='/reading-list/?slugs='+this.get().map(function(x){return x.slug;}).join(',');
+        }
+    };
+    RL.updateCount();
     </script>
+
+    <!-- Google Translate -->
+    <script>
+    function googleTranslateElementInit(){
+        new google.translate.TranslateElement({
+            pageLanguage:'en',
+            includedLanguages:'en,es,zh-CN,hi,fr,de,pt,ja,ko,ar,vi,tl,ru,it,pl',
+            layout:google.translate.TranslateElement.InlineLayout.SIMPLE,
+            autoDisplay:false
+        },'google_translate_element');
+    }
+    </script>
+    <script src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+
     {% block extra_js %}{% endblock %}
 </body>
 </html>

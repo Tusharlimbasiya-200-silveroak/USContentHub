@@ -1,0 +1,73 @@
+{% extends "blog/base.html" %}
+{% block title %}My Reading List — USA Content Hub{% endblock %}
+{% block main_class %}full-width{% endblock %}
+{% block content %}
+<section>
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:1.5rem;flex-wrap:wrap;gap:1rem;">
+        <div>
+            <h2 style="margin-bottom:.25rem;">📑 My Reading List</h2>
+            <p style="color:var(--text-light);font-size:.9rem;">Articles you saved for later. Stored in your browser.</p>
+        </div>
+        <button onclick="clearReadingList()" id="clearBtn" style="padding:8px 18px;background:#ef4444;color:#fff;border:none;border-radius:20px;cursor:pointer;font-size:.85rem;font-weight:600;display:none;">🗑️ Clear All</button>
+    </div>
+
+    <div id="readingListGrid" class="articles-grid">
+        {% for article in articles %}
+        <article class="article-card" data-slug="{{ article.slug }}">
+            <div class="card-image">
+                <img src="{{ article.cover_image }}" alt="{{ article.title }}" loading="lazy" decoding="async" width="640" height="360">
+            </div>
+            <div class="card-body">
+                <h3><a href="{% url 'blog:article' article.slug %}">{{ article.title }}</a></h3>
+                <div class="article-meta">
+                    <time datetime="{{ article.published_at|date:'Y-m-d' }}">📅 {{ article.published_at|date:'Y-m-d' }}</time>
+                    <span class="read-time">⏱️ {{ article.read_time }} min</span>
+                </div>
+                {% if article.publication %}
+                <span class="pub-badge" style="font-size:.75rem;color:var(--primary);">{{ article.publication.icon }} {{ article.publication.name }}</span>
+                {% endif %}
+                <div style="display:flex;gap:.5rem;margin-top:auto;">
+                    <a href="{% url 'blog:article' article.slug %}" class="read-more">Read</a>
+                    <button onclick="removeFromList('{{ article.slug }}')" style="background:none;border:1px solid #ef4444;color:#ef4444;border-radius:20px;padding:4px 12px;cursor:pointer;font-size:.78rem;">Remove</button>
+                </div>
+            </div>
+        </article>
+        {% empty %}
+        <div id="emptyState" style="grid-column:1/-1;text-align:center;padding:4rem 2rem;">
+            <div style="font-size:4rem;margin-bottom:1rem;">📑</div>
+            <h3 style="margin-bottom:.5rem;">Your reading list is empty</h3>
+            <p style="color:var(--text-light);margin-bottom:1.5rem;">Save articles by clicking the 🔖 Save button on any article page.</p>
+            <a href="{% url 'blog:home' %}" style="padding:10px 24px;background:var(--primary);color:#fff;border-radius:20px;text-decoration:none;font-size:.9rem;font-weight:600;">Browse Articles</a>
+        </div>
+        {% endfor %}
+    </div>
+</section>
+
+{% block extra_js %}
+<script>
+(function(){
+    var list=RL.get();
+    if(list.length===0){
+        window.location.href='/reading-list/';
+        return;
+    }
+    var clearBtn=document.getElementById('clearBtn');
+    if(list.length>0 && clearBtn) clearBtn.style.display='block';
+})();
+
+function removeFromList(slug){
+    RL.remove(slug);
+    var card=document.querySelector('[data-slug="'+slug+'"]');
+    if(card){card.style.transition='opacity .3s';card.style.opacity='0';setTimeout(function(){card.remove();
+        if(!document.querySelector('.article-card')){location.href='/reading-list/';}
+    },300);}
+}
+
+function clearReadingList(){
+    if(!confirm('Remove all articles from your reading list?'))return;
+    RL.set([]);
+    location.href='/reading-list/';
+}
+</script>
+{% endblock %}
+{% endblock %}

@@ -36,6 +36,10 @@
             <time datetime="{{ article.published_at|date:'Y-m-d' }}" itemprop="datePublished">📅 {{ article.published_at|date:'M d, Y' }}</time>
             <span class="read-time">⏱️ {{ article.read_time }} min read</span>
             <span>📝 {{ article.word_count }} words</span>
+            <span>👁️ {{ article.views }} views</span>
+            <button class="bookmark-btn" id="bookmarkBtn" onclick="toggleBookmark()" title="Save to Reading List" style="background:none;border:1px solid var(--border);border-radius:20px;padding:4px 12px;cursor:pointer;font-size:.82rem;color:var(--text-light);transition:all .2s;">
+                <span id="bookmarkIcon">🔖</span> <span id="bookmarkText">Save</span>
+            </button>
         </div>
     </header>
 
@@ -44,6 +48,15 @@
         <img src="{{ article.cover_image }}" alt="{{ article.title }}" loading="eager" decoding="async" width="1200" height="630" itemprop="image">
     </div>
     {% endif %}
+
+    <!-- Table of Contents -->
+    <nav class="toc-container" id="tocContainer" style="display:none;">
+        <div class="toc-header" onclick="document.getElementById('tocList').classList.toggle('collapsed')">
+            <h3 style="margin:0;font-size:.95rem;font-weight:700;">📋 Table of Contents</h3>
+            <span class="toc-toggle" style="font-size:1.1rem;cursor:pointer;">▼</span>
+        </div>
+        <ol id="tocList" class="toc-list"></ol>
+    </nav>
 
     <div class="article-body" itemprop="articleBody">
         {{ article.content|safe }}
@@ -64,6 +77,37 @@
         <a href="https://www.linkedin.com/sharing/share-offsite/?url={{ request.build_absolute_uri }}" target="_blank" rel="noopener" style="padding:8px 16px;background:#0a66c2;color:#fff;border-radius:20px;text-decoration:none;font-size:.85rem;">LinkedIn</a>
     </div>
 </article>
+
+<!-- Comments Section -->
+<section class="comments-section" style="margin-top:2rem;">
+    <h2 style="font-size:1.2rem;margin-bottom:1rem;">💬 Comments ({{ comment_count }})</h2>
+
+    <form id="commentForm" class="comment-form" style="margin-bottom:2rem;padding:1.5rem;background:var(--bg-light);border-radius:var(--radius);border:1px solid var(--border);">
+        {% csrf_token %}
+        <div style="margin-bottom:.75rem;">
+            <input type="text" id="commentName" name="name" placeholder="Your name" required maxlength="100" minlength="2" style="width:100%;padding:10px 14px;border:1px solid var(--border);border-radius:var(--radius);background:var(--bg);color:var(--text);font-size:.9rem;">
+        </div>
+        <div style="margin-bottom:.75rem;">
+            <textarea id="commentContent" name="content" placeholder="Write a comment..." required maxlength="2000" minlength="5" rows="4" style="width:100%;padding:10px 14px;border:1px solid var(--border);border-radius:var(--radius);background:var(--bg);color:var(--text);font-size:.9rem;resize:vertical;font-family:inherit;"></textarea>
+        </div>
+        <button type="submit" id="commentBtn" style="padding:10px 24px;background:var(--primary);color:#fff;border:none;border-radius:20px;cursor:pointer;font-size:.9rem;font-weight:600;">Post Comment</button>
+        <p id="commentMsg" style="display:none;margin-top:.5rem;font-size:.85rem;"></p>
+    </form>
+
+    <div id="commentsList">
+        {% for comment in comments %}
+        <div class="comment-item" style="padding:1rem 1.5rem;background:var(--card-bg);border:1px solid var(--border);border-radius:var(--radius);margin-bottom:.75rem;">
+            <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:.5rem;">
+                <strong style="font-size:.9rem;">{{ comment.name }}</strong>
+                <time style="font-size:.75rem;color:var(--text-muted);">{{ comment.created_at|date:'M d, Y H:i' }}</time>
+            </div>
+            <p style="font-size:.9rem;color:var(--text-light);margin:0;line-height:1.6;">{{ comment.content }}</p>
+        </div>
+        {% empty %}
+        <p id="noComments" style="color:var(--text-muted);font-size:.9rem;">No comments yet. Be the first to share your thoughts!</p>
+        {% endfor %}
+    </div>
+</section>
 
 {% if related %}
 <section class="related-articles" style="margin-top:3rem;">
@@ -100,7 +144,10 @@
     </form>
     <p id="nl-msg" style="display:none;margin-top:.75rem;font-weight:600;"></p>
 </div>
+
+{% block extra_js %}
 <script>
+/* Newsletter */
 document.getElementById('newsletter-form').addEventListener('submit',function(e){
     e.preventDefault();
     var btn=document.getElementById('nl-btn'),msg=document.getElementById('nl-msg'),email=document.getElementById('nl-email');
@@ -111,5 +158,81 @@ document.getElementById('newsletter-form').addEventListener('submit',function(e)
     .catch(function(){msg.style.color='#ef4444';msg.textContent='❌ Something went wrong. Try again.';msg.style.display='block';})
     .finally(function(){btn.disabled=false;btn.textContent='Subscribe';});
 });
+
+/* Table of Contents */
+(function(){
+    var body=document.querySelector('.article-body');
+    if(!body)return;
+    var headings=body.querySelectorAll('h2,h3');
+    if(headings.length<3)return;
+    var toc=document.getElementById('tocContainer');
+    var list=document.getElementById('tocList');
+    toc.style.display='block';
+    headings.forEach(function(h,i){
+        var id='section-'+i;
+        h.id=id;
+        var li=document.createElement('li');
+        li.style.marginLeft=h.tagName==='H3'?'20px':'0';
+        var a=document.createElement('a');
+        a.href='#'+id;
+        a.textContent=h.textContent;
+        a.style.cssText='color:var(--primary);text-decoration:none;font-size:.88rem;line-height:2;';
+        li.appendChild(a);
+        list.appendChild(li);
+    });
+})();
+
+/* Bookmark */
+var articleSlug='{{ article.slug }}';
+var articleTitle='{{ article.title|escapejs }}';
+function updateBookmarkUI(){
+    var saved=RL.has(articleSlug);
+    document.getElementById('bookmarkIcon').textContent=saved?'✅':'🔖';
+    document.getElementById('bookmarkText').textContent=saved?'Saved':'Save';
+    var btn=document.getElementById('bookmarkBtn');
+    btn.style.background=saved?'var(--primary-light)':'none';
+    btn.style.borderColor=saved?'var(--primary)':'var(--border)';
+}
+function toggleBookmark(){
+    if(RL.has(articleSlug)){RL.remove(articleSlug);}else{RL.add(articleSlug,articleTitle);}
+    updateBookmarkUI();
+}
+updateBookmarkUI();
+
+/* Comments */
+document.getElementById('commentForm').addEventListener('submit',function(e){
+    e.preventDefault();
+    var btn=document.getElementById('commentBtn');
+    var msg=document.getElementById('commentMsg');
+    var name=document.getElementById('commentName').value.trim();
+    var content=document.getElementById('commentContent').value.trim();
+    if(name.length<2||content.length<5)return;
+    btn.disabled=true;btn.textContent='Posting...';msg.style.display='none';
+    var csrfToken=document.querySelector('[name=csrfmiddlewaretoken]').value;
+    var formData=new FormData();
+    formData.append('name',name);
+    formData.append('content',content);
+    formData.append('csrfmiddlewaretoken',csrfToken);
+    fetch('/article/{{ article.slug }}/comment/',{method:'POST',body:formData,headers:{'X-CSRFToken':csrfToken}})
+    .then(function(r){return r.json()})
+    .then(function(d){
+        if(d.success){
+            var noC=document.getElementById('noComments');if(noC)noC.remove();
+            var div=document.createElement('div');
+            div.className='comment-item';
+            div.style.cssText='padding:1rem 1.5rem;background:var(--card-bg);border:1px solid var(--border);border-radius:var(--radius);margin-bottom:.75rem;';
+            div.innerHTML='<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:.5rem;"><strong style="font-size:.9rem;">'+d.name.replace(/</g,'&lt;')+'</strong><time style="font-size:.75rem;color:var(--text-muted);">'+d.created_at+'</time></div><p style="font-size:.9rem;color:var(--text-light);margin:0;line-height:1.6;">'+d.content.replace(/</g,'&lt;')+'</p>';
+            document.getElementById('commentsList').prepend(div);
+            document.getElementById('commentName').value='';
+            document.getElementById('commentContent').value='';
+            msg.style.color='#10b981';msg.textContent='✅ Comment posted!';msg.style.display='block';
+        }else{
+            msg.style.color='#ef4444';msg.textContent='❌ '+d.error;msg.style.display='block';
+        }
+    })
+    .catch(function(){msg.style.color='#ef4444';msg.textContent='❌ Something went wrong.';msg.style.display='block';})
+    .finally(function(){btn.disabled=false;btn.textContent='Post Comment';});
+});
 </script>
+{% endblock %}
 {% endblock %}

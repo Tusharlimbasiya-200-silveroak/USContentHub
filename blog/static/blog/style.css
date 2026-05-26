@@ -427,3 +427,45 @@ main.container:has(.article-full){grid-template-columns:1fr;max-width:800px}
 
 /* GPU-accelerated transforms for smooth hover */
 .article-card,.share-btn,.back-to-top,.load-more-btn{will-change:transform}
+
+/* ============================================================
+   TABLE OF CONTENTS
+   ============================================================ */
+.toc-container{margin:1.5rem 0;padding:1.25rem 1.5rem;background:var(--bg-light);border:1px solid var(--border);border-radius:var(--radius);border-left:4px solid var(--primary)}
+.toc-header{display:flex;justify-content:space-between;align-items:center;cursor:pointer;user-select:none}
+.toc-list{margin:.75rem 0 0;padding-left:1.25rem;list-style-type:decimal}
+.toc-list li{margin-bottom:2px}
+.toc-list.collapsed{display:none}
+.toc-list a:hover{text-decoration:underline}
+
+/* ============================================================
+   COMMENTS
+   ============================================================ */
+.comments-section{max-width:800px}
+.comment-form input:focus,.comment-form textarea:focus{border-color:var(--primary);outline:none;box-shadow:0 0 0 3px var(--primary-light)}
+.comment-item{transition:background var(--transition)}
+.comment-item:hover{background:var(--bg-light)}
+
+/* ============================================================
+   BOOKMARK BUTTON
+   ============================================================ */
+.bookmark-btn:hover{border-color:var(--primary)!important;color:var(--primary)!important}
+
+/* ============================================================
+   READING LIST NAV
+   ============================================================ */
+.reading-list-nav{position:relative}
+.rl-count{font-size:.65rem;background:var(--primary);color:#fff;border-radius:50%;min-width:16px;height:16px;display:inline-flex;align-items:center;justify-content:center;font-weight:700;vertical-align:top;margin-left:2px}
+.rl-count:empty{display:none}
+
+/* ============================================================
+   GOOGLE TRANSLATE WIDGET - Style Override
+   ============================================================ */
+#google_translate_element{display:inline-block;vertical-align:middle}
+#google_translate_element .goog-te-gadget{font-size:0!important;margin:0}
+#google_translate_element .goog-te-gadget>span{display:none!important}
+#google_translate_element select.goog-te-combo{padding:3px 6px;border-radius:12px;border:1px solid rgba(255,255,255,0.15);background:rgba(255,255,255,0.08);color:#e2e8f0;font-size:.75rem;cursor:pointer;max-width:100px}
+.goog-te-banner-frame{display:none!important}
+body{top:0!important}
+.skiptranslate{display:none!important}
+#goog-gt-tt{display:none!important}

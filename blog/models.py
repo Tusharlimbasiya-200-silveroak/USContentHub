@@ -38,6 +38,7 @@ class Article(models.Model):
     status = models.CharField(max_length=10, choices=STATUS_CHOICES, default="published")
     read_time = models.PositiveIntegerField(default=3)
     word_count = models.PositiveIntegerField(default=0)
+    views = models.PositiveIntegerField(default=0)
     meta_description = models.CharField(max_length=300, blank=True, default="")
     published_at = models.DateTimeField(default=timezone.now)
     updated_at = models.DateTimeField(auto_now=True)
@@ -52,3 +53,17 @@ class Article(models.Model):
         if not self.slug:
             self.slug = slugify(self.title)[:300]
         super().save(*args, **kwargs)
+
+
+class Comment(models.Model):
+    article = models.ForeignKey(Article, on_delete=models.CASCADE, related_name="comments")
+    name = models.CharField(max_length=100)
+    content = models.TextField(max_length=2000)
+    created_at = models.DateTimeField(auto_now_add=True)
+    is_approved = models.BooleanField(default=True)
+
+    class Meta:
+        ordering = ["-created_at"]
+
+    def __str__(self):
+        return f"{self.name} on {self.article.title[:30]}"

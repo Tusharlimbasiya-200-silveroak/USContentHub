@@ -3,27 +3,29 @@
 {% block main_class %}full-width{% endblock %}
 {% block content %}
 <section>
-    <h2>Explore Topics</h2>
-    {% if popular_tags %}
-    <div class="tag-cloud" style="margin-bottom:2rem;">
-        {% for tag in popular_tags %}
-        <a href="{% url 'blog:tag' tag.name %}" class="tag-link" style="font-size:{% if tag.count > 10 %}1.1rem{% else %}.9rem{% endif %}">{{ tag.name }} ({{ tag.count }})</a>
-        {% endfor %}
-    </div>
-    {% endif %}
-
-    <h2>Publications</h2>
+    <h2>Explore by Publication</h2>
     <div class="articles-grid" style="margin-bottom:2rem;">
-        {% for pub in publications %}
+        {% for pub in publications_with_counts %}
         <div class="article-card" style="text-align:center;padding:2rem;">
             <div style="font-size:3rem;margin-bottom:1rem;">{{ pub.icon }}</div>
             <h3><a href="{% url 'blog:publication' pub.slug %}" style="color:var(--text);text-decoration:none;">{{ pub.name }}</a></h3>
             <p style="color:var(--text-light);font-size:.9rem;">{{ pub.description|truncatechars:100 }}</p>
+            <span style="display:inline-block;margin-top:.5rem;padding:4px 12px;background:var(--primary-light);color:var(--primary);border-radius:20px;font-size:.78rem;font-weight:600;">{{ pub.article_count }} articles</span>
         </div>
         {% endfor %}
     </div>
 
-    <h2>Trending Articles</h2>
+    <h2>Browse by Topic</h2>
+    <p style="color:var(--text-light);font-size:.9rem;margin-bottom:1rem;">Click any tag to see all related articles</p>
+    {% if all_tags %}
+    <div class="tag-cloud" style="margin-bottom:2rem;">
+        {% for tag in all_tags %}
+        <a href="{% url 'blog:tag' tag.name %}" class="tag-link" style="font-size:{% if tag.count > 10 %}1.1rem{% elif tag.count > 5 %}1rem{% else %}.9rem{% endif %}">{{ tag.name }} <span style="opacity:.6;font-size:.75rem;">({{ tag.count }})</span></a>
+        {% endfor %}
+    </div>
+    {% endif %}
+
+    <h2>🔥 Most Popular Articles</h2>
     <div class="articles-grid">
         {% for article in trending %}
         <article class="article-card">
@@ -35,11 +37,19 @@
                 <div class="article-meta">
                     <time datetime="{{ article.published_at|date:'Y-m-d' }}">📅 {{ article.published_at|date:'Y-m-d' }}</time>
                     <span class="read-time">⏱️ {{ article.read_time }} min</span>
+                    <span>👁️ {{ article.views }}</span>
                 </div>
+                {% if article.publication %}
+                <span class="pub-badge" style="font-size:.75rem;color:var(--primary);">{{ article.publication.icon }} {{ article.publication.name }}</span>
+                {% endif %}
                 <a href="{% url 'blog:article' article.slug %}" class="read-more">Read More</a>
             </div>
         </article>
         {% endfor %}
+    </div>
+
+    <div style="text-align:center;margin-top:2rem;">
+        <a href="{% url 'blog:rss_feed' %}" style="display:inline-flex;align-items:center;gap:6px;padding:10px 24px;background:var(--bg-light);border:1px solid var(--border);border-radius:20px;color:var(--text);text-decoration:none;font-size:.9rem;font-weight:600;">📡 Subscribe via RSS</a>
     </div>
 </section>
 {% endblock %}
