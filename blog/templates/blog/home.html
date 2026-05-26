@@ -7,7 +7,7 @@
     <h2>Latest Articles</h2>
     <p class="articles-count">{{ total_articles }} articles published</p>
 
-    <div class="articles-grid">
+    <div class="articles-grid" id="articlesGrid">
         {% for article in articles %}
         <article class="article-card">
             <div class="card-image">
@@ -34,7 +34,19 @@
         {% endfor %}
     </div>
 
+    {% if is_paginated and page_obj.has_next %}
+    <div style="text-align:center;margin:2rem 0;" id="loadMoreWrap">
+        <button id="loadMoreBtn" onclick="loadMoreArticles()" style="padding:12px 36px;background:var(--primary);color:#fff;border:none;border-radius:20px;cursor:pointer;font-size:1rem;font-weight:600;transition:all .2s;">
+            Load More Articles
+        </button>
+        <p id="loadMoreInfo" style="font-size:.85rem;color:var(--text-muted);margin-top:.5rem;">
+            Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}
+        </p>
+    </div>
+    {% endif %}
+
     {% if is_paginated %}
+    <noscript>
     <nav class="pagination" aria-label="Page navigation">
         {% if page_obj.has_previous %}
         <a href="?page={{ page_obj.previous_page_number }}" class="page-prev" aria-label="Previous page">← Prev</a>
@@ -53,8 +65,8 @@
         {% if page_obj.has_next %}
         <a href="?page={{ page_obj.next_page_number }}" class="page-next" aria-label="Next page">Next →</a>
         {% endif %}
-        <span class="page-info">Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}</span>
     </nav>
+    </noscript>
     {% endif %}
 </section>
 
@@ -80,4 +92,43 @@
     </div>
     {% endif %}
 </aside>
+
+{% block extra_js %}
+<script>
+var nextPage = {{ page_obj.next_page_number|default:"null" }};
+function loadMoreArticles() {
+    if (!nextPage) return;
+    var btn = document.getElementById('loadMoreBtn');
+    btn.disabled = true;
+    btn.textContent = 'Loading...';
+    fetch('/api/articles/?page=' + nextPage)
+    .then(function(r) { return r.json(); })
+    .then(function(d) {
+        var grid = document.getElementById('articlesGrid');
+        d.articles.forEach(function(a) {
+            var card = document.createElement('article');
+            card.className = 'article-card';
+            card.innerHTML = '<div class="card-image"><img src="' + (a.cover_image || '') + '" alt="' + a.title.replace(/"/g, '&quot;') + '" loading="lazy" width="640" height="360"></div>' +
+                '<div class="card-body"><h3><a href="/article/' + a.slug + '/">' + a.title + '</a></h3>' +
+                '<div class="article-meta"><time datetime="' + a.published_at + '">📅 ' + a.published_at + '</time><span class="read-time">⏱️ ' + a.read_time + ' min</span></div>' +
+                (a.publication_name ? '<span class="pub-badge" style="font-size:.75rem;color:var(--primary);">' + a.publication_icon + ' ' + a.publication_name + '</span>' : '') +
+                '<p class="article-excerpt">' + (a.meta_description || '').substring(0, 160) + '</p>' +
+                '<a href="/article/' + a.slug + '/" class="read-more">Read More</a></div>';
+            grid.appendChild(card);
+        });
+        if (d.has_next) {
+            nextPage++;
+            btn.disabled = false;
+            btn.textContent = 'Load More Articles';
+        } else {
+            document.getElementById('loadMoreWrap').innerHTML = '<p style="color:var(--text-muted);font-size:.9rem;">All articles loaded ✓</p>';
+        }
+    })
+    .catch(function() {
+        btn.disabled = false;
+        btn.textContent = 'Load More Articles';
+    });
+}
+</script>
+{% endblock %}
 {% endblock %}
