@@ -119,14 +119,14 @@ def bump_css_version():
     with open(BASE_HTML, "r", encoding="utf-8") as f:
         html = f.read()
 
-    match = re.search(r"(style\.css\?v=)(\d+)", html)
+    match = re.search(r"(\?v=)(\d+)", html)
     if not match:
         warn("No CSS version found in base.html — skipping bump")
         return None
 
     old_ver = int(match.group(2))
     new_ver = old_ver + 1
-    html = html.replace(f"style.css?v={old_ver}", f"style.css?v={new_ver}")
+    html = html.replace(f"?v={old_ver}", f"?v={new_ver}", 1)
 
     with open(BASE_HTML, "w", encoding="utf-8") as f:
         f.write(html)
