@@ -17,7 +17,7 @@
     <meta property="og:description" content="{% block og_description %}Tech, Health, Finance, Travel, Recipes & News{% endblock %}">
     <meta property="og:type" content="{% block og_type %}website{% endblock %}">
     <meta property="og:image" content="{% block og_image %}https://picsum.photos/seed/usacontenthub/1200/630{% endblock %}">
-    <link rel="stylesheet" href="{% static 'blog/style.css' %}?v=19">
+    <link rel="stylesheet" href="{% static 'blog/style.css' %}?v=20">
     <style>
     @media print {
         .platform-bar, .site-footer, .back-to-top, .reading-progress,
@@ -80,10 +80,10 @@
             <span class="auth-links">
                 {% if user.is_authenticated %}
                 <a href="{% url 'blog:user_bookmarks' %}" title="My Bookmarks">📑</a>
-                <a href="{% url 'blog:logout' %}">Logout</a>
+                <a href="{% url 'account_logout' %}">Logout</a>
                 {% else %}
-                <a href="{% url 'blog:login' %}">Login</a>
-                <a href="{% url 'blog:register' %}">Register</a>
+                <a href="{% url 'account_login' %}">Login</a>
+                <a href="{% url 'account_signup' %}">Register</a>
                 {% endif %}
             </span>
         </div>

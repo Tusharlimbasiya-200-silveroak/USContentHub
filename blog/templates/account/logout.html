@@ -1,0 +1,46 @@
+{% extends "blog/base.html" %}
+{% load i18n %}
+
+{% block title %}Sign Out — USA Content Hub{% endblock %}
+
+{% block content %}
+<div class="auth-page">
+    <div class="auth-card" style="max-width:400px;text-align:center;">
+        <div class="auth-header">
+            <div class="auth-logo">👋</div>
+            <h1>Sign Out</h1>
+            <p>Are you sure you want to sign out?</p>
+        </div>
+        <form method="post" action="{% url 'account_logout' %}">
+            {% csrf_token %}
+            <button type="submit" class="auth-submit-btn">Yes, Sign Out</button>
+        </form>
+        <div class="auth-footer">
+            <p><a href="{% url 'blog:home' %}">← Back to Home</a></p>
+        </div>
+    </div>
+</div>
+
+<style>
+.auth-page {
+    display:flex; flex-direction:column; align-items:center; justify-content:center;
+    min-height:60vh; padding:2rem 1rem; grid-column:1/-1;
+}
+.auth-card {
+    width:100%; background:var(--card-bg); border:1px solid var(--border);
+    border-radius:16px; padding:2.5rem 2rem; box-shadow:0 8px 30px rgba(0,0,0,.08);
+}
+.auth-header { text-align:center; margin-bottom:1.75rem; }
+.auth-logo { font-size:2.5rem; margin-bottom:.5rem; }
+.auth-header h1 { font-size:1.6rem; margin:0 0 .4rem; color:var(--text); }
+.auth-header p { font-size:.9rem; color:var(--text-light); margin:0; }
+.auth-submit-btn {
+    width:100%; padding:13px; background:#dc2626; color:#fff;
+    border:none; border-radius:10px; cursor:pointer;
+    font-size:.95rem; font-weight:700; transition:all .2s;
+}
+.auth-submit-btn:hover { background:#b91c1c; }
+.auth-footer { text-align:center; margin-top:1.5rem; font-size:.9rem; color:var(--text-light); }
+.auth-footer a { color:var(--primary); font-weight:600; text-decoration:none; }
+</style>
+{% endblock %}
