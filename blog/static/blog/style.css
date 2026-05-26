@@ -461,11 +461,12 @@ main.container:has(.article-full){grid-template-columns:1fr;max-width:800px}
 /* ============================================================
    GOOGLE TRANSLATE WIDGET - Style Override
    ============================================================ */
-#google_translate_element{display:inline-block;vertical-align:middle}
+#google_translate_element{display:inline-block;vertical-align:middle;position:relative;overflow:visible}
+#google_translate_element .skiptranslate{display:inline!important}
 #google_translate_element .goog-te-gadget{font-size:0!important;margin:0}
 #google_translate_element .goog-te-gadget>span{display:none!important}
 #google_translate_element select.goog-te-combo{padding:3px 6px;border-radius:12px;border:1px solid rgba(255,255,255,0.15);background:rgba(255,255,255,0.08);color:#e2e8f0;font-size:.75rem;cursor:pointer;max-width:100px}
 .goog-te-banner-frame{display:none!important}
 body{top:0!important}
-.skiptranslate{display:none!important}
+body>.skiptranslate{display:none!important}
 #goog-gt-tt{display:none!important}
