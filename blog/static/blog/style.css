@@ -326,7 +326,7 @@ main.container:has(.article-full){grid-template-columns:1fr;max-width:800px}
     .share-btn{padding:7px 12px;font-size:.78rem}
     .articles-grid{grid-template-columns:1fr;gap:16px}
     .article-card .card-image{height:170px}
-    .footer-grid{grid-template-columns:1fr;gap:20px;text-align:center}
+    .footer-grid{grid-template-columns:repeat(3,1fr);gap:16px;font-size:.8rem}
 }
 @media(max-width:480px){
     body{font-size:15px}
