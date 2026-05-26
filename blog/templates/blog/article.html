@@ -248,6 +248,18 @@ function googleTranslateElementInit(){
     },'google_translate_element');
 }
 (function(){var s=document.createElement('script');s.src='https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit';document.body.appendChild(s);})();
+
+/* Kill Google Translate top banner & body offset */
+(function(){
+    function cleanGT(){
+        document.body.style.top='';
+        document.body.style.position='';
+        var f=document.querySelector('.goog-te-banner-frame');
+        if(f)f.style.display='none';
+    }
+    cleanGT();
+    new MutationObserver(function(){cleanGT();}).observe(document.body,{attributes:true,attributeFilter:['style']});
+})();
 </script>
 {% endblock %}
 {% endblock %}
