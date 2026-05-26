@@ -91,11 +91,25 @@
 <div class="newsletter-box" style="margin:2rem 0;padding:2rem;background:var(--bg-light);border-radius:var(--radius);text-align:center;">
     <h3>📬 Stay Updated</h3>
     <p style="color:var(--text-light);margin-bottom:1rem;">Get the latest articles delivered to your inbox.</p>
-    <form action="https://formsubmit.co/tusharlimbasiya200@gmail.com" method="POST" style="display:flex;gap:.5rem;justify-content:center;flex-wrap:wrap;">
+    <form id="newsletter-form" action="https://formsubmit.co/ajax/tusharlimbasiya200@gmail.com" method="POST" style="display:flex;gap:.5rem;justify-content:center;flex-wrap:wrap;">
         <input type="hidden" name="_subject" value="Newsletter Signup from {{ article.title }}">
         <input type="hidden" name="_captcha" value="false">
-        <input type="email" name="email" placeholder="Your email" required style="padding:10px 16px;border:1px solid var(--border);border-radius:20px;font-size:.9rem;background:var(--bg);color:var(--text);">
-        <button type="submit" style="padding:10px 24px;background:var(--primary);color:#fff;border:none;border-radius:20px;cursor:pointer;font-size:.9rem;">Subscribe</button>
+        <input type="hidden" name="_template" value="table">
+        <input type="email" name="email" id="nl-email" placeholder="Your email" required style="padding:10px 16px;border:1px solid var(--border);border-radius:20px;font-size:.9rem;background:var(--bg);color:var(--text);">
+        <button type="submit" id="nl-btn" style="padding:10px 24px;background:var(--primary);color:#fff;border:none;border-radius:20px;cursor:pointer;font-size:.9rem;">Subscribe</button>
     </form>
+    <p id="nl-msg" style="display:none;margin-top:.75rem;font-weight:600;"></p>
 </div>
+<script>
+document.getElementById('newsletter-form').addEventListener('submit',function(e){
+    e.preventDefault();
+    var btn=document.getElementById('nl-btn'),msg=document.getElementById('nl-msg'),email=document.getElementById('nl-email');
+    btn.disabled=true;btn.textContent='Sending...';msg.style.display='none';
+    fetch(this.action,{method:'POST',headers:{'Content-Type':'application/json','Accept':'application/json'},body:JSON.stringify({email:email.value,_subject:this._subject.value,_captcha:'false',_template:'table'})})
+    .then(function(r){return r.json()})
+    .then(function(d){msg.style.color='#10b981';msg.textContent='✅ Subscribed successfully!';msg.style.display='block';email.value='';})
+    .catch(function(){msg.style.color='#ef4444';msg.textContent='❌ Something went wrong. Try again.';msg.style.display='block';})
+    .finally(function(){btn.disabled=false;btn.textContent='Subscribe';});
+});
+</script>
 {% endblock %}
