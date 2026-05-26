@@ -245,3 +245,11 @@ class ArticleRSSFeed(Feed):
 class ArticleAtomFeed(ArticleRSSFeed):
     feed_type = Atom1Feed
     subtitle = ArticleRSSFeed.description
+
+
+def about_page(request):
+    return render(request, "blog/about.html")
+
+
+def contact_page(request):
+    return render(request, "blog/contact.html")

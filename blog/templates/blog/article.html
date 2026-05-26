@@ -58,6 +58,11 @@
         <ol id="tocList" class="toc-list"></ol>
     </nav>
 
+    <div class="translate-bar" style="margin:1rem 0;padding:8px 14px;background:var(--bg-light);border-radius:var(--radius);border:1px solid var(--border);display:inline-flex;align-items:center;gap:8px;font-size:.85rem;color:var(--text-light);">
+        🌐 <span>Translate:</span>
+        <div id="google_translate_element"></div>
+    </div>
+
     <div class="article-body" itemprop="articleBody">
         {{ article.content|safe }}
     </div>
@@ -233,6 +238,16 @@ document.getElementById('commentForm').addEventListener('submit',function(e){
     .catch(function(){msg.style.color='#ef4444';msg.textContent='❌ Something went wrong.';msg.style.display='block';})
     .finally(function(){btn.disabled=false;btn.textContent='Post Comment';});
 });
+
+/* Google Translate for article */
+function googleTranslateElementInit(){
+    new google.translate.TranslateElement({
+        pageLanguage:'en',
+        includedLanguages:'en,es,zh-CN,hi,fr,de,pt,ja,ko,ar,vi,tl,ru,it,pl',
+        autoDisplay:false
+    },'google_translate_element');
+}
+(function(){var s=document.createElement('script');s.src='https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit';document.body.appendChild(s);})();
 </script>
 {% endblock %}
 {% endblock %}

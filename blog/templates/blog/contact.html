@@ -1,0 +1,72 @@
+{% extends "blog/base.html" %}
+
+{% block title %}Contact — USA Content Hub{% endblock %}
+{% block description %}Get in touch with USA Content Hub. We'd love to hear from you.{% endblock %}
+
+{% block content %}
+<div class="page-content" style="max-width:700px;margin:0 auto;grid-column:1/-1;">
+    <h1 style="font-size:2rem;margin-bottom:1.5rem;">Contact Us</h1>
+
+    <div class="article-content" style="padding:2rem;">
+        <p style="font-size:1.05rem;line-height:1.8;margin-bottom:1.5rem;">
+            Have a question, suggestion, or feedback? We'd love to hear from you. Fill out the form below and we'll get back to you as soon as possible.
+        </p>
+
+        <form id="contactForm" action="https://formsubmit.co/ajax/tusharlimbasiya200@gmail.com" method="POST" style="margin-top:1.5rem;">
+            <input type="hidden" name="_subject" value="Contact from USA Content Hub">
+            <input type="hidden" name="_captcha" value="false">
+            <input type="hidden" name="_template" value="table">
+
+            <div style="margin-bottom:1rem;">
+                <label for="contactName" style="display:block;font-weight:600;margin-bottom:.4rem;font-size:.9rem;">Name</label>
+                <input type="text" id="contactName" name="name" placeholder="Your name" required minlength="2" maxlength="100" style="width:100%;padding:10px 14px;border:1px solid var(--border);border-radius:var(--radius);background:var(--bg);color:var(--text);font-size:.9rem;">
+            </div>
+
+            <div style="margin-bottom:1rem;">
+                <label for="contactEmail" style="display:block;font-weight:600;margin-bottom:.4rem;font-size:.9rem;">Email</label>
+                <input type="email" id="contactEmail" name="email" placeholder="you@example.com" required style="width:100%;padding:10px 14px;border:1px solid var(--border);border-radius:var(--radius);background:var(--bg);color:var(--text);font-size:.9rem;">
+            </div>
+
+            <div style="margin-bottom:1rem;">
+                <label for="contactSubject" style="display:block;font-weight:600;margin-bottom:.4rem;font-size:.9rem;">Subject</label>
+                <input type="text" id="contactSubject" name="subject" placeholder="What's this about?" required minlength="3" maxlength="200" style="width:100%;padding:10px 14px;border:1px solid var(--border);border-radius:var(--radius);background:var(--bg);color:var(--text);font-size:.9rem;">
+            </div>
+
+            <div style="margin-bottom:1.25rem;">
+                <label for="contactMessage" style="display:block;font-weight:600;margin-bottom:.4rem;font-size:.9rem;">Message</label>
+                <textarea id="contactMessage" name="message" placeholder="Your message..." required minlength="10" maxlength="5000" rows="6" style="width:100%;padding:10px 14px;border:1px solid var(--border);border-radius:var(--radius);background:var(--bg);color:var(--text);font-size:.9rem;resize:vertical;font-family:inherit;"></textarea>
+            </div>
+
+            <button type="submit" id="contactBtn" style="padding:12px 32px;background:var(--primary);color:#fff;border:none;border-radius:20px;cursor:pointer;font-size:.95rem;font-weight:600;transition:all .2s;">Send Message</button>
+            <p id="contactMsg" style="display:none;margin-top:.75rem;font-weight:600;"></p>
+        </form>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+document.getElementById('contactForm').addEventListener('submit',function(e){
+    e.preventDefault();
+    var btn=document.getElementById('contactBtn'),msg=document.getElementById('contactMsg');
+    btn.disabled=true;btn.textContent='Sending...';msg.style.display='none';
+    var formData={
+        name:document.getElementById('contactName').value,
+        email:document.getElementById('contactEmail').value,
+        subject:document.getElementById('contactSubject').value,
+        message:document.getElementById('contactMessage').value,
+        _subject:this._subject.value,
+        _captcha:'false',
+        _template:'table'
+    };
+    fetch(this.action,{method:'POST',headers:{'Content-Type':'application/json','Accept':'application/json'},body:JSON.stringify(formData)})
+    .then(function(r){return r.json()})
+    .then(function(d){
+        msg.style.color='#10b981';msg.textContent='✅ Message sent successfully! We\'ll get back to you soon.';msg.style.display='block';
+        document.getElementById('contactForm').reset();
+    })
+    .catch(function(){msg.style.color='#ef4444';msg.textContent='❌ Something went wrong. Please try again.';msg.style.display='block';})
+    .finally(function(){btn.disabled=false;btn.textContent='Send Message';});
+});
+</script>
+{% endblock %}

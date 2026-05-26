@@ -17,7 +17,7 @@
     <meta property="og:description" content="{% block og_description %}Tech, Health, Finance, Travel, Recipes & News{% endblock %}">
     <meta property="og:type" content="{% block og_type %}website{% endblock %}">
     <meta property="og:image" content="{% block og_image %}https://picsum.photos/seed/usacontenthub/1200/630{% endblock %}">
-    <link rel="stylesheet" href="{% static 'blog/style.css' %}?v=7">
+    <link rel="stylesheet" href="{% static 'blog/style.css' %}?v=8">
     <script>
     (function(){var t=localStorage.getItem('theme');if(t)document.documentElement.setAttribute('data-theme',t);})();
     </script>
@@ -33,15 +33,15 @@
             <a href="{% url 'blog:home' %}" class="platform-home">📚 USA Content Hub</a>
             <button class="menu-toggle" onclick="document.querySelector('.platform-links').classList.toggle('open')" aria-label="Toggle navigation menu">☰</button>
             <div class="platform-links" role="navigation">
-                {% for pub in publications %}
-                <a href="{% url 'blog:publication' pub.slug %}">{{ pub.icon }} {{ pub.name|truncatewords:1 }}</a>
-                {% endfor %}
+                <a href="{% url 'blog:home' %}">🏠 Home</a>
+                <a href="{% url 'blog:explore' %}">🔍 Explore</a>
+                <a href="{% url 'blog:about' %}">👤 About</a>
+                <a href="{% url 'blog:contact' %}">📧 Contact</a>
                 <a href="{% url 'blog:reading_list' %}" class="reading-list-nav" title="Reading List">📑 <span class="rl-count" id="rlNavCount"></span></a>
             </div>
             <form action="{% url 'blog:search' %}" method="get" style="display:inline">
                 <input type="search" name="q" placeholder="Search..." value="{{ q|default:'' }}" class="search-input" style="padding:4px 10px;border-radius:20px;border:1px solid rgba(255,255,255,0.15);background:rgba(255,255,255,0.08);color:#e2e8f0;font-size:.8rem;width:120px;">
             </form>
-            <div id="google_translate_element" style="margin-left:4px;"></div>
             <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle dark mode">
                 <span class="icon" id="themeIcon">🌙</span>
             </button>
@@ -154,18 +154,6 @@
     };
     RL.updateCount();
     </script>
-
-    <!-- Google Translate -->
-    <script>
-    function googleTranslateElementInit(){
-        new google.translate.TranslateElement({
-            pageLanguage:'en',
-            includedLanguages:'en,es,zh-CN,hi,fr,de,pt,ja,ko,ar,vi,tl,ru,it,pl',
-            autoDisplay:false
-        },'google_translate_element');
-    }
-    </script>
-    <script src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 
     {% block extra_js %}{% endblock %}
 </body>

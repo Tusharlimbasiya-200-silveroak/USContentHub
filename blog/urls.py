@@ -6,6 +6,8 @@ app_name = "blog"
 
 urlpatterns = [
     path("", views.HomeView.as_view(), name="home"),
+    path("about/", views.about_page, name="about"),
+    path("contact/", views.contact_page, name="contact"),
     path("article/<slug:slug>/", views.ArticleDetailView.as_view(), name="article"),
     path("article/<slug:slug>/comment/", views.add_comment, name="add_comment"),
     path("pub/<slug:slug>/", views.PublicationView.as_view(), name="publication"),
