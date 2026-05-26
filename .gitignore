@@ -24,8 +24,7 @@ Thumbs.db
 *.log
 
 # Database
-*.db
-*.sqlite3
+# *.sqlite3 — included for deployment with pre-loaded data
 
 # Static files collected
 staticfiles/
