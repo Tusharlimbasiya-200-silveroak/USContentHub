@@ -17,7 +17,7 @@
     <meta property="og:description" content="{% block og_description %}Tech, Health, Finance, Travel, Recipes & News{% endblock %}">
     <meta property="og:type" content="{% block og_type %}website{% endblock %}">
     <meta property="og:image" content="{% block og_image %}https://picsum.photos/seed/usacontenthub/1200/630{% endblock %}">
-    <link rel="stylesheet" href="{% static 'blog/style.css' %}?v=6">
+    <link rel="stylesheet" href="{% static 'blog/style.css' %}?v=7">
     <script>
     (function(){var t=localStorage.getItem('theme');if(t)document.documentElement.setAttribute('data-theme',t);})();
     </script>
@@ -161,7 +161,6 @@
         new google.translate.TranslateElement({
             pageLanguage:'en',
             includedLanguages:'en,es,zh-CN,hi,fr,de,pt,ja,ko,ar,vi,tl,ru,it,pl',
-            layout:google.translate.TranslateElement.InlineLayout.SIMPLE,
             autoDisplay:false
         },'google_translate_element');
     }
