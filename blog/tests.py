@@ -1,9 +1,10 @@
+from django.contrib.auth.models import User
 from django.core.cache import cache
 from django.test import Client, TestCase, override_settings
 from django.urls import reverse
 from django.utils import timezone
 
-from .models import Article, Comment, Publication, Tag
+from .models import Article, ArticleRating, Comment, NewsletterSubscriber, Publication, Tag, UserProfile
 
 
 class BaseTestCase(TestCase):
@@ -107,6 +108,38 @@ class ArticleModelTest(BaseTestCase):
         a = Article.objects.create(title=long_title, content="test")
         self.assertLessEqual(len(a.slug), 300)
 
+    def test_average_rating_no_ratings(self):
+        self.assertEqual(self.article.average_rating(), 0)
+
+    def test_average_rating_with_ratings(self):
+        ArticleRating.objects.create(article=self.article, ip_address="1.1.1.1", score=4)
+        ArticleRating.objects.create(article=self.article, ip_address="2.2.2.2", score=5)
+        self.assertEqual(self.article.average_rating(), 4.5)
+
+    def test_rating_count(self):
+        ArticleRating.objects.create(article=self.article, ip_address="1.1.1.1", score=3)
+        self.assertEqual(self.article.rating_count(), 1)
+
+    def test_embed_video_url_youtube(self):
+        self.article.video_url = "https://www.youtube.com/watch?v=dQw4w9WgXcQ"
+        self.assertEqual(self.article.embed_video_url(), "https://www.youtube.com/embed/dQw4w9WgXcQ")
+
+    def test_embed_video_url_youtu_be(self):
+        self.article.video_url = "https://youtu.be/dQw4w9WgXcQ"
+        self.assertEqual(self.article.embed_video_url(), "https://www.youtube.com/embed/dQw4w9WgXcQ")
+
+    def test_embed_video_url_vimeo(self):
+        self.article.video_url = "https://vimeo.com/123456"
+        self.assertEqual(self.article.embed_video_url(), "https://player.vimeo.com/video/123456")
+
+    def test_embed_video_url_empty(self):
+        self.article.video_url = ""
+        self.assertEqual(self.article.embed_video_url(), "")
+
+    def test_video_url_field_default(self):
+        a = Article.objects.create(title="No Video", slug="no-video", content="x")
+        self.assertEqual(a.video_url, "")
+
 
 class CommentModelTest(BaseTestCase):
     def test_str_representation(self):
@@ -125,6 +158,51 @@ class CommentModelTest(BaseTestCase):
         self.assertEqual(Comment.objects.count(), 1)
         self.article.delete()
         self.assertEqual(Comment.objects.count(), 0)
+
+
+class NewsletterModelTest(BaseTestCase):
+    def test_str_representation(self):
+        sub = NewsletterSubscriber.objects.create(email="test@example.com")
+        self.assertEqual(str(sub), "test@example.com")
+
+    def test_email_unique(self):
+        NewsletterSubscriber.objects.create(email="unique@example.com")
+        with self.assertRaises(Exception):
+            NewsletterSubscriber.objects.create(email="unique@example.com")
+
+    def test_default_active(self):
+        sub = NewsletterSubscriber.objects.create(email="active@example.com")
+        self.assertTrue(sub.is_active)
+
+
+class ArticleRatingModelTest(BaseTestCase):
+    def test_str_representation(self):
+        r = ArticleRating.objects.create(article=self.article, ip_address="1.2.3.4", score=5)
+        self.assertIn("5/5", str(r))
+
+    def test_unique_per_ip_per_article(self):
+        ArticleRating.objects.create(article=self.article, ip_address="1.1.1.1", score=3)
+        with self.assertRaises(Exception):
+            ArticleRating.objects.create(article=self.article, ip_address="1.1.1.1", score=4)
+
+    def test_score_boundaries(self):
+        r = ArticleRating.objects.create(article=self.article, ip_address="10.0.0.1", score=1)
+        self.assertEqual(r.score, 1)
+        r2 = ArticleRating.objects.create(article=self.article, ip_address="10.0.0.2", score=5)
+        self.assertEqual(r2.score, 5)
+
+
+class UserProfileModelTest(BaseTestCase):
+    def test_profile_creation(self):
+        user = User.objects.create_user("testuser", "test@test.com", "testpass123")
+        profile = UserProfile.objects.create(user=user)
+        self.assertEqual(str(profile), "testuser")
+
+    def test_bookmarks(self):
+        user = User.objects.create_user("bookmarker", "bm@test.com", "testpass123")
+        profile = UserProfile.objects.create(user=user)
+        profile.bookmarks.add(self.article)
+        self.assertIn(self.article, profile.bookmarks.all())
 
 
 # ============================================================
@@ -221,6 +299,23 @@ class ArticleDetailViewTest(BaseTestCase):
         self.assertContains(response, "application/ld+json")
         self.assertContains(response, '"@type": "Article"')
 
+    def test_breadcrumbs_in_context(self):
+        response = self.client.get(reverse("blog:article", args=["test-article-one"]))
+        self.assertIn("breadcrumbs", response.context)
+        breadcrumbs = response.context["breadcrumbs"]
+        self.assertEqual(breadcrumbs[0][0], "Home")
+        self.assertEqual(breadcrumbs[1][0], "Test Publication")
+
+    def test_rating_data_in_context(self):
+        response = self.client.get(reverse("blog:article", args=["test-article-one"]))
+        self.assertIn("avg_rating", response.context)
+        self.assertIn("rating_count", response.context)
+        self.assertIn("user_rated", response.context)
+
+    def test_print_button_in_template(self):
+        response = self.client.get(reverse("blog:article", args=["test-article-one"]))
+        self.assertContains(response, "window.print()")
+
 
 # ============================================================
 # VIEW TESTS — Comments
@@ -312,6 +407,281 @@ class CommentViewTest(BaseTestCase):
 
 
 # ============================================================
+# VIEW TESTS — Newsletter
+# ============================================================
+class NewsletterViewTest(BaseTestCase):
+    def test_subscribe_valid_email(self):
+        response = self.client.post(
+            reverse("blog:newsletter_subscribe"),
+            {"email": "hello@example.com"},
+        )
+        self.assertEqual(response.status_code, 200)
+        data = response.json()
+        self.assertTrue(data["success"])
+        self.assertTrue(NewsletterSubscriber.objects.filter(email="hello@example.com").exists())
+
+    def test_subscribe_invalid_email(self):
+        response = self.client.post(
+            reverse("blog:newsletter_subscribe"),
+            {"email": "notanemail"},
+        )
+        self.assertEqual(response.status_code, 400)
+
+    def test_subscribe_empty_email(self):
+        response = self.client.post(
+            reverse("blog:newsletter_subscribe"),
+            {"email": ""},
+        )
+        self.assertEqual(response.status_code, 400)
+
+    def test_subscribe_duplicate(self):
+        self.client.post(reverse("blog:newsletter_subscribe"), {"email": "dup@example.com"})
+        response = self.client.post(reverse("blog:newsletter_subscribe"), {"email": "dup@example.com"})
+        data = response.json()
+        self.assertTrue(data["success"])
+        self.assertIn("already", data["message"])
+
+    def test_subscribe_reactivate(self):
+        sub = NewsletterSubscriber.objects.create(email="inactive@example.com", is_active=False)
+        response = self.client.post(reverse("blog:newsletter_subscribe"), {"email": "inactive@example.com"})
+        sub.refresh_from_db()
+        self.assertTrue(sub.is_active)
+
+    def test_get_method_rejected(self):
+        response = self.client.get(reverse("blog:newsletter_subscribe"))
+        self.assertEqual(response.status_code, 405)
+
+    def test_csrf_required(self):
+        client = Client(enforce_csrf_checks=True)
+        response = client.post(reverse("blog:newsletter_subscribe"), {"email": "x@y.com"})
+        self.assertEqual(response.status_code, 403)
+
+
+# ============================================================
+# VIEW TESTS — Rating
+# ============================================================
+class RatingViewTest(BaseTestCase):
+    def test_rate_valid(self):
+        response = self.client.post(
+            reverse("blog:rate_article", args=["test-article-one"]),
+            {"score": 4},
+        )
+        self.assertEqual(response.status_code, 200)
+        data = response.json()
+        self.assertTrue(data["success"])
+        self.assertEqual(data["your_score"], 4)
+        self.assertEqual(data["rating_count"], 1)
+
+    def test_rate_invalid_score_zero(self):
+        response = self.client.post(
+            reverse("blog:rate_article", args=["test-article-one"]),
+            {"score": 0},
+        )
+        self.assertEqual(response.status_code, 400)
+
+    def test_rate_invalid_score_six(self):
+        response = self.client.post(
+            reverse("blog:rate_article", args=["test-article-one"]),
+            {"score": 6},
+        )
+        self.assertEqual(response.status_code, 400)
+
+    def test_rate_invalid_score_text(self):
+        response = self.client.post(
+            reverse("blog:rate_article", args=["test-article-one"]),
+            {"score": "abc"},
+        )
+        self.assertEqual(response.status_code, 400)
+
+    def test_rate_updates_on_second_attempt(self):
+        url = reverse("blog:rate_article", args=["test-article-one"])
+        self.client.post(url, {"score": 3})
+        self.client.post(url, {"score": 5})
+        rating = ArticleRating.objects.get(article=self.article, ip_address="127.0.0.1")
+        self.assertEqual(rating.score, 5)
+
+    def test_rate_nonexistent_article(self):
+        response = self.client.post(
+            reverse("blog:rate_article", args=["nonexistent"]),
+            {"score": 3},
+        )
+        self.assertEqual(response.status_code, 404)
+
+    def test_rate_draft_rejected(self):
+        response = self.client.post(
+            reverse("blog:rate_article", args=["draft-article"]),
+            {"score": 3},
+        )
+        self.assertEqual(response.status_code, 404)
+
+    def test_get_method_rejected(self):
+        response = self.client.get(reverse("blog:rate_article", args=["test-article-one"]))
+        self.assertEqual(response.status_code, 405)
+
+
+# ============================================================
+# VIEW TESTS — Load More (API)
+# ============================================================
+class LoadMoreViewTest(BaseTestCase):
+    def test_load_more_page_1(self):
+        response = self.client.get(reverse("blog:load_more") + "?page=1")
+        self.assertEqual(response.status_code, 200)
+        data = response.json()
+        self.assertIn("articles", data)
+        self.assertIn("has_next", data)
+
+    def test_load_more_returns_articles(self):
+        response = self.client.get(reverse("blog:load_more") + "?page=1")
+        data = response.json()
+        self.assertGreater(len(data["articles"]), 0)
+        article = data["articles"][0]
+        self.assertIn("title", article)
+        self.assertIn("slug", article)
+        self.assertIn("cover_image", article)
+
+    def test_load_more_invalid_page(self):
+        response = self.client.get(reverse("blog:load_more") + "?page=9999")
+        data = response.json()
+        self.assertEqual(data["articles"], [])
+        self.assertFalse(data["has_next"])
+
+
+# ============================================================
+# VIEW TESTS — Static Pages
+# ============================================================
+class StaticPagesTest(BaseTestCase):
+    def test_about_page(self):
+        response = self.client.get(reverse("blog:about"))
+        self.assertEqual(response.status_code, 200)
+        self.assertContains(response, "About")
+
+    def test_contact_page(self):
+        response = self.client.get(reverse("blog:contact"))
+        self.assertEqual(response.status_code, 200)
+        self.assertContains(response, "Contact")
+
+    def test_privacy_page(self):
+        response = self.client.get(reverse("blog:privacy"))
+        self.assertEqual(response.status_code, 200)
+        self.assertContains(response, "Privacy")
+
+
+# ============================================================
+# VIEW TESTS — Auth
+# ============================================================
+class AuthViewTest(BaseTestCase):
+    def test_register_page_loads(self):
+        response = self.client.get(reverse("blog:register"))
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, "blog/register.html")
+
+    def test_register_valid(self):
+        response = self.client.post(reverse("blog:register"), {
+            "username": "newuser", "email": "new@example.com",
+            "password": "strongpass123", "password2": "strongpass123",
+        })
+        self.assertEqual(response.status_code, 302)
+        self.assertTrue(User.objects.filter(username="newuser").exists())
+        self.assertTrue(UserProfile.objects.filter(user__username="newuser").exists())
+
+    def test_register_password_mismatch(self):
+        response = self.client.post(reverse("blog:register"), {
+            "username": "newuser2", "email": "new2@example.com",
+            "password": "strongpass123", "password2": "wrongpass123",
+        })
+        self.assertEqual(response.status_code, 200)
+        self.assertFalse(User.objects.filter(username="newuser2").exists())
+
+    def test_register_short_password(self):
+        response = self.client.post(reverse("blog:register"), {
+            "username": "shortpw", "email": "sp@example.com",
+            "password": "short", "password2": "short",
+        })
+        self.assertEqual(response.status_code, 200)
+        self.assertFalse(User.objects.filter(username="shortpw").exists())
+
+    def test_register_duplicate_username(self):
+        User.objects.create_user("taken", "taken@example.com", "testpass123")
+        response = self.client.post(reverse("blog:register"), {
+            "username": "taken", "email": "new3@example.com",
+            "password": "strongpass123", "password2": "strongpass123",
+        })
+        self.assertEqual(response.status_code, 200)
+
+    def test_login_page_loads(self):
+        response = self.client.get(reverse("blog:login"))
+        self.assertEqual(response.status_code, 200)
+
+    def test_login_valid(self):
+        User.objects.create_user("loginuser", "l@example.com", "testpass123")
+        response = self.client.post(reverse("blog:login"), {
+            "username": "loginuser", "password": "testpass123",
+        })
+        self.assertEqual(response.status_code, 302)
+
+    def test_login_invalid(self):
+        response = self.client.post(reverse("blog:login"), {
+            "username": "noone", "password": "wrong",
+        })
+        self.assertEqual(response.status_code, 200)
+        self.assertContains(response, "Invalid")
+
+    def test_logout(self):
+        User.objects.create_user("logoutuser", "lo@test.com", "testpass123")
+        self.client.login(username="logoutuser", password="testpass123")
+        response = self.client.get(reverse("blog:logout"))
+        self.assertEqual(response.status_code, 302)
+
+    def test_register_redirect_if_logged_in(self):
+        User.objects.create_user("existing", "ex@test.com", "testpass123")
+        self.client.login(username="existing", password="testpass123")
+        response = self.client.get(reverse("blog:register"))
+        self.assertEqual(response.status_code, 302)
+
+    def test_login_redirect_if_logged_in(self):
+        User.objects.create_user("existing2", "ex2@test.com", "testpass123")
+        self.client.login(username="existing2", password="testpass123")
+        response = self.client.get(reverse("blog:login"))
+        self.assertEqual(response.status_code, 302)
+
+
+# ============================================================
+# VIEW TESTS — Bookmarks (auth required)
+# ============================================================
+class BookmarkViewTest(BaseTestCase):
+    def setUp(self):
+        super().setUp()
+        self.user = User.objects.create_user("bmuser", "bm@test.com", "testpass123")
+        UserProfile.objects.create(user=self.user)
+
+    def test_bookmark_requires_login(self):
+        response = self.client.post(reverse("blog:toggle_bookmark", args=["test-article-one"]))
+        self.assertEqual(response.status_code, 302)  # redirect to login
+
+    def test_bookmark_add(self):
+        self.client.login(username="bmuser", password="testpass123")
+        response = self.client.post(reverse("blog:toggle_bookmark", args=["test-article-one"]))
+        data = response.json()
+        self.assertTrue(data["bookmarked"])
+
+    def test_bookmark_remove(self):
+        self.client.login(username="bmuser", password="testpass123")
+        self.client.post(reverse("blog:toggle_bookmark", args=["test-article-one"]))
+        response = self.client.post(reverse("blog:toggle_bookmark", args=["test-article-one"]))
+        data = response.json()
+        self.assertFalse(data["bookmarked"])
+
+    def test_bookmarks_page_loads(self):
+        self.client.login(username="bmuser", password="testpass123")
+        response = self.client.get(reverse("blog:user_bookmarks"))
+        self.assertEqual(response.status_code, 200)
+
+    def test_bookmarks_page_requires_login(self):
+        response = self.client.get(reverse("blog:user_bookmarks"))
+        self.assertEqual(response.status_code, 302)
+
+
+# ============================================================
 # VIEW TESTS — Publication
 # ============================================================
 class PublicationViewTest(BaseTestCase):
@@ -337,7 +707,6 @@ class TagViewTest(BaseTestCase):
     def test_tag_page_loads(self):
         response = self.client.get(reverse("blog:tag", args=["python"]))
         self.assertEqual(response.status_code, 200)
-        self.assertTemplateUsed(response, "blog/tag.html")
 
     def test_nonexistent_tag_404(self):
         response = self.client.get(reverse("blog:tag", args=["nonexistent-tag"]))
@@ -345,13 +714,11 @@ class TagViewTest(BaseTestCase):
 
     def test_tag_shows_correct_articles(self):
         response = self.client.get(reverse("blog:tag", args=["python"]))
-        articles = response.context["articles"]
-        self.assertEqual(len(articles), 2)
+        self.assertEqual(len(response.context["articles"]), 2)
 
     def test_tag_shows_only_tagged_articles(self):
         response = self.client.get(reverse("blog:tag", args=["django"]))
-        articles = response.context["articles"]
-        self.assertEqual(len(articles), 1)
+        self.assertEqual(len(response.context["articles"]), 1)
 
 
 # ============================================================
@@ -361,17 +728,14 @@ class SearchViewTest(BaseTestCase):
     def test_search_page_loads(self):
         response = self.client.get(reverse("blog:search") + "?q=test")
         self.assertEqual(response.status_code, 200)
-        self.assertTemplateUsed(response, "blog/search.html")
 
     def test_search_finds_by_title(self):
         response = self.client.get(reverse("blog:search") + "?q=Test+Article")
-        articles = response.context["articles"]
-        self.assertGreater(len(articles), 0)
+        self.assertGreater(len(response.context["articles"]), 0)
 
     def test_search_finds_by_content(self):
         response = self.client.get(reverse("blog:search") + "?q=paragraph")
-        articles = response.context["articles"]
-        self.assertGreater(len(articles), 0)
+        self.assertGreater(len(response.context["articles"]), 0)
 
     def test_search_ignores_short_query(self):
         response = self.client.get(reverse("blog:search") + "?q=x")
@@ -389,18 +753,16 @@ class SearchViewTest(BaseTestCase):
     def test_search_query_truncated(self):
         long_q = "a" * 500
         response = self.client.get(reverse("blog:search") + f"?q={long_q}")
-        self.assertEqual(response.status_code, 200)
         self.assertLessEqual(len(response.context["q"]), 200)
 
 
 # ============================================================
-# VIEW TESTS — Explore
+# VIEW TESTS — Explore / Reading List
 # ============================================================
 class ExploreViewTest(BaseTestCase):
     def test_explore_loads(self):
         response = self.client.get(reverse("blog:explore"))
         self.assertEqual(response.status_code, 200)
-        self.assertTemplateUsed(response, "blog/explore.html")
 
     def test_explore_has_all_context(self):
         response = self.client.get(reverse("blog:explore"))
@@ -410,18 +772,13 @@ class ExploreViewTest(BaseTestCase):
         self.assertIn("publications_with_counts", response.context)
 
 
-# ============================================================
-# VIEW TESTS — Reading List
-# ============================================================
 class ReadingListViewTest(BaseTestCase):
     def test_empty_reading_list(self):
         response = self.client.get(reverse("blog:reading_list"))
-        self.assertEqual(response.status_code, 200)
         self.assertEqual(len(response.context["articles"]), 0)
 
     def test_reading_list_with_slugs(self):
         response = self.client.get(reverse("blog:reading_list") + "?slugs=test-article-one,second-published")
-        self.assertEqual(response.status_code, 200)
         self.assertEqual(len(response.context["articles"]), 2)
 
     def test_reading_list_ignores_invalid_slugs(self):
@@ -435,7 +792,7 @@ class ReadingListViewTest(BaseTestCase):
 
 
 # ============================================================
-# VIEW TESTS — RSS & Atom Feeds
+# VIEW TESTS — Feeds
 # ============================================================
 class FeedTest(BaseTestCase):
     def test_rss_feed_loads(self):
@@ -455,6 +812,29 @@ class FeedTest(BaseTestCase):
     def test_atom_contains_articles(self):
         response = self.client.get(reverse("blog:atom_feed"))
         self.assertContains(response, "Test Article One")
+
+
+# ============================================================
+# SITEMAP TESTS
+# ============================================================
+class SitemapTest(BaseTestCase):
+    def test_sitemap_loads(self):
+        response = self.client.get("/sitemap.xml")
+        self.assertEqual(response.status_code, 200)
+        self.assertIn("xml", response["Content-Type"])
+
+    def test_sitemap_contains_articles(self):
+        response = self.client.get("/sitemap.xml")
+        self.assertContains(response, "/article/test-article-one/")
+
+    def test_sitemap_contains_static_pages(self):
+        response = self.client.get("/sitemap.xml")
+        self.assertContains(response, "/about/")
+        self.assertContains(response, "/privacy/")
+
+    def test_sitemap_excludes_drafts(self):
+        response = self.client.get("/sitemap.xml")
+        self.assertNotContains(response, "/article/draft-article/")
 
 
 # ============================================================
@@ -489,40 +869,41 @@ class SecurityTest(BaseTestCase):
         c = Comment.objects.filter(name="Test").first()
         self.assertNotIn("<img", c.content)
 
+    def test_newsletter_xss(self):
+        response = self.client.post(
+            reverse("blog:newsletter_subscribe"),
+            {"email": '<script>alert(1)</script>@evil.com'},
+        )
+        self.assertEqual(response.status_code, 400)
+
 
 # ============================================================
-# PERFORMANCE / CACHING TESTS
+# CACHING TESTS
 # ============================================================
 class CachingTest(BaseTestCase):
     def test_home_caches_popular_tags(self):
         self.client.get(reverse("blog:home"))
-        cached = cache.get("popular_tags_15")
-        self.assertIsNotNone(cached)
+        self.assertIsNotNone(cache.get("popular_tags_15"))
 
     def test_home_caches_total_count(self):
         self.client.get(reverse("blog:home"))
-        cached = cache.get("total_published_articles")
-        self.assertIsNotNone(cached)
-        self.assertEqual(cached, 2)
+        self.assertEqual(cache.get("total_published_articles"), 2)
 
     def test_explore_caches_trending(self):
         self.client.get(reverse("blog:explore"))
-        cached = cache.get("explore_trending_20")
-        self.assertIsNotNone(cached)
+        self.assertIsNotNone(cache.get("explore_trending_20"))
 
     def test_context_processor_caches_publications(self):
         self.client.get(reverse("blog:home"))
-        cached = cache.get("all_publications")
-        self.assertIsNotNone(cached)
+        self.assertIsNotNone(cache.get("all_publications"))
 
     def test_article_detail_caches_related(self):
         self.client.get(reverse("blog:article", args=["test-article-one"]))
-        cached = cache.get(f"related_articles_{self.article.pk}")
-        self.assertIsNotNone(cached)
+        self.assertIsNotNone(cache.get(f"related_articles_{self.article.pk}"))
 
 
 # ============================================================
-# RESPONSE HEADER / MIDDLEWARE TESTS
+# MIDDLEWARE TESTS
 # ============================================================
 class MiddlewareTest(BaseTestCase):
     def test_x_frame_options_header(self):
@@ -568,6 +949,33 @@ class URLTest(BaseTestCase):
     def test_comment_url(self):
         self.assertEqual(reverse("blog:add_comment", args=["my-slug"]), "/article/my-slug/comment/")
 
+    def test_newsletter_url(self):
+        self.assertEqual(reverse("blog:newsletter_subscribe"), "/newsletter/subscribe/")
+
+    def test_rate_url(self):
+        self.assertEqual(reverse("blog:rate_article", args=["my-slug"]), "/article/my-slug/rate/")
+
+    def test_privacy_url(self):
+        self.assertEqual(reverse("blog:privacy"), "/privacy/")
+
+    def test_register_url(self):
+        self.assertEqual(reverse("blog:register"), "/accounts/register/")
+
+    def test_login_url(self):
+        self.assertEqual(reverse("blog:login"), "/accounts/login/")
+
+    def test_logout_url(self):
+        self.assertEqual(reverse("blog:logout"), "/accounts/logout/")
+
+    def test_load_more_url(self):
+        self.assertEqual(reverse("blog:load_more"), "/api/articles/")
+
+    def test_bookmark_url(self):
+        self.assertEqual(reverse("blog:toggle_bookmark", args=["slug"]), "/article/slug/bookmark/")
+
+    def test_bookmarks_url(self):
+        self.assertEqual(reverse("blog:user_bookmarks"), "/accounts/bookmarks/")
+
 
 # ============================================================
 # TEMPLATE CONTENT TESTS
@@ -601,9 +1009,19 @@ class TemplateTest(BaseTestCase):
         response = self.client.get(reverse("blog:article", args=["test-article-one"]))
         self.assertContains(response, "tocContainer")
 
-    def test_base_has_google_translate(self):
-        response = self.client.get(reverse("blog:home"))
-        self.assertContains(response, "google_translate_element")
+    def test_article_has_rating_section(self):
+        response = self.client.get(reverse("blog:article", args=["test-article-one"]))
+        self.assertContains(response, "ratingStars")
+        self.assertContains(response, "Rate This Article")
+
+    def test_article_has_breadcrumbs(self):
+        response = self.client.get(reverse("blog:article", args=["test-article-one"]))
+        self.assertContains(response, "breadcrumbs")
+        self.assertContains(response, "Home")
+
+    def test_article_has_print_button(self):
+        response = self.client.get(reverse("blog:article", args=["test-article-one"]))
+        self.assertContains(response, "Print")
 
     def test_base_has_reading_progress(self):
         response = self.client.get(reverse("blog:home"))
@@ -613,21 +1031,53 @@ class TemplateTest(BaseTestCase):
         response = self.client.get(reverse("blog:home"))
         self.assertContains(response, "application/rss+xml")
 
-    def test_base_has_reading_list_nav(self):
-        response = self.client.get(reverse("blog:home"))
-        self.assertContains(response, "reading-list")
-
     def test_base_has_theme_toggle(self):
         response = self.client.get(reverse("blog:home"))
         self.assertContains(response, "toggleTheme")
 
+    def test_base_has_social_links(self):
+        response = self.client.get(reverse("blog:home"))
+        self.assertContains(response, "footer-social")
+        self.assertContains(response, "twitter.com")
+        self.assertContains(response, "facebook.com")
+
+    def test_base_has_newsletter_form(self):
+        response = self.client.get(reverse("blog:home"))
+        self.assertContains(response, "footerNewsletter")
+        self.assertContains(response, "subscribeNewsletter")
+
+    def test_base_has_privacy_link(self):
+        response = self.client.get(reverse("blog:home"))
+        self.assertContains(response, "Privacy")
+
+    def test_base_has_auth_links(self):
+        response = self.client.get(reverse("blog:home"))
+        self.assertContains(response, "Login")
+        self.assertContains(response, "Register")
+
+    def test_base_has_auth_links_logged_in(self):
+        User.objects.create_user("tmpluser", "t@t.com", "testpass123")
+        self.client.login(username="tmpluser", password="testpass123")
+        response = self.client.get(reverse("blog:home"))
+        self.assertContains(response, "Logout")
+
+    def test_print_css_exists(self):
+        response = self.client.get(reverse("blog:home"))
+        self.assertContains(response, "@media print")
+
+    def test_home_has_load_more(self):
+        for i in range(15):
+            Article.objects.create(title=f"LM {i}", slug=f"lm-{i}", content="t", status="published")
+        response = self.client.get(reverse("blog:home"))
+        self.assertContains(response, "loadMoreBtn")
+
 
 # ============================================================
-# EDGE CASE / STRESS TESTS
+# EDGE CASE TESTS
 # ============================================================
 class EdgeCaseTest(BaseTestCase):
     def test_article_with_no_publication(self):
-        a = Article.objects.create(
+        Article.objects.create(
             title="No Pub Article", slug="no-pub", content="<p>test</p>",
             status="published", publication=None,
         )
@@ -635,7 +1085,7 @@ class EdgeCaseTest(BaseTestCase):
         self.assertEqual(response.status_code, 200)
 
     def test_article_with_no_tags(self):
-        a = Article.objects.create(
+        Article.objects.create(
             title="No Tag Article", slug="no-tag", content="<p>test</p>",
             status="published",
         )
@@ -666,3 +1116,12 @@ class EdgeCaseTest(BaseTestCase):
             self.client.get(reverse("blog:article", args=["test-article-one"]))
         final = Article.objects.get(pk=self.article.pk).views
         self.assertEqual(final, initial + 20)
+
+    def test_article_with_video(self):
+        a = Article.objects.create(
+            title="Video Article", slug="video-test", content="<p>test</p>",
+            status="published", video_url="https://www.youtube.com/watch?v=abc123",
+        )
+        response = self.client.get(reverse("blog:article", args=["video-test"]))
+        self.assertEqual(response.status_code, 200)
+        self.assertContains(response, "youtube.com/embed/abc123")

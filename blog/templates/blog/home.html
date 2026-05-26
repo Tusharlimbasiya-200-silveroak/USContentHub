@@ -95,7 +95,7 @@
 
 {% block extra_js %}
 <script>
-var nextPage = {{ page_obj.next_page_number|default:"null" }};
+var nextPage = {% if page_obj.has_next %}{{ page_obj.next_page_number }}{% else %}null{% endif %};
 function loadMoreArticles() {
     if (!nextPage) return;
     var btn = document.getElementById('loadMoreBtn');
