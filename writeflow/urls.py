@@ -16,18 +16,38 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.contrib.sitemaps.views import sitemap
+from django.http import HttpResponse
 from django.urls import include, path
 
-from blog.sitemaps import ArticleSitemap, PublicationSitemap, StaticSitemap
+from blog.sitemaps import ArticleSitemap, PublicationSitemap, StaticSitemap, TagSitemap
 
 sitemaps = {
     "articles": ArticleSitemap,
     "publications": PublicationSitemap,
+    "tags": TagSitemap,
     "static": StaticSitemap,
 }
 
+
+def robots_txt(request):
+    lines = [
+        "User-agent: *",
+        "Allow: /",
+        "",
+        "Disallow: /admin/",
+        "Disallow: /accounts/",
+        "Disallow: /search/?q=",
+        "Disallow: /api/",
+        "",
+        f"Sitemap: https://tusharlimbasiya200.pythonanywhere.com/sitemap.xml",
+        f"Host: https://tusharlimbasiya200.pythonanywhere.com",
+    ]
+    return HttpResponse("\n".join(lines), content_type="text/plain")
+
+
 urlpatterns = [
     path("admin/", admin.site.urls),
+    path("robots.txt", robots_txt),
     path("sitemap.xml", sitemap, {"sitemaps": sitemaps}, name="django.contrib.sitemaps.views.sitemap"),
     path("accounts/", include("allauth.urls")),
     path("", include("blog.urls")),

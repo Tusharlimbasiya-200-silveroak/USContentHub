@@ -1,6 +1,52 @@
 {% extends "blog/base.html" %}
 
 {% block title %}USA Content Hub — Tech, Health, Finance, Travel, Recipes & News{% endblock %}
+{% block canonical %}https://tusharlimbasiya200.pythonanywhere.com/{% endblock %}
+
+{% block extra_head %}
+<script type="application/ld+json">
+[{
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "name": "USA Content Hub",
+    "url": "https://tusharlimbasiya200.pythonanywhere.com/",
+    "description": "Quality articles on technology, health, personal finance, travel, recipes, and US news.",
+    "potentialAction": {
+        "@type": "SearchAction",
+        "target": "https://tusharlimbasiya200.pythonanywhere.com/search/?q={search_term_string}",
+        "query-input": "required name=search_term_string"
+    }
+},
+{
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "USA Content Hub",
+    "url": "https://tusharlimbasiya200.pythonanywhere.com/",
+    "logo": "https://picsum.photos/seed/usacontenthub/600/60",
+    "sameAs": [
+        "https://twitter.com/USContentHub",
+        "https://facebook.com/USContentHub",
+        "https://instagram.com/USContentHub",
+        "https://youtube.com/@USContentHub",
+        "https://pinterest.com/USContentHub"
+    ]
+},
+{
+    "@context": "https://schema.org",
+    "@type": "CollectionPage",
+    "name": "USA Content Hub — Latest Articles",
+    "url": "https://tusharlimbasiya200.pythonanywhere.com/",
+    "description": "Latest articles on technology, health, personal finance, travel, recipes, and US news.",
+    "mainEntity": {
+        "@type": "ItemList",
+        "numberOfItems": {{ total_articles }},
+        "itemListElement": [{% for article in articles %}{% if forloop.counter <= 10 %}{% if not forloop.first %},{% endif %}
+            {"@type": "ListItem", "position": {{ forloop.counter }}, "url": "https://tusharlimbasiya200.pythonanywhere.com/article/{{ article.slug }}/", "name": "{{ article.title|escapejs }}"}{% endif %}{% endfor %}
+        ]
+    }
+}]
+</script>
+{% endblock %}
 
 {% block content %}
 <section class="articles-list" aria-label="Articles">

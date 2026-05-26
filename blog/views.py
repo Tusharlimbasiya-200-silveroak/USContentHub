@@ -61,16 +61,31 @@ class ArticleDetailView(DetailView):
     def get_context_data(self, **kwargs):
         ctx = super().get_context_data(**kwargs)
         article = self.object
-        cache_key = f"related_articles_{article.pk}"
+        cache_key = f"related_articles_v2_{article.pk}"
         related = cache.get(cache_key)
         if related is None:
-            related = list(
-                Article.objects.filter(status="published", publication=article.publication)
-                .exclude(id=article.id)
-                .order_by("-published_at")[:3]
-                if article.publication
-                else Article.objects.filter(status="published").exclude(id=article.id).order_by("-published_at")[:3]
-            )
+            tag_ids = list(article.tags.values_list("id", flat=True))
+            if tag_ids:
+                # Find articles sharing the most tags
+                related = list(
+                    Article.objects.filter(status="published", tags__in=tag_ids)
+                    .exclude(id=article.id)
+                    .annotate(shared_tags=Count("tags"))
+                    .order_by("-shared_tags", "-published_at")
+                    .distinct()[:6]
+                )
+            elif article.publication:
+                related = list(
+                    Article.objects.filter(status="published", publication=article.publication)
+                    .exclude(id=article.id)
+                    .order_by("-published_at")[:6]
+                )
+            else:
+                related = list(
+                    Article.objects.filter(status="published")
+                    .exclude(id=article.id)
+                    .order_by("-published_at")[:6]
+                )
             cache.set(cache_key, related, 600)
         ctx["related"] = related
         ctx["tags"] = article.tags.all()

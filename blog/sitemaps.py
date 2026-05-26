@@ -5,10 +5,11 @@ from .models import Article, Publication, Tag
 
 class ArticleSitemap(Sitemap):
     changefreq = "weekly"
-    priority = 0.8
+    priority = 0.9
+    limit = 1000
 
     def items(self):
-        return Article.objects.filter(status="published")
+        return Article.objects.filter(status="published").order_by("-published_at")
 
     def lastmod(self, obj):
         return obj.updated_at
@@ -19,7 +20,7 @@ class ArticleSitemap(Sitemap):
 
 class PublicationSitemap(Sitemap):
     changefreq = "daily"
-    priority = 0.6
+    priority = 0.7
 
     def items(self):
         return Publication.objects.all()
@@ -28,9 +29,20 @@ class PublicationSitemap(Sitemap):
         return f"/pub/{obj.slug}/"
 
 
+class TagSitemap(Sitemap):
+    changefreq = "weekly"
+    priority = 0.5
+
+    def items(self):
+        return Tag.objects.all()
+
+    def location(self, obj):
+        return f"/tag/{obj.name}/"
+
+
 class StaticSitemap(Sitemap):
     changefreq = "monthly"
-    priority = 0.5
+    priority = 0.6
 
     def items(self):
         return ["home", "about", "contact", "privacy", "explore"]
