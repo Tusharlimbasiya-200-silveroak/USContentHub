@@ -183,6 +183,9 @@ a.logo:hover{color:var(--primary-dark)}
    MAIN LAYOUT
    ============================================================ */
 main.container{display:grid;grid-template-columns:1fr 280px;gap:36px;padding-top:28px;padding-bottom:48px}
+main.container.full-width{grid-template-columns:1fr}
+main.container:has(.article-full){grid-template-columns:1fr;max-width:800px}
+.article-full,.related-articles,.newsletter-box,.share-buttons{grid-column:1/-1}
 
 /* ============================================================
    ARTICLE CONTENT

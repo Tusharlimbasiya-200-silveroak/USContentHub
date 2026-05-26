@@ -18,7 +18,6 @@ class HomeView(ListView):
 
     def get_context_data(self, **kwargs):
         ctx = super().get_context_data(**kwargs)
-        ctx["publications"] = Publication.objects.all()
         ctx["popular_tags"] = Tag.objects.annotate(count=Count("articles")).order_by("-count")[:15]
         ctx["total_articles"] = Article.objects.filter(status="published").count()
         return ctx
@@ -44,7 +43,6 @@ class ArticleDetailView(DetailView):
             else Article.objects.filter(status="published").exclude(id=article.id).order_by("-published_at")[:3]
         )
         ctx["tags"] = article.tags.all()
-        ctx["publications"] = Publication.objects.all()
         return ctx
 
 
@@ -61,7 +59,6 @@ class PublicationView(ListView):
     def get_context_data(self, **kwargs):
         ctx = super().get_context_data(**kwargs)
         ctx["publication"] = self.publication
-        ctx["publications"] = Publication.objects.all()
         ctx["total_articles"] = self.get_queryset().count()
         return ctx
 
@@ -79,7 +76,6 @@ class TagView(ListView):
     def get_context_data(self, **kwargs):
         ctx = super().get_context_data(**kwargs)
         ctx["tag"] = self.tag
-        ctx["publications"] = Publication.objects.all()
         return ctx
 
 
@@ -101,7 +97,6 @@ class SearchView(ListView):
     def get_context_data(self, **kwargs):
         ctx = super().get_context_data(**kwargs)
         ctx["q"] = self.query
-        ctx["publications"] = Publication.objects.all()
         return ctx
 
 
@@ -116,6 +111,5 @@ class ExploreView(ListView):
 
     def get_context_data(self, **kwargs):
         ctx = super().get_context_data(**kwargs)
-        ctx["publications"] = Publication.objects.all()
         ctx["popular_tags"] = Tag.objects.annotate(count=Count("articles")).order_by("-count")[:30]
         return ctx

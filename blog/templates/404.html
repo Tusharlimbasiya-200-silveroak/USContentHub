@@ -1,0 +1,11 @@
+{% extends "blog/base.html" %}
+{% block title %}Page Not Found — USA Content Hub{% endblock %}
+{% block main_class %}full-width{% endblock %}
+{% block content %}
+<div style="text-align:center;padding:4rem 1rem;">
+    <h1 style="font-size:4rem;margin-bottom:1rem;color:var(--primary);">404</h1>
+    <h2>Page Not Found</h2>
+    <p style="color:var(--text-light);margin:1rem 0 2rem;">The page you're looking for doesn't exist or has been moved.</p>
+    <a href="{% url 'blog:home' %}" class="load-more-btn" style="display:inline-block;padding:12px 32px;">← Back to Home</a>
+</div>
+{% endblock %}
