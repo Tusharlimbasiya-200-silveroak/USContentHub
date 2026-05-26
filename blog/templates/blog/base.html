@@ -17,7 +17,39 @@
     <meta property="og:description" content="{% block og_description %}Tech, Health, Finance, Travel, Recipes & News{% endblock %}">
     <meta property="og:type" content="{% block og_type %}website{% endblock %}">
     <meta property="og:image" content="{% block og_image %}https://picsum.photos/seed/usacontenthub/1200/630{% endblock %}">
-    <link rel="stylesheet" href="{% static 'blog/style.css' %}?v=14">
+    <link rel="stylesheet" href="{% static 'blog/style.css' %}?v=16">
+    <style>
+    @media print {
+        .platform-bar, .site-footer, .back-to-top, .reading-progress,
+        .share-buttons, .comments-section, .newsletter-box, .bookmark-btn,
+        .tts-player, .translate-bar, .toc-container, .theme-toggle,
+        .menu-toggle, .search-input, #google_translate_element, .skip-link,
+        .rating-section { display: none !important; }
+        body { font-size: 12pt; color: #000; background: #fff; }
+        .article-body { max-width: 100%; }
+        a { color: #000; text-decoration: underline; }
+        .article-header h1 { font-size: 18pt; }
+        .breadcrumbs { display: none !important; }
+    }
+    .breadcrumbs { font-size:.85rem; margin-bottom:1rem; color:var(--text-muted); }
+    .breadcrumbs a { color:var(--primary); text-decoration:none; }
+    .breadcrumbs a:hover { text-decoration:underline; }
+    .breadcrumbs span { margin:0 .3rem; }
+    .footer-social { display:flex; gap:12px; margin-top:.75rem; }
+    .footer-social a { font-size:1.3rem; text-decoration:none; transition:transform .2s; }
+    .footer-social a:hover { transform:scale(1.2); }
+    .newsletter-footer { margin-top:1rem; }
+    .newsletter-footer form { display:flex; gap:.5rem; flex-wrap:wrap; }
+    .newsletter-footer input[type="email"] { padding:8px 14px; border:1px solid var(--border); border-radius:20px; background:var(--bg); color:var(--text); font-size:.85rem; flex:1; min-width:180px; }
+    .newsletter-footer button { padding:8px 20px; background:var(--primary); color:#fff; border:none; border-radius:20px; cursor:pointer; font-size:.85rem; }
+    .auth-links { font-size:.8rem; }
+    .auth-links a { color:#e2e8f0; text-decoration:none; margin-left:6px; }
+    .rating-stars { display:inline-flex; gap:2px; cursor:pointer; }
+    .rating-stars .star { font-size:1.3rem; transition:transform .15s; }
+    .rating-stars .star:hover { transform:scale(1.2); }
+    .rating-stars .star.filled { color:#f59e0b; }
+    .rating-stars .star.empty { color:var(--text-muted); }
+    </style>
     <script>
     (function(){var t=localStorage.getItem('theme');if(t)document.documentElement.setAttribute('data-theme',t);})();
     </script>
@@ -45,6 +77,15 @@
             <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle dark mode">
                 <span class="icon" id="themeIcon">🌙</span>
             </button>
+            <span class="auth-links">
+                {% if user.is_authenticated %}
+                <a href="{% url 'blog:user_bookmarks' %}" title="My Bookmarks">📑</a>
+                <a href="{% url 'blog:logout' %}">Logout</a>
+                {% else %}
+                <a href="{% url 'blog:login' %}">Login</a>
+                <a href="{% url 'blog:register' %}">Register</a>
+                {% endif %}
+            </span>
         </div>
     </nav>
 
@@ -67,6 +108,13 @@
                 <div class="footer-section">
                     <h3>About</h3>
                     <p>USA Content Hub — Quality articles on technology, health, personal finance, travel, recipes, and US news.</p>
+                    <div class="footer-social">
+                        <a href="https://twitter.com/USContentHub" target="_blank" rel="noopener" title="Twitter/X">𝕏</a>
+                        <a href="https://facebook.com/USContentHub" target="_blank" rel="noopener" title="Facebook">📘</a>
+                        <a href="https://instagram.com/USContentHub" target="_blank" rel="noopener" title="Instagram">📷</a>
+                        <a href="https://youtube.com/@USContentHub" target="_blank" rel="noopener" title="YouTube">▶️</a>
+                        <a href="https://pinterest.com/USContentHub" target="_blank" rel="noopener" title="Pinterest">📌</a>
+                    </div>
                 </div>
                 <div class="footer-section">
                     <h3>Publications</h3>
@@ -81,13 +129,27 @@
                     <ul>
                         <li><a href="{% url 'blog:home' %}">Home</a></li>
                         <li><a href="{% url 'blog:explore' %}">Explore</a></li>
-                        <li><a href="{% url 'blog:search' %}">Search</a></li>
-                        <li><a href="{% url 'blog:reading_list' %}">📑 Reading List</a></li>
+                        <li><a href="{% url 'blog:about' %}">About</a></li>
+                        <li><a href="{% url 'blog:contact' %}">Contact</a></li>
+                        <li><a href="{% url 'blog:privacy' %}">Privacy Policy</a></li>
                         <li><a href="{% url 'blog:rss_feed' %}">📡 RSS Feed</a></li>
+                        <li><a href="/sitemap.xml">Sitemap</a></li>
                     </ul>
                 </div>
+                <div class="footer-section">
+                    <h3>📬 Newsletter</h3>
+                    <p style="font-size:.85rem;color:var(--text-light);margin-bottom:.5rem;">Get the latest articles in your inbox.</p>
+                    <div class="newsletter-footer">
+                        <form id="footerNewsletter" onsubmit="return subscribeNewsletter(event, this)">
+                            {% csrf_token %}
+                            <input type="email" name="email" placeholder="Your email" required>
+                            <button type="submit">Subscribe</button>
+                        </form>
+                        <p id="footerNlMsg" style="display:none;font-size:.8rem;margin-top:.4rem;"></p>
+                    </div>
+                </div>
             </div>
-            <p class="copyright">&copy; 2026 USA Content Hub. All rights reserved.</p>
+            <p class="copyright">&copy; 2026 USA Content Hub. All rights reserved. | <a href="{% url 'blog:privacy' %}" style="color:var(--text-light);">Privacy</a></p>
         </div>
     </footer>
 
@@ -153,6 +215,26 @@
         }
     };
     RL.updateCount();
+
+    /* Newsletter subscribe */
+    function subscribeNewsletter(e, form) {
+        e.preventDefault();
+        var msgEl = form.parentElement.querySelector('[id$="NlMsg"]') || document.getElementById('footerNlMsg');
+        var emailInput = form.querySelector('input[name="email"]');
+        var csrfToken = form.querySelector('[name=csrfmiddlewaretoken]').value;
+        var fd = new FormData();
+        fd.append('email', emailInput.value);
+        fd.append('csrfmiddlewaretoken', csrfToken);
+        fetch('/newsletter/subscribe/', { method: 'POST', body: fd, headers: {'X-CSRFToken': csrfToken} })
+        .then(function(r) { return r.json(); })
+        .then(function(d) {
+            if (d.success) { msgEl.style.color = '#10b981'; msgEl.textContent = '✅ ' + d.message; emailInput.value = ''; }
+            else { msgEl.style.color = '#ef4444'; msgEl.textContent = '❌ ' + d.error; }
+            msgEl.style.display = 'block';
+        })
+        .catch(function() { msgEl.style.color = '#ef4444'; msgEl.textContent = '❌ Something went wrong.'; msgEl.style.display = 'block'; });
+        return false;
+    }
     </script>
 
     {% block extra_js %}{% endblock %}

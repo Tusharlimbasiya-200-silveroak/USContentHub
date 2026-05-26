@@ -1,16 +1,22 @@
 import re
 from html import escape
 
+from django.contrib import messages
+from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.models import User
 from django.contrib.syndication.views import Feed
 from django.core.cache import cache
-from django.db.models import Count, F, Q
+from django.core.paginator import Paginator
+from django.core.validators import validate_email
+from django.db.models import Avg, Count, F, Q
 from django.http import JsonResponse
-from django.shortcuts import get_object_or_404, render
+from django.shortcuts import get_object_or_404, redirect, render
 from django.utils.feedgenerator import Atom1Feed
 from django.views.decorators.http import require_POST
-from django.views.generic import DetailView, ListView
+from django.views.generic import DetailView, ListView, TemplateView
 
-from .models import Article, Comment, Publication, Tag
+from .models import Article, ArticleRating, Comment, NewsletterSubscriber, Publication, Tag, UserProfile
 
 
 class HomeView(ListView):
@@ -70,6 +76,16 @@ class ArticleDetailView(DetailView):
         ctx["tags"] = article.tags.all()
         ctx["comments"] = article.comments.filter(is_approved=True)
         ctx["comment_count"] = ctx["comments"].count()
+        ctx["avg_rating"] = article.average_rating()
+        ctx["rating_count"] = article.rating_count()
+        # Check if current user has rated
+        ip = _get_client_ip(self.request)
+        ctx["user_rated"] = ArticleRating.objects.filter(article=article, ip_address=ip).exists()
+        # Breadcrumbs
+        ctx["breadcrumbs"] = [("Home", "/")]
+        if article.publication:
+            ctx["breadcrumbs"].append((article.publication.name, f"/pub/{article.publication.slug}/"))
+        ctx["breadcrumbs"].append((article.title[:60], None))
         return ctx
 
 
@@ -253,3 +269,158 @@ def about_page(request):
 
 def contact_page(request):
     return render(request, "blog/contact.html")
+
+
+def privacy_page(request):
+    return render(request, "blog/privacy.html")
+
+
+# ── Newsletter Subscribe ──────────────────────────────────────
+@require_POST
+def newsletter_subscribe(request):
+    email = request.POST.get("email", "").strip().lower()[:254]
+    if not email:
+        return JsonResponse({"success": False, "error": "Email is required."}, status=400)
+    try:
+        validate_email(email)
+    except Exception:
+        return JsonResponse({"success": False, "error": "Invalid email address."}, status=400)
+
+    subscriber, created = NewsletterSubscriber.objects.get_or_create(email=email)
+    if not created and subscriber.is_active:
+        return JsonResponse({"success": True, "message": "You're already subscribed!"})
+    if not subscriber.is_active:
+        subscriber.is_active = True
+        subscriber.save()
+    return JsonResponse({"success": True, "message": "Successfully subscribed!"})
+
+
+# ── Article Rating ─────────────────────────────────────────────
+@require_POST
+def rate_article(request, slug):
+    article = get_object_or_404(Article, slug=slug, status="published")
+    ip = _get_client_ip(request)
+
+    try:
+        score = int(request.POST.get("score", 0))
+    except (ValueError, TypeError):
+        return JsonResponse({"success": False, "error": "Invalid score."}, status=400)
+
+    if score < 1 or score > 5:
+        return JsonResponse({"success": False, "error": "Score must be between 1 and 5."}, status=400)
+
+    rating, created = ArticleRating.objects.update_or_create(
+        article=article, ip_address=ip,
+        defaults={"score": score},
+    )
+
+    avg = article.average_rating()
+    count = article.rating_count()
+    return JsonResponse({"success": True, "avg_rating": avg, "rating_count": count, "your_score": score})
+
+
+# ── Load More Articles (AJAX) ─────────────────────────────────
+def load_more_articles(request):
+    page = request.GET.get("page", 1)
+    per_page = 12
+    articles = Article.objects.filter(status="published").select_related("publication").prefetch_related("tags")
+    paginator = Paginator(articles, per_page)
+
+    try:
+        page_obj = paginator.page(page)
+    except Exception:
+        return JsonResponse({"articles": [], "has_next": False})
+
+    data = []
+    for a in page_obj:
+        data.append({
+            "title": a.title,
+            "slug": a.slug,
+            "cover_image": a.cover_image,
+            "published_at": a.published_at.strftime("%Y-%m-%d"),
+            "read_time": a.read_time,
+            "meta_description": a.meta_description or a.subtitle[:160] if a.subtitle else "",
+            "publication_name": a.publication.name if a.publication else "",
+            "publication_icon": a.publication.icon if a.publication else "",
+            "publication_slug": a.publication.slug if a.publication else "",
+        })
+    return JsonResponse({"articles": data, "has_next": page_obj.has_next()})
+
+
+# ── Auth Views ─────────────────────────────────────────────────
+def register_view(request):
+    if request.user.is_authenticated:
+        return redirect("blog:home")
+    if request.method == "POST":
+        username = request.POST.get("username", "").strip()[:150]
+        email = request.POST.get("email", "").strip().lower()[:254]
+        password = request.POST.get("password", "")
+        password2 = request.POST.get("password2", "")
+
+        errors = []
+        if not username or len(username) < 3:
+            errors.append("Username must be at least 3 characters.")
+        if not email:
+            errors.append("Email is required.")
+        else:
+            try:
+                validate_email(email)
+            except Exception:
+                errors.append("Invalid email address.")
+        if not password or len(password) < 8:
+            errors.append("Password must be at least 8 characters.")
+        if password != password2:
+            errors.append("Passwords do not match.")
+        if User.objects.filter(username=username).exists():
+            errors.append("Username already taken.")
+        if User.objects.filter(email=email).exists():
+            errors.append("Email already registered.")
+
+        if errors:
+            return render(request, "blog/register.html", {"errors": errors, "username": username, "email": email})
+
+        user = User.objects.create_user(username=username, email=email, password=password)
+        UserProfile.objects.create(user=user)
+        login(request, user)
+        messages.success(request, "Account created successfully!")
+        return redirect("blog:home")
+    return render(request, "blog/register.html")
+
+
+def login_view(request):
+    if request.user.is_authenticated:
+        return redirect("blog:home")
+    if request.method == "POST":
+        username = request.POST.get("username", "").strip()
+        password = request.POST.get("password", "")
+        user = authenticate(request, username=username, password=password)
+        if user:
+            login(request, user)
+            next_url = request.GET.get("next", "/")
+            return redirect(next_url)
+        return render(request, "blog/login.html", {"error": "Invalid username or password.", "username": username})
+    return render(request, "blog/login.html")
+
+
+def logout_view(request):
+    logout(request)
+    return redirect("blog:home")
+
+
+@login_required
+@require_POST
+def toggle_bookmark(request, slug):
+    article = get_object_or_404(Article, slug=slug, status="published")
+    profile, _ = UserProfile.objects.get_or_create(user=request.user)
+    if profile.bookmarks.filter(pk=article.pk).exists():
+        profile.bookmarks.remove(article)
+        return JsonResponse({"bookmarked": False})
+    profile.bookmarks.add(article)
+    return JsonResponse({"bookmarked": True})
+
+
+@login_required
+def user_bookmarks(request):
+    profile, _ = UserProfile.objects.get_or_create(user=request.user)
+    articles = profile.bookmarks.filter(status="published").select_related("publication")
+    return render(request, "blog/user_bookmarks.html", {"articles": articles})

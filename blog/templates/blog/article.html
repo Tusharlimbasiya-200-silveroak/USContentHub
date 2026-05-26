@@ -27,6 +27,13 @@
 {% block content %}
 <article class="article-full" itemscope itemtype="https://schema.org/Article">
     <header class="article-header">
+        {% if breadcrumbs %}
+        <nav class="breadcrumbs" aria-label="Breadcrumb">
+            {% for label, url in breadcrumbs %}
+                {% if url %}<a href="{{ url }}">{{ label }}</a> <span>›</span>{% else %}<span>{{ label }}</span>{% endif %}
+            {% endfor %}
+        </nav>
+        {% endif %}
         {% if article.publication %}
         <a href="{% url 'blog:publication' article.publication.slug %}" class="pub-badge" style="color:var(--primary);text-decoration:none;font-size:.9rem;margin-bottom:.5rem;display:inline-block;">{{ article.publication.icon }} {{ article.publication.name }}</a>
         {% endif %}
@@ -40,12 +47,19 @@
             <button class="bookmark-btn" id="bookmarkBtn" onclick="toggleBookmark()" title="Save to Reading List" style="background:none;border:1px solid var(--border);border-radius:20px;padding:4px 12px;cursor:pointer;font-size:.82rem;color:var(--text-light);transition:all .2s;">
                 <span id="bookmarkIcon">🔖</span> <span id="bookmarkText">Save</span>
             </button>
+            <button onclick="window.print()" style="background:none;border:1px solid var(--border);border-radius:20px;padding:4px 12px;cursor:pointer;font-size:.82rem;color:var(--text-light);" title="Print article">🖨️ Print</button>
         </div>
     </header>
 
     {% if article.cover_image %}
     <div class="article-cover">
         <img src="{{ article.cover_image }}" alt="{{ article.title }}" loading="eager" decoding="async" width="1200" height="630" itemprop="image">
+    </div>
+    {% endif %}
+
+    {% if article.video_url %}
+    <div class="video-embed" style="margin:1.5rem 0;position:relative;padding-bottom:56.25%;height:0;overflow:hidden;border-radius:var(--radius);">
+        <iframe src="{{ article.embed_video_url }}" style="position:absolute;top:0;left:0;width:100%;height:100%;border:0;" allowfullscreen loading="lazy" title="Video: {{ article.title }}"></iframe>
     </div>
     {% endif %}
 
@@ -68,14 +82,14 @@
             <span id="ttsIcon">▶️</span>
         </button>
         <div class="tts-info">
-            <div class="tts-label" id="ttsLabel">Listen to Article</div>
+            <div class="tts-label" id="ttsLabel">🎧 Listen to Article</div>
             <div class="tts-progress-bar">
                 <div class="tts-progress-fill" id="ttsProgress"></div>
             </div>
-            <div class="tts-meta" id="ttsMeta">~{{ article.read_time }} min · <span id="ttsLang">English</span></div>
+            <div class="tts-meta" id="ttsMeta">~{{ article.read_time }} min · <span id="ttsLang">English</span> · Narrated</div>
         </div>
         <div class="tts-controls">
-            <button class="tts-ctrl" onclick="ttsSkip(-30)" title="Back 30s">⏪</button>
+            <button class="tts-ctrl" onclick="ttsSkip(-3)" title="Previous section">⏪</button>
             <select class="tts-speed" id="ttsSpeed" onchange="ttsSetSpeed(this.value)" title="Speed">
                 <option value="0.75">0.75×</option>
                 <option value="1" selected>1×</option>
@@ -83,7 +97,7 @@
                 <option value="1.5">1.5×</option>
                 <option value="2">2×</option>
             </select>
-            <button class="tts-ctrl" onclick="ttsSkip(30)" title="Forward 30s">⏩</button>
+            <button class="tts-ctrl" onclick="ttsSkip(3)" title="Next section">⏩</button>
             <button class="tts-ctrl" onclick="ttsStop()" title="Stop">⏹️</button>
         </div>
     </div>
@@ -106,6 +120,20 @@
         <a href="https://www.facebook.com/sharer/sharer.php?u={{ request.build_absolute_uri }}" target="_blank" rel="noopener" style="padding:8px 16px;background:#1877f2;color:#fff;border-radius:20px;text-decoration:none;font-size:.85rem;">Facebook</a>
         <a href="https://www.linkedin.com/sharing/share-offsite/?url={{ request.build_absolute_uri }}" target="_blank" rel="noopener" style="padding:8px 16px;background:#0a66c2;color:#fff;border-radius:20px;text-decoration:none;font-size:.85rem;">LinkedIn</a>
     </div>
+
+<!-- Rating Section -->
+<section class="rating-section" style="margin:1.5rem 0;padding:1.5rem;background:var(--bg-light);border-radius:var(--radius);text-align:center;">
+    <h3 style="margin:0 0 .5rem;font-size:1rem;">⭐ Rate This Article</h3>
+    <div class="rating-stars" id="ratingStars">
+        {% for i in "12345" %}
+        <span class="star {% if forloop.counter <= avg_rating %}filled{% else %}empty{% endif %}" data-score="{{ forloop.counter }}" onclick="submitRating({{ forloop.counter }})">★</span>
+        {% endfor %}
+    </div>
+    <p style="font-size:.85rem;color:var(--text-muted);margin:.5rem 0 0;" id="ratingInfo">
+        {% if rating_count %}{{ avg_rating }}/5 ({{ rating_count }} rating{{ rating_count|pluralize }}){% else %}No ratings yet{% endif %}
+        {% if user_rated %}<span style="color:#10b981;"> · You rated this</span>{% endif %}
+    </p>
+</section>
 </article>
 
 <!-- Comments Section -->
@@ -165,14 +193,12 @@
 <div class="newsletter-box" style="margin:2rem 0;padding:2rem;background:var(--bg-light);border-radius:var(--radius);text-align:center;">
     <h3>📬 Stay Updated</h3>
     <p style="color:var(--text-light);margin-bottom:1rem;">Get the latest articles delivered to your inbox.</p>
-    <form id="newsletter-form" action="https://formsubmit.co/ajax/tusharlimbasiya200@gmail.com" method="POST" style="display:flex;gap:.5rem;justify-content:center;flex-wrap:wrap;">
-        <input type="hidden" name="_subject" value="Newsletter Signup from {{ article.title }}">
-        <input type="hidden" name="_captcha" value="false">
-        <input type="hidden" name="_template" value="table">
+    <form id="newsletter-form" onsubmit="return subscribeNewsletter(event, this)" style="display:flex;gap:.5rem;justify-content:center;flex-wrap:wrap;">
+        {% csrf_token %}
         <input type="email" name="email" id="nl-email" placeholder="Your email" required style="padding:10px 16px;border:1px solid var(--border);border-radius:20px;font-size:.9rem;background:var(--bg);color:var(--text);">
         <button type="submit" id="nl-btn" style="padding:10px 24px;background:var(--primary);color:#fff;border:none;border-radius:20px;cursor:pointer;font-size:.9rem;">Subscribe</button>
     </form>
-    <p id="nl-msg" style="display:none;margin-top:.75rem;font-weight:600;"></p>
+    <p id="articleNlMsg" style="display:none;margin-top:.75rem;font-weight:600;"></p>
 </div>
 
 {% block extra_js %}
@@ -286,165 +312,218 @@ function googleTranslateElementInit(){
     new MutationObserver(function(){cleanGT();}).observe(document.body,{attributes:true,attributeFilter:['style']});
 })();
 
-/* ── Text-to-Speech Player ─────────────────────────────────── */
+/* ── Text-to-Speech — Storytelling Narrator ────────────────── */
 (function(){
     var synth=window.speechSynthesis;
     if(!synth){document.getElementById('ttsPlayer').style.display='none';return;}
 
-    var state='stopped'; // stopped|playing|paused
-    var chunks=[];
-    var currentChunk=0;
-    var utterance=null;
+    var state='stopped';
+    var segments=[];    // {type:'intro'|'heading'|'paragraph'|'outro', text:'...'}
+    var currentSeg=0;
     var speed=1;
-    var totalChunks=0;
+    var PAUSE=800; // ms pause between sections
 
-    /* Detect language from Google Translate cookie or html lang */
+    /* ── Language detection ── */
     function detectLang(){
-        var cookie=document.cookie.match(/googtrans=\/[a-z-]+\/([a-z-]+)/i);
-        if(cookie)return cookie[1];
-        return document.documentElement.lang||'en';
+        var c=document.cookie.match(/googtrans=\/[a-z-]+\/([a-z-]+)/i);
+        return c?c[1]:(document.documentElement.lang||'en');
     }
-
-    /* Language display names */
     var langNames={en:'English',es:'Spanish','zh-CN':'Chinese',hi:'Hindi',fr:'French',de:'German',pt:'Portuguese',ja:'Japanese',ko:'Korean',ar:'Arabic',vi:'Vietnamese',tl:'Filipino',ru:'Russian',it:'Italian',pl:'Polish'};
-
-    /* Update language label when Google Translate changes */
     function updateLangLabel(){
-        var lang=detectLang();
         var el=document.getElementById('ttsLang');
-        if(el)el.textContent=langNames[lang]||lang.toUpperCase();
+        if(el){var l=detectLang();el.textContent=langNames[l]||l.toUpperCase();}
     }
-    setInterval(updateLangLabel,2000);
-    updateLangLabel();
+    setInterval(updateLangLabel,2000);updateLangLabel();
 
-    /* Get article text (uses translated text if page is translated) */
-    function getArticleText(){
+    /* ── Smart content extraction ── */
+    function extractStory(){
         var body=document.querySelector('.article-body');
-        if(!body)return '';
-        return body.innerText||body.textContent||'';
-    }
+        if(!body)return[];
+        var parts=[];
+        var title=document.querySelector('[itemprop="headline"]');
+        if(title)parts.push({type:'intro',text:title.innerText.trim()});
 
-    /* Split text into chunks (~200 chars at sentence boundaries) */
-    function splitText(text){
-        var sentences=text.replace(/\n+/g,' ').replace(/\s+/g,' ').match(/[^.!?]+[.!?]+[\s]*/g)||[text];
-        var result=[];
-        var buf='';
-        for(var i=0;i<sentences.length;i++){
-            buf+=sentences[i];
-            if(buf.length>180){
-                result.push(buf.trim());
-                buf='';
+        var els=body.querySelectorAll('h1,h2,h3,h4,h5,h6,p,li,blockquote');
+        var skip=['script','style','code','pre','noscript','nav','.toc','.translate-bar','.tts-player','.newsletter','.comment'];
+
+        for(var i=0;i<els.length;i++){
+            var el=els[i];
+            // Skip if inside ignored containers
+            var dominated=false;
+            for(var s=0;s<skip.length;s++){if(el.closest&&el.closest(skip[s])){dominated=true;break;}}
+            if(dominated)continue;
+
+            var txt=(el.innerText||'').trim();
+            if(!txt||txt.length<3)continue;
+            // Skip pure link lists, social share, etc.
+            if(el.querySelectorAll('a').length>3&&txt.split(' ').length<10)continue;
+
+            var tag=el.tagName.toLowerCase();
+            if(tag.match(/^h[1-6]$/)){
+                parts.push({type:'heading',text:txt});
+            }else if(tag==='blockquote'){
+                parts.push({type:'quote',text:txt});
+            }else if(tag==='li'){
+                parts.push({type:'paragraph',text:txt});
+            }else{
+                // Regular paragraph — split long ones at sentence boundaries
+                if(txt.length>300){
+                    var sents=txt.match(/[^.!?]+[.!?]+[\s]*/g)||[txt];
+                    var buf='';
+                    for(var j=0;j<sents.length;j++){
+                        buf+=sents[j];
+                        if(buf.length>200){parts.push({type:'paragraph',text:buf.trim()});buf='';}
+                    }
+                    if(buf.trim())parts.push({type:'paragraph',text:buf.trim()});
+                }else{
+                    parts.push({type:'paragraph',text:txt});
+                }
             }
         }
-        if(buf.trim())result.push(buf.trim());
-        return result;
+        parts.push({type:'outro',text:'That was the end of this article. Thank you for listening.'});
+        return parts;
     }
 
-    /* Find best matching voice for language */
+    /* ── Voice selection ── */
     function findVoice(lang){
         var voices=synth.getVoices();
         if(!voices.length)return null;
-        // Exact match
-        for(var i=0;i<voices.length;i++){
-            if(voices[i].lang.toLowerCase()===lang.toLowerCase())return voices[i];
-        }
-        // Prefix match (e.g. 'en' matches 'en-US')
+        // Prefer natural/enhanced voices
         var prefix=lang.split('-')[0].toLowerCase();
+        var best=null;
         for(var i=0;i<voices.length;i++){
-            if(voices[i].lang.toLowerCase().startsWith(prefix))return voices[i];
+            var v=voices[i];
+            if(!v.lang.toLowerCase().startsWith(prefix))continue;
+            if(!best)best=v;
+            var n=v.name.toLowerCase();
+            if(n.indexOf('natural')>-1||n.indexOf('neural')>-1||n.indexOf('enhanced')>-1)return v;
         }
-        return null;
+        return best;
     }
 
-    /* Speak a single chunk */
-    function speakChunk(index){
-        if(index>=chunks.length){
-            ttsFinished();
-            return;
-        }
-        currentChunk=index;
-        utterance=new SpeechSynthesisUtterance(chunks[index]);
+    /* ── Speak one segment with storytelling style ── */
+    function speakSegment(index){
+        if(index>=segments.length){finished();return;}
+        currentSeg=index;
+        var seg=segments[index];
+        var utt=new SpeechSynthesisUtterance(seg.text);
         var lang=detectLang();
-        utterance.lang=lang;
+        utt.lang=lang;
         var voice=findVoice(lang);
-        if(voice)utterance.voice=voice;
-        utterance.rate=speed;
-        utterance.onend=function(){
-            currentChunk++;
+        if(voice)utt.voice=voice;
+        utt.rate=speed;
+
+        // Storytelling style adjustments
+        if(seg.type==='intro'){
+            utt.rate=speed*0.9;  // slower for title
+            utt.pitch=1.1;       // slightly higher to draw attention
+        }else if(seg.type==='heading'){
+            utt.rate=speed*0.92;
+            utt.pitch=1.05;
+        }else if(seg.type==='quote'){
+            utt.rate=speed*0.88;
+            utt.pitch=0.95;      // deeper for quotes
+        }else if(seg.type==='outro'){
+            utt.rate=speed*0.85;
+            utt.pitch=1.0;
+        }else{
+            utt.pitch=1.0;
+        }
+
+        utt.onend=function(){
+            currentSeg++;
             updateProgress();
-            if(state==='playing')speakChunk(currentChunk);
-        };
-        utterance.onerror=function(e){
-            if(e.error!=='interrupted'&&e.error!=='canceled'){
-                currentChunk++;
-                if(state==='playing')speakChunk(currentChunk);
+            updateLabel();
+            if(state==='playing'){
+                // Natural pause between sections
+                var pause=(seg.type==='heading'||seg.type==='intro')?PAUSE:400;
+                setTimeout(function(){
+                    if(state==='playing')speakSegment(currentSeg);
+                },pause);
             }
         };
-        synth.speak(utterance);
+        utt.onerror=function(e){
+            if(e.error!=='interrupted'&&e.error!=='canceled'){
+                currentSeg++;
+                if(state==='playing')speakSegment(currentSeg);
+            }
+        };
+
+        // Highlight current section type in label
+        updateLabel();
+        synth.speak(utt);
         updateProgress();
     }
 
     function updateProgress(){
-        var pct=totalChunks?Math.round((currentChunk/totalChunks)*100):0;
+        var pct=segments.length?Math.round((currentSeg/segments.length)*100):0;
         var bar=document.getElementById('ttsProgress');
         if(bar)bar.style.width=pct+'%';
+    }
+
+    function updateLabel(){
+        var label=document.getElementById('ttsLabel');
+        if(!label||state!=='playing')return;
+        if(currentSeg>=segments.length)return;
+        var seg=segments[currentSeg];
+        var prefix={intro:'📖 ',heading:'📌 ',paragraph:'🎙️ ',quote:'💬 ',outro:'✅ '};
+        var short=seg.text.length>45?seg.text.substring(0,42)+'...':seg.text;
+        label.textContent=(prefix[seg.type]||'🎙️ ')+short;
     }
 
     function setUI(s){
         var icon=document.getElementById('ttsIcon');
         var label=document.getElementById('ttsLabel');
-        if(s==='playing'){icon.textContent='⏸️';label.textContent='Playing...';}
-        else if(s==='paused'){icon.textContent='▶️';label.textContent='Paused';}
-        else{icon.textContent='▶️';label.textContent='Listen to Article';
+        if(s==='playing'){icon.textContent='⏸️';}
+        else if(s==='paused'){icon.textContent='▶️';label.textContent='⏸️ Paused';}
+        else{icon.textContent='▶️';label.textContent='🎧 Listen to Article';
             var bar=document.getElementById('ttsProgress');if(bar)bar.style.width='0%';}
     }
 
-    function ttsFinished(){
-        state='stopped';synth.cancel();setUI('stopped');currentChunk=0;
+    function finished(){
+        state='stopped';synth.cancel();setUI('stopped');currentSeg=0;
     }
 
-    /* Public API */
+    /* ── Public controls ── */
     window.ttsToggle=function(){
         if(state==='playing'){
             synth.pause();state='paused';setUI('paused');
         }else if(state==='paused'){
-            synth.resume();state='playing';setUI('playing');
+            synth.resume();state='playing';setUI('playing');updateLabel();
         }else{
             synth.cancel();
-            chunks=splitText(getArticleText());
-            totalChunks=chunks.length;
-            currentChunk=0;
+            segments=extractStory();
+            if(!segments.length)return;
+            currentSeg=0;
             state='playing';setUI('playing');
-            speakChunk(0);
+            speakSegment(0);
         }
     };
 
     window.ttsStop=function(){
-        synth.cancel();state='stopped';currentChunk=0;setUI('stopped');
+        synth.cancel();state='stopped';currentSeg=0;setUI('stopped');
     };
 
     window.ttsSetSpeed=function(v){
         speed=parseFloat(v);
         if(state==='playing'){
             synth.cancel();state='playing';setUI('playing');
-            speakChunk(currentChunk);
+            speakSegment(currentSeg);
         }
     };
 
     window.ttsSkip=function(dir){
         if(state==='stopped')return;
-        var skip=Math.round(Math.abs(dir)/2); // ~2s per chunk
-        var next=dir<0?Math.max(0,currentChunk-skip):Math.min(chunks.length-1,currentChunk+skip);
-        synth.cancel();
-        currentChunk=next;
-        if(state==='playing'||state==='paused'){state='playing';setUI('playing');speakChunk(currentChunk);}
+        var step=dir<0?-3:3;
+        var next=Math.max(0,Math.min(segments.length-1,currentSeg+step));
+        synth.cancel();currentSeg=next;
+        if(state!=='stopped'){state='playing';setUI('playing');speakSegment(currentSeg);}
     };
 
-    /* Preload voices (some browsers load async) */
+    /* Preload voices */
     synth.getVoices();
     if(synth.onvoiceschanged!==undefined)synth.onvoiceschanged=function(){synth.getVoices();};
-
-    /* Chrome bug: synth stops after ~15s. Keep-alive workaround */
+    /* Chrome keep-alive */
     setInterval(function(){if(state==='playing'&&synth.speaking){synth.pause();synth.resume();}},10000);
 })();
 </script>

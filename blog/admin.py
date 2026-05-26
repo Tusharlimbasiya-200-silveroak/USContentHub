@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from .models import Article, Comment, Publication, Tag
+from .models import Article, ArticleRating, Comment, NewsletterSubscriber, Publication, Tag, UserProfile
 
 
 @admin.register(Publication)
@@ -41,3 +41,22 @@ class CommentAdmin(admin.ModelAdmin):
     @admin.action(description="Reject selected comments")
     def reject_comments(self, request, queryset):
         queryset.update(is_approved=False)
+
+
+@admin.register(NewsletterSubscriber)
+class NewsletterSubscriberAdmin(admin.ModelAdmin):
+    list_display = ("email", "subscribed_at", "is_active")
+    list_filter = ("is_active",)
+    search_fields = ("email",)
+
+
+@admin.register(ArticleRating)
+class ArticleRatingAdmin(admin.ModelAdmin):
+    list_display = ("article", "score", "ip_address", "created_at")
+    list_filter = ("score",)
+
+
+@admin.register(UserProfile)
+class UserProfileAdmin(admin.ModelAdmin):
+    list_display = ("user",)
+    filter_horizontal = ("bookmarks",)

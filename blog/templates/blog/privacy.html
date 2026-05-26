@@ -1,0 +1,49 @@
+{% extends "blog/base.html" %}
+
+{% block title %}Privacy Policy — USA Content Hub{% endblock %}
+{% block description %}Privacy policy for USA Content Hub. Learn how we handle your data.{% endblock %}
+
+{% block content %}
+<div class="page-content" style="max-width:800px;margin:0 auto;grid-column:1/-1;">
+    <nav class="breadcrumbs" aria-label="Breadcrumb">
+        <a href="/">Home</a> <span>›</span> <span>Privacy Policy</span>
+    </nav>
+    <h1 style="font-size:2rem;margin-bottom:1.5rem;">Privacy Policy</h1>
+
+    <div class="article-content" style="padding:2rem;">
+        <p style="color:var(--text-muted);margin-bottom:1.5rem;"><em>Last updated: May 26, 2026</em></p>
+
+        <h2>Information We Collect</h2>
+        <p style="line-height:1.8;">We collect minimal information to provide you with the best experience:</p>
+        <ul style="line-height:2;">
+            <li><strong>Newsletter subscriptions:</strong> Your email address when you voluntarily subscribe to our newsletter.</li>
+            <li><strong>Comments:</strong> Your name and comment content when you post comments on articles.</li>
+            <li><strong>Account data:</strong> Username and email when you create an account.</li>
+            <li><strong>Analytics:</strong> Page views and article ratings (linked to IP address, not personal identity).</li>
+            <li><strong>Cookies:</strong> Theme preference stored locally in your browser.</li>
+        </ul>
+
+        <h2 style="margin-top:2rem;">How We Use Your Information</h2>
+        <ul style="line-height:2;">
+            <li>To deliver newsletter content you subscribed to.</li>
+            <li>To display comments and facilitate community discussion.</li>
+            <li>To prevent abuse through rate limiting.</li>
+            <li>To improve our content based on aggregate analytics.</li>
+        </ul>
+
+        <h2 style="margin-top:2rem;">Data Protection</h2>
+        <p style="line-height:1.8;">We do not sell, trade, or share your personal information with third parties. All data is stored securely, and we implement industry-standard security measures including CSRF protection, XSS prevention, and secure headers.</p>
+
+        <h2 style="margin-top:2rem;">Your Rights</h2>
+        <p style="line-height:1.8;">You can:</p>
+        <ul style="line-height:2;">
+            <li>Unsubscribe from the newsletter at any time.</li>
+            <li>Request deletion of your account and associated data.</li>
+            <li>Clear your local reading list and theme preferences through your browser.</li>
+        </ul>
+
+        <h2 style="margin-top:2rem;">Contact</h2>
+        <p style="line-height:1.8;">If you have questions about this privacy policy, please <a href="{% url 'blog:contact' %}">contact us</a>.</p>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,38 @@
+{% extends "blog/base.html" %}
+
+{% block title %}My Bookmarks — USA Content Hub{% endblock %}
+
+{% block content %}
+<div class="page-content" style="max-width:900px;margin:0 auto;grid-column:1/-1;">
+    <nav class="breadcrumbs" aria-label="Breadcrumb">
+        <a href="/">Home</a> <span>›</span> <span>My Bookmarks</span>
+    </nav>
+    <h1 style="font-size:1.8rem;margin-bottom:1.5rem;">📑 My Bookmarks</h1>
+
+    <div class="articles-grid">
+        {% for article in articles %}
+        <article class="article-card">
+            <div class="card-image">
+                <img src="{{ article.cover_image }}" alt="{{ article.title }}" loading="lazy" width="640" height="360">
+            </div>
+            <div class="card-body">
+                <h3><a href="{% url 'blog:article' article.slug %}">{{ article.title }}</a></h3>
+                <div class="article-meta">
+                    <time datetime="{{ article.published_at|date:'Y-m-d' }}">📅 {{ article.published_at|date:'Y-m-d' }}</time>
+                    <span class="read-time">⏱️ {{ article.read_time }} min</span>
+                </div>
+                {% if article.publication %}
+                <span class="pub-badge" style="font-size:.75rem;color:var(--primary);">{{ article.publication.icon }} {{ article.publication.name }}</span>
+                {% endif %}
+                <a href="{% url 'blog:article' article.slug %}" class="read-more">Read More</a>
+            </div>
+        </article>
+        {% empty %}
+        <div style="text-align:center;padding:3rem;grid-column:1/-1;">
+            <p style="font-size:1.1rem;color:var(--text-muted);">No bookmarks yet.</p>
+            <a href="{% url 'blog:home' %}" style="color:var(--primary);">Browse articles →</a>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

@@ -1,3 +1,7 @@
+import re
+
+from django.contrib.auth.models import User
+from django.core.validators import MaxValueValidator, MinValueValidator
 from django.db import models
 from django.utils import timezone
 from django.utils.text import slugify
@@ -31,6 +35,7 @@ class Article(models.Model):
     slug = models.SlugField(max_length=300, unique=True)
     content = models.TextField()
     cover_image = models.URLField(max_length=500, blank=True, default="")
+    video_url = models.URLField(max_length=500, blank=True, default="")
     publication = models.ForeignKey(
         Publication, on_delete=models.SET_NULL, null=True, blank=True, related_name="articles"
     )
@@ -59,6 +64,28 @@ class Article(models.Model):
             self.slug = slugify(self.title)[:300]
         super().save(*args, **kwargs)
 
+    def average_rating(self):
+        ratings = self.ratings.all()
+        if not ratings.exists():
+            return 0
+        return round(sum(r.score for r in ratings) / ratings.count(), 1)
+
+    def rating_count(self):
+        return self.ratings.count()
+
+    def embed_video_url(self):
+        """Convert YouTube/Vimeo URLs to embeddable format."""
+        url = self.video_url
+        if not url:
+            return ""
+        yt = re.match(r'(?:https?://)?(?:www\.)?(?:youtube\.com/watch\?v=|youtu\.be/)([\w-]+)', url)
+        if yt:
+            return f"https://www.youtube.com/embed/{yt.group(1)}"
+        vm = re.match(r'(?:https?://)?(?:www\.)?vimeo\.com/(\d+)', url)
+        if vm:
+            return f"https://player.vimeo.com/video/{vm.group(1)}"
+        return url
+
 
 class Comment(models.Model):
     article = models.ForeignKey(Article, on_delete=models.CASCADE, related_name="comments")
@@ -75,3 +102,37 @@ class Comment(models.Model):
 
     def __str__(self):
         return f"{self.name} on {self.article.title[:30]}"
+
+
+class NewsletterSubscriber(models.Model):
+    email = models.EmailField(unique=True)
+    subscribed_at = models.DateTimeField(auto_now_add=True)
+    is_active = models.BooleanField(default=True)
+
+    class Meta:
+        ordering = ["-subscribed_at"]
+
+    def __str__(self):
+        return self.email
+
+
+class ArticleRating(models.Model):
+    article = models.ForeignKey(Article, on_delete=models.CASCADE, related_name="ratings")
+    ip_address = models.GenericIPAddressField()
+    score = models.PositiveSmallIntegerField(validators=[MinValueValidator(1), MaxValueValidator(5)])
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        unique_together = ("article", "ip_address")
+        ordering = ["-created_at"]
+
+    def __str__(self):
+        return f"{self.score}/5 on {self.article.title[:30]}"
+
+
+class UserProfile(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE, related_name="profile")
+    bookmarks = models.ManyToManyField(Article, blank=True, related_name="bookmarked_by")
+
+    def __str__(self):
+        return self.user.username

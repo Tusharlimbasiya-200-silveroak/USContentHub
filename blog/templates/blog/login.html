@@ -1,0 +1,37 @@
+{% extends "blog/base.html" %}
+
+{% block title %}Sign In — USA Content Hub{% endblock %}
+
+{% block content %}
+<div class="page-content" style="max-width:420px;margin:0 auto;grid-column:1/-1;">
+    <nav class="breadcrumbs" aria-label="Breadcrumb">
+        <a href="/">Home</a> <span>›</span> <span>Sign In</span>
+    </nav>
+    <h1 style="font-size:1.8rem;margin-bottom:1.5rem;text-align:center;">Sign In</h1>
+
+    <div style="padding:2rem;background:var(--card-bg);border:1px solid var(--border);border-radius:var(--radius);">
+        {% if error %}
+        <div style="padding:1rem;background:#fef2f2;border:1px solid #fecaca;border-radius:var(--radius);margin-bottom:1rem;">
+            <p style="color:#dc2626;font-size:.9rem;margin:0;">⚠️ {{ error }}</p>
+        </div>
+        {% endif %}
+
+        <form method="post" action="{% url 'blog:login' %}{% if request.GET.next %}?next={{ request.GET.next }}{% endif %}">
+            {% csrf_token %}
+            <div style="margin-bottom:1rem;">
+                <label for="username" style="display:block;font-weight:600;margin-bottom:.4rem;font-size:.9rem;">Username</label>
+                <input type="text" id="username" name="username" value="{{ username|default:'' }}" required style="width:100%;padding:10px 14px;border:1px solid var(--border);border-radius:var(--radius);background:var(--bg);color:var(--text);font-size:.9rem;">
+            </div>
+            <div style="margin-bottom:1.25rem;">
+                <label for="password" style="display:block;font-weight:600;margin-bottom:.4rem;font-size:.9rem;">Password</label>
+                <input type="password" id="password" name="password" required style="width:100%;padding:10px 14px;border:1px solid var(--border);border-radius:var(--radius);background:var(--bg);color:var(--text);font-size:.9rem;">
+            </div>
+            <button type="submit" style="width:100%;padding:12px;background:var(--primary);color:#fff;border:none;border-radius:20px;cursor:pointer;font-size:.95rem;font-weight:600;">Sign In</button>
+        </form>
+
+        <p style="text-align:center;margin-top:1rem;font-size:.9rem;color:var(--text-light);">
+            Don't have an account? <a href="{% url 'blog:register' %}">Create one</a>
+        </p>
+    </div>
+</div>
+{% endblock %}
