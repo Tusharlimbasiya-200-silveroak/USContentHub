@@ -465,7 +465,10 @@ main.container:has(.article-full){grid-template-columns:1fr;max-width:800px}
 #google_translate_element .skiptranslate{display:inline!important}
 #google_translate_element .goog-te-gadget{font-size:0!important;margin:0}
 #google_translate_element .goog-te-gadget>span{display:none!important}
-#google_translate_element select.goog-te-combo{padding:3px 6px;border-radius:12px;border:1px solid rgba(255,255,255,0.15);background:rgba(255,255,255,0.08);color:#e2e8f0;font-size:.75rem;cursor:pointer;max-width:100px}
+#google_translate_element select.goog-te-combo{padding:6px 28px 6px 10px;border-radius:8px;border:1px solid var(--border);background:var(--card-bg);color:var(--text);font-size:.82rem;cursor:pointer;min-width:130px;appearance:none;-webkit-appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%2364748b' d='M2 4l4 4 4-4'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 8px center;transition:border-color .2s,box-shadow .2s;outline:none}
+#google_translate_element select.goog-te-combo:hover{border-color:var(--primary)}
+#google_translate_element select.goog-te-combo:focus{border-color:var(--primary);box-shadow:0 0 0 3px var(--primary-light)}
+.translate-bar{margin:1rem 0;padding:10px 16px;background:var(--bg-light);border-radius:var(--radius);border:1px solid var(--border);display:inline-flex;align-items:center;gap:10px;font-size:.85rem;color:var(--text-light)}
 .goog-te-banner-frame{display:none!important}
 .goog-te-menu-frame{z-index:100000001!important}
 body{top:0!important;position:static!important}
