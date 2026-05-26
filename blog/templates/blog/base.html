@@ -17,7 +17,7 @@
     <meta property="og:description" content="{% block og_description %}Tech, Health, Finance, Travel, Recipes & News{% endblock %}">
     <meta property="og:type" content="{% block og_type %}website{% endblock %}">
     <meta property="og:image" content="{% block og_image %}https://picsum.photos/seed/usacontenthub/1200/630{% endblock %}">
-    <link rel="stylesheet" href="{% static 'blog/style.css' %}?v=22">
+    <link rel="stylesheet" href="{% static 'blog/style.css' %}?v=24">
     <style>
     @media print {
         .platform-bar, .site-footer, .back-to-top, .reading-progress,
@@ -42,6 +42,7 @@
     .newsletter-footer form { display:flex; gap:.5rem; flex-wrap:wrap; }
     .newsletter-footer input[type="email"] { padding:8px 14px; border:1px solid var(--border); border-radius:20px; background:var(--bg); color:var(--text); font-size:.85rem; flex:1; min-width:180px; }
     .newsletter-footer button { padding:8px 20px; background:var(--primary); color:#fff; border:none; border-radius:20px; cursor:pointer; font-size:.85rem; }
+    @media(max-width:480px){.footer-grid{grid-template-columns:1fr!important}}
     .auth-links { font-size:.8rem; }
     .auth-links a { color:#e2e8f0; text-decoration:none; margin-left:6px; }
     .rating-stars { display:inline-flex; gap:2px; cursor:pointer; }
@@ -103,53 +104,82 @@
     </main>
 
     <footer class="site-footer">
-        <div class="container">
-            <div class="footer-grid">
-                <div class="footer-section">
-                    <h3>About</h3>
-                    <p>USA Content Hub — Quality articles on technology, health, personal finance, travel, recipes, and US news.</p>
-                    <div class="footer-social">
-                        <a href="https://twitter.com/USContentHub" target="_blank" rel="noopener" title="Twitter/X">𝕏</a>
-                        <a href="https://facebook.com/USContentHub" target="_blank" rel="noopener" title="Facebook">📘</a>
-                        <a href="https://instagram.com/USContentHub" target="_blank" rel="noopener" title="Instagram">📷</a>
-                        <a href="https://youtube.com/@USContentHub" target="_blank" rel="noopener" title="YouTube">▶️</a>
-                        <a href="https://pinterest.com/USContentHub" target="_blank" rel="noopener" title="Pinterest">📌</a>
+        <div class="footer-glow-2"></div>
+        <div class="footer-glow-3"></div>
+        <div class="footer-top-wave">
+            <svg viewBox="0 0 1440 60" preserveAspectRatio="none" fill="none">
+                <path d="M0,40 C360,80 720,0 1080,40 C1260,60 1380,30 1440,40 L1440,60 L0,60 Z" fill="#0f172a"/>
+            </svg>
+        </div>
+        <div class="footer-inner">
+            <div class="container">
+                <div class="footer-brand">
+                    <div class="footer-brand-icon">📚</div>
+                    <div class="footer-brand-text">
+                        <h3>USA Content Hub</h3>
+                        <p>Tech, Health, Finance, Travel, Recipes & News</p>
                     </div>
                 </div>
-                <div class="footer-section">
-                    <h3>Publications</h3>
-                    <ul>
-                        {% for pub in publications %}
-                        <li><a href="{% url 'blog:publication' pub.slug %}">{{ pub.icon }} {{ pub.name }}</a></li>
-                        {% endfor %}
-                    </ul>
+                <div class="footer-grid">
+                    <div class="footer-section">
+                        <h3>Publications</h3>
+                        <ul>
+                            {% for pub in publications %}
+                            <li><a href="{% url 'blog:publication' pub.slug %}">{{ pub.icon }} {{ pub.name }}</a></li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                    <div class="footer-section">
+                        <h3>Quick Links</h3>
+                        <ul>
+                            <li><a href="{% url 'blog:home' %}">Home</a></li>
+                            <li><a href="{% url 'blog:explore' %}">Explore</a></li>
+                            <li><a href="{% url 'blog:about' %}">About</a></li>
+                            <li><a href="{% url 'blog:contact' %}">Contact</a></li>
+                            <li><a href="{% url 'blog:privacy' %}">Privacy Policy</a></li>
+                            <li><a href="{% url 'blog:rss_feed' %}">📡 RSS Feed</a></li>
+                            <li><a href="/sitemap.xml">Sitemap</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-section">
+                        <h3>Connect</h3>
+                        <div class="footer-social-grid">
+                            <a href="https://twitter.com/USContentHub" target="_blank" rel="noopener" title="Twitter/X">𝕏</a>
+                            <a href="https://facebook.com/USContentHub" target="_blank" rel="noopener" title="Facebook">📘</a>
+                            <a href="https://instagram.com/USContentHub" target="_blank" rel="noopener" title="Instagram">📷</a>
+                            <a href="https://youtube.com/@USContentHub" target="_blank" rel="noopener" title="YouTube">▶️</a>
+                            <a href="https://pinterest.com/USContentHub" target="_blank" rel="noopener" title="Pinterest">📌</a>
+                        </div>
+                    </div>
+                    <div class="footer-section">
+                        <h3>Newsletter</h3>
+                        <div class="footer-newsletter">
+                            <p>Get the latest articles delivered to your inbox every week.</p>
+                            <form id="footerNewsletter" onsubmit="return subscribeNewsletter(event, this)">
+                                {% csrf_token %}
+                                <input type="email" name="email" placeholder="you@example.com" required>
+                                <button type="submit">Subscribe</button>
+                            </form>
+                            <p id="footerNlMsg" style="display:none;font-size:.8rem;margin-top:.5rem;"></p>
+                        </div>
+                    </div>
                 </div>
-                <div class="footer-section">
-                    <h3>Links</h3>
-                    <ul>
-                        <li><a href="{% url 'blog:home' %}">Home</a></li>
-                        <li><a href="{% url 'blog:explore' %}">Explore</a></li>
-                        <li><a href="{% url 'blog:about' %}">About</a></li>
-                        <li><a href="{% url 'blog:contact' %}">Contact</a></li>
-                        <li><a href="{% url 'blog:privacy' %}">Privacy Policy</a></li>
-                        <li><a href="{% url 'blog:rss_feed' %}">📡 RSS Feed</a></li>
-                        <li><a href="/sitemap.xml">Sitemap</a></li>
-                    </ul>
-                </div>
-                <div class="footer-section">
-                    <h3>📬 Newsletter</h3>
-                    <p style="font-size:.85rem;color:var(--text-light);margin-bottom:.5rem;">Get the latest articles in your inbox.</p>
-                    <div class="newsletter-footer">
-                        <form id="footerNewsletter" onsubmit="return subscribeNewsletter(event, this)">
-                            {% csrf_token %}
-                            <input type="email" name="email" placeholder="Your email" required>
-                            <button type="submit">Subscribe</button>
-                        </form>
-                        <p id="footerNlMsg" style="display:none;font-size:.8rem;margin-top:.4rem;"></p>
+                <hr class="footer-divider">
+                <div class="footer-bottom">
+                    <div class="footer-bottom-left">
+                        <p class="copyright">&copy; 2026 USA Content Hub. All rights reserved.</p>
+                        <div class="footer-bottom-links">
+                            <a href="{% url 'blog:privacy' %}">Privacy</a>
+                            <a href="{% url 'blog:contact' %}">Contact</a>
+                            <a href="/sitemap.xml">Sitemap</a>
+                        </div>
+                    </div>
+                    <div class="footer-bottom-right">
+                        <span class="footer-status-dot"></span>
+                        All systems operational
                     </div>
                 </div>
             </div>
-            <p class="copyright">&copy; 2026 USA Content Hub. All rights reserved. | <a href="{% url 'blog:privacy' %}" style="color:var(--text-light);">Privacy</a></p>
         </div>
     </footer>
 
