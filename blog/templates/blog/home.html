@@ -35,15 +35,26 @@
     </div>
 
     {% if is_paginated %}
-    <div class="load-more-container" style="text-align:center;margin:2rem 0;">
+    <nav class="pagination" aria-label="Page navigation">
         {% if page_obj.has_previous %}
-        <a href="?page={{ page_obj.previous_page_number }}" class="load-more-btn" style="margin-right:1rem;">← Previous</a>
+        <a href="?page={{ page_obj.previous_page_number }}" class="page-prev" aria-label="Previous page">← Prev</a>
         {% endif %}
-        <span style="color:var(--text-light);">Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}</span>
+        {% for num in page_obj.paginator.page_range %}
+            {% if page_obj.number == num %}
+            <span class="page-current" aria-current="page">{{ num }}</span>
+            {% elif num > page_obj.number|add:"-3" and num < page_obj.number|add:"4" %}
+            <a href="?page={{ num }}" class="page-num">{{ num }}</a>
+            {% elif num == 1 or num == page_obj.paginator.num_pages %}
+            <a href="?page={{ num }}" class="page-num">{{ num }}</a>
+            {% elif num == page_obj.number|add:"-3" or num == page_obj.number|add:"4" %}
+            <span class="page-dots">…</span>
+            {% endif %}
+        {% endfor %}
         {% if page_obj.has_next %}
-        <a href="?page={{ page_obj.next_page_number }}" class="load-more-btn" style="margin-left:1rem;">Next →</a>
+        <a href="?page={{ page_obj.next_page_number }}" class="page-next" aria-label="Next page">Next →</a>
         {% endif %}
-    </div>
+        <span class="page-info">Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}</span>
+    </nav>
     {% endif %}
 </section>
 

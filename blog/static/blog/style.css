@@ -404,6 +404,18 @@ main.container:has(.article-full){grid-template-columns:1fr;max-width:800px}
 .load-more-btn:disabled{opacity:.6;cursor:wait}
 .load-more-count{font-weight:400;font-size:.82rem;opacity:.85}
 
+/* Pagination */
+.pagination{display:flex;align-items:center;justify-content:center;gap:6px;padding:32px 0 8px;grid-column:1/-1;flex-wrap:wrap}
+.pagination a,.pagination span{display:inline-flex;align-items:center;justify-content:center;min-width:42px;height:42px;padding:0 14px;border-radius:var(--radius);font-family:'Inter',sans-serif;font-size:.9rem;font-weight:600;transition:all var(--transition);text-decoration:none;user-select:none}
+.pagination .page-num{background:var(--card-bg);color:var(--text);border:2px solid var(--border);cursor:pointer}
+.pagination .page-num:hover{background:var(--primary);color:#fff;border-color:var(--primary);transform:translateY(-2px);box-shadow:var(--shadow-md)}
+.pagination .page-current{background:var(--primary);color:#fff;border:2px solid var(--primary);box-shadow:var(--shadow-md);cursor:default}
+.pagination .page-prev,.pagination .page-next{background:var(--card-bg);color:var(--primary);border:2px solid var(--border);cursor:pointer;gap:6px;font-weight:700}
+.pagination .page-prev:hover,.pagination .page-next:hover{background:var(--primary);color:#fff;border-color:var(--primary);transform:translateY(-2px);box-shadow:var(--shadow-md)}
+.pagination .page-dots{color:var(--text-muted);border:none;background:none;min-width:32px;cursor:default;letter-spacing:2px}
+.pagination .page-info{color:var(--text-muted);font-size:.8rem;font-weight:500;border:none;background:none;width:100%;margin-top:8px}
+@media(max-width:480px){.pagination a,.pagination span{min-width:36px;height:36px;padding:0 10px;font-size:.82rem}.pagination{gap:4px}}
+
 /* ============================================================
    PERFORMANCE: CONTAIN & WILL-CHANGE
    ============================================================ */
