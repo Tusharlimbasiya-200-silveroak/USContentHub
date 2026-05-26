@@ -266,7 +266,15 @@ main.container:has(.article-full){grid-template-columns:1fr;max-width:800px}
 /* ============================================================
    FOOTER
    ============================================================ */
-.site-footer{background:var(--card-bg);border-top:1px solid var(--border);padding:28px 0;text-align:center;margin-top:40px}
+.site-footer{background:var(--card-bg);border-top:1px solid var(--border);padding:40px 0 28px;margin-top:40px}
+.footer-grid{display:grid;grid-template-columns:1.2fr 1fr 0.8fr;gap:32px;margin-bottom:24px}
+.footer-section h3{font-size:1rem;font-weight:700;margin-bottom:12px;color:var(--text)}
+.footer-section p{color:var(--text-light);font-size:.85rem;line-height:1.6}
+.footer-section ul{list-style:none;padding:0;margin:0}
+.footer-section ul li{margin-bottom:6px}
+.footer-section ul li a{color:var(--text-light);text-decoration:none;font-size:.85rem;transition:color var(--transition)}
+.footer-section ul li a:hover{color:var(--primary)}
+.copyright{text-align:center;color:var(--text-muted);font-size:.8rem;padding-top:20px;border-top:1px solid var(--border)}
 .site-footer p{color:var(--text-light);font-size:.82rem}
 .site-footer nav{margin-top:10px;display:flex;justify-content:center;flex-wrap:wrap;gap:4px}
 .site-footer nav a{color:var(--text-light);padding:5px 12px;border-radius:20px;font-size:.82rem;font-weight:500;transition:all var(--transition)}
@@ -318,6 +326,7 @@ main.container:has(.article-full){grid-template-columns:1fr;max-width:800px}
     .share-btn{padding:7px 12px;font-size:.78rem}
     .articles-grid{grid-template-columns:1fr;gap:16px}
     .article-card .card-image{height:170px}
+    .footer-grid{grid-template-columns:1fr;gap:20px;text-align:center}
 }
 @media(max-width:480px){
     body{font-size:15px}
