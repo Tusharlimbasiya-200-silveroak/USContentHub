@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en-US" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Your Reading List — The Daily Digest</title>
+    <meta name="robots" content="noindex, nofollow">
+    
+    <!-- Resource Hints -->
+    <link rel="preconnect" href="https://picsum.photos" crossorigin>
+    <link rel="dns-prefetch" href="https://picsum.photos">
+    <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="style.css">
+    <script>(function(){var t=localStorage.getItem('theme');if(t)document.documentElement.setAttribute('data-theme',t);})();</script>
+</head>
+<body>
+    <a href="#main-content" class="skip-link">Skip to content</a>
+
+        <!-- Platform Top Bar -->
+    <nav class="platform-bar" aria-label="Platform navigation">
+        <div class="platform-bar-inner">
+            <a href="https://Tusharlimbasiya-200-silveroak.github.io/blog-platform/" class="platform-home">📚 USA Content Hub</a>
+            <button class="menu-toggle" onclick="document.querySelector('.platform-links').classList.toggle('open')" aria-label="Toggle navigation menu">☰</button>
+            <div class="platform-links" role="navigation">
+                <a href="https://Tusharlimbasiya-200-silveroak.github.io/tech-gadget-hub/">💻 Tech</a>
+                <a href="https://Tusharlimbasiya-200-silveroak.github.io/health-wellness-daily/">🏃 Health</a>
+                <a href="https://Tusharlimbasiya-200-silveroak.github.io/smart-money-guide/">💰 Money</a>
+                <a href="https://Tusharlimbasiya-200-silveroak.github.io/usa-travel-explorer/">✈️ Travel</a>
+                <a href="https://Tusharlimbasiya-200-silveroak.github.io/recipe-kitchen-usa/">🍳 Recipes</a>
+                <a href="https://Tusharlimbasiya-200-silveroak.github.io/usa-news-digest/">📰 News</a>
+            </div>
+            <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle dark mode">
+                <span class="icon" id="themeIcon">🌙</span>
+            </button>
+        </div>
+    </nav>
+
+    <nav class="medium-nav" aria-label="Navigation">
+        <div class="medium-nav-inner">
+            <a href="index.html" class="medium-logo">
+                <span class="logo-icon">📖</span>
+                <span class="logo-text">The Daily Digest</span>
+            </a>
+            <div class="medium-nav-actions">
+                <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle dark mode"><span id="themeIcon">🌙</span></button>
+            </div>
+        </div>
+    </nav>
+
+    <main id="main-content" class="reading-list-layout">
+        <div class="reading-list-header">
+            <h1>Your reading list</h1>
+            <div class="reading-list-tabs">
+                <button class="rl-tab active" onclick="showTab('saved',this)">Saved</button>
+                <button class="rl-tab" onclick="showTab('history',this)">Reading history</button>
+            </div>
+        </div>
+
+        <!-- Saved / Bookmarks -->
+        <div class="reading-list-section" id="savedSection">
+            <div id="savedList"></div>
+            <p class="reading-list-empty" id="savedEmpty" style="display:none">No saved stories yet. Bookmark stories to find them here.</p>
+        </div>
+
+        <!-- Reading History -->
+        <div class="reading-list-section" id="historySection" style="display:none">
+            <div id="historyList"></div>
+            <p class="reading-list-empty" id="historyEmpty" style="display:none">No reading history yet.</p>
+        </div>
+    </main>
+
+    
+            <!-- Newsletter Signup -->
+            <div class="newsletter-signup">
+                <h3>📬 Stay Ahead — Get Free Updates</h3>
+                <p>Join our growing community. Fresh insights delivered to your inbox every week — written by Tushar.</p>
+                <form class="newsletter-form" action="https://formsubmit.co/200203041018@silveroakuni.ac.in" method="POST">
+                    <input type="email" name="email" placeholder="Your best email address" required aria-label="Email address">
+                    <input type="hidden" name="_subject" value="🎉 New Subscriber — Recipe Kitchen Usa">
+                    <input type="hidden" name="_captcha" value="true">
+                    <input type="hidden" name="_template" value="table">
+                    <input type="hidden" name="_autoresponse" value="Hey there! 👋 Thanks for subscribing to Recipe Kitchen Usa. You'll receive our best articles every week — no spam, ever. Welcome aboard! — Tushar">
+                    <input type="hidden" name="_next" value="https://Tusharlimbasiya-200-silveroak.github.io/recipe-kitchen-usa/?subscribed=true">
+                    <button type="submit">Subscribe Free →</button>
+                </form>
+                <span class="newsletter-note">✅ Free forever · No spam · Unsubscribe anytime</span>
+            </div>
+<footer class="medium-footer" role="contentinfo">
+        <div class="footer-inner">
+            <span class="footer-logo">📖 The Daily Digest</span>
+            <p class="footer-copy">&copy; 2026 The Daily Digest. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+    function toggleTheme(){var h=document.documentElement,c=h.getAttribute('data-theme'),n=(c==='dark')?'light':'dark';if(!c)n='dark';h.setAttribute('data-theme',n);localStorage.setItem('theme',n);document.getElementById('themeIcon').textContent=(n==='dark')?'☀️':'🌙';}
+    (function(){var t=localStorage.getItem('theme');if(!t&&window.matchMedia('(prefers-color-scheme:dark)').matches)t='dark';var i=document.getElementById('themeIcon');if(i)i.textContent=(t==='dark')?'☀️':'🌙';})();
+
+    function showTab(tab,btn){
+        document.querySelectorAll('.rl-tab').forEach(function(b){b.classList.remove('active');});
+        btn.classList.add('active');
+        document.getElementById('savedSection').style.display=tab==='saved'?'block':'none';
+        document.getElementById('historySection').style.display=tab==='history'?'block':'none';
+    }
+
+    function renderCard(item,type){
+        var card=document.createElement('div');card.className='rl-card';
+        var time=type==='saved'?'Saved '+new Date(item.savedAt).toLocaleDateString():'Read '+new Date(item.readAt).toLocaleDateString();
+        card.innerHTML='<a href="'+item.slug+'.html" class="rl-card-link"><div class="rl-card-body"><h3>'+item.title+'</h3><span class="rl-card-meta">'+(item.readTime||'?')+' min read · '+time+'</span></div></a>'+(type==='saved'?'<button class="rl-remove" onclick="removeBookmark(\''+item.slug+'\',this)" title="Remove">×</button>':'');
+        return card;
+    }
+
+    function loadSaved(){
+        var list=JSON.parse(localStorage.getItem('reading_list')||'[]');
+        var container=document.getElementById('savedList');container.innerHTML='';
+        if(!list.length){document.getElementById('savedEmpty').style.display='block';return;}
+        document.getElementById('savedEmpty').style.display='none';
+        list.forEach(function(item){container.appendChild(renderCard(item,'saved'));});
+    }
+
+    function loadHistory(){
+        var history=JSON.parse(localStorage.getItem('reading_history')||'[]');
+        var container=document.getElementById('historyList');container.innerHTML='';
+        if(!history.length){document.getElementById('historyEmpty').style.display='block';return;}
+        document.getElementById('historyEmpty').style.display='none';
+        history.forEach(function(item){container.appendChild(renderCard(item,'history'));});
+    }
+
+    function removeBookmark(slug,btn){
+        var list=JSON.parse(localStorage.getItem('reading_list')||'[]');
+        list=list.filter(function(i){return i.slug!==slug;});
+        localStorage.setItem('reading_list',JSON.stringify(list));
+        btn.parentElement.remove();
+        if(!list.length)document.getElementById('savedEmpty').style.display='block';
+    }
+
+    loadSaved();loadHistory();
+    </script>
+
+    <!-- Service Worker -->
+    <script>
+    if ('serviceWorker' in navigator) {
+        navigator.serviceWorker.register('/recipe-kitchen-usa/sw.js')
+            .then(r => console.log('SW registered'))
+            .catch(e => console.log('SW failed', e));
+    }
+    </script>
+</body>
+</html>

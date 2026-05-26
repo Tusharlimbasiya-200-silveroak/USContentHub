@@ -1,0 +1,113 @@
+{% load static %}<!DOCTYPE html>
+<html lang="en-US" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>{% block title %}USA Content Hub{% endblock %}</title>
+    <meta name="description" content="{% block description %}USA Content Hub — Tech, Health, Finance, Travel, Recipes & News{% endblock %}">
+    <meta name="robots" content="index, follow">
+    <meta name="theme-color" content="#2563eb" media="(prefers-color-scheme: light)">
+    <meta name="theme-color" content="#0f172a" media="(prefers-color-scheme: dark)">
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📚</text></svg>">
+    <link rel="preconnect" href="https://picsum.photos" crossorigin>
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <meta property="og:title" content="{% block og_title %}USA Content Hub{% endblock %}">
+    <meta property="og:description" content="{% block og_description %}Tech, Health, Finance, Travel, Recipes & News{% endblock %}">
+    <meta property="og:type" content="{% block og_type %}website{% endblock %}">
+    <meta property="og:image" content="{% block og_image %}https://picsum.photos/seed/usacontenthub/1200/630{% endblock %}">
+    <link rel="stylesheet" href="{% static 'blog/style.css' %}">
+    <script>
+    (function(){var t=localStorage.getItem('theme');if(t)document.documentElement.setAttribute('data-theme',t);})();
+    </script>
+    {% block extra_head %}{% endblock %}
+</head>
+<body>
+    <a href="#main-content" class="skip-link">Skip to content</a>
+
+    <nav class="platform-bar" aria-label="Platform navigation">
+        <div class="platform-bar-inner">
+            <a href="{% url 'blog:home' %}" class="platform-home">📚 USA Content Hub</a>
+            <button class="menu-toggle" onclick="document.querySelector('.platform-links').classList.toggle('open')" aria-label="Toggle navigation menu">☰</button>
+            <div class="platform-links" role="navigation">
+                {% for pub in publications %}
+                <a href="{% url 'blog:publication' pub.slug %}">{{ pub.icon }} {{ pub.name|truncatewords:1 }}</a>
+                {% endfor %}
+            </div>
+            <form action="{% url 'blog:search' %}" method="get" style="display:inline">
+                <input type="search" name="q" placeholder="Search..." value="{{ q|default:'' }}" class="search-input" style="padding:4px 10px;border-radius:20px;border:1px solid rgba(255,255,255,0.15);background:rgba(255,255,255,0.08);color:#e2e8f0;font-size:.8rem;width:120px;">
+            </form>
+            <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle dark mode">
+                <span class="icon" id="themeIcon">🌙</span>
+            </button>
+        </div>
+    </nav>
+
+    {% block header %}
+    <header class="site-header">
+        <div class="container">
+            <h1 class="logo"><a href="{% url 'blog:home' %}" style="color:inherit;text-decoration:none">USA Content Hub</a></h1>
+            <p class="tagline">Tech, Health, Finance, Travel, Recipes & News for America</p>
+        </div>
+    </header>
+    {% endblock %}
+
+    <main class="container" id="main-content">
+        {% block content %}{% endblock %}
+    </main>
+
+    <footer class="site-footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-section">
+                    <h3>About</h3>
+                    <p>USA Content Hub — Quality articles on technology, health, personal finance, travel, recipes, and US news.</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Publications</h3>
+                    <ul>
+                        {% for pub in publications %}
+                        <li><a href="{% url 'blog:publication' pub.slug %}">{{ pub.icon }} {{ pub.name }}</a></li>
+                        {% endfor %}
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Links</h3>
+                    <ul>
+                        <li><a href="{% url 'blog:home' %}">Home</a></li>
+                        <li><a href="{% url 'blog:explore' %}">Explore</a></li>
+                        <li><a href="{% url 'blog:search' %}">Search</a></li>
+                    </ul>
+                </div>
+            </div>
+            <p class="copyright">&copy; 2026 USA Content Hub. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <button class="back-to-top" id="backToTop" aria-label="Back to top">&uarr;</button>
+
+    <script>
+    function toggleTheme(){
+        var html=document.documentElement;
+        var cur=html.getAttribute('data-theme');
+        var next=cur==='dark'?'light':'dark';
+        html.setAttribute('data-theme',next);
+        localStorage.setItem('theme',next);
+        document.getElementById('themeIcon').textContent=next==='dark'?'☀️':'🌙';
+    }
+    (function(){
+        var icon=document.getElementById('themeIcon');
+        if(icon&&document.documentElement.getAttribute('data-theme')==='dark')icon.textContent='☀️';
+    })();
+    var backBtn=document.getElementById('backToTop');
+    var ticking=false;
+    window.addEventListener('scroll',function(){
+        if(!ticking){requestAnimationFrame(function(){
+            backBtn.classList.toggle('visible',window.scrollY>600);
+            ticking=false;
+        });ticking=true;}
+    },{passive:true});
+    backBtn.addEventListener('click',function(){window.scrollTo({top:0,behavior:'smooth'});});
+    </script>
+    {% block extra_js %}{% endblock %}
+</body>
+</html>

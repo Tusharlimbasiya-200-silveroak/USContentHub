@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://usa-travel-explorer.github.io/sitemap.xml

@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://Tusharlimbasiya-200-silveroak.github.io/blog-platform/sitemap.xml

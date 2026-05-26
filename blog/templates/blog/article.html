@@ -1,0 +1,101 @@
+{% extends "blog/base.html" %}
+
+{% block title %}{{ article.title }} — USA Content Hub{% endblock %}
+{% block description %}{{ article.meta_description|default:article.subtitle|truncatechars:160 }}{% endblock %}
+{% block og_title %}{{ article.title }}{% endblock %}
+{% block og_description %}{{ article.meta_description|default:article.subtitle|truncatechars:200 }}{% endblock %}
+{% block og_type %}article{% endblock %}
+{% block og_image %}{{ article.cover_image }}{% endblock %}
+
+{% block extra_head %}
+<script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "{{ article.title|escapejs }}",
+    "datePublished": "{{ article.published_at|date:'c' }}",
+    "dateModified": "{{ article.updated_at|date:'c' }}",
+    "image": "{{ article.cover_image }}",
+    "wordCount": {{ article.word_count }},
+    "publisher": {"@type": "Organization", "name": "USA Content Hub"}
+}
+</script>
+{% endblock %}
+
+{% block header %}{% endblock %}
+
+{% block content %}
+<article class="article-full" itemscope itemtype="https://schema.org/Article">
+    <header class="article-header">
+        {% if article.publication %}
+        <a href="{% url 'blog:publication' article.publication.slug %}" class="pub-badge" style="color:var(--primary);text-decoration:none;font-size:.9rem;margin-bottom:.5rem;display:inline-block;">{{ article.publication.icon }} {{ article.publication.name }}</a>
+        {% endif %}
+        <h1 itemprop="headline">{{ article.title }}</h1>
+        {% if article.subtitle %}<p class="article-subtitle">{{ article.subtitle }}</p>{% endif %}
+        <div class="article-meta">
+            <time datetime="{{ article.published_at|date:'Y-m-d' }}" itemprop="datePublished">📅 {{ article.published_at|date:'M d, Y' }}</time>
+            <span class="read-time">⏱️ {{ article.read_time }} min read</span>
+            <span>📝 {{ article.word_count }} words</span>
+        </div>
+    </header>
+
+    {% if article.cover_image %}
+    <div class="article-cover">
+        <img src="{{ article.cover_image }}" alt="{{ article.title }}" loading="eager" decoding="async" width="1200" height="630" itemprop="image">
+    </div>
+    {% endif %}
+
+    <div class="article-body" itemprop="articleBody">
+        {{ article.content|safe }}
+    </div>
+
+    {% if tags %}
+    <div class="article-tags">
+        {% for tag in tags %}
+        <a href="{% url 'blog:tag' tag.name %}" class="tag-link">{{ tag.name }}</a>
+        {% endfor %}
+    </div>
+    {% endif %}
+
+    <div class="share-buttons" style="margin:2rem 0;padding:1.5rem;background:var(--bg-light);border-radius:var(--radius);text-align:center;">
+        <h3 style="margin-bottom:1rem;font-size:1rem;">Share this article</h3>
+        <a href="https://twitter.com/intent/tweet?text={{ article.title|urlencode }}&url={{ request.build_absolute_uri }}" target="_blank" rel="noopener" style="display:inline-block;padding:8px 16px;margin:4px;background:#1da1f2;color:#fff;border-radius:20px;text-decoration:none;font-size:.85rem;">Twitter</a>
+        <a href="https://www.facebook.com/sharer/sharer.php?u={{ request.build_absolute_uri }}" target="_blank" rel="noopener" style="display:inline-block;padding:8px 16px;margin:4px;background:#1877f2;color:#fff;border-radius:20px;text-decoration:none;font-size:.85rem;">Facebook</a>
+        <a href="https://www.linkedin.com/sharing/share-offsite/?url={{ request.build_absolute_uri }}" target="_blank" rel="noopener" style="display:inline-block;padding:8px 16px;margin:4px;background:#0a66c2;color:#fff;border-radius:20px;text-decoration:none;font-size:.85rem;">LinkedIn</a>
+    </div>
+</article>
+
+{% if related %}
+<section class="related-articles" style="margin-top:3rem;">
+    <h2>Related Articles</h2>
+    <div class="articles-grid">
+        {% for r in related %}
+        <article class="article-card">
+            <div class="card-image">
+                <img src="{{ r.cover_image }}" alt="{{ r.title }}" loading="lazy" decoding="async" width="640" height="360">
+            </div>
+            <div class="card-body">
+                <h3><a href="{% url 'blog:article' r.slug %}">{{ r.title }}</a></h3>
+                <div class="article-meta">
+                    <time datetime="{{ r.published_at|date:'Y-m-d' }}">📅 {{ r.published_at|date:'Y-m-d' }}</time>
+                    <span class="read-time">⏱️ {{ r.read_time }} min</span>
+                </div>
+                <a href="{% url 'blog:article' r.slug %}" class="read-more">Read More</a>
+            </div>
+        </article>
+        {% endfor %}
+    </div>
+</section>
+{% endif %}
+
+<div class="newsletter-box" style="margin:2rem 0;padding:2rem;background:var(--bg-light);border-radius:var(--radius);text-align:center;">
+    <h3>📬 Stay Updated</h3>
+    <p style="color:var(--text-light);margin-bottom:1rem;">Get the latest articles delivered to your inbox.</p>
+    <form action="https://formsubmit.co/200203041018@silveroakuni.ac.in" method="POST" style="display:flex;gap:.5rem;justify-content:center;flex-wrap:wrap;">
+        <input type="hidden" name="_subject" value="Newsletter Signup from {{ article.title }}">
+        <input type="hidden" name="_captcha" value="false">
+        <input type="email" name="email" placeholder="Your email" required style="padding:10px 16px;border:1px solid var(--border);border-radius:20px;font-size:.9rem;background:var(--bg);color:var(--text);">
+        <button type="submit" style="padding:10px 24px;background:var(--primary);color:#fff;border:none;border-radius:20px;cursor:pointer;font-size:.9rem;">Subscribe</button>
+    </form>
+</div>
+{% endblock %}

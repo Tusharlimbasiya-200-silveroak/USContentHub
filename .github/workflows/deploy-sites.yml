@@ -1,0 +1,79 @@
+# USContentHub - Deploy Sites to GitHub Pages
+#
+# Triggered when site content is pushed. Deploys each site
+# to its own GitHub Pages repository.
+
+name: Deploy Sites
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'sites/**'
+  workflow_dispatch:
+    inputs:
+      site:
+        description: 'Specific site to deploy (leave empty for all)'
+        required: false
+        default: ''
+
+permissions:
+  contents: read
+
+jobs:
+  detect-changes:
+    runs-on: ubuntu-latest
+    outputs:
+      sites: ${{ steps.changes.outputs.sites }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
+
+      - name: Detect changed sites
+        id: changes
+        run: |
+          if [ "${{ github.event.inputs.site }}" != "" ]; then
+            echo "sites=[\"${{ github.event.inputs.site }}\"]" >> $GITHUB_OUTPUT
+          else
+            CHANGED=$(git diff --name-only HEAD~1 HEAD -- sites/ | cut -d'/' -f2 | sort -u | jq -R -s -c 'split("\n") | map(select(length > 0))')
+            if [ "$CHANGED" = "[]" ] || [ -z "$CHANGED" ]; then
+              CHANGED='["tech-gadget-hub","health-wellness-daily","smart-money-guide","usa-travel-explorer","recipe-kitchen-usa","usa-news-digest"]'
+            fi
+            echo "sites=$CHANGED" >> $GITHUB_OUTPUT
+          fi
+
+  deploy:
+    needs: detect-changes
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        site: ${{ fromJson(needs.detect-changes.outputs.sites) }}
+      max-parallel: 3
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Deploy ${{ matrix.site }} to GitHub Pages
+        env:
+          GITHUB_TOKEN: ${{ secrets.DEPLOY_TOKEN }}
+        run: |
+          SITE_DIR="sites/${{ matrix.site }}"
+          REPO="Tusharlimbasiya-200-silveroak/${{ matrix.site }}"
+
+          if [ ! -d "$SITE_DIR" ]; then
+            echo "Site directory $SITE_DIR not found, skipping"
+            exit 0
+          fi
+
+          cd "$SITE_DIR"
+
+          git init
+          git config user.name "USContentHub Bot"
+          git config user.email "bot@uscontenthub.com"
+          git checkout -b gh-pages
+          git add -A
+          git commit -m "Deploy ${{ matrix.site }} - $(date +'%Y-%m-%d %H:%M')"
+          git remote add origin "https://x-access-token:${GITHUB_TOKEN}@github.com/${REPO}.git"
+          git push origin gh-pages --force
+
+          echo "Deployed ${{ matrix.site }} successfully"

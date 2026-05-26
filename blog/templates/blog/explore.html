@@ -1,0 +1,44 @@
+{% extends "blog/base.html" %}
+{% block title %}Explore — USA Content Hub{% endblock %}
+{% block content %}
+<section>
+    <h2>Explore Topics</h2>
+    {% if popular_tags %}
+    <div class="tag-cloud" style="margin-bottom:2rem;">
+        {% for tag in popular_tags %}
+        <a href="{% url 'blog:tag' tag.name %}" class="tag-link" style="font-size:{% if tag.count > 10 %}1.1rem{% else %}.9rem{% endif %}">{{ tag.name }} ({{ tag.count }})</a>
+        {% endfor %}
+    </div>
+    {% endif %}
+
+    <h2>Publications</h2>
+    <div class="articles-grid" style="margin-bottom:2rem;">
+        {% for pub in publications %}
+        <div class="article-card" style="text-align:center;padding:2rem;">
+            <div style="font-size:3rem;margin-bottom:1rem;">{{ pub.icon }}</div>
+            <h3><a href="{% url 'blog:publication' pub.slug %}" style="color:var(--text);text-decoration:none;">{{ pub.name }}</a></h3>
+            <p style="color:var(--text-light);font-size:.9rem;">{{ pub.description|truncatechars:100 }}</p>
+        </div>
+        {% endfor %}
+    </div>
+
+    <h2>Trending Articles</h2>
+    <div class="articles-grid">
+        {% for article in trending %}
+        <article class="article-card">
+            <div class="card-image">
+                <img src="{{ article.cover_image }}" alt="{{ article.title }}" loading="lazy" decoding="async" width="640" height="360">
+            </div>
+            <div class="card-body">
+                <h3><a href="{% url 'blog:article' article.slug %}">{{ article.title }}</a></h3>
+                <div class="article-meta">
+                    <time datetime="{{ article.published_at|date:'Y-m-d' }}">📅 {{ article.published_at|date:'Y-m-d' }}</time>
+                    <span class="read-time">⏱️ {{ article.read_time }} min</span>
+                </div>
+                <a href="{% url 'blog:article' article.slug %}" class="read-more">Read More</a>
+            </div>
+        </article>
+        {% endfor %}
+    </div>
+</section>
+{% endblock %}

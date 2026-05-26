@@ -1,0 +1,942 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>USA Content Hub - Live Dashboard</title>
+    <meta name="description" content="Live analytics dashboard for USA Content Hub blogs">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #06060f;
+            --bg-card: #0f0f1e;
+            --bg-card-hover: #16162e;
+            --surface: #1a1a30;
+            --text: #eaeaf0;
+            --text-muted: #7a7a9a;
+            --text-dim: #4a4a6a;
+            --primary: #6366f1;
+            --primary-light: #818cf8;
+            --primary-glow: rgba(99,102,241,0.25);
+            --green: #10b981;
+            --green-bg: rgba(16,185,129,0.12);
+            --red: #f43f5e;
+            --red-bg: rgba(244,63,94,0.12);
+            --yellow: #f59e0b;
+            --yellow-bg: rgba(245,158,11,0.12);
+            --purple: #a855f7;
+            --cyan: #06b6d4;
+            --orange: #f97316;
+            --pink: #ec4899;
+            --border: rgba(255,255,255,0.06);
+            --radius: 14px;
+            --shadow: 0 4px 30px rgba(0,0,0,0.5);
+        }
+        *{margin:0;padding:0;box-sizing:border-box}
+        body{font-family:'Inter',system-ui,-apple-system,sans-serif;background:var(--bg);color:var(--text);min-height:100vh;overflow-x:hidden}
+        body::before{content:'';position:fixed;top:0;left:0;width:100%;height:100%;background:radial-gradient(ellipse at 15% 50%,rgba(99,102,241,0.07) 0%,transparent 50%),radial-gradient(ellipse at 85% 20%,rgba(168,85,247,0.05) 0%,transparent 50%),radial-gradient(ellipse at 50% 80%,rgba(6,182,212,0.04) 0%,transparent 50%);pointer-events:none;z-index:0}
+        ::-webkit-scrollbar{width:6px}
+        ::-webkit-scrollbar-track{background:var(--bg)}
+        ::-webkit-scrollbar-thumb{background:var(--border);border-radius:3px}
+
+        .topbar{background:rgba(6,6,15,0.88);backdrop-filter:blur(24px);border-bottom:1px solid var(--border);padding:12px 24px;display:flex;justify-content:space-between;align-items:center;position:sticky;top:0;z-index:100}
+        .topbar-left{display:flex;align-items:center;gap:10px}
+        .logo{width:34px;height:34px;background:linear-gradient(135deg,var(--primary),var(--purple));border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:1rem}
+        .topbar h1{font-size:1.05rem;font-weight:700;background:linear-gradient(135deg,#fff,var(--primary-light));-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+        .topbar-right{display:flex;align-items:center;gap:10px}
+        .live-dot{width:7px;height:7px;background:var(--green);border-radius:50%;animation:pulse 2s infinite;box-shadow:0 0 8px var(--green)}
+        @keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.4;transform:scale(.7)}}
+        .update-text{font-size:.75rem;color:var(--text-muted)}
+        .btn{padding:7px 14px;border-radius:8px;border:1px solid var(--border);background:var(--bg-card);color:var(--text);cursor:pointer;font-size:.78rem;font-family:inherit;transition:all .2s;display:flex;align-items:center;gap:5px}
+        .btn:hover{background:var(--bg-card-hover);border-color:var(--primary);box-shadow:0 0 12px var(--primary-glow)}
+        .btn-primary{background:var(--primary);border-color:var(--primary)}
+        .btn-sm{padding:5px 10px;font-size:.72rem}
+
+        .loading-overlay{position:fixed;inset:0;background:var(--bg);display:flex;flex-direction:column;align-items:center;justify-content:center;z-index:200;transition:opacity .5s}
+        .loading-overlay.fade-out{opacity:0;pointer-events:none}
+        .loader{width:44px;height:44px;border:3px solid var(--border);border-top-color:var(--primary);border-radius:50%;animation:spin .7s linear infinite}
+        @keyframes spin{to{transform:rotate(360deg)}}
+        .loading-text{margin-top:14px;color:var(--text-muted);font-size:.85rem}
+        .loading-sub{margin-top:6px;color:var(--text-dim);font-size:.75rem}
+
+        .dashboard{padding:20px 24px;max-width:1380px;margin:0 auto;position:relative;z-index:1}
+        .hidden{display:none!important}
+
+        .settings-panel{background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius);margin-bottom:16px;overflow:hidden}
+        .settings-content{padding:16px 20px}
+        .settings-content h3{font-size:.9rem;margin-bottom:6px}
+        .settings-content p{font-size:.78rem;color:var(--text-muted);margin-bottom:10px}
+        .token-row{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+        .token-input{flex:1;min-width:200px;padding:7px 12px;border-radius:8px;border:1px solid var(--border);background:var(--bg);color:var(--text);font-family:monospace;font-size:.82rem}
+        .token-input:focus{outline:none;border-color:var(--primary)}
+        .security-note{font-size:.68rem!important;color:var(--text-dim)!important;margin-top:8px!important}
+        .connected-badge{display:inline-flex;align-items:center;gap:5px;padding:3px 10px;background:var(--green-bg);color:var(--green);border-radius:16px;font-size:.75rem;font-weight:600}
+
+        .kpi-row{display:grid;grid-template-columns:repeat(6,1fr);gap:12px;margin-bottom:18px}
+        .kpi-card{background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius);padding:16px 18px;transition:all .3s;position:relative;overflow:hidden}
+        .kpi-card::before{content:'';position:absolute;top:0;left:0;width:100%;height:3px}
+        .kpi-card:nth-child(1)::before{background:var(--green)}
+        .kpi-card:nth-child(2)::before{background:var(--primary)}
+        .kpi-card:nth-child(3)::before{background:var(--cyan)}
+        .kpi-card:nth-child(4)::before{background:var(--purple)}
+        .kpi-card:nth-child(5)::before{background:var(--orange)}
+        .kpi-card:nth-child(6)::before{background:var(--yellow)}
+        .kpi-card:hover{transform:translateY(-3px);box-shadow:var(--shadow);border-color:rgba(255,255,255,.1)}
+        .kpi-icon{font-size:1.2rem;margin-bottom:6px}
+        .kpi-label{font-size:.68rem;color:var(--text-muted);text-transform:uppercase;letter-spacing:.7px;margin-bottom:5px}
+        .kpi-value{font-size:1.7rem;font-weight:800;line-height:1}
+        .kpi-sub{font-size:.68rem;color:var(--text-muted);margin-top:5px}
+
+        .charts-row{display:grid;grid-template-columns:3fr 2fr;gap:12px;margin-bottom:18px}
+        .charts-row.equal{grid-template-columns:1fr 1fr}
+        .chart-card{background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius);padding:18px}
+        .chart-card h3{font-size:.85rem;font-weight:600;margin-bottom:12px;display:flex;align-items:center;gap:6px}
+        .chart-wrapper{position:relative;height:240px}
+
+        .section-title{font-size:1rem;font-weight:700;margin-bottom:12px;margin-top:4px;display:flex;align-items:center;gap:8px}
+        .sites-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:18px}
+        .site-card{background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius);padding:16px 18px;transition:all .3s}
+        .site-card:hover{transform:translateY(-3px);box-shadow:var(--shadow);border-color:rgba(255,255,255,.1)}
+        .site-header{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:12px}
+        .site-icon{font-size:1.4rem;margin-bottom:3px}
+        .site-name{font-size:.9rem;font-weight:700}
+        .site-niche{font-size:.68rem;color:var(--text-muted);margin-top:2px}
+        .status-badge{padding:3px 9px;border-radius:16px;font-size:.62rem;font-weight:700;text-transform:uppercase;letter-spacing:.5px}
+        .status-live{background:var(--green-bg);color:var(--green);border:1px solid rgba(16,185,129,.3)}
+        .status-loading{background:var(--yellow-bg);color:var(--yellow);border:1px solid rgba(245,158,11,.3)}
+        .site-metrics{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin-bottom:12px}
+        .site-metric{text-align:center;padding:7px 3px;background:rgba(255,255,255,.02);border-radius:7px}
+        .site-metric-value{font-size:1rem;font-weight:700}
+        .site-metric-label{font-size:.62rem;color:var(--text-muted);margin-top:2px}
+        .progress-bar{height:4px;background:rgba(255,255,255,.04);border-radius:4px;overflow:hidden;margin-top:10px}
+        .progress-fill{height:100%;border-radius:4px;transition:width 1s ease}
+        .progress-label{display:flex;justify-content:space-between;font-size:.62rem;color:var(--text-muted);margin-top:3px}
+        .site-link{display:block;text-align:center;padding:7px;margin-top:10px;border-radius:7px;border:1px solid var(--border);color:var(--primary-light);text-decoration:none;font-size:.75rem;transition:all .2s}
+        .site-link:hover{background:var(--primary-glow);border-color:var(--primary)}
+
+        .table-card{background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius);padding:18px;margin-bottom:18px;overflow-x:auto}
+        table{width:100%;border-collapse:collapse}
+        th{text-align:left;padding:8px 10px;font-size:.68rem;color:var(--text-muted);text-transform:uppercase;letter-spacing:.5px;border-bottom:1px solid var(--border)}
+        td{padding:9px 10px;font-size:.82rem;border-bottom:1px solid rgba(255,255,255,.03)}
+        tr:hover td{background:rgba(255,255,255,.015)}
+        .seo-badge{display:inline-block;padding:2px 9px;border-radius:10px;font-size:.75rem;font-weight:600}
+        .seo-high{background:var(--green-bg);color:var(--green)}
+        .seo-mid{background:var(--yellow-bg);color:var(--yellow)}
+        .seo-low{background:var(--red-bg);color:var(--red)}
+
+        .footer{text-align:center;padding:20px;color:var(--text-muted);font-size:.75rem;border-top:1px solid var(--border);margin-top:16px}
+        .footer a{color:var(--primary-light);text-decoration:none}
+        .footer-links{display:flex;justify-content:center;gap:14px;margin-top:8px;flex-wrap:wrap}
+
+        .error-banner{background:var(--red-bg);border:1px solid rgba(244,63,94,.3);border-radius:var(--radius);padding:12px 18px;margin-bottom:14px;font-size:.82rem;display:flex;align-items:center;gap:8px}
+        .info-banner{background:rgba(99,102,241,.08);border:1px solid rgba(99,102,241,.2);border-radius:var(--radius);padding:12px 18px;margin-bottom:14px;font-size:.82rem;display:flex;align-items:center;gap:8px}
+
+        .no-data{display:flex;align-items:center;justify-content:center;height:100%;color:var(--text-muted);font-size:.82rem;flex-direction:column;gap:6px}
+        .skeleton{background:linear-gradient(90deg,var(--bg-card) 25%,var(--bg-card-hover) 50%,var(--bg-card) 75%);background-size:200% 100%;animation:shimmer 1.5s infinite;border-radius:6px}
+        @keyframes shimmer{0%{background-position:200% 0}100%{background-position:-200% 0}}
+
+        @keyframes fadeInUp{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
+        .animate-in{animation:fadeInUp .4s ease forwards}
+        .delay-1{animation-delay:.1s;opacity:0}
+        .delay-2{animation-delay:.2s;opacity:0}
+        .delay-3{animation-delay:.3s;opacity:0}
+
+        @media(max-width:1200px){.kpi-row{grid-template-columns:repeat(3,1fr)}.sites-grid{grid-template-columns:repeat(2,1fr)}}
+        @media(max-width:900px){.charts-row,.charts-row.equal{grid-template-columns:1fr}.dashboard{padding:14px}.topbar{padding:10px 14px;flex-wrap:wrap;gap:8px}}
+        @media(max-width:600px){.kpi-row{grid-template-columns:repeat(2,1fr)}.sites-grid{grid-template-columns:1fr}}
+    </style>
+</head>
+<body>
+
+<!-- Top Bar -->
+<nav class="topbar">
+    <div class="topbar-left">
+        <div class="logo">ðŸ“Š</div>
+        <h1>USA Content Hub Dashboard</h1>
+    </div>
+    <div class="topbar-right">
+        <span class="live-dot"></span>
+        <span class="update-text" id="updateTime">Loading...</span>
+        <button class="btn" onclick="refreshData()" id="refreshBtn">&#8635; Refresh</button>
+        <button class="btn" onclick="toggleSettings()">&#9881; Connect GitHub</button>
+    </div>
+</nav>
+
+<!-- Loading Overlay -->
+<div class="loading-overlay" id="loadingOverlay">
+    <div class="loader"></div>
+    <div class="loading-text">Fetching live data from GitHub...</div>
+    <div class="loading-sub" id="loadingStatus">Connecting to GitHub API...</div>
+</div>
+
+<!-- Dashboard -->
+<div class="dashboard hidden" id="dashboardContent">
+
+    <!-- Settings Panel -->
+    <div class="settings-panel hidden" id="settingsPanel">
+        <div class="settings-content">
+            <h3>&#128274; Connect GitHub Token for Real Traffic Data</h3>
+            <p>Add your GitHub personal access token to see real page views and visitor counts from GitHub Pages traffic API.</p>
+            <div class="token-row" id="tokenRow">
+                <!-- Filled dynamically -->
+            </div>
+            <p class="security-note">&#128274; Your token is stored only in your browser's localStorage and is sent only to api.github.com. It never leaves your device otherwise.</p>
+        </div>
+    </div>
+
+    <!-- Error Banner -->
+    <div class="error-banner hidden" id="errorBanner">
+        <span>&#9888;&#65039;</span>
+        <span id="errorText"></span>
+    </div>
+
+    <!-- Traffic Info Banner -->
+    <div class="info-banner hidden" id="trafficBanner">
+        <span>&#128200;</span>
+        <span id="trafficBannerText"></span>
+    </div>
+
+    <!-- KPI Cards -->
+    <div class="kpi-row" id="kpiRow">
+        <div class="kpi-card animate-in">
+            <div class="kpi-icon">&#127760;</div>
+            <div class="kpi-label">Live Sites</div>
+            <div class="kpi-value" id="kpiSites" style="color:var(--green)">-</div>
+            <div class="kpi-sub">All on GitHub Pages</div>
+        </div>
+        <div class="kpi-card animate-in delay-1">
+            <div class="kpi-icon">&#128196;</div>
+            <div class="kpi-label">Total Articles</div>
+            <div class="kpi-value" id="kpiArticles" style="color:var(--primary-light)">-</div>
+            <div class="kpi-sub" id="kpiArticlesSub">across all sites</div>
+        </div>
+        <div class="kpi-card animate-in delay-1">
+            <div class="kpi-icon">&#128065;</div>
+            <div class="kpi-label">Page Views (14d)</div>
+            <div class="kpi-value" id="kpiViews" style="color:var(--cyan)">-</div>
+            <div class="kpi-sub" id="kpiViewsSub">from GitHub Pages</div>
+        </div>
+        <div class="kpi-card animate-in delay-2">
+            <div class="kpi-icon">&#128101;</div>
+            <div class="kpi-label">Unique Visitors (14d)</div>
+            <div class="kpi-value" id="kpiVisitors" style="color:var(--purple)">-</div>
+            <div class="kpi-sub" id="kpiVisitorsSub">unique people</div>
+        </div>
+        <div class="kpi-card animate-in delay-2">
+            <div class="kpi-icon">&#128221;</div>
+            <div class="kpi-label">Total Words</div>
+            <div class="kpi-value" id="kpiWords" style="color:var(--orange)">-</div>
+            <div class="kpi-sub">written content</div>
+        </div>
+        <div class="kpi-card animate-in delay-3">
+            <div class="kpi-icon">&#127942;</div>
+            <div class="kpi-label">Avg SEO Score</div>
+            <div class="kpi-value" id="kpiSeo" style="color:var(--yellow)">-</div>
+            <div class="kpi-sub" id="kpiSeoSub">out of 100</div>
+        </div>
+    </div>
+
+    <!-- Charts Row 1 -->
+    <div class="charts-row">
+        <div class="chart-card animate-in delay-1">
+            <h3>&#128200; Article Growth Timeline</h3>
+            <div class="chart-wrapper" id="growthWrap"><canvas id="growthChart"></canvas></div>
+        </div>
+        <div class="chart-card animate-in delay-2">
+            <h3>&#128203; Articles by Site</h3>
+            <div class="chart-wrapper" id="distWrap"><canvas id="distChart"></canvas></div>
+        </div>
+    </div>
+
+    <!-- Charts Row 2 -->
+    <div class="charts-row equal">
+        <div class="chart-card animate-in delay-2">
+            <h3>&#128202; Traffic by Site (Last 14 Days)</h3>
+            <div class="chart-wrapper" id="trafficWrap"><canvas id="trafficChart"></canvas></div>
+        </div>
+        <div class="chart-card animate-in delay-3">
+            <h3>&#127919; SEO Score by Site</h3>
+            <div class="chart-wrapper" id="seoWrap"><canvas id="seoChart"></canvas></div>
+        </div>
+    </div>
+
+    <!-- Sites Grid -->
+    <div class="section-title animate-in delay-2">&#127760; Your Websites</div>
+    <div class="sites-grid" id="sitesGrid"></div>
+
+    <!-- Articles Table -->
+    <div class="section-title animate-in delay-3">&#128221; Top Articles by SEO Score</div>
+    <div class="table-card animate-in delay-3" id="articlesTableCard">
+        <table>
+            <thead>
+                <tr>
+                    <th>Title</th>
+                    <th>Site</th>
+                    <th>Words</th>
+                    <th>SEO</th>
+                    <th>Date</th>
+                </tr>
+            </thead>
+            <tbody id="articlesTableBody"></tbody>
+        </table>
+    </div>
+
+    <!-- Footer -->
+    <div class="footer">
+        <div>USA Content Hub Dashboard &mdash; Live data from GitHub API</div>
+        <div class="footer-links" id="footerLinks"></div>
+    </div>
+</div>
+
+<script>
+// ==================== CONFIGURATION ====================
+const GITHUB_USER = 'Tusharlimbasiya-200-silveroak';
+const BASE_URL = `https://${GITHUB_USER}.github.io`;
+const API_BASE = 'https://api.github.com';
+const CACHE_TTL = 300000; // 5 minutes cache
+const AUTO_REFRESH = 300000; // Auto-refresh every 5 minutes
+
+const SITES = [
+    { name: 'tech-gadget-hub', display: 'Tech Gadget Hub', niche: 'Technology & Gadgets', icon: '\u{1F4BB}', color: '#3b82f6' },
+    { name: 'health-wellness-daily', display: 'Health & Wellness Daily', niche: 'Health & Wellness', icon: '\u{1F3E5}', color: '#10b981' },
+    { name: 'smart-money-guide', display: 'Smart Money Guide', niche: 'Personal Finance', icon: '\u{1F4B0}', color: '#f59e0b' },
+    { name: 'usa-travel-explorer', display: 'USA Travel Explorer', niche: 'Travel', icon: '\u{2708}\u{FE0F}', color: '#f97316' },
+    { name: 'recipe-kitchen-usa', display: 'Recipe Kitchen USA', niche: 'Recipes & Food', icon: '\u{1F373}', color: '#ef4444' },
+    { name: 'usa-news-digest', display: 'USA News Digest', niche: 'News & Trends', icon: '\u{1F4F0}', color: '#a855f7' },
+];
+
+// ==================== STATE ====================
+let siteArticles = {};
+let siteTraffic = {};
+let chartInstances = {};
+let refreshTimer = null;
+
+// ==================== UTILITY ====================
+function formatNum(n) {
+    if (n >= 1000000) return (n / 1000000).toFixed(1) + 'M';
+    if (n >= 1000) return (n / 1000).toFixed(1) + 'K';
+    return n.toLocaleString();
+}
+
+function escapeHtml(text) {
+    const d = document.createElement('div');
+    d.textContent = text || '';
+    return d.innerHTML;
+}
+
+function animateCounter(el, target, duration) {
+    duration = duration || 800;
+    const start = performance.now();
+    function tick(now) {
+        const p = Math.min((now - start) / duration, 1);
+        const ease = 1 - Math.pow(1 - p, 3);
+        el.textContent = formatNum(Math.round(target * ease));
+        if (p < 1) requestAnimationFrame(tick);
+    }
+    requestAnimationFrame(tick);
+}
+
+function b64Decode(str) {
+    try {
+        return decodeURIComponent(Array.from(atob(str.replace(/\n/g, '')), function(c) {
+            return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
+        }).join(''));
+    } catch (e) {
+        return atob(str.replace(/\n/g, ''));
+    }
+}
+
+function getToken() {
+    return localStorage.getItem('gh_dashboard_token') || '';
+}
+
+function getCachedData(key) {
+    try {
+        const raw = sessionStorage.getItem(key);
+        if (!raw) return null;
+        const parsed = JSON.parse(raw);
+        if (Date.now() - parsed.ts > CACHE_TTL) { sessionStorage.removeItem(key); return null; }
+        return parsed.data;
+    } catch (e) { return null; }
+}
+
+function setCachedData(key, data) {
+    try { sessionStorage.setItem(key, JSON.stringify({ ts: Date.now(), data: data })); } catch (e) { /* ignore */ }
+}
+
+// ==================== API ====================
+async function fetchArticles(siteName) {
+    const cacheKey = 'articles_' + siteName;
+    const cached = getCachedData(cacheKey);
+    if (cached) return cached;
+
+    const headers = { 'Accept': 'application/vnd.github.v3+json' };
+    const token = getToken();
+    if (token) headers['Authorization'] = 'token ' + token;
+
+    const resp = await fetch(API_BASE + '/repos/' + GITHUB_USER + '/' + siteName + '/contents/articles.json', { headers: headers });
+
+    if (!resp.ok) {
+        if (resp.status === 403) throw new Error('rate_limited');
+        throw new Error('fetch_failed_' + resp.status);
+    }
+
+    const data = await resp.json();
+
+    let articles;
+    if (data.encoding === 'base64' && data.content) {
+        articles = JSON.parse(b64Decode(data.content));
+    } else if (data.download_url) {
+        const dlResp = await fetch(data.download_url);
+        articles = await dlResp.json();
+    } else {
+        articles = [];
+    }
+
+    setCachedData(cacheKey, articles);
+    return articles;
+}
+
+async function fetchTraffic(siteName, token) {
+    if (!token) return null;
+    const cacheKey = 'traffic_' + siteName;
+    const cached = getCachedData(cacheKey);
+    if (cached) return cached;
+
+    const headers = { 'Authorization': 'token ' + token, 'Accept': 'application/vnd.github.v3+json' };
+    const result = { views: 0, uniques: 0, daily: [], referrers: [], paths: [] };
+
+    try {
+        const [viewsResp, refResp, pathsResp] = await Promise.all([
+            fetch(API_BASE + '/repos/' + GITHUB_USER + '/' + siteName + '/traffic/views', { headers: headers }),
+            fetch(API_BASE + '/repos/' + GITHUB_USER + '/' + siteName + '/traffic/popular/referrers', { headers: headers }),
+            fetch(API_BASE + '/repos/' + GITHUB_USER + '/' + siteName + '/traffic/popular/paths', { headers: headers }),
+        ]);
+
+        if (viewsResp.ok) {
+            const vd = await viewsResp.json();
+            result.views = vd.count || 0;
+            result.uniques = vd.uniques || 0;
+            result.daily = (vd.views || []).map(function(v) { return { date: v.timestamp.slice(0, 10), views: v.count, uniques: v.uniques }; });
+        }
+        if (refResp.ok) result.referrers = (await refResp.json()).slice(0, 5);
+        if (pathsResp.ok) result.paths = (await pathsResp.json()).slice(0, 5);
+    } catch (e) { /* network error, continue with zeros */ }
+
+    setCachedData(cacheKey, result);
+    return result;
+}
+
+// ==================== DATA LOADING ====================
+async function loadAllData() {
+    const status = document.getElementById('loadingStatus');
+    let errors = [];
+    let loadedCount = 0;
+
+    // Fetch articles for all sites in parallel
+    status.textContent = 'Fetching articles from ' + SITES.length + ' sites...';
+    const articlePromises = SITES.map(function(site) {
+        return fetchArticles(site.name).then(function(articles) {
+            loadedCount++;
+            status.textContent = 'Loaded ' + loadedCount + '/' + SITES.length + ' sites...';
+            return { site: site.name, articles: articles };
+        }).catch(function(e) {
+            loadedCount++;
+            errors.push(site.display + ': ' + e.message);
+            return { site: site.name, articles: [] };
+        });
+    });
+
+    const results = await Promise.all(articlePromises);
+    results.forEach(function(r) { siteArticles[r.site] = r.articles; });
+
+    // Fetch traffic if token available
+    const token = getToken();
+    if (token) {
+        status.textContent = 'Fetching traffic data...';
+        const trafficPromises = SITES.map(function(site) {
+            return fetchTraffic(site.name, token).then(function(traffic) {
+                return { site: site.name, traffic: traffic };
+            }).catch(function() {
+                return { site: site.name, traffic: null };
+            });
+        });
+        const trafficResults = await Promise.all(trafficPromises);
+        trafficResults.forEach(function(r) { siteTraffic[r.site] = r.traffic; });
+    }
+
+    return errors;
+}
+
+// ==================== COMPUTE ====================
+function computeStats() {
+    let totalArticles = 0, totalWords = 0, totalSeoSum = 0, seoCount = 0;
+    let totalViews = 0, totalUniques = 0;
+    let allArticles = [];
+    const hasToken = !!getToken();
+    let hasTraffic = false;
+
+    SITES.forEach(function(site) {
+        const articles = siteArticles[site.name] || [];
+        totalArticles += articles.length;
+        articles.forEach(function(a) {
+            totalWords += a.word_count || 0;
+            if (a.seo_score) { totalSeoSum += a.seo_score; seoCount++; }
+            allArticles.push(Object.assign({}, a, { siteName: site.display, siteSlug: site.name }));
+        });
+
+        const traffic = siteTraffic[site.name];
+        if (traffic) {
+            totalViews += traffic.views;
+            totalUniques += traffic.uniques;
+            if (traffic.views > 0) hasTraffic = true;
+        }
+    });
+
+    allArticles.sort(function(a, b) { return (b.seo_score || 0) - (a.seo_score || 0); });
+
+    return {
+        totalSites: SITES.length,
+        totalArticles: totalArticles,
+        totalWords: totalWords,
+        avgSeo: seoCount > 0 ? Math.round(totalSeoSum / seoCount) : 0,
+        totalViews: totalViews,
+        totalUniques: totalUniques,
+        hasToken: hasToken,
+        hasTraffic: hasTraffic,
+        topArticles: allArticles.slice(0, 15),
+    };
+}
+
+// ==================== RENDERING ====================
+function renderKPIs(stats) {
+    animateCounter(document.getElementById('kpiSites'), stats.totalSites);
+    animateCounter(document.getElementById('kpiArticles'), stats.totalArticles);
+    animateCounter(document.getElementById('kpiWords'), stats.totalWords);
+
+    const seoEl = document.getElementById('kpiSeo');
+    animateCounter(seoEl, stats.avgSeo);
+    document.getElementById('kpiSeoSub').textContent = stats.avgSeo >= 70 ? 'Good score!' : 'Room to improve';
+
+    if (stats.hasToken) {
+        animateCounter(document.getElementById('kpiViews'), stats.totalViews);
+        animateCounter(document.getElementById('kpiVisitors'), stats.totalUniques);
+        document.getElementById('kpiViewsSub').textContent = 'real data (14 days)';
+        document.getElementById('kpiVisitorsSub').textContent = 'real data (14 days)';
+    } else {
+        document.getElementById('kpiViews').textContent = '--';
+        document.getElementById('kpiVisitors').textContent = '--';
+        document.getElementById('kpiViewsSub').textContent = 'connect token for data';
+        document.getElementById('kpiVisitorsSub').textContent = 'connect token for data';
+    }
+}
+
+function renderSiteCards(stats) {
+    const grid = document.getElementById('sitesGrid');
+    grid.innerHTML = '';
+    const hasToken = stats.hasToken;
+
+    SITES.forEach(function(site, idx) {
+        const articles = siteArticles[site.name] || [];
+        const traffic = siteTraffic[site.name] || { views: 0, uniques: 0 };
+        const totalWords = articles.reduce(function(s, a) { return s + (a.word_count || 0); }, 0);
+        const seoScores = articles.filter(function(a) { return a.seo_score; }).map(function(a) { return a.seo_score; });
+        const avgSeo = seoScores.length > 0 ? Math.round(seoScores.reduce(function(a, b) { return a + b; }, 0) / seoScores.length) : 0;
+        const progress = Math.min(100, (articles.length / 60) * 100);
+        const progressColor = progress >= 100 ? 'var(--green)' : progress >= 60 ? 'var(--yellow)' : 'var(--primary)';
+
+        const card = document.createElement('div');
+        card.className = 'site-card animate-in';
+        card.style.animationDelay = (idx * 0.08) + 's';
+        card.style.opacity = '0';
+
+        let viewsHtml = hasToken ? formatNum(traffic.views) : '--';
+        let visitorsHtml = hasToken ? formatNum(traffic.uniques) : '--';
+
+        card.innerHTML =
+            '<div class="site-header">' +
+                '<div>' +
+                    '<div class="site-icon">' + site.icon + '</div>' +
+                    '<div class="site-name">' + escapeHtml(site.display) + '</div>' +
+                    '<div class="site-niche">' + escapeHtml(site.niche) + '</div>' +
+                '</div>' +
+                '<span class="status-badge ' + (articles.length > 0 ? 'status-live' : 'status-loading') + '">' +
+                    (articles.length > 0 ? 'Live' : 'Loading') +
+                '</span>' +
+            '</div>' +
+            '<div class="site-metrics">' +
+                '<div class="site-metric"><div class="site-metric-value">' + articles.length + '</div><div class="site-metric-label">Articles</div></div>' +
+                '<div class="site-metric"><div class="site-metric-value">' + viewsHtml + '</div><div class="site-metric-label">Views 14d</div></div>' +
+                '<div class="site-metric"><div class="site-metric-value">' + visitorsHtml + '</div><div class="site-metric-label">Visitors 14d</div></div>' +
+            '</div>' +
+            '<div class="site-metrics">' +
+                '<div class="site-metric"><div class="site-metric-value">' + avgSeo + '</div><div class="site-metric-label">SEO Score</div></div>' +
+                '<div class="site-metric"><div class="site-metric-value">' + formatNum(totalWords) + '</div><div class="site-metric-label">Words</div></div>' +
+                '<div class="site-metric"><div class="site-metric-value">' + (articles[0] ? articles[0].date.slice(5, 10) : 'N/A') + '</div><div class="site-metric-label">Last Post</div></div>' +
+            '</div>' +
+            '<div class="progress-bar"><div class="progress-fill" style="width:' + progress + '%;background:' + progressColor + '"></div></div>' +
+            '<div class="progress-label"><span>AdSense Readiness</span><span>' + articles.length + '/60 articles</span></div>' +
+            '<a class="site-link" href="' + BASE_URL + '/' + site.name + '/" target="_blank" rel="noopener">Visit Site &#8599;</a>';
+
+        grid.appendChild(card);
+    });
+}
+
+function renderArticlesTable(stats) {
+    const tbody = document.getElementById('articlesTableBody');
+    tbody.innerHTML = '';
+
+    stats.topArticles.forEach(function(a) {
+        const seoClass = a.seo_score >= 75 ? 'seo-high' : a.seo_score >= 50 ? 'seo-mid' : 'seo-low';
+        const slug = a.slug || '';
+        const siteSlug = a.siteSlug || '';
+        const url = BASE_URL + '/' + siteSlug + '/' + slug + '.html';
+        const dateStr = (a.date || '').slice(0, 10);
+
+        const tr = document.createElement('tr');
+        tr.innerHTML =
+            '<td><a href="' + escapeHtml(url) + '" target="_blank" rel="noopener" style="color:var(--text);text-decoration:none">' + escapeHtml((a.title || '').slice(0, 65)) + (a.title && a.title.length > 65 ? '...' : '') + '</a></td>' +
+            '<td style="color:var(--text-muted)">' + escapeHtml(a.siteName || '') + '</td>' +
+            '<td>' + (a.word_count || 0).toLocaleString() + '</td>' +
+            '<td><span class="seo-badge ' + seoClass + '">' + (a.seo_score || 0) + '</span></td>' +
+            '<td style="color:var(--text-muted)">' + escapeHtml(dateStr) + '</td>';
+        tbody.appendChild(tr);
+    });
+}
+
+function renderFooter() {
+    const fl = document.getElementById('footerLinks');
+    fl.innerHTML = '';
+    SITES.forEach(function(site) {
+        const a = document.createElement('a');
+        a.href = BASE_URL + '/' + site.name + '/';
+        a.target = '_blank';
+        a.rel = 'noopener';
+        a.textContent = site.display;
+        fl.appendChild(a);
+    });
+}
+
+function renderBanners(stats, errors) {
+    const errorBanner = document.getElementById('errorBanner');
+    const trafficBanner = document.getElementById('trafficBanner');
+
+    if (errors.length > 0) {
+        errorBanner.classList.remove('hidden');
+        document.getElementById('errorText').textContent = 'Some data could not be loaded: ' + errors.join(', ');
+    } else {
+        errorBanner.classList.add('hidden');
+    }
+
+    if (!stats.hasToken) {
+        trafficBanner.classList.remove('hidden');
+        document.getElementById('trafficBannerText').textContent =
+            'Connect your GitHub token (click "Connect GitHub" above) to see real page views and visitor counts from GitHub Pages.';
+    } else if (stats.hasTraffic) {
+        trafficBanner.classList.remove('hidden');
+        document.getElementById('trafficBannerText').textContent =
+            'Showing real traffic data from GitHub Pages API (last 14 days). Data refreshes automatically every 5 minutes.';
+    } else {
+        trafficBanner.classList.remove('hidden');
+        document.getElementById('trafficBannerText').textContent =
+            'GitHub token connected but no traffic recorded yet. Views will appear once people visit your sites.';
+    }
+}
+
+// ==================== CHARTS ====================
+const CHART_COLORS = ['#3b82f6', '#10b981', '#f59e0b', '#f97316', '#ef4444', '#a855f7'];
+
+function destroyCharts() {
+    Object.keys(chartInstances).forEach(function(k) {
+        if (chartInstances[k]) chartInstances[k].destroy();
+    });
+    chartInstances = {};
+    // Recreate canvas elements in case they were replaced
+    ['growthWrap:growthChart','distWrap:distChart','trafficWrap:trafficChart','seoWrap:seoChart'].forEach(function(pair) {
+        var parts = pair.split(':');
+        var wrap = document.getElementById(parts[0]);
+        if (wrap && !document.getElementById(parts[1])) {
+            wrap.innerHTML = '<canvas id="' + parts[1] + '"></canvas>';
+        }
+    });
+}
+
+function createGrowthChart() {
+    // Aggregate articles by date across all sites
+    const dateCounts = {};
+    SITES.forEach(function(site) {
+        (siteArticles[site.name] || []).forEach(function(a) {
+            const d = (a.date || '').slice(0, 10);
+            if (d) dateCounts[d] = (dateCounts[d] || 0) + 1;
+        });
+    });
+
+    const sortedDates = Object.keys(dateCounts).sort();
+    if (sortedDates.length === 0) {
+        var gw = document.getElementById('growthWrap');
+        if (gw) gw.innerHTML = '<div class="no-data">No article date data available</div>';
+        return;
+    }
+
+    // Cumulative count
+    let cumulative = 0;
+    const cumulativeData = sortedDates.map(function(d) { cumulative += dateCounts[d]; return cumulative; });
+
+    const ctx = document.getElementById('growthChart').getContext('2d');
+    const gradient = ctx.createLinearGradient(0, 0, 0, 240);
+    gradient.addColorStop(0, 'rgba(99,102,241,0.3)');
+    gradient.addColorStop(1, 'rgba(99,102,241,0)');
+
+    chartInstances.growth = new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: sortedDates,
+            datasets: [{
+                label: 'Total Articles',
+                data: cumulativeData,
+                borderColor: '#6366f1',
+                backgroundColor: gradient,
+                fill: true,
+                tension: 0.4,
+                pointRadius: sortedDates.length > 20 ? 0 : 4,
+                pointBackgroundColor: '#6366f1',
+                borderWidth: 2,
+            }]
+        },
+        options: {
+            responsive: true, maintainAspectRatio: false,
+            plugins: { legend: { display: false } },
+            scales: {
+                x: { grid: { color: 'rgba(255,255,255,0.04)' }, ticks: { color: '#7a7a9a', maxRotation: 45, font: { size: 10 } } },
+                y: { grid: { color: 'rgba(255,255,255,0.04)' }, ticks: { color: '#7a7a9a', font: { size: 10 } }, beginAtZero: true }
+            },
+            animation: { duration: 1200, easing: 'easeOutQuart' }
+        }
+    });
+}
+
+function createDistChart() {
+    const labels = []; const data = [];
+    SITES.forEach(function(site) {
+        labels.push(site.display);
+        data.push((siteArticles[site.name] || []).length);
+    });
+
+    chartInstances.dist = new Chart(document.getElementById('distChart'), {
+        type: 'doughnut',
+        data: {
+            labels: labels,
+            datasets: [{
+                data: data,
+                backgroundColor: CHART_COLORS,
+                borderColor: '#0f0f1e',
+                borderWidth: 3,
+            }]
+        },
+        options: {
+            responsive: true, maintainAspectRatio: false,
+            cutout: '60%',
+            plugins: {
+                legend: { position: 'bottom', labels: { color: '#7a7a9a', padding: 10, font: { size: 10 }, usePointStyle: true, pointStyle: 'circle' } }
+            },
+            animation: { animateRotate: true, duration: 1000 }
+        }
+    });
+}
+
+function createTrafficChart(stats) {
+    const labels = []; const viewsData = []; const uniquesData = [];
+
+    if (stats.hasToken) {
+        SITES.forEach(function(site) {
+            labels.push(site.display);
+            const t = siteTraffic[site.name] || { views: 0, uniques: 0 };
+            viewsData.push(t.views);
+            uniquesData.push(t.uniques);
+        });
+    } else {
+        var tw = document.getElementById('trafficWrap');
+        if (tw) tw.innerHTML = '<div class="no-data"><div style="font-size:1.5rem">&#128274;</div><div>Connect GitHub token to see real traffic</div></div>';
+        return;
+    }
+
+    chartInstances.traffic = new Chart(document.getElementById('trafficChart'), {
+        type: 'bar',
+        data: {
+            labels: labels,
+            datasets: [
+                { label: 'Page Views', data: viewsData, backgroundColor: CHART_COLORS.map(function(c) { return c + '99'; }), borderColor: CHART_COLORS, borderWidth: 1, borderRadius: 6 },
+                { label: 'Unique Visitors', data: uniquesData, backgroundColor: CHART_COLORS.map(function(c) { return c + '44'; }), borderColor: CHART_COLORS, borderWidth: 1, borderRadius: 6 },
+            ]
+        },
+        options: {
+            responsive: true, maintainAspectRatio: false,
+            indexAxis: 'y',
+            plugins: { legend: { position: 'top', labels: { color: '#7a7a9a', font: { size: 10 }, usePointStyle: true } } },
+            scales: {
+                x: { grid: { color: 'rgba(255,255,255,0.04)' }, ticks: { color: '#7a7a9a', font: { size: 10 } }, beginAtZero: true },
+                y: { grid: { display: false }, ticks: { color: '#7a7a9a', font: { size: 10 } } }
+            },
+            animation: { duration: 1000 }
+        }
+    });
+}
+
+function createSeoChart() {
+    const labels = []; const data = []; const colors = [];
+
+    SITES.forEach(function(site) {
+        const articles = siteArticles[site.name] || [];
+        const scores = articles.filter(function(a) { return a.seo_score; }).map(function(a) { return a.seo_score; });
+        const avg = scores.length > 0 ? Math.round(scores.reduce(function(a, b) { return a + b; }, 0) / scores.length) : 0;
+        labels.push(site.display);
+        data.push(avg);
+        colors.push(avg >= 75 ? '#10b981' : avg >= 50 ? '#f59e0b' : '#f43f5e');
+    });
+
+    chartInstances.seo = new Chart(document.getElementById('seoChart'), {
+        type: 'bar',
+        data: {
+            labels: labels,
+            datasets: [{
+                label: 'Avg SEO Score',
+                data: data,
+                backgroundColor: colors.map(function(c) { return c + '66'; }),
+                borderColor: colors,
+                borderWidth: 1,
+                borderRadius: 6,
+            }]
+        },
+        options: {
+            responsive: true, maintainAspectRatio: false,
+            plugins: { legend: { display: false } },
+            scales: {
+                x: { grid: { display: false }, ticks: { color: '#7a7a9a', font: { size: 10 }, maxRotation: 45 } },
+                y: { grid: { color: 'rgba(255,255,255,0.04)' }, ticks: { color: '#7a7a9a', font: { size: 10 } }, beginAtZero: true, max: 100 }
+            },
+            animation: { duration: 1000 }
+        }
+    });
+}
+
+// ==================== TOKEN MANAGEMENT ====================
+function renderTokenUI() {
+    const row = document.getElementById('tokenRow');
+    const token = getToken();
+
+    if (token) {
+        row.innerHTML =
+            '<span class="connected-badge"><span class="live-dot" style="width:6px;height:6px"></span> Connected</span>' +
+            '<span style="color:var(--text-muted);font-size:.78rem;margin-left:8px">Token: ' + token.slice(0, 8) + '...</span>' +
+            '<button class="btn btn-sm" onclick="clearToken()" style="margin-left:auto">Disconnect</button>';
+    } else {
+        row.innerHTML =
+            '<input type="password" class="token-input" id="tokenInput" placeholder="ghp_xxxxxxxxxxxx...">' +
+            '<button class="btn btn-primary btn-sm" onclick="saveToken()">Connect</button>';
+    }
+}
+
+function saveToken() {
+    const input = document.getElementById('tokenInput');
+    if (!input) return;
+    const val = input.value.trim();
+    if (!val) return;
+    localStorage.setItem('gh_dashboard_token', val);
+    // Clear cached traffic data so it refetches
+    SITES.forEach(function(s) { sessionStorage.removeItem('traffic_' + s.name); });
+    renderTokenUI();
+    refreshData();
+}
+
+function clearToken() {
+    localStorage.removeItem('gh_dashboard_token');
+    SITES.forEach(function(s) { sessionStorage.removeItem('traffic_' + s.name); });
+    siteTraffic = {};
+    renderTokenUI();
+    refreshData();
+}
+
+function toggleSettings() {
+    const panel = document.getElementById('settingsPanel');
+    panel.classList.toggle('hidden');
+}
+
+// ==================== MAIN ====================
+async function init() {
+    renderTokenUI();
+
+    const overlay = document.getElementById('loadingOverlay');
+    overlay.classList.remove('fade-out');
+
+    const errors = await loadAllData();
+    const stats = computeStats();
+
+    // Hide loading, show dashboard
+    overlay.classList.add('fade-out');
+    document.getElementById('dashboardContent').classList.remove('hidden');
+
+    // Render everything
+    renderKPIs(stats);
+    renderBanners(stats, errors);
+    destroyCharts();
+    createGrowthChart();
+    createDistChart();
+    createTrafficChart(stats);
+    createSeoChart();
+    renderSiteCards(stats);
+    renderArticlesTable(stats);
+    renderFooter();
+
+    // Update time
+    const now = new Date();
+    document.getElementById('updateTime').textContent =
+        'Updated: ' + now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+
+    // Set auto-refresh timer
+    if (refreshTimer) clearInterval(refreshTimer);
+    refreshTimer = setInterval(refreshData, AUTO_REFRESH);
+}
+
+async function refreshData() {
+    // Clear article cache so we refetch
+    SITES.forEach(function(s) { sessionStorage.removeItem('articles_' + s.name); });
+    siteArticles = {};
+
+    const btn = document.getElementById('refreshBtn');
+    btn.innerHTML = '<span style="display:inline-block;animation:spin .7s linear infinite">&#8635;</span> Refreshing...';
+    btn.disabled = true;
+
+    try {
+        const errors = await loadAllData();
+        const stats = computeStats();
+
+        renderKPIs(stats);
+        renderBanners(stats, errors);
+        destroyCharts();
+        createGrowthChart();
+        createDistChart();
+        createTrafficChart(stats);
+        createSeoChart();
+        renderSiteCards(stats);
+        renderArticlesTable(stats);
+
+        const now = new Date();
+        document.getElementById('updateTime').textContent =
+            'Updated: ' + now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+    } catch (e) {
+        document.getElementById('errorBanner').classList.remove('hidden');
+        document.getElementById('errorText').textContent = 'Refresh failed: ' + e.message;
+    }
+
+    btn.innerHTML = '&#8635; Refresh';
+    btn.disabled = false;
+}
+
+// Start!
+init();
+</script>
+</body>
+</html>
+

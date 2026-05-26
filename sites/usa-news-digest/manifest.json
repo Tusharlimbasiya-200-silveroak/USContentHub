@@ -1,0 +1,20 @@
+{
+  "name": "Usa News Digest",
+  "short_name": "Usa News Digest",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#2563eb",
+  "icons": [
+    {
+      "src": "https://picsum.photos/seed/usa-news-digest/192/192",
+      "sizes": "192x192",
+      "type": "image/jpeg"
+    },
+    {
+      "src": "https://picsum.photos/seed/usa-news-digest/512/512",
+      "sizes": "512x512",
+      "type": "image/jpeg"
+    }
+  ]
+}

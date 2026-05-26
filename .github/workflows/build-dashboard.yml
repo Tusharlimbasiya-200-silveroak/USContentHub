@@ -1,0 +1,42 @@
+# USContentHub - Build Dashboard
+#
+# Rebuilds the content dashboard on push and deploys it.
+
+name: Build Dashboard
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'sites/**/articles.json'
+      - 'dashboard.html'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  build-dashboard:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Generate dashboard stats
+        run: |
+          echo "Counting articles across all sites..."
+          total=0
+          for site_dir in sites/*/; do
+            site_name=$(basename "$site_dir")
+            count=$(find "$site_dir" -maxdepth 1 -name "*.html" ! -name "index.html" ! -name "about.html" ! -name "contact.html" ! -name "privacy.html" | wc -l)
+            total=$((total + count))
+            echo "  $site_name: $count articles"
+          done
+          echo "Total: $total articles"
+
+      - name: Commit dashboard updates
+        run: |
+          git config user.name "USContentHub Bot"
+          git config user.email "bot@uscontenthub.com"
+          git add dashboard.html
+          git diff --staged --quiet || git commit -m "Update dashboard - $(date +'%Y-%m-%d')"
+          git push

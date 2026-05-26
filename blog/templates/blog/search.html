@@ -1,0 +1,30 @@
+{% extends "blog/base.html" %}
+{% block title %}Search: {{ q }} — USA Content Hub{% endblock %}
+{% block content %}
+<section class="articles-list">
+    <h2>{% if q %}Search results for "{{ q }}"{% else %}Search{% endif %}</h2>
+    <form action="{% url 'blog:search' %}" method="get" style="margin-bottom:2rem;">
+        <input type="search" name="q" value="{{ q }}" placeholder="Search articles..." style="padding:12px 20px;width:100%;max-width:500px;border:1px solid var(--border);border-radius:var(--radius);font-size:1rem;background:var(--bg);color:var(--text);">
+    </form>
+    <div class="articles-grid">
+        {% for article in articles %}
+        <article class="article-card">
+            <div class="card-image">
+                <img src="{{ article.cover_image }}" alt="{{ article.title }}" loading="lazy" decoding="async" width="640" height="360">
+            </div>
+            <div class="card-body">
+                <h3><a href="{% url 'blog:article' article.slug %}">{{ article.title }}</a></h3>
+                <div class="article-meta">
+                    <time datetime="{{ article.published_at|date:'Y-m-d' }}">📅 {{ article.published_at|date:'Y-m-d' }}</time>
+                    <span class="read-time">⏱️ {{ article.read_time }} min</span>
+                </div>
+                <p class="article-excerpt">{{ article.meta_description|default:article.subtitle|truncatechars:160 }}</p>
+                <a href="{% url 'blog:article' article.slug %}" class="read-more">Read More</a>
+            </div>
+        </article>
+        {% empty %}
+        {% if q %}<p>No articles found for "{{ q }}".</p>{% endif %}
+        {% endfor %}
+    </div>
+</section>
+{% endblock %}
