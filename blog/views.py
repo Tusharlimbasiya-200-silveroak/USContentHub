@@ -1,10 +1,13 @@
 import re
+from html import escape
 
 from django.contrib.syndication.views import Feed
+from django.core.cache import cache
 from django.db.models import Count, F, Q
 from django.http import JsonResponse
 from django.shortcuts import get_object_or_404, render
 from django.utils.feedgenerator import Atom1Feed
+from django.views.decorators.http import require_POST
 from django.views.generic import DetailView, ListView
 
 from .models import Article, Comment, Publication, Tag
@@ -21,8 +24,17 @@ class HomeView(ListView):
 
     def get_context_data(self, **kwargs):
         ctx = super().get_context_data(**kwargs)
-        ctx["popular_tags"] = Tag.objects.annotate(count=Count("articles")).order_by("-count")[:15]
-        ctx["total_articles"] = Article.objects.filter(status="published").count()
+        popular_tags = cache.get("popular_tags_15")
+        if popular_tags is None:
+            popular_tags = list(Tag.objects.annotate(count=Count("articles")).order_by("-count")[:15])
+            cache.set("popular_tags_15", popular_tags, 300)
+        ctx["popular_tags"] = popular_tags
+
+        total = cache.get("total_published_articles")
+        if total is None:
+            total = Article.objects.filter(status="published").count()
+            cache.set("total_published_articles", total, 300)
+        ctx["total_articles"] = total
         return ctx
 
 
@@ -43,38 +55,61 @@ class ArticleDetailView(DetailView):
     def get_context_data(self, **kwargs):
         ctx = super().get_context_data(**kwargs)
         article = self.object
-        ctx["related"] = (
-            Article.objects.filter(status="published", publication=article.publication)
-            .exclude(id=article.id)
-            .order_by("-published_at")[:3]
-            if article.publication
-            else Article.objects.filter(status="published").exclude(id=article.id).order_by("-published_at")[:3]
-        )
+        cache_key = f"related_articles_{article.pk}"
+        related = cache.get(cache_key)
+        if related is None:
+            related = list(
+                Article.objects.filter(status="published", publication=article.publication)
+                .exclude(id=article.id)
+                .order_by("-published_at")[:3]
+                if article.publication
+                else Article.objects.filter(status="published").exclude(id=article.id).order_by("-published_at")[:3]
+            )
+            cache.set(cache_key, related, 600)
+        ctx["related"] = related
         ctx["tags"] = article.tags.all()
         ctx["comments"] = article.comments.filter(is_approved=True)
         ctx["comment_count"] = ctx["comments"].count()
         return ctx
 
 
+@require_POST
 def add_comment(request, slug):
-    if request.method == "POST":
-        article = get_object_or_404(Article, slug=slug, status="published")
-        name = request.POST.get("name", "").strip()[:100]
-        content = request.POST.get("content", "").strip()[:2000]
-        if name and content and len(name) >= 2 and len(content) >= 5:
-            comment = Comment.objects.create(
-                article=article,
-                name=name,
-                content=content,
-            )
-            return JsonResponse({
-                "success": True,
-                "name": comment.name,
-                "content": comment.content,
-                "created_at": comment.created_at.strftime("%b %d, %Y %H:%M"),
-            })
-        return JsonResponse({"success": False, "error": "Name and comment are required."}, status=400)
-    return JsonResponse({"success": False, "error": "POST required."}, status=405)
+    # Rate limiting: max 5 comments per IP per minute
+    ip = _get_client_ip(request)
+    rate_key = f"comment_rate_{ip}"
+    count = cache.get(rate_key, 0)
+    if count >= 5:
+        return JsonResponse(
+            {"success": False, "error": "Too many comments. Please wait a minute."},
+            status=429,
+        )
+
+    article = get_object_or_404(Article, slug=slug, status="published")
+    name = escape(request.POST.get("name", "").strip()[:100])
+    content = escape(request.POST.get("content", "").strip()[:2000])
+
+    if not name or not content or len(name) < 2 or len(content) < 5:
+        return JsonResponse({"success": False, "error": "Name (2+ chars) and comment (5+ chars) are required."}, status=400)
+
+    comment = Comment.objects.create(article=article, name=name, content=content)
+
+    # Increment rate counter
+    cache.set(rate_key, count + 1, 60)
+
+    return JsonResponse({
+        "success": True,
+        "name": comment.name,
+        "content": comment.content,
+        "created_at": comment.created_at.strftime("%b %d, %Y %H:%M"),
+    })
+
+
+def _get_client_ip(request):
+    xff = request.META.get("HTTP_X_FORWARDED_FOR")
+    if xff:
+        return xff.split(",")[0].strip()
+    return request.META.get("REMOTE_ADDR", "unknown")
 
 
 class PublicationView(ListView):
@@ -117,7 +152,7 @@ class SearchView(ListView):
     paginate_by = 12
 
     def get_queryset(self):
-        self.query = self.request.GET.get("q", "").strip()
+        self.query = self.request.GET.get("q", "").strip()[:200]
         if self.query and len(self.query) >= 2:
             return Article.objects.filter(
                 Q(title__icontains=self.query) | Q(content__icontains=self.query) | Q(subtitle__icontains=self.query),
@@ -138,13 +173,38 @@ class ExploreView(ListView):
     paginate_by = 20
 
     def get_queryset(self):
-        return Article.objects.filter(status="published").select_related("publication").prefetch_related("tags").order_by("-views")[:20]
+        cache_key = "explore_trending_20"
+        qs = cache.get(cache_key)
+        if qs is None:
+            qs = list(
+                Article.objects.filter(status="published")
+                .select_related("publication")
+                .prefetch_related("tags")
+                .order_by("-views")[:20]
+            )
+            cache.set(cache_key, qs, 300)
+        return qs
 
     def get_context_data(self, **kwargs):
         ctx = super().get_context_data(**kwargs)
-        ctx["popular_tags"] = Tag.objects.annotate(count=Count("articles")).order_by("-count")[:30]
-        ctx["all_tags"] = Tag.objects.annotate(count=Count("articles")).order_by("name")
-        ctx["publications_with_counts"] = Publication.objects.annotate(article_count=Count("articles")).order_by("name")
+
+        popular_tags = cache.get("popular_tags_30")
+        if popular_tags is None:
+            popular_tags = list(Tag.objects.annotate(count=Count("articles")).order_by("-count")[:30])
+            cache.set("popular_tags_30", popular_tags, 300)
+        ctx["popular_tags"] = popular_tags
+
+        all_tags = cache.get("all_tags_counted")
+        if all_tags is None:
+            all_tags = list(Tag.objects.annotate(count=Count("articles")).order_by("name"))
+            cache.set("all_tags_counted", all_tags, 300)
+        ctx["all_tags"] = all_tags
+
+        pubs = cache.get("publications_with_counts")
+        if pubs is None:
+            pubs = list(Publication.objects.annotate(article_count=Count("articles")).order_by("name"))
+            cache.set("publications_with_counts", pubs, 300)
+        ctx["publications_with_counts"] = pubs
         return ctx
 
 
