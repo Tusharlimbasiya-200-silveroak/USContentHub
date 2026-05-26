@@ -63,6 +63,31 @@
         <div id="google_translate_element"></div>
     </div>
 
+    <div class="tts-player notranslate" id="ttsPlayer">
+        <button class="tts-btn" id="ttsPlayBtn" onclick="ttsToggle()" title="Listen to this article">
+            <span id="ttsIcon">▶️</span>
+        </button>
+        <div class="tts-info">
+            <div class="tts-label" id="ttsLabel">Listen to Article</div>
+            <div class="tts-progress-bar">
+                <div class="tts-progress-fill" id="ttsProgress"></div>
+            </div>
+            <div class="tts-meta" id="ttsMeta">~{{ article.read_time }} min · <span id="ttsLang">English</span></div>
+        </div>
+        <div class="tts-controls">
+            <button class="tts-ctrl" onclick="ttsSkip(-30)" title="Back 30s">⏪</button>
+            <select class="tts-speed" id="ttsSpeed" onchange="ttsSetSpeed(this.value)" title="Speed">
+                <option value="0.75">0.75×</option>
+                <option value="1" selected>1×</option>
+                <option value="1.25">1.25×</option>
+                <option value="1.5">1.5×</option>
+                <option value="2">2×</option>
+            </select>
+            <button class="tts-ctrl" onclick="ttsSkip(30)" title="Forward 30s">⏩</button>
+            <button class="tts-ctrl" onclick="ttsStop()" title="Stop">⏹️</button>
+        </div>
+    </div>
+
     <div class="article-body" itemprop="articleBody">
         {{ article.content|safe }}
     </div>
@@ -259,6 +284,168 @@ function googleTranslateElementInit(){
     }
     cleanGT();
     new MutationObserver(function(){cleanGT();}).observe(document.body,{attributes:true,attributeFilter:['style']});
+})();
+
+/* ── Text-to-Speech Player ─────────────────────────────────── */
+(function(){
+    var synth=window.speechSynthesis;
+    if(!synth){document.getElementById('ttsPlayer').style.display='none';return;}
+
+    var state='stopped'; // stopped|playing|paused
+    var chunks=[];
+    var currentChunk=0;
+    var utterance=null;
+    var speed=1;
+    var totalChunks=0;
+
+    /* Detect language from Google Translate cookie or html lang */
+    function detectLang(){
+        var cookie=document.cookie.match(/googtrans=\/[a-z-]+\/([a-z-]+)/i);
+        if(cookie)return cookie[1];
+        return document.documentElement.lang||'en';
+    }
+
+    /* Language display names */
+    var langNames={en:'English',es:'Spanish','zh-CN':'Chinese',hi:'Hindi',fr:'French',de:'German',pt:'Portuguese',ja:'Japanese',ko:'Korean',ar:'Arabic',vi:'Vietnamese',tl:'Filipino',ru:'Russian',it:'Italian',pl:'Polish'};
+
+    /* Update language label when Google Translate changes */
+    function updateLangLabel(){
+        var lang=detectLang();
+        var el=document.getElementById('ttsLang');
+        if(el)el.textContent=langNames[lang]||lang.toUpperCase();
+    }
+    setInterval(updateLangLabel,2000);
+    updateLangLabel();
+
+    /* Get article text (uses translated text if page is translated) */
+    function getArticleText(){
+        var body=document.querySelector('.article-body');
+        if(!body)return '';
+        return body.innerText||body.textContent||'';
+    }
+
+    /* Split text into chunks (~200 chars at sentence boundaries) */
+    function splitText(text){
+        var sentences=text.replace(/\n+/g,' ').replace(/\s+/g,' ').match(/[^.!?]+[.!?]+[\s]*/g)||[text];
+        var result=[];
+        var buf='';
+        for(var i=0;i<sentences.length;i++){
+            buf+=sentences[i];
+            if(buf.length>180){
+                result.push(buf.trim());
+                buf='';
+            }
+        }
+        if(buf.trim())result.push(buf.trim());
+        return result;
+    }
+
+    /* Find best matching voice for language */
+    function findVoice(lang){
+        var voices=synth.getVoices();
+        if(!voices.length)return null;
+        // Exact match
+        for(var i=0;i<voices.length;i++){
+            if(voices[i].lang.toLowerCase()===lang.toLowerCase())return voices[i];
+        }
+        // Prefix match (e.g. 'en' matches 'en-US')
+        var prefix=lang.split('-')[0].toLowerCase();
+        for(var i=0;i<voices.length;i++){
+            if(voices[i].lang.toLowerCase().startsWith(prefix))return voices[i];
+        }
+        return null;
+    }
+
+    /* Speak a single chunk */
+    function speakChunk(index){
+        if(index>=chunks.length){
+            ttsFinished();
+            return;
+        }
+        currentChunk=index;
+        utterance=new SpeechSynthesisUtterance(chunks[index]);
+        var lang=detectLang();
+        utterance.lang=lang;
+        var voice=findVoice(lang);
+        if(voice)utterance.voice=voice;
+        utterance.rate=speed;
+        utterance.onend=function(){
+            currentChunk++;
+            updateProgress();
+            if(state==='playing')speakChunk(currentChunk);
+        };
+        utterance.onerror=function(e){
+            if(e.error!=='interrupted'&&e.error!=='canceled'){
+                currentChunk++;
+                if(state==='playing')speakChunk(currentChunk);
+            }
+        };
+        synth.speak(utterance);
+        updateProgress();
+    }
+
+    function updateProgress(){
+        var pct=totalChunks?Math.round((currentChunk/totalChunks)*100):0;
+        var bar=document.getElementById('ttsProgress');
+        if(bar)bar.style.width=pct+'%';
+    }
+
+    function setUI(s){
+        var icon=document.getElementById('ttsIcon');
+        var label=document.getElementById('ttsLabel');
+        if(s==='playing'){icon.textContent='⏸️';label.textContent='Playing...';}
+        else if(s==='paused'){icon.textContent='▶️';label.textContent='Paused';}
+        else{icon.textContent='▶️';label.textContent='Listen to Article';
+            var bar=document.getElementById('ttsProgress');if(bar)bar.style.width='0%';}
+    }
+
+    function ttsFinished(){
+        state='stopped';synth.cancel();setUI('stopped');currentChunk=0;
+    }
+
+    /* Public API */
+    window.ttsToggle=function(){
+        if(state==='playing'){
+            synth.pause();state='paused';setUI('paused');
+        }else if(state==='paused'){
+            synth.resume();state='playing';setUI('playing');
+        }else{
+            synth.cancel();
+            chunks=splitText(getArticleText());
+            totalChunks=chunks.length;
+            currentChunk=0;
+            state='playing';setUI('playing');
+            speakChunk(0);
+        }
+    };
+
+    window.ttsStop=function(){
+        synth.cancel();state='stopped';currentChunk=0;setUI('stopped');
+    };
+
+    window.ttsSetSpeed=function(v){
+        speed=parseFloat(v);
+        if(state==='playing'){
+            synth.cancel();state='playing';setUI('playing');
+            speakChunk(currentChunk);
+        }
+    };
+
+    window.ttsSkip=function(dir){
+        if(state==='stopped')return;
+        var skip=Math.round(Math.abs(dir)/2); // ~2s per chunk
+        var next=dir<0?Math.max(0,currentChunk-skip):Math.min(chunks.length-1,currentChunk+skip);
+        synth.cancel();
+        currentChunk=next;
+        if(state==='playing'||state==='paused'){state='playing';setUI('playing');speakChunk(currentChunk);}
+    };
+
+    /* Preload voices (some browsers load async) */
+    synth.getVoices();
+    if(synth.onvoiceschanged!==undefined)synth.onvoiceschanged=function(){synth.getVoices();};
+
+    /* Chrome bug: synth stops after ~15s. Keep-alive workaround */
+    setInterval(function(){if(state==='playing'&&synth.speaking){synth.pause();synth.resume();}},10000);
 })();
 </script>
 {% endblock %}
