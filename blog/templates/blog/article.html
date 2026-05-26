@@ -57,11 +57,11 @@
     </div>
     {% endif %}
 
-    <div class="share-buttons" style="margin:2rem 0;padding:1.5rem;background:var(--bg-light);border-radius:var(--radius);text-align:center;">
-        <h3 style="margin-bottom:1rem;font-size:1rem;">Share this article</h3>
-        <a href="https://twitter.com/intent/tweet?text={{ article.title|urlencode }}&url={{ request.build_absolute_uri }}" target="_blank" rel="noopener" style="display:inline-block;padding:8px 16px;margin:4px;background:#1da1f2;color:#fff;border-radius:20px;text-decoration:none;font-size:.85rem;">Twitter</a>
-        <a href="https://www.facebook.com/sharer/sharer.php?u={{ request.build_absolute_uri }}" target="_blank" rel="noopener" style="display:inline-block;padding:8px 16px;margin:4px;background:#1877f2;color:#fff;border-radius:20px;text-decoration:none;font-size:.85rem;">Facebook</a>
-        <a href="https://www.linkedin.com/sharing/share-offsite/?url={{ request.build_absolute_uri }}" target="_blank" rel="noopener" style="display:inline-block;padding:8px 16px;margin:4px;background:#0a66c2;color:#fff;border-radius:20px;text-decoration:none;font-size:.85rem;">LinkedIn</a>
+    <div class="share-buttons" style="margin:2rem 0;padding:1rem 1.5rem;background:var(--bg-light);border-radius:var(--radius);display:flex;align-items:center;justify-content:center;gap:12px;flex-wrap:wrap;">
+        <h3 style="margin:0;font-size:1rem;">Share this article</h3>
+        <a href="https://twitter.com/intent/tweet?text={{ article.title|urlencode }}&url={{ request.build_absolute_uri }}" target="_blank" rel="noopener" style="padding:8px 16px;background:#1da1f2;color:#fff;border-radius:20px;text-decoration:none;font-size:.85rem;">Twitter</a>
+        <a href="https://www.facebook.com/sharer/sharer.php?u={{ request.build_absolute_uri }}" target="_blank" rel="noopener" style="padding:8px 16px;background:#1877f2;color:#fff;border-radius:20px;text-decoration:none;font-size:.85rem;">Facebook</a>
+        <a href="https://www.linkedin.com/sharing/share-offsite/?url={{ request.build_absolute_uri }}" target="_blank" rel="noopener" style="padding:8px 16px;background:#0a66c2;color:#fff;border-radius:20px;text-decoration:none;font-size:.85rem;">LinkedIn</a>
     </div>
 </article>
 
