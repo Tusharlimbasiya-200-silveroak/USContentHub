@@ -23,11 +23,21 @@ import os
 
 SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY', 'django-insecure-dev-only-change-in-production')
 DEBUG = os.environ.get('DJANGO_DEBUG', 'True').lower() in ('true', '1')
-ALLOWED_HOSTS = os.environ.get('DJANGO_ALLOWED_HOSTS', 'localhost,127.0.0.1').split(',')
-CSRF_TRUSTED_ORIGINS = [
-    origin.strip() for origin in
-    os.environ.get('DJANGO_CSRF_ORIGINS', 'http://localhost:8000,http://127.0.0.1:8000').split(',')
-]
+
+# Build ALLOWED_HOSTS: explicit env var + auto-detect Vercel domain
+_allowed = [h.strip() for h in os.environ.get('DJANGO_ALLOWED_HOSTS', 'localhost,127.0.0.1').split(',') if h.strip()]
+_vercel_url = os.environ.get('VERCEL_URL', '')          # e.g. us-content-hub.vercel.app
+_vercel_branch_url = os.environ.get('VERCEL_BRANCH_URL', '')
+for _vh in [_vercel_url, _vercel_branch_url]:
+    if _vh and _vh not in _allowed:
+        _allowed.append(_vh)
+ALLOWED_HOSTS = _allowed
+
+# Build CSRF origins: explicit env var + auto-detect Vercel URL
+_csrf = [o.strip() for o in os.environ.get('DJANGO_CSRF_ORIGINS', 'http://localhost:8000,http://127.0.0.1:8000').split(',') if o.strip()]
+if _vercel_url and f'https://{_vercel_url}' not in _csrf:
+    _csrf.append(f'https://{_vercel_url}')
+CSRF_TRUSTED_ORIGINS = _csrf
 
 # ── Guard: fail loudly if insecure default key is used in production ──
 if not DEBUG and SECRET_KEY == 'django-insecure-dev-only-change-in-production':
@@ -191,12 +201,6 @@ LOGIN_URL = '/accounts/login/'
 LOGOUT_URL = '/accounts/logout/'
 
 # ============================================================
-# SESSIONS — use cache-backed sessions to avoid DB writes on
-# read-only file systems (e.g. Vercel serverless).
-# ============================================================
-SESSION_ENGINE = 'django.contrib.sessions.backends.cache'
-
-# ============================================================
 # CACHING — Redis in production (set REDIS_URL), LocMemCache for dev/tests
 # Example: REDIS_URL=redis://localhost:6379/0
 # Note: LocMemCache is process-local; on multi-worker deployments each
@@ -227,6 +231,18 @@ else:
             },
         }
     }
+
+# ============================================================
+# SESSIONS — signed cookies work on Vercel serverless without
+# any external storage. Use cache-backed sessions when Redis
+# is available (multi-worker / stateful deployments).
+# ============================================================
+if _REDIS_URL:
+    SESSION_ENGINE = 'django.contrib.sessions.backends.cache'
+else:
+    # signed_cookies: session data lives in the browser cookie,
+    # signed + encrypted with SECRET_KEY — no server-side storage needed.
+    SESSION_ENGINE = 'django.contrib.sessions.backends.signed_cookies'
 
 # ============================================================
 # SECURITY SETTINGS — enforced in production

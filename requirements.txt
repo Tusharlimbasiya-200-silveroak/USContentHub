@@ -4,9 +4,7 @@ django-allauth>=65.0
 cryptography>=48.0
 pyjwt>=2.0
 requests>=2.31
-# Web server
-gunicorn>=21.2
-# Static file serving (production)
+# Static file serving
 whitenoise>=6.7
-# PostgreSQL (Vercel + Neon.tech / any PostgreSQL host)
+# PostgreSQL (optional — set DATABASE_URL env var to enable)
 psycopg2-binary>=2.9
