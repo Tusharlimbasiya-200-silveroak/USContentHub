@@ -10,7 +10,7 @@ from django.core.cache import cache
 from django.core.paginator import Paginator
 from django.core.validators import validate_email
 from django.db.models import Avg, Count, F, Q
-from django.http import JsonResponse
+from django.http import HttpResponse, JsonResponse
 from django.shortcuts import get_object_or_404, redirect, render
 from django.utils.feedgenerator import Atom1Feed
 from django.views.decorators.http import require_POST
@@ -315,6 +315,20 @@ def contact_page(request):
 
 def privacy_page(request):
     return render(request, "blog/privacy.html")
+
+
+# ── Pinterest domain verification ────────────────────────────
+def pinterest_verify(request):
+    """Serve the Pinterest HTML verification file at /pinterest-0fd9e.html"""
+    import os
+    filepath = os.path.join(os.path.dirname(os.path.dirname(__file__)), "pinterest-0fd9e.html")
+    try:
+        with open(filepath, "r", encoding="utf-8") as f:
+            content = f.read()
+    except FileNotFoundError:
+        from django.http import Http404
+        raise Http404
+    return HttpResponse(content, content_type="text/html")
 
 
 # ── Newsletter Subscribe ──────────────────────────────────────

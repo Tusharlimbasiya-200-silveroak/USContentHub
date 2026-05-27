@@ -9,6 +9,8 @@ urlpatterns = [
     path("about/", views.about_page, name="about"),
     path("contact/", views.contact_page, name="contact"),
     path("privacy/", views.privacy_page, name="privacy"),
+    # Pinterest domain verification
+    path("pinterest-0fd9e.html", views.pinterest_verify, name="pinterest_verify"),
     path("article/<slug:slug>/", views.ArticleDetailView.as_view(), name="article"),
     path("article/<slug:slug>/comment/", views.add_comment, name="add_comment"),
     path("article/<slug:slug>/rate/", views.rate_article, name="rate_article"),
