@@ -1,0 +1,89 @@
+name: Pinterest Daily Auto-Pin
+
+# ─────────────────────────────────────────────────────────────────────────────
+# Runs every day at 9:00 AM UTC automatically.
+# Can also be triggered manually from GitHub → Actions → "Run workflow".
+# ─────────────────────────────────────────────────────────────────────────────
+on:
+  schedule:
+    - cron: '0 9 * * *'   # 9:00 AM UTC every day
+  workflow_dispatch:
+    inputs:
+      pins_per_day:
+        description: 'How many pins to post today (default: 7, one per niche)'
+        required: false
+        default: '7'
+        type: string
+      dry_run:
+        description: 'Dry run (generate images but do NOT post to Pinterest)'
+        required: false
+        default: 'false'
+        type: choice
+        options:
+          - 'false'
+          - 'true'
+
+jobs:
+  pin-articles:
+    name: Post daily pins to Pinterest
+    runs-on: ubuntu-latest
+
+    permissions:
+      contents: write   # needed to commit pinned_tracker.json back to the repo
+
+    steps:
+      # ── 1. Checkout ──────────────────────────────────────────────────────────
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      # ── 2. Python setup ──────────────────────────────────────────────────────
+      - name: Set up Python 3.11
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: 'pip'
+
+      # ── 3. Install dependencies ──────────────────────────────────────────────
+      - name: Install dependencies
+        run: pip install requests pillow
+
+      # ── 4. Run the Pinterest bot ─────────────────────────────────────────────
+      - name: Run Pinterest auto-pin bot
+        env:
+          PINTEREST_ACCESS_TOKEN: ${{ secrets.PINTEREST_ACCESS_TOKEN }}
+          PINTEREST_BOARD_TECH:    ${{ secrets.PINTEREST_BOARD_TECH }}
+          PINTEREST_BOARD_HEALTH:  ${{ secrets.PINTEREST_BOARD_HEALTH }}
+          PINTEREST_BOARD_FINANCE: ${{ secrets.PINTEREST_BOARD_FINANCE }}
+          PINTEREST_BOARD_TRAVEL:  ${{ secrets.PINTEREST_BOARD_TRAVEL }}
+          PINTEREST_BOARD_RECIPES: ${{ secrets.PINTEREST_BOARD_RECIPES }}
+          PINTEREST_BOARD_NEWS:    ${{ secrets.PINTEREST_BOARD_NEWS }}
+          PINTEREST_BOARD_TRADING: ${{ secrets.PINTEREST_BOARD_TRADING }}
+          SITE_URL:                ${{ secrets.SITE_URL }}
+          PINS_PER_DAY:            ${{ github.event.inputs.pins_per_day || '7' }}
+          DRY_RUN:                 ${{ github.event.inputs.dry_run || 'false' }}
+        run: python pinterest_bot/pinterest_auto_pin.py
+
+      # ── 5. Commit updated tracker back to the repo ───────────────────────────
+      # The tracker records which articles have been pinned so we never repost.
+      # [skip ci] prevents this commit from triggering another workflow run.
+      - name: Commit updated pin tracker
+        run: |
+          git config user.name  "Pinterest Bot"
+          git config user.email "pinterest-bot@users.noreply.github.com"
+          git add pinterest_bot/pinned_tracker.json
+          git diff --staged --quiet \
+            || git commit -m "chore: update pinterest tracker $(date -u +%Y-%m-%d) [skip ci]"
+          git push
+
+      # ── 6. Summary ───────────────────────────────────────────────────────────
+      - name: Post run summary
+        if: always()
+        run: |
+          echo "## Pinterest Auto-Pin Summary" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "- **Date:** $(date -u +%Y-%m-%d)" >> $GITHUB_STEP_SUMMARY
+          echo "- **Pins requested:** ${{ github.event.inputs.pins_per_day || '7' }}" >> $GITHUB_STEP_SUMMARY
+          PINNED=$(python3 -c "import json; d=json.load(open('pinterest_bot/pinned_tracker.json')); print(len(d))")
+          echo "- **Total articles pinned to date:** $PINNED" >> $GITHUB_STEP_SUMMARY
