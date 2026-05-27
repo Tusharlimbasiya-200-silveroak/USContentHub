@@ -38,7 +38,7 @@ jobs:
           else
             CHANGED=$(git diff --name-only HEAD~1 HEAD -- sites/ | cut -d'/' -f2 | sort -u | jq -R -s -c 'split("\n") | map(select(length > 0))')
             if [ "$CHANGED" = "[]" ] || [ -z "$CHANGED" ]; then
-              CHANGED='["tech-gadget-hub","health-wellness-daily","smart-money-guide","usa-travel-explorer","recipe-kitchen-usa","usa-news-digest"]'
+              CHANGED='["tech-gadget-hub","health-wellness-daily","smart-money-guide","usa-travel-explorer","recipe-kitchen-usa","usa-news-digest","the-trading-blueprint","blog-platform"]'
             fi
             echo "sites=$CHANGED" >> $GITHUB_OUTPUT
           fi
