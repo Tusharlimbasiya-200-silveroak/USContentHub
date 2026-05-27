@@ -41,6 +41,28 @@ class HomeView(ListView):
             total = Article.objects.filter(status="published").count()
             cache.set("total_published_articles", total, 300)
         ctx["total_articles"] = total
+
+        # Extra context for logged-in users
+        if self.request.user.is_authenticated:
+            try:
+                profile = UserProfile.objects.get(user=self.request.user)
+                ctx["bookmark_count"] = profile.bookmarks.count()
+            except UserProfile.DoesNotExist:
+                ctx["bookmark_count"] = 0
+
+            # Featured articles (top 3 by views, different from main list)
+            featured_key = "featured_articles_3"
+            featured = cache.get(featured_key)
+            if featured is None:
+                featured = list(
+                    Article.objects.filter(status="published")
+                    .select_related("publication")
+                    .prefetch_related("tags")
+                    .order_by("-views")[:3]
+                )
+                cache.set(featured_key, featured, 300)
+            ctx["featured_articles"] = featured
+
         return ctx
 
 

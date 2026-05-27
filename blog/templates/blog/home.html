@@ -16,42 +16,328 @@
         "target": "{{ site_url }}/search/?q={search_term_string}",
         "query-input": "required name=search_term_string"
     }
-},
-{
-    "@context": "https://schema.org",
-    "@type": "Organization",
-    "name": "USA Content Hub",
-    "url": "{{ site_url }}/",
-    "logo": "https://picsum.photos/seed/usacontenthub/600/60",
-    "sameAs": [
-        "https://twitter.com/USContentHub",
-        "https://facebook.com/USContentHub",
-        "https://instagram.com/USContentHub",
-        "https://youtube.com/@USContentHub",
-        "https://pinterest.com/USContentHub"
-    ]
-},
-{
-    "@context": "https://schema.org",
-    "@type": "CollectionPage",
-    "name": "USA Content Hub — Latest Articles",
-    "url": "{{ site_url }}/",
-    "description": "Latest articles on technology, health, personal finance, travel, recipes, and US news.",
-    "mainEntity": {
-        "@type": "ItemList",
-        "numberOfItems": {{ total_articles }},
-        "itemListElement": [{% for article in articles %}{% if forloop.counter <= 10 %}{% if not forloop.first %},{% endif %}
-            {"@type": "ListItem", "position": {{ forloop.counter }}, "url": "{{ site_url }}/article/{{ article.slug }}/", "name": "{{ article.title|escapejs }}"}{% endif %}{% endfor %}
-        ]
-    }
 }]
 </script>
+<style>
+/* ── Welcome Hero (authenticated only) ─────────────────────── */
+.user-hero {
+    grid-column: 1 / -1;
+    background: linear-gradient(135deg, #0f172a 0%, #1e1b4b 50%, #1e3a5f 100%);
+    border-radius: var(--radius-lg);
+    padding: 32px 36px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+    position: relative;
+    overflow: hidden;
+    margin-bottom: 4px;
+}
+.user-hero::before {
+    content: '';
+    position: absolute;
+    top: -80px; left: -80px;
+    width: 300px; height: 300px;
+    background: radial-gradient(circle, rgba(99,102,241,.2) 0%, transparent 70%);
+    border-radius: 50%;
+    animation: heroGlow 8s ease-in-out infinite;
+}
+@keyframes heroGlow {
+    0%,100%{transform:translate(0,0) scale(1)}
+    50%{transform:translate(20px,15px) scale(1.2)}
+}
+.user-hero-left { position: relative; z-index: 2; }
+.user-hero-greeting {
+    font-size: .85rem; color: #94a3b8; margin-bottom: 6px; font-weight: 500;
+    text-transform: uppercase; letter-spacing: .08em;
+}
+.user-hero-name {
+    font-size: 1.9rem; font-weight: 800; color: #fff;
+    letter-spacing: -.03em; margin-bottom: 10px; line-height: 1.15;
+}
+.user-hero-name span {
+    background: linear-gradient(90deg, #60a5fa, #a78bfa);
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+.user-hero-sub { font-size: .9rem; color: #94a3b8; line-height: 1.5; }
+.user-hero-right { position: relative; z-index: 2; display: flex; gap: 14px; flex-shrink: 0; }
+.user-stat {
+    background: rgba(255,255,255,.06);
+    border: 1px solid rgba(255,255,255,.09);
+    border-radius: 14px;
+    padding: 16px 22px;
+    text-align: center;
+    backdrop-filter: blur(8px);
+    min-width: 90px;
+    transition: background .25s, border-color .25s;
+}
+.user-stat:hover { background: rgba(255,255,255,.1); border-color: rgba(99,102,241,.3); }
+.user-stat a { text-decoration: none; display: block; }
+.user-stat-num { font-size: 1.6rem; font-weight: 800; color: #fff; line-height: 1; margin-bottom: 4px; }
+.user-stat-label { font-size: .72rem; color: #94a3b8; text-transform: uppercase; letter-spacing: .07em; }
+
+@media (max-width: 640px) {
+    .user-hero { flex-direction: column; padding: 24px 20px; }
+    .user-hero-right { gap: 10px; width: 100%; }
+    .user-stat { flex: 1; min-width: 0; padding: 12px 14px; }
+    .user-hero-name { font-size: 1.5rem; }
+}
+
+/* ── Category rail ─────────────────────────────────────────── */
+.category-rail {
+    grid-column: 1 / -1;
+    display: flex; gap: 10px;
+    overflow-x: auto;
+    padding-bottom: 4px;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    margin-bottom: 4px;
+}
+.category-rail::-webkit-scrollbar { display: none; }
+.cat-chip {
+    display: inline-flex; align-items: center; gap: 7px;
+    padding: 8px 18px;
+    border-radius: 100px;
+    font-size: .82rem; font-weight: 600;
+    white-space: nowrap; cursor: pointer;
+    text-decoration: none;
+    border: 1.5px solid var(--border);
+    background: var(--card-bg);
+    color: var(--text);
+    transition: all .2s;
+    flex-shrink: 0;
+}
+.cat-chip:hover, .cat-chip.active {
+    background: var(--primary);
+    color: #fff;
+    border-color: var(--primary);
+    box-shadow: 0 3px 12px rgba(37,99,235,.25);
+}
+
+/* ── Featured strip (authenticated only) ───────────────────── */
+.featured-strip {
+    grid-column: 1 / -1;
+    margin-bottom: 4px;
+}
+.featured-strip-title {
+    font-size: .75rem; font-weight: 700; text-transform: uppercase;
+    letter-spacing: .1em; color: var(--text-muted);
+    margin-bottom: 14px;
+    display: flex; align-items: center; gap: 8px;
+}
+.featured-strip-title::after {
+    content: ''; flex: 1; height: 1px; background: var(--border);
+}
+.featured-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr;
+    gap: 14px;
+}
+.featured-card {
+    position: relative; overflow: hidden;
+    border-radius: var(--radius-lg);
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    min-height: 220px;
+    display: flex; flex-direction: column; justify-content: flex-end;
+    transition: transform .25s, box-shadow .25s;
+    text-decoration: none;
+}
+.featured-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-lg); }
+.featured-card-img {
+    position: absolute; inset: 0;
+    width: 100%; height: 100%;
+    object-fit: cover;
+    filter: brightness(var(--img-brightness));
+    transition: transform .4s ease;
+}
+.featured-card:hover .featured-card-img { transform: scale(1.05); }
+.featured-card-overlay {
+    position: absolute; inset: 0;
+    background: linear-gradient(to top, rgba(0,0,0,.85) 0%, rgba(0,0,0,.3) 55%, transparent 100%);
+}
+.featured-card-body {
+    position: relative; z-index: 2;
+    padding: 18px 20px;
+}
+.featured-card-pub {
+    display: inline-flex; align-items: center; gap: 5px;
+    font-size: .72rem; font-weight: 700;
+    background: rgba(37,99,235,.85); color: #fff;
+    padding: 3px 10px; border-radius: 20px;
+    margin-bottom: 8px; letter-spacing: .03em;
+}
+.featured-card-title {
+    font-size: 1rem; font-weight: 700; color: #fff;
+    line-height: 1.35; margin-bottom: 6px;
+}
+.featured-card:first-child .featured-card-title { font-size: 1.25rem; }
+.featured-card-meta { font-size: .72rem; color: rgba(255,255,255,.65); }
+
+/* Hot badge */
+.hot-badge {
+    position: absolute; top: 14px; right: 14px; z-index: 3;
+    background: linear-gradient(135deg, #ef4444, #f97316);
+    color: #fff; font-size: .7rem; font-weight: 800;
+    padding: 4px 10px; border-radius: 20px;
+    letter-spacing: .05em; text-transform: uppercase;
+    box-shadow: 0 2px 10px rgba(239,68,68,.4);
+}
+
+@media (max-width: 768px) {
+    .featured-grid { grid-template-columns: 1fr; }
+    .featured-card { min-height: 180px; }
+}
+@media (max-width: 480px) {
+    .featured-card { min-height: 160px; }
+}
+
+/* ── Section header ─────────────────────────────────────────── */
+.section-header {
+    display: flex; align-items: center; justify-content: space-between;
+    margin-bottom: 20px;
+}
+.section-header h2 {
+    font-size: 1.2rem; font-weight: 800;
+    color: var(--text); margin: 0;
+    letter-spacing: -.02em;
+}
+.section-header a {
+    font-size: .8rem; font-weight: 600; color: var(--primary);
+}
+
+/* ── Tag cloud (sidebar) ─────────────────────────────────────── */
+.tag-cloud { display: flex; flex-wrap: wrap; gap: 6px; }
+.tag-link {
+    display: inline-block;
+    padding: 4px 12px; border-radius: 20px;
+    font-size: .75rem; font-weight: 600;
+    background: var(--primary-light); color: var(--primary);
+    text-decoration: none; transition: all .2s;
+}
+.tag-link:hover { background: var(--primary); color: #fff; }
+
+/* ── Sidebar user card (authenticated) ─────────────────────── */
+.sidebar-user-card {
+    background: linear-gradient(135deg, #1e1b4b, #1e3a5f);
+    border-radius: var(--radius);
+    padding: 20px;
+    margin-bottom: 16px;
+    color: #fff;
+}
+.sidebar-user-avatar {
+    width: 48px; height: 48px; border-radius: 50%;
+    background: linear-gradient(135deg, #7c3aed, #2563eb);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.3rem; font-weight: 800; color: #fff;
+    margin-bottom: 12px;
+    box-shadow: 0 3px 12px rgba(124,58,237,.4);
+}
+.sidebar-user-name { font-size: 1rem; font-weight: 700; margin-bottom: 2px; }
+.sidebar-user-sub  { font-size: .75rem; color: #94a3b8; margin-bottom: 14px; }
+.sidebar-user-actions { display: flex; flex-direction: column; gap: 6px; }
+.sidebar-user-btn {
+    display: block; width: 100%;
+    padding: 8px 14px; border-radius: 8px; text-align: center;
+    font-size: .8rem; font-weight: 600; text-decoration: none;
+    transition: all .2s;
+}
+.sidebar-user-btn.primary {
+    background: rgba(255,255,255,.12); color: #e2e8f0;
+    border: 1px solid rgba(255,255,255,.12);
+}
+.sidebar-user-btn.primary:hover { background: rgba(255,255,255,.2); color: #fff; }
+.sidebar-user-btn.secondary {
+    background: transparent; color: #94a3b8;
+    border: 1px solid rgba(255,255,255,.06);
+}
+.sidebar-user-btn.secondary:hover { color: #e2e8f0; border-color: rgba(255,255,255,.15); }
+</style>
 {% endblock %}
 
 {% block content %}
+
+{% if user.is_authenticated %}
+<!-- ── Welcome Hero ── -->
+<div class="user-hero">
+    <div class="user-hero-left">
+        <div class="user-hero-greeting">Welcome back</div>
+        <div class="user-hero-name">
+            Hello, <span>{{ user.username }}</span>
+        </div>
+        <div class="user-hero-sub">
+            Discover {{ total_articles }} articles across Tech, Health, Finance, Travel &amp; more
+        </div>
+    </div>
+    <div class="user-hero-right">
+        <div class="user-stat">
+            <div class="user-stat-num">{{ total_articles }}</div>
+            <div class="user-stat-label">Articles</div>
+        </div>
+        <div class="user-stat">
+            <a href="{% url 'blog:user_bookmarks' %}">
+                <div class="user-stat-num">{{ bookmark_count }}</div>
+                <div class="user-stat-label">Bookmarks</div>
+            </a>
+        </div>
+        <div class="user-stat">
+            <div class="user-stat-num">{{ publications|length }}</div>
+            <div class="user-stat-label">Topics</div>
+        </div>
+    </div>
+</div>
+{% endif %}
+
+<!-- ── Category rail ── -->
+<div class="category-rail">
+    <a href="{% url 'blog:home' %}" class="cat-chip active">All</a>
+    {% for pub in publications %}
+    <a href="{% url 'blog:publication' pub.slug %}" class="cat-chip">
+        {{ pub.icon }} {{ pub.name }}
+    </a>
+    {% endfor %}
+    <a href="{% url 'blog:explore' %}" class="cat-chip">🔥 Trending</a>
+</div>
+
+{% if user.is_authenticated and featured_articles %}
+<!-- ── Featured / Trending (logged-in only) ── -->
+<div class="featured-strip">
+    <div class="featured-strip-title">Trending Now</div>
+    <div class="featured-grid">
+        {% for article in featured_articles %}
+        <a href="{% url 'blog:article' article.slug %}" class="featured-card">
+            {% if article.cover_image %}
+            <img class="featured-card-img"
+                 src="{{ article.cover_image }}"
+                 alt="{{ article.title }}"
+                 loading="{% if forloop.first %}eager{% else %}lazy{% endif %}"
+                 decoding="async" width="640" height="360">
+            {% endif %}
+            <div class="featured-card-overlay"></div>
+            {% if forloop.first %}<span class="hot-badge">Hot</span>{% endif %}
+            <div class="featured-card-body">
+                {% if article.publication %}
+                <div class="featured-card-pub">{{ article.publication.icon }} {{ article.publication.name }}</div>
+                {% endif %}
+                <div class="featured-card-title">{{ article.title|truncatechars:80 }}</div>
+                <div class="featured-card-meta">
+                    ⏱️ {{ article.read_time }} min &nbsp;·&nbsp;
+                    👁️ {{ article.views|default:0 }} views
+                </div>
+            </div>
+        </a>
+        {% endfor %}
+    </div>
+</div>
+{% endif %}
+
+<!-- ── Articles section ── -->
 <section class="articles-list" aria-label="Articles">
-    <h2>Latest Articles</h2>
-    <p class="articles-count">{{ total_articles }} articles published</p>
+    <div class="section-header">
+        <h2>{% if user.is_authenticated %}Latest Articles{% else %}Latest Articles{% endif %}</h2>
+        <a href="{% url 'blog:explore' %}">View all →</a>
+    </div>
 
     <div class="articles-grid" id="articlesGrid">
         {% for article in articles %}
@@ -63,16 +349,31 @@
                      width="640" height="360">
             </div>
             <div class="card-body">
+                {% if article.publication %}
+                <div style="margin-bottom:6px;">
+                    <a href="{% url 'blog:publication' article.publication.slug %}"
+                       style="display:inline-flex;align-items:center;gap:4px;font-size:.72rem;font-weight:700;color:var(--primary);text-decoration:none;background:var(--primary-light);padding:2px 10px;border-radius:20px;">
+                        {{ article.publication.icon }} {{ article.publication.name }}
+                    </a>
+                </div>
+                {% endif %}
                 <h3><a href="{% url 'blog:article' article.slug %}">{{ article.title }}</a></h3>
                 <div class="article-meta">
-                    <time datetime="{{ article.published_at|date:'Y-m-d' }}">📅 {{ article.published_at|date:'Y-m-d' }}</time>
-                    <span class="read-time">⏱️ {{ article.read_time }} min</span>
+                    <time datetime="{{ article.published_at|date:'Y-m-d' }}">📅 {{ article.published_at|date:'M j, Y' }}</time>
+                    <span class="read-time">⏱️ {{ article.read_time }} min read</span>
                 </div>
-                {% if article.publication %}
-                <span class="pub-badge" style="font-size:.75rem;color:var(--primary);">{{ article.publication.icon }} {{ article.publication.name }}</span>
-                {% endif %}
-                <p class="article-excerpt">{{ article.meta_description|default:article.subtitle|truncatechars:160 }}</p>
-                <a href="{% url 'blog:article' article.slug %}" class="read-more">Read More</a>
+                <p class="article-excerpt">{{ article.meta_description|default:article.subtitle|truncatechars:140 }}</p>
+                <div style="display:flex;align-items:center;justify-content:space-between;margin-top:auto;">
+                    <a href="{% url 'blog:article' article.slug %}" class="read-more">Read More</a>
+                    {% if user.is_authenticated %}
+                    <button class="bm-btn" data-slug="{{ article.slug }}" data-title="{{ article.title|escapejs }}"
+                            title="Bookmark"
+                            style="background:none;border:1px solid var(--border);border-radius:8px;padding:5px 10px;cursor:pointer;font-size:.9rem;color:var(--text-muted);transition:all .2s;"
+                            onclick="toggleBookmark(this)">
+                        🔖
+                    </button>
+                    {% endif %}
+                </div>
             </div>
         </article>
         {% empty %}
@@ -86,7 +387,7 @@
             Load More Articles
         </button>
         <p id="loadMoreInfo" style="font-size:.85rem;color:var(--text-muted);margin-top:.5rem;">
-            Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}
+            Showing {{ articles|length }} of {{ total_articles }}
         </p>
     </div>
     {% endif %}
@@ -95,7 +396,7 @@
     <noscript>
     <nav class="pagination" aria-label="Page navigation">
         {% if page_obj.has_previous %}
-        <a href="?page={{ page_obj.previous_page_number }}" class="page-prev" aria-label="Previous page">← Prev</a>
+        <a href="?page={{ page_obj.previous_page_number }}" class="page-prev">← Prev</a>
         {% endif %}
         {% for num in page_obj.paginator.page_range %}
             {% if page_obj.number == num %}
@@ -109,17 +410,53 @@
             {% endif %}
         {% endfor %}
         {% if page_obj.has_next %}
-        <a href="?page={{ page_obj.next_page_number }}" class="page-next" aria-label="Next page">Next →</a>
+        <a href="?page={{ page_obj.next_page_number }}" class="page-next">Next →</a>
         {% endif %}
     </nav>
     </noscript>
     {% endif %}
 </section>
 
+<!-- ── Sidebar ── -->
 <aside class="sidebar">
+
+    {% if user.is_authenticated %}
+    <!-- User quick-access card -->
+    <div class="sidebar-user-card">
+        <div class="sidebar-user-avatar">{{ user.username|slice:":1"|upper }}</div>
+        <div class="sidebar-user-name">{{ user.username }}</div>
+        <div class="sidebar-user-sub">Member since {{ user.date_joined|date:"M Y" }}</div>
+        <div class="sidebar-user-actions">
+            <a href="{% url 'blog:user_bookmarks' %}" class="sidebar-user-btn primary">
+                📑 My Bookmarks{% if bookmark_count %} ({{ bookmark_count }}){% endif %}
+            </a>
+            <a href="{% url 'blog:explore' %}" class="sidebar-user-btn primary">
+                🔍 Explore All Topics
+            </a>
+            <a href="{% url 'blog:logout' %}" class="sidebar-user-btn secondary">Sign out</a>
+        </div>
+    </div>
+    {% else %}
+    <!-- Sign-up CTA -->
+    <div class="sidebar-section" style="background:linear-gradient(135deg,#eff6ff,#f5f3ff);border-color:#c7d2fe;">
+        <h3 style="color:#1e3a5f;margin-bottom:8px;">Join the community</h3>
+        <p style="font-size:.85rem;color:#475569;margin-bottom:14px;">
+            Create a free account to bookmark articles and get a personalised experience.
+        </p>
+        <a href="{% url 'blog:register' %}"
+           style="display:block;width:100%;padding:10px;background:linear-gradient(135deg,#2563eb,#7c3aed);color:#fff;text-align:center;border-radius:10px;font-weight:700;font-size:.88rem;text-decoration:none;">
+            Create Free Account
+        </a>
+        <a href="{% url 'blog:login' %}"
+           style="display:block;width:100%;padding:8px;text-align:center;font-size:.82rem;color:var(--primary);text-decoration:none;margin-top:6px;">
+            Already a member? Sign in
+        </a>
+    </div>
+    {% endif %}
+
     {% if popular_tags %}
     <div class="sidebar-section">
-        <h3 class="sidebar-title">Popular Topics</h3>
+        <h3 class="sidebar-title" style="font-size:.85rem;font-weight:700;margin-bottom:12px;">Popular Topics</h3>
         <div class="tag-cloud">
             {% for tag in popular_tags %}
             <a href="{% url 'blog:tag' tag.name %}" class="tag-link">{{ tag.name }}</a>
@@ -127,53 +464,104 @@
         </div>
     </div>
     {% endif %}
+
     {% if publications %}
     <div class="sidebar-section">
-        <h3 class="sidebar-title">Publications</h3>
-        <ul style="list-style:none;padding:0;">
+        <h3 style="font-size:.85rem;font-weight:700;margin-bottom:12px;">Publications</h3>
+        <ul style="list-style:none;padding:0;display:flex;flex-direction:column;gap:4px;">
             {% for pub in publications %}
-            <li style="margin-bottom:.5rem;"><a href="{% url 'blog:publication' pub.slug %}" style="color:var(--text);text-decoration:none;">{{ pub.icon }} {{ pub.name }}</a></li>
+            <li>
+                <a href="{% url 'blog:publication' pub.slug %}"
+                   style="display:flex;align-items:center;gap:8px;padding:7px 10px;border-radius:8px;color:var(--text);text-decoration:none;font-size:.85rem;font-weight:500;transition:background .2s;"
+                   onmouseover="this.style.background='var(--bg-light)'"
+                   onmouseout="this.style.background='transparent'">
+                    <span style="font-size:1.1rem;">{{ pub.icon }}</span>
+                    <span>{{ pub.name }}</span>
+                </a>
+            </li>
             {% endfor %}
         </ul>
     </div>
     {% endif %}
+
+    <!-- Newsletter -->
+    <div class="sidebar-section" style="background:var(--bg-warm);border-color:var(--accent);">
+        <h3 style="font-size:.88rem;font-weight:700;margin-bottom:6px;">Weekly Newsletter</h3>
+        <p style="font-size:.8rem;color:var(--text-light);margin-bottom:12px;line-height:1.5;">
+            Get the best articles delivered every week.
+        </p>
+        <form onsubmit="return subscribeNewsletter(event, this)">
+            {% csrf_token %}
+            <input type="email" name="email" placeholder="your@email.com" required
+                   style="width:100%;padding:9px 12px;border:1px solid var(--border);border-radius:8px;font-size:.83rem;background:var(--bg);color:var(--text);margin-bottom:8px;outline:none;">
+            <button type="submit"
+                    style="width:100%;padding:9px;background:var(--accent);color:#fff;border:none;border-radius:8px;font-weight:700;font-size:.83rem;cursor:pointer;">
+                Subscribe
+            </button>
+            <p id="sidebarNlMsg" style="display:none;font-size:.78rem;margin-top:6px;"></p>
+        </form>
+    </div>
 </aside>
 
 {% block extra_js %}
 <script>
 var nextPage = {% if page_obj.has_next %}{{ page_obj.next_page_number }}{% else %}null{% endif %};
+
 function loadMoreArticles() {
     if (!nextPage) return;
     var btn = document.getElementById('loadMoreBtn');
-    btn.disabled = true;
-    btn.textContent = 'Loading...';
+    btn.disabled = true; btn.textContent = 'Loading…';
     fetch('/api/articles/?page=' + nextPage)
-    .then(function(r) { return r.json(); })
-    .then(function(d) {
+    .then(function(r){return r.json();})
+    .then(function(d){
         var grid = document.getElementById('articlesGrid');
-        d.articles.forEach(function(a) {
+        d.articles.forEach(function(a){
             var card = document.createElement('article');
             card.className = 'article-card';
-            card.innerHTML = '<div class="card-image"><img src="' + (a.cover_image || '') + '" alt="' + a.title.replace(/"/g, '&quot;') + '" loading="lazy" width="640" height="360"></div>' +
-                '<div class="card-body"><h3><a href="/article/' + a.slug + '/">' + a.title + '</a></h3>' +
-                '<div class="article-meta"><time datetime="' + a.published_at + '">📅 ' + a.published_at + '</time><span class="read-time">⏱️ ' + a.read_time + ' min</span></div>' +
-                (a.publication_name ? '<span class="pub-badge" style="font-size:.75rem;color:var(--primary);">' + a.publication_icon + ' ' + a.publication_name + '</span>' : '') +
-                '<p class="article-excerpt">' + (a.meta_description || '').substring(0, 160) + '</p>' +
-                '<a href="/article/' + a.slug + '/" class="read-more">Read More</a></div>';
+            card.innerHTML =
+                '<div class="card-image"><img src="'+(a.cover_image||'')+'" alt="'+a.title.replace(/"/g,'&quot;')+'" loading="lazy" width="640" height="360"></div>'+
+                '<div class="card-body">'+
+                (a.publication_name?'<div style="margin-bottom:6px;"><a href="/pub/'+a.publication_slug+'/" style="display:inline-flex;align-items:center;gap:4px;font-size:.72rem;font-weight:700;color:var(--primary);text-decoration:none;background:var(--primary-light);padding:2px 10px;border-radius:20px;">'+a.publication_icon+' '+a.publication_name+'</a></div>':'')+
+                '<h3><a href="/article/'+a.slug+'/">'+a.title+'</a></h3>'+
+                '<div class="article-meta"><time>📅 '+a.published_at+'</time><span class="read-time">⏱️ '+a.read_time+' min read</span></div>'+
+                '<p class="article-excerpt">'+(a.meta_description||'').substring(0,140)+'</p>'+
+                '<a href="/article/'+a.slug+'/" class="read-more">Read More</a>'+
+                '</div>';
             grid.appendChild(card);
         });
         if (d.has_next) {
             nextPage++;
-            btn.disabled = false;
-            btn.textContent = 'Load More Articles';
+            btn.disabled = false; btn.textContent = 'Load More Articles';
         } else {
             document.getElementById('loadMoreWrap').innerHTML = '<p style="color:var(--text-muted);font-size:.9rem;">All articles loaded ✓</p>';
         }
     })
-    .catch(function() {
-        btn.disabled = false;
-        btn.textContent = 'Load More Articles';
-    });
+    .catch(function(){btn.disabled=false;btn.textContent='Load More Articles';});
+}
+
+function toggleBookmark(btn) {
+    var slug = btn.dataset.slug;
+    var title = btn.dataset.title;
+    var csrf = document.querySelector('[name=csrfmiddlewaretoken]');
+    if (!csrf) return;
+    var fd = new FormData();
+    fd.append('csrfmiddlewaretoken', csrf.value);
+    fetch('/article/'+slug+'/bookmark/', {method:'POST', body:fd})
+    .then(function(r){return r.json();})
+    .then(function(d){
+        if (d.bookmarked) {
+            btn.style.background = 'var(--primary-light)';
+            btn.style.borderColor = 'var(--primary)';
+            btn.style.color = 'var(--primary)';
+            btn.title = 'Bookmarked';
+        } else {
+            btn.style.background = 'none';
+            btn.style.borderColor = 'var(--border)';
+            btn.style.color = 'var(--text-muted)';
+            btn.title = 'Bookmark';
+        }
+    })
+    .catch(function(){});
 }
 </script>
 {% endblock %}
