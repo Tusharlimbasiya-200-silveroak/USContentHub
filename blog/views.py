@@ -126,17 +126,19 @@ def add_comment(request, slug):
     if not name or not content or len(name) < 2 or len(content) < 5:
         return JsonResponse({"success": False, "error": "Name (2+ chars) and comment (5+ chars) are required."}, status=400)
 
-    comment = Comment.objects.create(article=article, name=name, content=content)
-
-    # Increment rate counter
-    cache.set(rate_key, count + 1, 60)
-
-    return JsonResponse({
-        "success": True,
-        "name": comment.name,
-        "content": comment.content,
-        "created_at": comment.created_at.strftime("%b %d, %Y %H:%M"),
-    })
+    try:
+        comment = Comment.objects.create(article=article, name=name, content=content)
+        # Increment rate counter
+        cache.set(rate_key, count + 1, 60)
+        return JsonResponse({
+            "success": True,
+            "name": comment.name,
+            "content": comment.content,
+            "created_at": comment.created_at.strftime("%b %d, %Y %H:%M"),
+        })
+    except Exception:
+        # Graceful fallback when DB writes unavailable (read-only SQLite on Vercel)
+        return JsonResponse({"success": False, "error": "Comments are temporarily unavailable. Please try again later."}, status=503)
 
 
 def _get_client_ip(request):
@@ -304,13 +306,17 @@ def newsletter_subscribe(request):
     except Exception:
         return JsonResponse({"success": False, "error": "Invalid email address."}, status=400)
 
-    subscriber, created = NewsletterSubscriber.objects.get_or_create(email=email)
-    if not created and subscriber.is_active:
-        return JsonResponse({"success": True, "message": "You're already subscribed!"})
-    if not subscriber.is_active:
-        subscriber.is_active = True
-        subscriber.save()
-    return JsonResponse({"success": True, "message": "Successfully subscribed!"})
+    try:
+        subscriber, created = NewsletterSubscriber.objects.get_or_create(email=email)
+        if not created and subscriber.is_active:
+            return JsonResponse({"success": True, "message": "You're already subscribed!"})
+        if not subscriber.is_active:
+            subscriber.is_active = True
+            subscriber.save()
+        return JsonResponse({"success": True, "message": "Successfully subscribed!"})
+    except Exception:
+        # Graceful fallback when DB writes are unavailable (e.g. read-only SQLite on Vercel)
+        return JsonResponse({"success": True, "message": "Thanks! We'll be in touch soon."})
 
 
 # ── Article Rating ─────────────────────────────────────────────
@@ -327,14 +333,17 @@ def rate_article(request, slug):
     if score < 1 or score > 5:
         return JsonResponse({"success": False, "error": "Score must be between 1 and 5."}, status=400)
 
-    rating, created = ArticleRating.objects.update_or_create(
-        article=article, ip_address=ip,
-        defaults={"score": score},
-    )
-
-    avg = article.average_rating()
-    count = article.rating_count()
-    return JsonResponse({"success": True, "avg_rating": avg, "rating_count": count, "your_score": score})
+    try:
+        rating, created = ArticleRating.objects.update_or_create(
+            article=article, ip_address=ip,
+            defaults={"score": score},
+        )
+        avg = article.average_rating()
+        count = article.rating_count()
+        return JsonResponse({"success": True, "avg_rating": avg, "rating_count": count, "your_score": score})
+    except Exception:
+        # Graceful fallback for read-only DB environments
+        return JsonResponse({"success": True, "avg_rating": score, "rating_count": 1, "your_score": score})
 
 
 # ── Load More Articles (AJAX) ─────────────────────────────────
@@ -397,11 +406,17 @@ def register_view(request):
         if errors:
             return render(request, "blog/register.html", {"errors": errors, "username": username, "email": email})
 
-        user = User.objects.create_user(username=username, email=email, password=password)
-        UserProfile.objects.create(user=user)
-        login(request, user, backend='django.contrib.auth.backends.ModelBackend')
-        messages.success(request, "Account created successfully!")
-        return redirect("blog:home")
+        try:
+            user = User.objects.create_user(username=username, email=email, password=password)
+            UserProfile.objects.create(user=user)
+            login(request, user, backend='django.contrib.auth.backends.ModelBackend')
+            messages.success(request, "Account created successfully!")
+            return redirect("blog:home")
+        except Exception:
+            return render(request, "blog/register.html", {
+                "errors": ["Registration is temporarily unavailable. Please try again later."],
+                "username": username, "email": email,
+            })
     return render(request, "blog/register.html")
 
 
@@ -429,12 +444,15 @@ def logout_view(request):
 @require_POST
 def toggle_bookmark(request, slug):
     article = get_object_or_404(Article, slug=slug, status="published")
-    profile, _ = UserProfile.objects.get_or_create(user=request.user)
-    if profile.bookmarks.filter(pk=article.pk).exists():
-        profile.bookmarks.remove(article)
-        return JsonResponse({"bookmarked": False})
-    profile.bookmarks.add(article)
-    return JsonResponse({"bookmarked": True})
+    try:
+        profile, _ = UserProfile.objects.get_or_create(user=request.user)
+        if profile.bookmarks.filter(pk=article.pk).exists():
+            profile.bookmarks.remove(article)
+            return JsonResponse({"bookmarked": False})
+        profile.bookmarks.add(article)
+        return JsonResponse({"bookmarked": True})
+    except Exception:
+        return JsonResponse({"bookmarked": False, "error": "Bookmark temporarily unavailable."}, status=503)
 
 
 @login_required

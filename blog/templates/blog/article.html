@@ -2,11 +2,11 @@
 
 {% block title %}{{ article.title }} — USA Content Hub{% endblock %}
 {% block description %}{{ article.meta_description|default:article.subtitle|truncatechars:160 }}{% endblock %}
-{% block canonical %}https://tusharlimbasiya200.pythonanywhere.com/article/{{ article.slug }}/{% endblock %}
+{% block canonical %}{{ site_url }}/article/{{ article.slug }}/{% endblock %}
 {% block og_title %}{{ article.title }}{% endblock %}
 {% block og_description %}{{ article.meta_description|default:article.subtitle|truncatechars:200 }}{% endblock %}
 {% block og_type %}article{% endblock %}
-{% block og_url %}https://tusharlimbasiya200.pythonanywhere.com/article/{{ article.slug }}/{% endblock %}
+{% block og_url %}{{ site_url }}/article/{{ article.slug }}/{% endblock %}
 {% block og_image %}{{ article.cover_image }}{% endblock %}
 {% block twitter_title %}{{ article.title }}{% endblock %}
 {% block twitter_description %}{{ article.meta_description|default:article.subtitle|truncatechars:200 }}{% endblock %}
@@ -24,7 +24,7 @@
     "@type": "Article",
     "mainEntityOfPage": {
         "@type": "WebPage",
-        "@id": "https://tusharlimbasiya200.pythonanywhere.com/article/{{ article.slug }}/"
+        "@id": "{{ site_url }}/article/{{ article.slug }}/"
     },
     "headline": "{{ article.title|escapejs }}",
     "description": "{{ article.meta_description|default:article.subtitle|truncatechars:200|escapejs }}",
@@ -41,12 +41,12 @@
     "author": {
         "@type": "Organization",
         "name": "USA Content Hub",
-        "url": "https://tusharlimbasiya200.pythonanywhere.com/"
+        "url": "{{ site_url }}/"
     },
     "publisher": {
         "@type": "Organization",
         "name": "USA Content Hub",
-        "url": "https://tusharlimbasiya200.pythonanywhere.com/",
+        "url": "{{ site_url }}/",
         "logo": {
             "@type": "ImageObject",
             "url": "https://picsum.photos/seed/usacontenthub/600/60"
@@ -65,8 +65,8 @@
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
     "itemListElement": [
-        {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://tusharlimbasiya200.pythonanywhere.com/"}
-        {% if article.publication %},{"@type": "ListItem", "position": 2, "name": "{{ article.publication.name|escapejs }}", "item": "https://tusharlimbasiya200.pythonanywhere.com/pub/{{ article.publication.slug }}/"}
+        {"@type": "ListItem", "position": 1, "name": "Home", "item": "{{ site_url }}/"}
+        {% if article.publication %},{"@type": "ListItem", "position": 2, "name": "{{ article.publication.name|escapejs }}", "item": "{{ site_url }}/pub/{{ article.publication.slug }}/"}
         ,{"@type": "ListItem", "position": 3, "name": "{{ article.title|truncatechars:60|escapejs }}"}
         {% else %},{"@type": "ListItem", "position": 2, "name": "{{ article.title|truncatechars:60|escapejs }}"}
         {% endif %}

@@ -33,3 +33,4 @@ media/
 
 # Temp files
 *.tmp
+.vercel
