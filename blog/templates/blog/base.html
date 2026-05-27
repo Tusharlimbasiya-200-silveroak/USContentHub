@@ -40,7 +40,7 @@
     <meta name="twitter:image" content="{% block twitter_image %}https://picsum.photos/seed/usacontenthub/1200/630{% endblock %}">
     <!-- Pinterest domain verification -->
     <meta name="p:domain_verify" content="0fd9e315649e6a279c78a137c7bf9443"/>
-    <link rel="stylesheet" href="{% static 'blog/style.css' %}?v=30">
+    <link rel="stylesheet" href="{% static 'blog/style.css' %}?v=31">
     <style>
     @media print {
         .platform-bar, .site-footer, .back-to-top, .reading-progress,
@@ -109,11 +109,11 @@
 
             <!-- ── Nav links ── -->
             <div class="platform-links" role="navigation">
-                <a href="{% url 'blog:home' %}"        class="nav-link">Home</a>
-                <a href="{% url 'blog:explore' %}"     class="nav-link">Explore</a>
-                <a href="{% url 'blog:about' %}"       class="nav-link">About</a>
-                <a href="{% url 'blog:contact' %}"     class="nav-link">Contact</a>
-                <a href="{% url 'blog:reading_list' %}" class="nav-link reading-list-nav" title="Reading List">
+                <a href="{% url 'blog:home' %}"    class="nav-link">Home</a>
+                <a href="{% url 'blog:explore' %}" class="nav-link">Explore</a>
+                <a href="{% url 'blog:about' %}"   class="nav-link">About</a>
+                <a href="{% url 'blog:contact' %}" class="nav-link nav-secondary-item">Contact</a>
+                <a href="{% url 'blog:reading_list' %}" class="nav-link nav-secondary-item reading-list-nav" title="Reading List">
                     📑 <span class="rl-count" id="rlNavCount"></span>
                 </a>
             </div>
