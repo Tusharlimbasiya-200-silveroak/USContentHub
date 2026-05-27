@@ -38,7 +38,7 @@
     <meta name="twitter:title" content="{% block twitter_title %}USA Content Hub{% endblock %}">
     <meta name="twitter:description" content="{% block twitter_description %}Tech, Health, Finance, Travel, Recipes & News{% endblock %}">
     <meta name="twitter:image" content="{% block twitter_image %}https://picsum.photos/seed/usacontenthub/1200/630{% endblock %}">
-    <link rel="stylesheet" href="{% static 'blog/style.css' %}?v=27">
+    <link rel="stylesheet" href="{% static 'blog/style.css' %}?v=28">
     <style>
     @media print {
         .platform-bar, .site-footer, .back-to-top, .reading-progress,
@@ -102,10 +102,10 @@
             <span class="auth-links">
                 {% if user.is_authenticated %}
                 <a href="{% url 'blog:user_bookmarks' %}" title="My Bookmarks">📑</a>
-                <a href="{% url 'account_logout' %}">Logout</a>
+                <a href="{% url 'blog:logout' %}">Logout</a>
                 {% else %}
-                <a href="{% url 'account_login' %}">Login</a>
-                <a href="{% url 'account_signup' %}">Register</a>
+                <a href="{% url 'blog:login' %}">Login</a>
+                <a href="{% url 'blog:register' %}">Register</a>
                 {% endif %}
             </span>
         </div>
