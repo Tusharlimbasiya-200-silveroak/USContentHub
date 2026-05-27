@@ -55,7 +55,10 @@ class ArticleDetailView(DetailView):
 
     def get(self, request, *args, **kwargs):
         response = super().get(request, *args, **kwargs)
-        Article.objects.filter(pk=self.object.pk).update(views=F("views") + 1)
+        try:
+            Article.objects.filter(pk=self.object.pk).update(views=F("views") + 1)
+        except Exception:
+            pass  # Read-only filesystem (e.g. Vercel) — view count increment is best-effort
         return response
 
     def get_context_data(self, **kwargs):

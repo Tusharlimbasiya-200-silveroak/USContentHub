@@ -191,6 +191,12 @@ LOGIN_URL = '/accounts/login/'
 LOGOUT_URL = '/accounts/logout/'
 
 # ============================================================
+# SESSIONS — use cache-backed sessions to avoid DB writes on
+# read-only file systems (e.g. Vercel serverless).
+# ============================================================
+SESSION_ENGINE = 'django.contrib.sessions.backends.cache'
+
+# ============================================================
 # CACHING — Redis in production (set REDIS_URL), LocMemCache for dev/tests
 # Example: REDIS_URL=redis://localhost:6379/0
 # Note: LocMemCache is process-local; on multi-worker deployments each
