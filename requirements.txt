@@ -7,6 +7,5 @@ pyjwt>=2.0
 gunicorn>=21.2
 # Static file serving (production)
 whitenoise>=6.7
-# Database backends — install the one matching your server
-psycopg2-binary>=2.9       # PostgreSQL (production / local postgres)
-mysqlclient>=2.1           # MySQL / MariaDB (PythonAnywhere free tier)
+# PostgreSQL (Vercel + Neon.tech / any PostgreSQL host)
+psycopg2-binary>=2.9

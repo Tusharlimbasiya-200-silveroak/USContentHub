@@ -26,7 +26,7 @@ Thumbs.db
 # db.sqlite3 is included in git — it carries pre-loaded article data for deployment
 
 # Static files collected by collectstatic
-staticfiles/
+# staticfiles/ — included in git so Vercel can serve /static/ routes
 
 # Media uploads (user content)
 media/
