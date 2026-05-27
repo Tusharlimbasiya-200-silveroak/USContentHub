@@ -20,6 +20,10 @@ urlpatterns = [
     path("reading-list/", views.ReadingListView.as_view(), name="reading_list"),
     path("newsletter/subscribe/", views.newsletter_subscribe, name="newsletter_subscribe"),
     path("api/articles/", views.load_more_articles, name="load_more"),
+    # ── Custom Auth (takes precedence over allauth for these paths) ──
+    path("accounts/register/", views.register_view, name="register"),
+    path("accounts/login/", views.login_view, name="login"),
+    path("accounts/logout/", views.logout_view, name="logout"),
     path("accounts/bookmarks/", views.user_bookmarks, name="user_bookmarks"),
     path("feed/rss/", views.ArticleRSSFeed(), name="rss_feed"),
     path("feed/atom/", views.ArticleAtomFeed(), name="atom_feed"),

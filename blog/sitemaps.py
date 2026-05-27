@@ -23,7 +23,7 @@ class PublicationSitemap(Sitemap):
     priority = 0.7
 
     def items(self):
-        return Publication.objects.all()
+        return Publication.objects.all().order_by("slug")
 
     def location(self, obj):
         return f"/pub/{obj.slug}/"
@@ -34,7 +34,7 @@ class TagSitemap(Sitemap):
     priority = 0.5
 
     def items(self):
-        return Tag.objects.all()
+        return Tag.objects.all().order_by("name")
 
     def location(self, obj):
         return f"/tag/{obj.name}/"

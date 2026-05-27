@@ -899,7 +899,7 @@ class CachingTest(BaseTestCase):
 
     def test_article_detail_caches_related(self):
         self.client.get(reverse("blog:article", args=["test-article-one"]))
-        self.assertIsNotNone(cache.get(f"related_articles_{self.article.pk}"))
+        self.assertIsNotNone(cache.get(f"related_articles_v2_{self.article.pk}"))
 
 
 # ============================================================

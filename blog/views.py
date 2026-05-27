@@ -396,7 +396,7 @@ def register_view(request):
 
         user = User.objects.create_user(username=username, email=email, password=password)
         UserProfile.objects.create(user=user)
-        login(request, user)
+        login(request, user, backend='django.contrib.auth.backends.ModelBackend')
         messages.success(request, "Account created successfully!")
         return redirect("blog:home")
     return render(request, "blog/register.html")

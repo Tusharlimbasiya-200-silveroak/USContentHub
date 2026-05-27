@@ -29,6 +29,16 @@ CSRF_TRUSTED_ORIGINS = [
     os.environ.get('DJANGO_CSRF_ORIGINS', 'http://localhost:8000,http://127.0.0.1:8000').split(',')
 ]
 
+# ── Guard: fail loudly if insecure default key is used in production ──
+if not DEBUG and SECRET_KEY == 'django-insecure-dev-only-change-in-production':
+    raise ValueError(
+        "DJANGO_SECRET_KEY environment variable must be set to a strong random "
+        "value in production. Never use the insecure development default."
+    )
+
+# Site URL — used in robots.txt, sitemaps, and email links
+SITE_URL = os.environ.get('SITE_URL', 'http://localhost:8000').rstrip('/')
+
 
 # Application definition
 
@@ -84,15 +94,52 @@ TEMPLATES = [
 WSGI_APPLICATION = 'writeflow.wsgi.application'
 
 
-# Database
-# https://docs.djangoproject.com/en/6.0/ref/settings/#databases
+# ============================================================
+# DATABASE — PostgreSQL in production, SQLite in development
+# Set DATABASE_URL env var to switch:
+#   postgres://user:pass@host:5432/dbname   → PostgreSQL
+#   mysql://user:pass@host:3306/dbname      → MySQL (PythonAnywhere free tier)
+#   (not set)                               → SQLite (local dev / tests)
+# ============================================================
+_DATABASE_URL = os.environ.get('DATABASE_URL', '')
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+if _DATABASE_URL.startswith('postgres'):
+    import urllib.parse as _urlparse
+    _parsed = _urlparse.urlparse(_DATABASE_URL)
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.postgresql',
+            'NAME': _parsed.path.lstrip('/'),
+            'USER': _parsed.username or '',
+            'PASSWORD': _parsed.password or '',
+            'HOST': _parsed.hostname or 'localhost',
+            'PORT': _parsed.port or 5432,
+            'CONN_MAX_AGE': 600,           # keep connections alive for 10 min
+            'OPTIONS': {'sslmode': 'prefer'},
+        }
     }
-}
+elif _DATABASE_URL.startswith('mysql'):
+    import urllib.parse as _urlparse
+    _parsed = _urlparse.urlparse(_DATABASE_URL)
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.mysql',
+            'NAME': _parsed.path.lstrip('/'),
+            'USER': _parsed.username or '',
+            'PASSWORD': _parsed.password or '',
+            'HOST': _parsed.hostname or 'localhost',
+            'PORT': _parsed.port or 3306,
+            'CONN_MAX_AGE': 600,
+        }
+    }
+else:
+    # Development / test fallback — SQLite
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': BASE_DIR / 'db.sqlite3',
+        }
+    }
 
 
 # Password validation
@@ -132,24 +179,46 @@ USE_TZ = True
 STATIC_URL = 'static/'
 STATIC_ROOT = BASE_DIR / 'staticfiles'
 
+# Media files (user-uploaded content)
+MEDIA_URL = '/media/'
+MEDIA_ROOT = BASE_DIR / 'media'
+
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 LOGIN_URL = '/accounts/login/'
 LOGOUT_URL = '/accounts/logout/'
 
 # ============================================================
-# CACHING — LocMemCache for single-server; switch to Redis for multi-server
+# CACHING — Redis in production (set REDIS_URL), LocMemCache for dev/tests
+# Example: REDIS_URL=redis://localhost:6379/0
+# Note: LocMemCache is process-local; on multi-worker deployments each
+# worker has its own cache. Switch to Redis for consistency.
 # ============================================================
-CACHES = {
-    'default': {
-        'BACKEND': 'django.core.cache.backends.locmem.LocMemCache',
-        'LOCATION': 'uch-cache-v1',
-        'TIMEOUT': 300,
-        'OPTIONS': {
-            'MAX_ENTRIES': 1000,
-        },
+_REDIS_URL = os.environ.get('REDIS_URL', '')
+
+if _REDIS_URL:
+    CACHES = {
+        'default': {
+            'BACKEND': 'django.core.cache.backends.redis.RedisCache',
+            'LOCATION': _REDIS_URL,
+            'TIMEOUT': 300,
+            'OPTIONS': {
+                'MAX_ENTRIES': 1000,
+            },
+        }
     }
-}
+else:
+    # Development / test fallback — in-process memory cache
+    CACHES = {
+        'default': {
+            'BACKEND': 'django.core.cache.backends.locmem.LocMemCache',
+            'LOCATION': 'uch-cache-v1',
+            'TIMEOUT': 300,
+            'OPTIONS': {
+                'MAX_ENTRIES': 1000,
+            },
+        }
+    }
 
 # ============================================================
 # SECURITY SETTINGS — enforced in production

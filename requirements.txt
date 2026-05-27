@@ -3,3 +3,6 @@ pillow>=12.0
 django-allauth>=65.0
 cryptography>=48.0
 pyjwt>=2.0
+# Database backends — install the one matching your server
+psycopg2-binary>=2.9       # PostgreSQL (production / local postgres)
+mysqlclient>=2.1           # MySQL / MariaDB (PythonAnywhere free tier)
