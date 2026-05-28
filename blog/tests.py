@@ -1,4 +1,5 @@
 from django.contrib.auth.models import User
+from django.core import mail
 from django.core.cache import cache
 from django.test import Client, TestCase, override_settings
 from django.urls import reverse
@@ -1125,3 +1126,203 @@ class EdgeCaseTest(BaseTestCase):
         response = self.client.get(reverse("blog:article", args=["video-test"]))
         self.assertEqual(response.status_code, 200)
         self.assertContains(response, "youtube.com/embed/abc123")
+
+
+# ============================================================
+# CONTACT FORM SUBMIT TESTS
+# ============================================================
+_VALID_CONTACT = {
+    "name": "Test User",
+    "email": "tester@example.com",
+    "subject": "Testing contact form",
+    "message": "This is a test message long enough to pass validation.",
+}
+
+
+@override_settings(EMAIL_BACKEND="django.core.mail.backends.locmem.EmailBackend")
+class ContactSubmitViewTest(BaseTestCase):
+    """Tests for the contact_submit view (/contact/submit/)."""
+
+    URL = "/contact/submit/"
+
+    def setUp(self):
+        # Each test starts with a clean rate-limit cache
+        cache.clear()
+
+    # ── Happy path ──────────────────────────────────────────────
+    def test_valid_submission_returns_200(self):
+        response = self.client.post(self.URL, _VALID_CONTACT)
+        self.assertEqual(response.status_code, 200)
+        data = response.json()
+        self.assertTrue(data["success"])
+        self.assertIn("1–2 business days", data["message"])
+
+    def test_valid_submission_sends_two_emails(self):
+        self.client.post(self.URL, _VALID_CONTACT)
+        self.assertEqual(len(mail.outbox), 2)
+
+    def test_admin_email_subject_contains_sender_name(self):
+        self.client.post(self.URL, _VALID_CONTACT)
+        admin_mail = mail.outbox[0]
+        self.assertIn("Test User", admin_mail.subject)
+        self.assertIn("[Contact]", admin_mail.subject)
+
+    def test_confirmation_email_goes_to_sender(self):
+        self.client.post(self.URL, _VALID_CONTACT)
+        # Second email is the confirmation to the contact sender
+        confirm_mail = mail.outbox[1]
+        self.assertIn("tester@example.com", confirm_mail.to)
+
+    def test_confirmation_email_has_html_alternative(self):
+        self.client.post(self.URL, _VALID_CONTACT)
+        confirm_mail = mail.outbox[1]
+        self.assertTrue(
+            len(confirm_mail.alternatives) > 0,
+            "Confirmation email should have an HTML alternative.",
+        )
+
+    def test_admin_email_reply_to_is_sender(self):
+        self.client.post(self.URL, _VALID_CONTACT)
+        admin_mail = mail.outbox[0]
+        self.assertIn("tester@example.com", admin_mail.reply_to)
+
+    # ── URL helper ──────────────────────────────────────────────
+    def test_contact_submit_url_resolves(self):
+        self.assertEqual(reverse("blog:contact_submit"), "/contact/submit/")
+
+    # ── Method enforcement ──────────────────────────────────────
+    def test_get_method_rejected(self):
+        response = self.client.get(self.URL)
+        self.assertEqual(response.status_code, 405)
+
+    # ── CSRF enforcement ────────────────────────────────────────
+    def test_csrf_required(self):
+        client = Client(enforce_csrf_checks=True)
+        response = client.post(self.URL, _VALID_CONTACT)
+        self.assertEqual(response.status_code, 403)
+
+    # ── Validation errors ───────────────────────────────────────
+    def test_invalid_email_returns_400(self):
+        data = {**_VALID_CONTACT, "email": "notanemail"}
+        response = self.client.post(self.URL, data)
+        self.assertEqual(response.status_code, 400)
+        self.assertFalse(response.json()["success"])
+        self.assertIn("email", response.json()["error"].lower())
+
+    def test_name_too_short_returns_400(self):
+        data = {**_VALID_CONTACT, "name": "X"}
+        response = self.client.post(self.URL, data)
+        self.assertEqual(response.status_code, 400)
+        self.assertFalse(response.json()["success"])
+
+    def test_empty_name_returns_400(self):
+        data = {**_VALID_CONTACT, "name": ""}
+        response = self.client.post(self.URL, data)
+        self.assertEqual(response.status_code, 400)
+
+    def test_message_too_short_returns_400(self):
+        data = {**_VALID_CONTACT, "message": "short"}
+        response = self.client.post(self.URL, data)
+        self.assertEqual(response.status_code, 400)
+        self.assertFalse(response.json()["success"])
+        self.assertIn("10", response.json()["error"])
+
+    def test_subject_too_short_returns_400(self):
+        data = {**_VALID_CONTACT, "subject": "Hi"}
+        response = self.client.post(self.URL, data)
+        self.assertEqual(response.status_code, 400)
+        self.assertFalse(response.json()["success"])
+
+    def test_missing_fields_return_400(self):
+        response = self.client.post(self.URL, {})
+        self.assertEqual(response.status_code, 400)
+
+    def test_validation_error_sends_no_email(self):
+        self.client.post(self.URL, {**_VALID_CONTACT, "email": "bad"})
+        self.assertEqual(len(mail.outbox), 0)
+
+    # ── Rate limiting ───────────────────────────────────────────
+    def test_rate_limit_allows_first_two_submissions(self):
+        for _ in range(3):
+            response = self.client.post(self.URL, _VALID_CONTACT)
+            self.assertEqual(response.status_code, 200)
+
+    def test_rate_limit_blocks_third_submission(self):
+        for _ in range(3):
+            self.client.post(self.URL, _VALID_CONTACT)
+        response = self.client.post(self.URL, _VALID_CONTACT)
+        self.assertEqual(response.status_code, 429)
+        data = response.json()
+        self.assertFalse(data["success"])
+        self.assertIn("Too many", data["error"])
+
+    def test_rate_limit_error_response_is_json(self):
+        for _ in range(3):
+            self.client.post(self.URL, _VALID_CONTACT)
+        response = self.client.post(self.URL, _VALID_CONTACT)
+        # Must be valid JSON even on 429
+        self.assertEqual(response["Content-Type"], "application/json")
+        self.assertIn("error", response.json())
+
+    # ── XSS / injection ─────────────────────────────────────────
+    def test_xss_in_name_is_escaped(self):
+        data = {**_VALID_CONTACT, "name": "<script>alert(1)</script>"}
+        response = self.client.post(self.URL, data)
+        # Should succeed (escaped, not rejected)
+        self.assertEqual(response.status_code, 200)
+        # Email content must not contain raw script tag
+        if mail.outbox:
+            admin_subject = mail.outbox[0].subject
+            self.assertNotIn("<script>", admin_subject)
+
+
+# ============================================================
+# NEWSLETTER WELCOME EMAIL TESTS
+# ============================================================
+@override_settings(EMAIL_BACKEND="django.core.mail.backends.locmem.EmailBackend")
+class NewsletterWelcomeEmailTest(BaseTestCase):
+    """Verify that subscribing triggers a welcome email."""
+
+    def setUp(self):
+        cache.clear()
+
+    def test_new_subscriber_receives_welcome_email(self):
+        self.client.post(
+            reverse("blog:newsletter_subscribe"),
+            {"email": "newsubscriber@example.com"},
+        )
+        self.assertEqual(len(mail.outbox), 1)
+        self.assertIn("newsubscriber@example.com", mail.outbox[0].to)
+
+    def test_welcome_email_has_correct_subject(self):
+        self.client.post(
+            reverse("blog:newsletter_subscribe"),
+            {"email": "welcome@example.com"},
+        )
+        self.assertIn("Welcome", mail.outbox[0].subject)
+
+    def test_welcome_email_has_html_alternative(self):
+        self.client.post(
+            reverse("blog:newsletter_subscribe"),
+            {"email": "htmltest@example.com"},
+        )
+        self.assertTrue(len(mail.outbox[0].alternatives) > 0)
+
+    def test_duplicate_subscriber_sends_no_email(self):
+        """Already-subscribed address should not get another welcome email."""
+        NewsletterSubscriber.objects.create(email="already@example.com", is_active=True)
+        self.client.post(
+            reverse("blog:newsletter_subscribe"),
+            {"email": "already@example.com"},
+        )
+        self.assertEqual(len(mail.outbox), 0)
+
+    def test_reactivated_subscriber_receives_welcome_email(self):
+        """Inactive subscriber re-subscribing should get a welcome email."""
+        NewsletterSubscriber.objects.create(email="inactive2@example.com", is_active=False)
+        self.client.post(
+            reverse("blog:newsletter_subscribe"),
+            {"email": "inactive2@example.com"},
+        )
+        self.assertEqual(len(mail.outbox), 1)
+        self.assertIn("inactive2@example.com", mail.outbox[0].to)
