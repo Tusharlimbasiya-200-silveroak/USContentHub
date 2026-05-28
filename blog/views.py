@@ -18,7 +18,6 @@ from django.http import HttpResponse, JsonResponse
 from django.shortcuts import get_object_or_404, redirect, render
 from django.template.loader import render_to_string
 from django.utils.feedgenerator import Atom1Feed
-from django.views.decorators.cache import cache_page
 from django.views.decorators.http import require_POST
 from django.views.generic import DetailView, ListView, TemplateView
 
@@ -316,12 +315,10 @@ class ArticleAtomFeed(ArticleRSSFeed):
     subtitle = ArticleRSSFeed.description
 
 
-@cache_page(86400)
 def about_page(request):
     return render(request, "blog/about.html")
 
 
-@cache_page(86400)
 def contact_page(request):
     return render(request, "blog/contact.html")
 
@@ -420,7 +417,6 @@ def contact_submit(request):
     return JsonResponse({"success": True, "message": "Message sent! We'll reply within 1–2 business days."})
 
 
-@cache_page(86400)
 def privacy_page(request):
     return render(request, "blog/privacy.html")
 
