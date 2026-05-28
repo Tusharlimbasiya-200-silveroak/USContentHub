@@ -227,9 +227,10 @@ class HomeViewTest(BaseTestCase):
         self.assertNotIn("draft-article", slugs)
 
     def test_home_has_total_count(self):
+        expected = Article.objects.filter(status="published").count()
         response = self.client.get(reverse("blog:home"))
         self.assertIn("total_articles", response.context)
-        self.assertEqual(response.context["total_articles"], 2)
+        self.assertEqual(response.context["total_articles"], expected)
 
     def test_home_has_popular_tags(self):
         response = self.client.get(reverse("blog:home"))
@@ -887,8 +888,9 @@ class CachingTest(BaseTestCase):
         self.assertIsNotNone(cache.get("popular_tags_15"))
 
     def test_home_caches_total_count(self):
+        expected = Article.objects.filter(status="published").count()
         self.client.get(reverse("blog:home"))
-        self.assertEqual(cache.get("total_published_articles"), 2)
+        self.assertEqual(cache.get("total_published_articles"), expected)
 
     def test_explore_caches_trending(self):
         self.client.get(reverse("blog:explore"))
