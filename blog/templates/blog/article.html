@@ -130,7 +130,9 @@
 
     {% if article.cover_image %}
     <div class="article-cover">
-        <img src="{{ article.cover_image }}" alt="{{ article.title }}" loading="eager" decoding="async" width="1200" height="630" itemprop="image">
+        <img src="{{ article.cover_image }}" alt="{{ article.title }}"
+             loading="eager" decoding="async" fetchpriority="high"
+             width="1200" height="630" itemprop="image">
     </div>
     {% endif %}
 
