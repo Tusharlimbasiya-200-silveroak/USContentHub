@@ -1,3 +1,4 @@
+import logging
 import re
 from html import escape
 
@@ -18,6 +19,8 @@ from django.views.decorators.http import require_POST
 from django.views.generic import DetailView, ListView, TemplateView
 
 from .models import Article, ArticleRating, Comment, NewsletterSubscriber, Publication, Tag, UserProfile
+
+logger = logging.getLogger(__name__)
 
 
 class HomeView(ListView):
@@ -159,8 +162,9 @@ def add_comment(request, slug):
             "content": comment.content,
             "created_at": comment.created_at.strftime("%b %d, %Y %H:%M"),
         })
-    except Exception:
+    except Exception as exc:
         # Graceful fallback when DB writes unavailable (read-only SQLite on Vercel)
+        logger.error("add_comment: DB write failed — %s: %s", type(exc).__name__, exc, exc_info=True)
         return JsonResponse({"success": False, "error": "Comments are temporarily unavailable. Please try again later."}, status=503)
 
 
@@ -427,6 +431,8 @@ def register_view(request):
         errors = []
         if not username or len(username) < 3:
             errors.append("Username must be at least 3 characters.")
+        elif not re.match(r'^[a-zA-Z0-9_]+$', username):
+            errors.append("Username can only contain letters, numbers, and underscores (no spaces).")
         if not email:
             errors.append("Email is required.")
         else:
@@ -452,7 +458,8 @@ def register_view(request):
             login(request, user, backend='django.contrib.auth.backends.ModelBackend')
             messages.success(request, "Account created successfully!")
             return redirect("blog:home")
-        except Exception:
+        except Exception as exc:
+            logger.error("register_view: create_user failed — %s: %s", type(exc).__name__, exc, exc_info=True)
             return render(request, "blog/register.html", {
                 "errors": ["Registration is temporarily unavailable. Please try again later."],
                 "username": username, "email": email,
@@ -491,7 +498,8 @@ def toggle_bookmark(request, slug):
             return JsonResponse({"bookmarked": False})
         profile.bookmarks.add(article)
         return JsonResponse({"bookmarked": True})
-    except Exception:
+    except Exception as exc:
+        logger.error("toggle_bookmark: DB write failed — %s: %s", type(exc).__name__, exc, exc_info=True)
         return JsonResponse({"bookmarked": False, "error": "Bookmark temporarily unavailable."}, status=503)
 
 
