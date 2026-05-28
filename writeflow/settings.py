@@ -129,6 +129,11 @@ _DATABASE_URL = os.environ.get('DATABASE_URL', '')
 if _DATABASE_URL.startswith('postgres'):
     import urllib.parse as _urlparse
     _parsed = _urlparse.urlparse(_DATABASE_URL)
+    _qs = dict(_urlparse.parse_qsl(_parsed.query))
+    # Build OPTIONS from URL query params so channel_binding, sslmode, etc. are honoured
+    _pg_options = {'sslmode': _qs.get('sslmode', 'require')}
+    if 'channel_binding' in _qs:
+        _pg_options['channel_binding'] = _qs['channel_binding']
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.postgresql',
@@ -137,8 +142,8 @@ if _DATABASE_URL.startswith('postgres'):
             'PASSWORD': _parsed.password or '',
             'HOST': _parsed.hostname or 'localhost',
             'PORT': _parsed.port or 5432,
-            'CONN_MAX_AGE': 600,           # keep connections alive for 10 min
-            'OPTIONS': {'sslmode': 'prefer'},
+            'CONN_MAX_AGE': 0,   # 0 = close after each request (correct for serverless/pooler)
+            'OPTIONS': _pg_options,
         }
     }
 elif _DATABASE_URL.startswith('mysql'):
