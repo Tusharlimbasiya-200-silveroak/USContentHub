@@ -37,6 +37,7 @@ media/
 
 # ── Windows metadata artifacts ───────────────────────────────
 *.Zone.Identifier
+*:Zone.Identifier
 Thumbs.db
 ehthumbs.db
 Desktop.ini
