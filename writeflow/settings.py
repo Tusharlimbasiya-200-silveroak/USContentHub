@@ -334,7 +334,15 @@ if _EMAIL_HOST:
     EMAIL_USE_TLS = os.environ.get('EMAIL_USE_TLS', 'True').lower() in ('true', '1')
     EMAIL_HOST_USER = os.environ.get('EMAIL_HOST_USER', '')
     EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD', '')
-    DEFAULT_FROM_EMAIL = os.environ.get('DEFAULT_FROM_EMAIL', EMAIL_HOST_USER)
+    # DEFAULT_FROM_EMAIL must be either a bare address or RFC 5322 format:
+    #   "Display Name <user@example.com>"
+    # If the env var is set but has no '@', assume it's just a display name
+    # and auto-wrap it: "Display Name <EMAIL_HOST_USER>"
+    _raw_from = os.environ.get('DEFAULT_FROM_EMAIL', '').strip()
+    if _raw_from and '@' not in _raw_from:
+        DEFAULT_FROM_EMAIL = f'{_raw_from} <{EMAIL_HOST_USER}>'
+    else:
+        DEFAULT_FROM_EMAIL = _raw_from or EMAIL_HOST_USER
     SERVER_EMAIL = DEFAULT_FROM_EMAIL
 else:
     # Development: print emails to console instead of sending
