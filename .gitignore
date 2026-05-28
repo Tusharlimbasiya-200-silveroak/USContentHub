@@ -58,6 +58,9 @@ Desktop.ini
 # ── Temporary staging directories ────────────────────────────
 _tmp_*/
 
+# ── Vercel local cache ────────────────────────────────────────
+.vercel/
+
 # ── Testing / Coverage ───────────────────────────────────────
 .coverage
 htmlcov/
