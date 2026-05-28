@@ -21,6 +21,7 @@ from django.http import HttpResponse
 from django.urls import include, path
 
 from blog.sitemaps import ArticleSitemap, PublicationSitemap, StaticSitemap, TagSitemap
+from blog.views import custom_404
 
 sitemaps = {
     "articles": ArticleSitemap,
@@ -55,3 +56,5 @@ urlpatterns = [
     path("", include("blog.urls")),
     path("accounts/", include("allauth.urls")),
 ]
+
+handler404 = custom_404

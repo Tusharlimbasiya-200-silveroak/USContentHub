@@ -1,6 +1,10 @@
 {% extends "blog/base.html" %}
 {% block title %}{{ tag.name }} Articles — USA Content Hub{% endblock %}
 {% block description %}Browse all USA Content Hub articles tagged "{{ tag.name }}". Expert US news, tech, health, finance, travel and lifestyle content.{% endblock %}
+{% block canonical %}{{ site_url }}{% url 'blog:tag' tag.name %}{% endblock %}
+{% block og_url %}{{ site_url }}{% url 'blog:tag' tag.name %}{% endblock %}
+{% block og_title %}{{ tag.name }} Articles — USA Content Hub{% endblock %}
+{% block og_description %}Browse all USA Content Hub articles tagged "{{ tag.name }}". Expert US news, tech, health, finance, travel and lifestyle content.{% endblock %}
 {% block main_class %}full-width{% endblock %}
 
 {% block extra_head %}

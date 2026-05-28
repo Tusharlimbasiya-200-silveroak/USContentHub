@@ -508,3 +508,9 @@ def user_bookmarks(request):
     profile, _ = UserProfile.objects.get_or_create(user=request.user)
     articles = profile.bookmarks.filter(status="published").select_related("publication")
     return render(request, "blog/user_bookmarks.html", {"articles": articles})
+
+
+def custom_404(request, exception=None):
+    """Branded 404 handler — registered as handler404 in writeflow/urls.py."""
+    recent = Article.objects.filter(status="published").order_by("-published_at")[:4]
+    return render(request, "blog/404.html", {"recent_articles": recent}, status=404)

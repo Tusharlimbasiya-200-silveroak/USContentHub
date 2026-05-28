@@ -1,0 +1,44 @@
+{% extends "blog/base.html" %}
+{% load static %}
+
+{% block title %}Page Not Found — USA Content Hub{% endblock %}
+{% block description %}The page you're looking for doesn't exist. Browse USA Content Hub for US news, tech, health, finance, travel and lifestyle articles.{% endblock %}
+{% block robots %}noindex, follow{% endblock %}
+{% block canonical %}{{ site_url }}/{% endblock %}
+
+{% block content %}
+<div style="grid-column:1/-1;text-align:center;padding:4rem 1rem 6rem;">
+    <div style="font-size:6rem;line-height:1;margin-bottom:1rem;">404</div>
+    <h1 style="font-size:2rem;margin-bottom:1rem;color:var(--text);">Page Not Found</h1>
+    <p style="font-size:1.1rem;color:var(--text-muted);max-width:480px;margin:0 auto 2.5rem;">
+        That page doesn't exist or may have moved. Try the home page or browse recent articles below.
+    </p>
+    <div style="display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;margin-bottom:4rem;">
+        <a href="/" style="display:inline-block;padding:12px 28px;background:var(--primary);color:#fff;border-radius:var(--radius);text-decoration:none;font-weight:600;">
+            Go to Home
+        </a>
+        <a href="/explore/" style="display:inline-block;padding:12px 28px;border:2px solid var(--border);color:var(--text);border-radius:var(--radius);text-decoration:none;font-weight:600;">
+            Explore Topics
+        </a>
+    </div>
+
+    {% if recent_articles %}
+    <div style="max-width:900px;margin:0 auto;">
+        <h2 style="font-size:1.2rem;font-weight:600;color:var(--text-muted);text-transform:uppercase;letter-spacing:.08em;margin-bottom:1.5rem;">Recent Articles</h2>
+        <div class="articles-grid">
+            {% for article in recent_articles %}
+            <article class="article-card">
+                <div class="card-image">
+                    <img src="{{ article.cover_image }}" alt="{{ article.title }}" loading="lazy" decoding="async" width="640" height="360">
+                </div>
+                <div class="card-body">
+                    <h3><a href="{% url 'blog:article' article.slug %}">{{ article.title }}</a></h3>
+                    <p class="card-excerpt">{{ article.meta_description|truncatechars:120 }}</p>
+                </div>
+            </article>
+            {% endfor %}
+        </div>
+    </div>
+    {% endif %}
+</div>
+{% endblock %}
