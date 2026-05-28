@@ -3,6 +3,7 @@ import re
 from django.contrib.auth.models import User
 from django.core.validators import MaxValueValidator, MinValueValidator
 from django.db import models
+from django.db.models import Avg
 from django.utils import timezone
 from django.utils.text import slugify
 
@@ -65,10 +66,9 @@ class Article(models.Model):
         super().save(*args, **kwargs)
 
     def average_rating(self):
-        ratings = self.ratings.all()
-        if not ratings.exists():
-            return 0
-        return round(sum(r.score for r in ratings) / ratings.count(), 1)
+        result = self.ratings.aggregate(avg=Avg("score"))
+        avg = result.get("avg")
+        return round(avg, 1) if avg is not None else 0
 
     def rating_count(self):
         return self.ratings.count()
