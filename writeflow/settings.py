@@ -299,6 +299,29 @@ SOCIALACCOUNT_PROVIDERS = {
 }
 
 # ============================================================
+# EMAIL — configure SMTP for newsletter and contact form emails
+# In development, emails are printed to the console.
+# In production, set EMAIL_* env vars to use real SMTP.
+# ============================================================
+_EMAIL_HOST = os.environ.get('EMAIL_HOST', '')
+
+if _EMAIL_HOST:
+    EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+    EMAIL_HOST = _EMAIL_HOST
+    EMAIL_PORT = int(os.environ.get('EMAIL_PORT', 587))
+    EMAIL_USE_TLS = os.environ.get('EMAIL_USE_TLS', 'True').lower() in ('true', '1')
+    EMAIL_HOST_USER = os.environ.get('EMAIL_HOST_USER', '')
+    EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD', '')
+    DEFAULT_FROM_EMAIL = os.environ.get('DEFAULT_FROM_EMAIL', EMAIL_HOST_USER)
+    SERVER_EMAIL = DEFAULT_FROM_EMAIL
+else:
+    # Development: print emails to console instead of sending
+    EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+    DEFAULT_FROM_EMAIL = 'noreply@uscontenthub.com'
+
+CONTACT_EMAIL = os.environ.get('CONTACT_EMAIL', 'tusharlimbasiya200@gmail.com')
+
+# ============================================================
 # LOGGING — track errors and slow queries in production
 # ============================================================
 LOGGING = {
