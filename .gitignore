@@ -1,36 +1,69 @@
-# Python
+# ============================================================
+# USContentHub — .gitignore
+# ============================================================
+
+# ── Python ──────────────────────────────────────────────────
 __pycache__/
 *.py[cod]
+*$py.class
+*.so
+*.egg
 *.egg-info/
 dist/
-*.egg
+build/
+.eggs/
+.Python
+pip-wheel-metadata/
 
-# Environment
-.env
-*.env
+# ── Virtual environments ─────────────────────────────────────
 venv/
+env/
 .venv/
+.env/
+ENV/
 
-# IDE
-.vscode/
-.idea/
-
-# OS
-.DS_Store
-Thumbs.db
-
-# Logs
+# ── Django ──────────────────────────────────────────────────
 *.log
-
-# Database
-# db.sqlite3 is included in git — it carries pre-loaded article data for deployment
-
-# Static files collected by collectstatic
-# staticfiles/ — included in git so Vercel can serve /static/ routes
-
-# Media uploads (user content)
+local_settings.py
+db.sqlite3
+db.sqlite3-journal
+staticfiles/
 media/
 
-# Temp files
-*.tmp
-.vercel
+# ── Environment / secrets ────────────────────────────────────
+.env
+.env.local
+.env.*.local
+
+# ── Windows metadata artifacts ───────────────────────────────
+*.Zone.Identifier
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# ── macOS ────────────────────────────────────────────────────
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# ── Editors / IDEs ───────────────────────────────────────────
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.project
+.settings/
+
+# ── Temporary staging directories ────────────────────────────
+_tmp_*/
+
+# ── Testing / Coverage ───────────────────────────────────────
+.coverage
+htmlcov/
+.pytest_cache/
+.tox/
+
+# ── Node (if any tooling added later) ────────────────────────
+node_modules/
+npm-debug.log*
