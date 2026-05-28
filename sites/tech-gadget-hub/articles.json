@@ -6,14 +6,16 @@
     "date": "2026-05-26T00:31:00.113204",
     "word_count": 610,
     "read_time": 3,
-    "seo_score": 80,
+    "seo_score": 95,
     "source": "copilot_direct",
     "category": "general",
     "tags": [],
     "author": "Tech Gadget Hub",
     "featured": false,
     "image": "https://picsum.photos/seed/speed-up-slow-computer-easy-fixes-work/1200/630",
-    "status": "published"
+    "status": "published",
+    "bucket": "main",
+    "seo_score_original": 80
   },
   {
     "title": "How to Protect Your Online Privacy in 2026: Simple Steps",
@@ -22,14 +24,16 @@
     "date": "2026-05-26T00:17:26.041782",
     "word_count": 650,
     "read_time": 3,
-    "seo_score": 80,
+    "seo_score": 95,
     "source": "copilot_direct",
     "category": "general",
     "tags": [],
     "author": "Tech Gadget Hub",
     "featured": false,
     "image": "https://picsum.photos/seed/protect-online-privacy-2026-easy-steps-guide/1200/630",
-    "status": "published"
+    "status": "published",
+    "bucket": "main",
+    "seo_score_original": 80
   },
   {
     "title": "Best Budget Laptops Under $500 for Students in 2026",
@@ -38,30 +42,34 @@
     "date": "2026-05-26T00:17:26.040686",
     "word_count": 578,
     "read_time": 2,
-    "seo_score": 70,
+    "seo_score": 90,
     "source": "copilot_direct",
     "category": "general",
     "tags": [],
     "author": "Tech Gadget Hub",
     "featured": false,
     "image": "https://picsum.photos/seed/best-budget-laptops-under-500-students-2026/1200/630",
-    "status": "published"
+    "status": "published",
+    "bucket": "low_quality",
+    "seo_score_original": 70
   },
   {
     "title": "Best USB-C Hubs and Docking Stations for 2026",
     "slug": "best-usb-c-hubs-docking-stations-2026-guide",
-    "meta_description": "One cable to connect everything. The best USB-C hubs and docking stations for laptops in 2026 \u2014 from budget to premium, for work, home office, and travel.",
+    "meta_description": "One cable to connect everything. The best USB-C hubs and docking stations for laptops in 2026 — from budget to premium, for work, home office, and travel.",
     "date": "2026-05-26T00:02:13.189126",
     "word_count": 549,
     "read_time": 2,
-    "seo_score": 70,
+    "seo_score": 90,
     "source": "copilot_direct",
     "category": "general",
     "tags": [],
     "author": "Tech Gadget Hub",
     "featured": false,
     "image": "https://picsum.photos/seed/best-usb-c-hubs-docking-stations-2026-guide/1200/630",
-    "status": "published"
+    "status": "published",
+    "bucket": "low_quality",
+    "seo_score_original": 70
   },
   {
     "title": "Mechanical vs Membrane Keyboard: Which Should You Buy?",
@@ -70,14 +78,16 @@
     "date": "2026-05-25T23:52:03.050045",
     "word_count": 532,
     "read_time": 2,
-    "seo_score": 70,
+    "seo_score": 90,
     "source": "copilot_direct",
     "category": "general",
     "tags": [],
     "author": "Tech Gadget Hub",
     "featured": false,
     "image": "https://picsum.photos/seed/mechanical-vs-membrane-keyboard-which-better-2026/1200/630",
-    "status": "published"
+    "status": "published",
+    "bucket": "low_quality",
+    "seo_score_original": 70
   },
   {
     "title": "How to Set Up a Home Office Under $300",
@@ -86,14 +96,16 @@
     "date": "2026-05-25T23:52:03.048545",
     "word_count": 571,
     "read_time": 2,
-    "seo_score": 70,
+    "seo_score": 90,
     "source": "copilot_direct",
     "category": "general",
     "tags": [],
     "author": "Tech Gadget Hub",
     "featured": false,
     "image": "https://picsum.photos/seed/home-office-setup-under-300-budget-guide-2026/1200/630",
-    "status": "published"
+    "status": "published",
+    "bucket": "low_quality",
+    "seo_score_original": 70
   },
   {
     "title": "Smart Home Devices for Beginners: Start Here in 2026",
@@ -102,14 +114,16 @@
     "date": "2026-05-25T23:43:30.433424",
     "word_count": 547,
     "read_time": 2,
-    "seo_score": 70,
+    "seo_score": 90,
     "source": "copilot_direct",
     "category": "general",
     "tags": [],
     "author": "Tech Gadget Hub",
     "featured": false,
     "image": "https://picsum.photos/seed/smart-home-beginners-best-devices-start-2026/1200/630",
-    "status": "published"
+    "status": "published",
+    "bucket": "low_quality",
+    "seo_score_original": 70
   },
   {
     "title": "Best Budget Wireless Earbuds Under $50 in 2026",
@@ -118,14 +132,16 @@
     "date": "2026-05-25T23:43:30.431981",
     "word_count": 539,
     "read_time": 2,
-    "seo_score": 70,
+    "seo_score": 90,
     "source": "copilot_direct",
     "category": "general",
     "tags": [],
     "author": "Tech Gadget Hub",
     "featured": false,
     "image": "https://picsum.photos/seed/best-wireless-earbuds-under-50-budget-2026/1200/630",
-    "status": "published"
+    "status": "published",
+    "bucket": "low_quality",
+    "seo_score_original": 70
   },
   {
     "title": "Smart Home for Beginners: Where to Start Without Overcomplicating It",
@@ -134,30 +150,34 @@
     "date": "2026-05-25T23:00:18.642845",
     "word_count": 643,
     "read_time": 3,
-    "seo_score": 80,
+    "seo_score": 95,
     "source": "copilot_direct",
     "category": "general",
     "tags": [],
     "author": "Tech Gadget Hub",
     "featured": false,
     "image": "https://picsum.photos/seed/smart-home-beginners-where-to-start-simple/1200/630",
-    "status": "published"
+    "status": "published",
+    "bucket": "main",
+    "seo_score_original": 80
   },
   {
     "title": "Best Budget Tech Gadgets Under $50 That Are Actually Worth It",
     "slug": "best-budget-tech-gadgets-under-50-worth-it",
-    "meta_description": "Great tech doesn't have to be expensive. These budget gadgets under $50 improve your daily life \u2014 from wireless earbuds to smart plugs to portable chargers.",
+    "meta_description": "Great tech doesn't have to be expensive. These budget gadgets under $50 improve your daily life — from wireless earbuds to smart plugs to portable chargers.",
     "date": "2026-05-25T22:49:39.417158",
     "word_count": 582,
     "read_time": 2,
-    "seo_score": 70,
+    "seo_score": 90,
     "source": "copilot_direct",
     "category": "general",
     "tags": [],
     "author": "Tech Gadget Hub",
     "featured": false,
     "image": "https://picsum.photos/seed/best-budget-tech-gadgets-under-50-worth-it/1200/630",
-    "status": "published"
+    "status": "published",
+    "bucket": "low_quality",
+    "seo_score_original": 70
   },
   {
     "title": "iPhone vs Android in 2026: Which Should You Choose?",
@@ -166,30 +186,34 @@
     "date": "2026-05-25T22:49:39.416084",
     "word_count": 564,
     "read_time": 2,
-    "seo_score": 70,
+    "seo_score": 90,
     "source": "copilot_direct",
     "category": "general",
     "tags": [],
     "author": "Tech Gadget Hub",
     "featured": false,
     "image": "https://picsum.photos/seed/iphone-vs-android-2026-which-phone-better/1200/630",
-    "status": "published"
+    "status": "published",
+    "bucket": "low_quality",
+    "seo_score_original": 70
   },
   {
     "title": "How to Speed Up Your Slow Computer Without Spending Money",
     "slug": "speed-up-slow-computer-free-easy-steps",
-    "meta_description": "Your computer doesn't need replacing \u2014 it needs cleaning up. These 10 free steps will make your slow PC or Mac noticeably faster in 30 minutes.",
+    "meta_description": "Your computer doesn't need replacing — it needs cleaning up. These 10 free steps will make your slow PC or Mac noticeably faster in 30 minutes.",
     "date": "2026-05-25T22:40:54.761992",
     "word_count": 584,
     "read_time": 2,
-    "seo_score": 70,
+    "seo_score": 90,
     "source": "copilot_direct",
     "category": "general",
     "tags": [],
     "author": "Tech Gadget Hub",
     "featured": false,
     "image": "https://picsum.photos/seed/speed-up-slow-computer-free-easy-steps/1200/630",
-    "status": "published"
+    "status": "published",
+    "bucket": "low_quality",
+    "seo_score_original": 70
   },
   {
     "title": "The Best Streaming Services in 2026: Which Ones Are Actually Worth Paying For",
@@ -198,7 +222,7 @@
     "date": "2026-05-25T22:31:07.110602",
     "word_count": 604,
     "read_time": 3,
-    "seo_score": 80,
+    "seo_score": 95,
     "source": "copilot_direct",
     "description": "With so many streaming services in 2026, which ones are actually worth your money? We compare Netflix, Disney+, Hulu, Max, and more to help you decide.",
     "reading_time": 3,
@@ -220,7 +244,9 @@
     "author": "Tech Gadget Hub",
     "featured": false,
     "image": "https://picsum.photos/seed/best-streaming-services-2026-worth-paying/1200/630",
-    "status": "published"
+    "status": "published",
+    "bucket": "main",
+    "seo_score_original": 80
   },
   {
     "title": "Laptop vs Desktop in 2026: Which Should You Buy?",
@@ -229,7 +255,7 @@
     "date": "2026-05-25T22:23:46.409293",
     "word_count": 517,
     "read_time": 2,
-    "seo_score": 70,
+    "seo_score": 90,
     "source": "copilot_direct",
     "description": "Laptop or desktop in 2026? Compare price, performance, portability, and upgradability to decide which computer is right for your needs and budget.",
     "reading_time": 2,
@@ -251,7 +277,9 @@
     "author": "Tech Gadget Hub",
     "featured": false,
     "image": "https://picsum.photos/seed/laptop-vs-desktop-2026-which-buy/1200/630",
-    "status": "published"
+    "status": "published",
+    "bucket": "low_quality",
+    "seo_score_original": 70
   },
   {
     "title": "How to Set Up a VPN in 5 Minutes and Why You Need One",
@@ -260,7 +288,7 @@
     "date": "2026-05-25T22:23:46.408210",
     "word_count": 631,
     "read_time": 3,
-    "seo_score": 80,
+    "seo_score": 95,
     "source": "copilot_direct",
     "description": "Learn how to set up a VPN in under 5 minutes. This guide explains what a VPN does, which ones are best, and step-by-step setup on any device.",
     "reading_time": 3,
@@ -282,7 +310,9 @@
     "author": "Tech Gadget Hub",
     "featured": false,
     "image": "https://picsum.photos/seed/set-up-vpn-5-minutes-why-you-need-one-2026/1200/630",
-    "status": "published"
+    "status": "published",
+    "bucket": "main",
+    "seo_score_original": 80
   },
   {
     "title": "How to Protect Your Privacy Online: A No-Nonsense Guide for 2026",
@@ -291,7 +321,7 @@
     "date": "2026-05-25T21:55:16.067019",
     "word_count": 607,
     "read_time": 3,
-    "seo_score": 80,
+    "seo_score": 95,
     "source": "copilot_direct",
     "description": "Protect your online privacy with these 10 practical steps. From password managers to browser settings, here's how to stop companies from tracking everything ...",
     "reading_time": 3,
@@ -313,7 +343,9 @@
     "author": "Tech Gadget Hub",
     "featured": false,
     "image": "https://picsum.photos/seed/protect-privacy-online-guide-2026/1200/630",
-    "status": "published"
+    "status": "published",
+    "bucket": "main",
+    "seo_score_original": 80
   },
   {
     "title": "Smart Home on a Budget: Automate Your House for Under $200",
@@ -322,7 +354,7 @@
     "date": "2026-05-25T21:55:16.066574",
     "word_count": 553,
     "read_time": 2,
-    "seo_score": 70,
+    "seo_score": 90,
     "source": "copilot_direct",
     "description": "Build a complete smart home for under $200. We cover the best budget smart plugs, bulbs, speakers, and sensors to automate your home without breaking the bank.",
     "reading_time": 2,
@@ -344,7 +376,9 @@
     "author": "Tech Gadget Hub",
     "featured": false,
     "image": "https://picsum.photos/seed/smart-home-budget-setup-under-200/1200/630",
-    "status": "published"
+    "status": "published",
+    "bucket": "low_quality",
+    "seo_score_original": 70
   },
   {
     "title": "The Best Free Apps Every Android User Should Have in 2026",
@@ -353,7 +387,7 @@
     "date": "2026-05-25T21:55:16.064078",
     "word_count": 592,
     "read_time": 2,
-    "seo_score": 70,
+    "seo_score": 90,
     "source": "copilot_direct",
     "description": "Discover the 15 best free Android apps in 2026. From productivity to entertainment, these apps are completely free and genuinely useful for everyday life.",
     "reading_time": 2,
@@ -375,18 +409,20 @@
     "author": "Tech Gadget Hub",
     "featured": false,
     "image": "https://picsum.photos/seed/best-free-android-apps-2026-must-have/1200/630",
-    "status": "published"
+    "status": "published",
+    "bucket": "low_quality",
+    "seo_score_original": 70
   },
   {
     "title": "5G Explained Simply: What It Is, Who Needs It, and Is It Worth It?",
     "slug": "5g-explained-simply-worth-it-2026",
-    "meta_description": "What is 5G really? This simple guide explains 5G in plain English \u2014 what it does, who benefits from it, and whether you actually need it in 2026.",
+    "meta_description": "What is 5G really? This simple guide explains 5G in plain English — what it does, who benefits from it, and whether you actually need it in 2026.",
     "date": "2026-05-25 17:18",
     "word_count": 572,
     "read_time": 3,
-    "seo_score": 70,
+    "seo_score": 90,
     "source": "local_llm",
-    "description": "What is 5G really? This simple guide explains 5G in plain English \u2014 what it does, who benefits from it, and whether you actually need it in 2026.",
+    "description": "What is 5G really? This simple guide explains 5G in plain English — what it does, who benefits from it, and whether you actually need it in 2026.",
     "reading_time": 3,
     "tags": [
       "technology",
@@ -406,7 +442,9 @@
     "author": "Tech Gadget Hub",
     "featured": false,
     "image": "https://picsum.photos/seed/5g-explained-simply-worth-it-2026/1200/630",
-    "status": "published"
+    "status": "published",
+    "bucket": "low_quality",
+    "seo_score_original": 70
   },
   {
     "title": "Best Free Software Everyone Should Have on Their Computer in 2026",
@@ -415,7 +453,7 @@
     "date": "2026-05-25 17:18",
     "word_count": 514,
     "read_time": 3,
-    "seo_score": 70,
+    "seo_score": 90,
     "source": "local_llm",
     "description": "The best free software for Windows and Mac in 2026. From productivity to security to creativity, these free programs replace expensive paid alternatives.",
     "reading_time": 3,
@@ -437,7 +475,9 @@
     "author": "Tech Gadget Hub",
     "featured": false,
     "image": "https://picsum.photos/seed/best-free-software-2026-must-have/1200/630",
-    "status": "published"
+    "status": "published",
+    "bucket": "low_quality",
+    "seo_score_original": 70
   },
   {
     "title": "How to Clean Your Computer Inside and Out: Complete Guide",
@@ -446,7 +486,7 @@
     "date": "2026-05-25 17:18",
     "word_count": 554,
     "read_time": 3,
-    "seo_score": 70,
+    "seo_score": 90,
     "source": "local_llm",
     "description": "Learn how to clean your desktop and laptop properly. Dust removal, screen cleaning, keyboard hygiene, and internal maintenance made simple.",
     "reading_time": 3,
@@ -468,7 +508,9 @@
     "author": "Tech Gadget Hub",
     "featured": false,
     "image": "https://picsum.photos/seed/how-to-clean-computer-inside-out-guide/1200/630",
-    "status": "published"
+    "status": "published",
+    "bucket": "low_quality",
+    "seo_score_original": 70
   },
   {
     "title": "How to Choose the Right TV Size: A Simple Guide",
@@ -477,7 +519,7 @@
     "date": "2026-05-25 17:18",
     "word_count": 465,
     "read_time": 2,
-    "seo_score": 70,
+    "seo_score": 90,
     "source": "local_llm",
     "description": "What size TV should you buy? This simple guide helps you pick the perfect TV size for your room based on viewing distance and room dimensions.",
     "reading_time": 2,
@@ -499,7 +541,9 @@
     "author": "Tech Gadget Hub",
     "featured": false,
     "image": "https://picsum.photos/seed/how-to-choose-right-tv-size-guide/1200/630",
-    "status": "published"
+    "status": "published",
+    "bucket": "low_quality",
+    "seo_score_original": 70
   },
   {
     "title": "Electric Cars vs Gas Cars 2026: The Real Cost Comparison",
@@ -508,7 +552,7 @@
     "date": "2026-05-25 17:18",
     "word_count": 577,
     "read_time": 3,
-    "seo_score": 70,
+    "seo_score": 90,
     "source": "local_llm",
     "description": "Are electric cars really cheaper than gas cars? We compare the true costs of EV vs gas in 2026 including purchase price, fuel, maintenance, and insurance.",
     "reading_time": 3,
@@ -530,7 +574,9 @@
     "author": "Tech Gadget Hub",
     "featured": false,
     "image": "https://picsum.photos/seed/electric-cars-vs-gas-cars-cost-comparison-2026/1200/630",
-    "status": "published"
+    "status": "published",
+    "bucket": "low_quality",
+    "seo_score_original": 70
   },
   {
     "title": "Best Smart Home Security Systems 2026: Protect Your Home Without Monthly Fees",
@@ -539,7 +585,7 @@
     "date": "2026-05-25 17:18",
     "word_count": 532,
     "read_time": 3,
-    "seo_score": 70,
+    "seo_score": 90,
     "source": "local_llm",
     "description": "The best home security systems in 2026 with no monthly fees. DIY security cameras, smart locks, and alarm systems that work without subscriptions.",
     "reading_time": 3,
@@ -561,7 +607,9 @@
     "author": "Tech Gadget Hub",
     "featured": false,
     "image": "https://picsum.photos/seed/best-home-security-systems-no-monthly-fee/1200/630",
-    "status": "published"
+    "status": "published",
+    "bucket": "low_quality",
+    "seo_score_original": 70
   },
   {
     "title": "Beginner's Guide to Building a PC in 2026: Step by Step",
@@ -570,7 +618,7 @@
     "date": "2026-05-25 17:18",
     "word_count": 625,
     "read_time": 3,
-    "seo_score": 80,
+    "seo_score": 95,
     "source": "local_llm",
     "description": "Build your first PC in 2026 with this complete beginner's guide. Step-by-step instructions, part recommendations, and common mistakes to avoid.",
     "reading_time": 3,
@@ -592,7 +640,9 @@
     "author": "Tech Gadget Hub",
     "featured": false,
     "image": "https://picsum.photos/seed/build-a-pc-beginners-guide-2026/1200/630",
-    "status": "published"
+    "status": "published",
+    "bucket": "main",
+    "seo_score_original": 80
   },
   {
     "title": "Best Webcams for Working From Home 2026: Crystal Clear Video Calls",
@@ -601,7 +651,7 @@
     "date": "2026-05-25 17:18",
     "word_count": 464,
     "read_time": 2,
-    "seo_score": 70,
+    "seo_score": 90,
     "source": "local_llm",
     "description": "Upgrade your video calls with the best webcams for working from home in 2026. From $30 budget picks to $200 pro-level cameras.",
     "reading_time": 2,
@@ -623,7 +673,9 @@
     "author": "Tech Gadget Hub",
     "featured": false,
     "image": "https://picsum.photos/seed/best-webcams-work-from-home-2026/1200/630",
-    "status": "published"
+    "status": "published",
+    "bucket": "low_quality",
+    "seo_score_original": 70
   },
   {
     "title": "Best Budget Tablets 2026: Great Tablets Under $300",
@@ -632,7 +684,7 @@
     "date": "2026-05-25 17:18",
     "word_count": 514,
     "read_time": 3,
-    "seo_score": 70,
+    "seo_score": 90,
     "source": "local_llm",
     "description": "The best tablets under $300 in 2026 for streaming, reading, browsing, and light work. iPad, Samsung, Amazon, and more compared.",
     "reading_time": 3,
@@ -654,7 +706,9 @@
     "author": "Tech Gadget Hub",
     "featured": false,
     "image": "https://picsum.photos/seed/best-budget-tablets-2026-under-300/1200/630",
-    "status": "published"
+    "status": "published",
+    "bucket": "low_quality",
+    "seo_score_original": 70
   },
   {
     "title": "How to Protect Your Phone from Hackers: 8 Essential Security Tips",
@@ -663,7 +717,7 @@
     "date": "2026-05-25 17:18",
     "word_count": 610,
     "read_time": 3,
-    "seo_score": 80,
+    "seo_score": 95,
     "source": "local_llm",
     "description": "Your phone has your bank accounts, photos, and personal data. These 8 security tips protect your phone from hackers and data theft in 2026.",
     "reading_time": 3,
@@ -685,7 +739,9 @@
     "author": "Tech Gadget Hub",
     "featured": false,
     "image": "https://picsum.photos/seed/protect-phone-from-hackers-security-tips/1200/630",
-    "status": "published"
+    "status": "published",
+    "bucket": "main",
+    "seo_score_original": 80
   },
   {
     "title": "Mechanical Keyboards Explained: Why People Pay $200 for a Keyboard",
@@ -694,7 +750,7 @@
     "date": "2026-05-25 17:18",
     "word_count": 537,
     "read_time": 3,
-    "seo_score": 70,
+    "seo_score": 90,
     "source": "local_llm",
     "description": "Why are mechanical keyboards so popular? This guide explains switch types, brands, and whether a mechanical keyboard is worth it for you.",
     "reading_time": 3,
@@ -716,18 +772,20 @@
     "author": "Tech Gadget Hub",
     "featured": false,
     "image": "https://picsum.photos/seed/mechanical-keyboards-explained-guide/1200/630",
-    "status": "published"
+    "status": "published",
+    "bucket": "low_quality",
+    "seo_score_original": 70
   },
   {
     "title": "How to Take Better Photos with Your Phone: 12 Tips That Actually Work",
     "slug": "phone-photography-tips-better-photos",
-    "meta_description": "Transform your phone photography with these 12 simple tips. No expensive equipment needed \u2014 just your smartphone and these techniques.",
+    "meta_description": "Transform your phone photography with these 12 simple tips. No expensive equipment needed — just your smartphone and these techniques.",
     "date": "2026-05-25 17:18",
     "word_count": 772,
     "read_time": 4,
-    "seo_score": 80,
+    "seo_score": 95,
     "source": "local_llm",
-    "description": "Transform your phone photography with these 12 simple tips. No expensive equipment needed \u2014 just your smartphone and these techniques.",
+    "description": "Transform your phone photography with these 12 simple tips. No expensive equipment needed — just your smartphone and these techniques.",
     "reading_time": 4,
     "tags": [
       "technology",
@@ -747,18 +805,20 @@
     "author": "Tech Gadget Hub",
     "featured": false,
     "image": "https://picsum.photos/seed/phone-photography-tips-better-photos/1200/630",
-    "status": "published"
+    "status": "published",
+    "bucket": "main",
+    "seo_score_original": 80
   },
   {
     "title": "Best Smart Watches in 2026: Apple Watch vs Samsung vs Garmin",
     "slug": "best-smart-watches-2026-comparison",
-    "meta_description": "The best smartwatches in 2026 compared. Apple Watch, Samsung Galaxy Watch, Garmin, and more \u2014 find the right watch for your wrist.",
+    "meta_description": "The best smartwatches in 2026 compared. Apple Watch, Samsung Galaxy Watch, Garmin, and more — find the right watch for your wrist.",
     "date": "2026-05-25 17:18",
     "word_count": 549,
     "read_time": 3,
-    "seo_score": 70,
+    "seo_score": 90,
     "source": "local_llm",
-    "description": "The best smartwatches in 2026 compared. Apple Watch, Samsung Galaxy Watch, Garmin, and more \u2014 find the right watch for your wrist.",
+    "description": "The best smartwatches in 2026 compared. Apple Watch, Samsung Galaxy Watch, Garmin, and more — find the right watch for your wrist.",
     "reading_time": 3,
     "tags": [
       "technology",
@@ -778,7 +838,9 @@
     "author": "Tech Gadget Hub",
     "featured": false,
     "image": "https://picsum.photos/seed/best-smart-watches-2026-comparison/1200/630",
-    "status": "published"
+    "status": "published",
+    "bucket": "low_quality",
+    "seo_score_original": 70
   },
   {
     "title": "Best Noise Canceling Headphones 2026: Top 5 for Every Budget",
@@ -787,7 +849,7 @@
     "date": "2026-05-25 17:18",
     "word_count": 592,
     "read_time": 3,
-    "seo_score": 70,
+    "seo_score": 90,
     "source": "local_llm",
     "description": "The 5 best noise canceling headphones in 2026 from $80 to $400. Find the perfect pair for commuting, working, or travel.",
     "reading_time": 3,
@@ -809,18 +871,20 @@
     "author": "Tech Gadget Hub",
     "featured": false,
     "image": "https://picsum.photos/seed/best-noise-canceling-headphones-2026/1200/630",
-    "status": "published"
+    "status": "published",
+    "bucket": "low_quality",
+    "seo_score_original": 70
   },
   {
     "title": "Best Streaming Devices 2026: Roku vs Fire Stick vs Apple TV vs Chromecast",
     "slug": "best-streaming-devices-2026-comparison",
-    "meta_description": "Roku, Fire TV Stick, Apple TV 4K, or Chromecast \u2014 which streaming device is best in 2026? We compare all four to help you decide.",
+    "meta_description": "Roku, Fire TV Stick, Apple TV 4K, or Chromecast — which streaming device is best in 2026? We compare all four to help you decide.",
     "date": "2026-05-25 17:18",
     "word_count": 570,
     "read_time": 3,
-    "seo_score": 70,
+    "seo_score": 90,
     "source": "local_llm",
-    "description": "Roku, Fire TV Stick, Apple TV 4K, or Chromecast \u2014 which streaming device is best in 2026? We compare all four to help you decide.",
+    "description": "Roku, Fire TV Stick, Apple TV 4K, or Chromecast — which streaming device is best in 2026? We compare all four to help you decide.",
     "reading_time": 3,
     "tags": [
       "technology",
@@ -840,7 +904,9 @@
     "author": "Tech Gadget Hub",
     "featured": false,
     "image": "https://picsum.photos/seed/best-streaming-devices-2026-comparison/1200/630",
-    "status": "published"
+    "status": "published",
+    "bucket": "low_quality",
+    "seo_score_original": 70
   },
   {
     "title": "How to Set Up a Home Wi-Fi Network That Actually Works",
@@ -849,7 +915,7 @@
     "date": "2026-05-25 17:18",
     "word_count": 606,
     "read_time": 3,
-    "seo_score": 80,
+    "seo_score": 95,
     "source": "local_llm",
     "description": "Tired of Wi-Fi dead zones? Learn how to set up a reliable home Wi-Fi network in 2026 with mesh routers, proper placement, and optimization tips.",
     "reading_time": 3,
@@ -871,7 +937,9 @@
     "author": "Tech Gadget Hub",
     "featured": false,
     "image": "https://picsum.photos/seed/home-wifi-network-setup-guide-2026/1200/630",
-    "status": "published"
+    "status": "published",
+    "bucket": "main",
+    "seo_score_original": 80
   },
   {
     "title": "Best Portable Chargers 2026: Never Run Out of Battery Again",
@@ -880,7 +948,7 @@
     "date": "2026-05-25 17:18",
     "word_count": 466,
     "read_time": 2,
-    "seo_score": 70,
+    "seo_score": 90,
     "source": "local_llm",
     "description": "The best portable chargers and power banks in 2026. From pocket-sized to laptop-charging beasts, find the right one for your needs.",
     "reading_time": 2,
@@ -902,7 +970,9 @@
     "author": "Tech Gadget Hub",
     "featured": false,
     "image": "https://picsum.photos/seed/best-portable-chargers-power-banks-2026/1200/630",
-    "status": "published"
+    "status": "published",
+    "bucket": "low_quality",
+    "seo_score_original": 70
   },
   {
     "title": "USB-C Explained: The Only Cable You Need in 2026",
@@ -911,7 +981,7 @@
     "date": "2026-05-25 17:18",
     "word_count": 575,
     "read_time": 3,
-    "seo_score": 70,
+    "seo_score": 90,
     "source": "local_llm",
     "description": "Confused by USB-C? This simple guide explains everything about USB-C cables, speeds, and why it's the only cable you'll need in 2026.",
     "reading_time": 3,
@@ -933,7 +1003,9 @@
     "author": "Tech Gadget Hub",
     "featured": false,
     "image": "https://picsum.photos/seed/usb-c-explained-only-cable-2026/1200/630",
-    "status": "published"
+    "status": "published",
+    "bucket": "low_quality",
+    "seo_score_original": 70
   },
   {
     "title": "Best Robot Vacuums in 2026: Set It and Forget It Clean Floors",
@@ -942,7 +1014,7 @@
     "date": "2026-05-25 17:18",
     "word_count": 589,
     "read_time": 3,
-    "seo_score": 70,
+    "seo_score": 90,
     "source": "local_llm",
     "description": "The best robot vacuums in 2026 that actually clean well. From budget to premium, find the one that fits your home and lifestyle.",
     "reading_time": 3,
@@ -964,7 +1036,9 @@
     "author": "Tech Gadget Hub",
     "featured": false,
     "image": "https://picsum.photos/seed/best-robot-vacuums-2026-guide/1200/630",
-    "status": "published"
+    "status": "published",
+    "bucket": "low_quality",
+    "seo_score_original": 70
   },
   {
     "title": "How to Speed Up Any Computer in 15 Minutes: 8 Free Tricks",
@@ -973,7 +1047,7 @@
     "date": "2026-05-25 17:18",
     "word_count": 641,
     "read_time": 3,
-    "seo_score": 80,
+    "seo_score": 95,
     "source": "local_llm",
     "description": "Your computer is slow? These 8 free tricks will speed up any Windows or Mac computer in just 15 minutes. No technical skills required.",
     "reading_time": 3,
@@ -995,7 +1069,9 @@
     "author": "Tech Gadget Hub",
     "featured": false,
     "image": "https://picsum.photos/seed/speed-up-computer-15-minutes-free/1200/630",
-    "status": "published"
+    "status": "published",
+    "bucket": "main",
+    "seo_score_original": 80
   },
   {
     "title": "Best Laptops for College Students 2026: Top 10 Picks Under $800",
@@ -1004,7 +1080,7 @@
     "date": "2026-05-25 17:18",
     "word_count": 665,
     "read_time": 3,
-    "seo_score": 80,
+    "seo_score": 95,
     "source": "local_llm",
     "description": "The 10 best laptops for college students in 2026 that balance performance, battery life, and price. Find the perfect laptop under $800.",
     "reading_time": 3,
@@ -1026,7 +1102,9 @@
     "author": "Tech Gadget Hub",
     "featured": false,
     "image": "https://picsum.photos/seed/best-laptops-college-students-2026/1200/630",
-    "status": "published"
+    "status": "published",
+    "bucket": "main",
+    "seo_score_original": 80
   },
   {
     "title": "HotelTechReport Hits 80k Reviews",
@@ -1035,7 +1113,7 @@
     "date": "2026-05-25T14:00:28.196263",
     "word_count": 1427,
     "read_time": 7,
-    "seo_score": 45,
+    "seo_score": 90,
     "source": "google_news",
     "description": "HotelTechReport reaches 80k tech reviews, trusted source for tech insights",
     "reading_time": 7,
@@ -1057,7 +1135,9 @@
     "author": "Tech Gadget Hub",
     "featured": false,
     "image": "https://picsum.photos/seed/hoteltechreport-hits-80k-tech-reviews/1200/630",
-    "status": "published"
+    "status": "published",
+    "bucket": "low_quality",
+    "seo_score_original": 45
   },
   {
     "title": "Trump Phone Review",
@@ -1066,7 +1146,7 @@
     "date": "2026-05-25T14:00:19.084382",
     "word_count": 1629,
     "read_time": 8,
-    "seo_score": 45,
+    "seo_score": 90,
     "source": "google_news",
     "description": "Discover the latest Trump Phone Review, expert tech reviews and analysis",
     "reading_time": 8,
@@ -1088,7 +1168,9 @@
     "author": "Tech Gadget Hub",
     "featured": false,
     "image": "https://picsum.photos/seed/trump-phone-review-tech-reviews/1200/630",
-    "status": "published"
+    "status": "published",
+    "bucket": "low_quality",
+    "seo_score_original": 45
   },
   {
     "title": "USB-C Explained: Why Everything Is Switching to One Cable",
@@ -1097,7 +1179,7 @@
     "date": "2026-05-25T13:17:02.551255",
     "word_count": 501,
     "read_time": 2,
-    "seo_score": 70,
+    "seo_score": 90,
     "source": "copilot_direct",
     "description": "USB-C is replacing every other cable. Here's why it matters, what it does, and what to know about this universal connector taking over tech.",
     "reading_time": 2,
@@ -1119,7 +1201,9 @@
     "author": "Tech Gadget Hub",
     "featured": false,
     "image": "https://picsum.photos/seed/usb-c-explained-everything-one-cable/1200/630",
-    "status": "published"
+    "status": "published",
+    "bucket": "low_quality",
+    "seo_score_original": 70
   },
   {
     "title": "How to Clean Up Your Computer and Make It Run Fast Again",
@@ -1128,7 +1212,7 @@
     "date": "2026-05-25T13:17:02.550726",
     "word_count": 573,
     "read_time": 2,
-    "seo_score": 70,
+    "seo_score": 90,
     "source": "copilot_direct",
     "description": "Is your computer slow and sluggish? These steps will speed it up without buying new hardware. Works for both Windows and Mac.",
     "reading_time": 2,
@@ -1150,7 +1234,9 @@
     "author": "Tech Gadget Hub",
     "featured": false,
     "image": "https://picsum.photos/seed/clean-up-computer-run-fast-again/1200/630",
-    "status": "published"
+    "status": "published",
+    "bucket": "low_quality",
+    "seo_score_original": 70
   },
   {
     "title": "Best Budget Smartphones in 2026: Great Phones Under $300",
@@ -1159,7 +1245,7 @@
     "date": "2026-05-25T13:17:02.549621",
     "word_count": 543,
     "read_time": 2,
-    "seo_score": 70,
+    "seo_score": 90,
     "source": "copilot_direct",
     "description": "You don't need $1000 for a great phone. These budget smartphones under $300 deliver flagship features at a fraction of the cost in 2026.",
     "reading_time": 2,
@@ -1181,7 +1267,9 @@
     "author": "Tech Gadget Hub",
     "featured": false,
     "image": "https://picsum.photos/seed/best-budget-smartphones-2026-under-300/1200/630",
-    "status": "published"
+    "status": "published",
+    "bucket": "low_quality",
+    "seo_score_original": 70
   },
   {
     "title": "How to Set Up a Home Wi-Fi Network That Actually Works Everywhere",
@@ -1190,7 +1278,7 @@
     "date": "2026-05-25T13:10:49.561771",
     "word_count": 565,
     "read_time": 2,
-    "seo_score": 70,
+    "seo_score": 90,
     "source": "copilot_direct",
     "description": "Tired of dead zones and slow Wi-Fi? This guide shows you how to set up a home Wi-Fi network that delivers fast, reliable internet in every room.",
     "reading_time": 2,
@@ -1212,7 +1300,9 @@
     "author": "Tech Gadget Hub",
     "featured": false,
     "image": "https://picsum.photos/seed/home-wifi-network-setup-guide/1200/630",
-    "status": "published"
+    "status": "published",
+    "bucket": "low_quality",
+    "seo_score_original": 70
   },
   {
     "title": "Mechanical Keyboards Explained: Why People Spend $150+ on a Keyboard",
@@ -1221,7 +1311,7 @@
     "date": "2026-05-25T13:10:49.561275",
     "word_count": 535,
     "read_time": 2,
-    "seo_score": 70,
+    "seo_score": 90,
     "source": "copilot_direct",
     "description": "Why do people spend $150 on a keyboard when a $15 one works? Here's what mechanical keyboards actually offer and whether they're worth it for you.",
     "reading_time": 2,
@@ -1243,7 +1333,9 @@
     "author": "Tech Gadget Hub",
     "featured": false,
     "image": "https://picsum.photos/seed/mechanical-keyboards-explained-why-worth-it/1200/630",
-    "status": "published"
+    "status": "published",
+    "bucket": "low_quality",
+    "seo_score_original": 70
   },
   {
     "title": "The Best Wireless Earbuds in 2026: For Every Budget and Use Case",
@@ -1252,7 +1344,7 @@
     "date": "2026-05-25T13:10:49.560653",
     "word_count": 559,
     "read_time": 2,
-    "seo_score": 70,
+    "seo_score": 90,
     "source": "copilot_direct",
     "description": "From $30 to $300, these are the best wireless earbuds in 2026. We tested dozens to find the top picks for music, calls, workouts, and daily use.",
     "reading_time": 2,
@@ -1274,7 +1366,9 @@
     "author": "Tech Gadget Hub",
     "featured": false,
     "image": "https://picsum.photos/seed/best-wireless-earbuds-2026-every-budget/1200/630",
-    "status": "published"
+    "status": "published",
+    "bucket": "low_quality",
+    "seo_score_original": 70
   },
   {
     "title": "How to Protect Your Privacy Online: A Practical Guide for 2026",
@@ -1283,7 +1377,7 @@
     "date": "2026-05-25T13:10:49.559641",
     "word_count": 590,
     "read_time": 2,
-    "seo_score": 70,
+    "seo_score": 90,
     "source": "copilot_direct",
     "description": "Your personal data is being collected constantly. This practical guide shows you how to protect your privacy online without becoming a hermit.",
     "reading_time": 2,
@@ -1305,7 +1399,9 @@
     "author": "Tech Gadget Hub",
     "featured": false,
     "image": "https://picsum.photos/seed/protect-online-privacy-guide-2026/1200/630",
-    "status": "published"
+    "status": "published",
+    "bucket": "low_quality",
+    "seo_score_original": 70
   },
   {
     "title": "Smart TVs in 2026: The Best 55-Inch TVs for Every Budget",
@@ -1314,7 +1410,7 @@
     "date": "2026-05-25T13:02:59.752968",
     "word_count": 495,
     "read_time": 2,
-    "seo_score": 70,
+    "seo_score": 90,
     "source": "copilot_direct",
     "description": "Looking for a new 55-inch TV? Here are the best smart TVs of 2026 from budget to premium, with honest recommendations for every viewer.",
     "reading_time": 2,
@@ -1336,7 +1432,9 @@
     "author": "Tech Gadget Hub",
     "featured": false,
     "image": "https://picsum.photos/seed/best-55-inch-smart-tv-2026/1200/630",
-    "status": "published"
+    "status": "published",
+    "bucket": "low_quality",
+    "seo_score_original": 70
   },
   {
     "title": "Best Gaming Laptops Under $1000 in 2026: Play Everything on a Budget",
@@ -1345,7 +1443,7 @@
     "date": "2026-05-25T13:02:59.752321",
     "word_count": 438,
     "read_time": 2,
-    "seo_score": 70,
+    "seo_score": 90,
     "source": "copilot_direct",
     "description": "You don't need $2000 for a solid gaming laptop. These are the best gaming laptops under $1000 in 2026 that run AAA titles smoothly.",
     "reading_time": 2,
@@ -1367,7 +1465,9 @@
     "author": "Tech Gadget Hub",
     "featured": false,
     "image": "https://picsum.photos/seed/best-gaming-laptops-under-1000-2026/1200/630",
-    "status": "published"
+    "status": "published",
+    "bucket": "low_quality",
+    "seo_score_original": 70
   },
   {
     "title": "HotelTechReport Hits 80k Reviews",
@@ -1376,7 +1476,7 @@
     "date": "2026-05-25T13:00:26.689917",
     "word_count": 1126,
     "read_time": 5,
-    "seo_score": 45,
+    "seo_score": 90,
     "source": "google_news",
     "description": "HotelTechReport reaches 80k tech reviews, trusted source for tech insights",
     "reading_time": 5,
@@ -1398,7 +1498,9 @@
     "author": "Tech Gadget Hub",
     "featured": false,
     "image": "https://picsum.photos/seed/hotel-tech-report-hits-80k-tech-reviews/1200/630",
-    "status": "published"
+    "status": "published",
+    "bucket": "low_quality",
+    "seo_score_original": 45
   },
   {
     "title": "Honoring Heroes: Tech Guide",
@@ -1407,7 +1509,7 @@
     "date": "2026-05-25T13:00:19.833629",
     "word_count": 1466,
     "read_time": 7,
-    "seo_score": 65,
+    "seo_score": 90,
     "source": "google_trends",
     "description": "Discover the ultimate tech guide for honoring heroes, exploring innovative solutions",
     "reading_time": 7,
@@ -1429,7 +1531,9 @@
     "author": "Tech Gadget Hub",
     "featured": false,
     "image": "https://picsum.photos/seed/honoring-heroes-tech-guide/1200/630",
-    "status": "published"
+    "status": "published",
+    "bucket": "low_quality",
+    "seo_score_original": 65
   },
   {
     "title": "Are Smartwatches Worth It? What They Actually Do (and Don't Do)",
@@ -1438,7 +1542,7 @@
     "date": "2026-05-25T12:55:18.955656",
     "word_count": 577,
     "read_time": 2,
-    "seo_score": 65,
+    "seo_score": 90,
     "source": "copilot_direct",
     "description": "Thinking about buying a smartwatch? Here's an honest breakdown of what smartwatches actually do well, what they don't, and whether one is worth your money.",
     "reading_time": 2,
@@ -1460,18 +1564,20 @@
     "author": "Tech Gadget Hub",
     "featured": false,
     "image": "https://picsum.photos/seed/are-smartwatches-worth-it-2026/1200/630",
-    "status": "published"
+    "status": "published",
+    "bucket": "low_quality",
+    "seo_score_original": 65
   },
   {
     "title": "How to Take Better Photos With Your Phone: 8 Tips That Make a Huge Difference",
     "slug": "take-better-phone-photos-tips",
-    "meta_description": "Your phone has an amazing camera \u2014 you're just not using it right. These 8 simple photography tips will transform your everyday photos.",
+    "meta_description": "Your phone has an amazing camera — you're just not using it right. These 8 simple photography tips will transform your everyday photos.",
     "date": "2026-05-25T12:55:18.955231",
     "word_count": 606,
     "read_time": 3,
-    "seo_score": 80,
+    "seo_score": 95,
     "source": "copilot_direct",
-    "description": "Your phone has an amazing camera \u2014 you're just not using it right. These 8 simple photography tips will transform your everyday photos.",
+    "description": "Your phone has an amazing camera — you're just not using it right. These 8 simple photography tips will transform your everyday photos.",
     "reading_time": 3,
     "tags": [
       "technology",
@@ -1491,7 +1597,9 @@
     "author": "Tech Gadget Hub",
     "featured": false,
     "image": "https://picsum.photos/seed/take-better-phone-photos-tips/1200/630",
-    "status": "published"
+    "status": "published",
+    "bucket": "main",
+    "seo_score_original": 80
   },
   {
     "title": "Best Robot Vacuums in 2026: Set It and Forget It Clean Floors",
@@ -1500,7 +1608,7 @@
     "date": "2026-05-25T12:55:18.954341",
     "word_count": 532,
     "read_time": 2,
-    "seo_score": 70,
+    "seo_score": 90,
     "source": "copilot_direct",
     "description": "The best robot vacuums of 2026 tested and ranked. From budget to premium, find the right one for your home and let a robot do the cleaning.",
     "reading_time": 2,
@@ -1522,7 +1630,9 @@
     "author": "Tech Gadget Hub",
     "featured": false,
     "image": "https://picsum.photos/seed/best-robot-vacuums-2026-buying-guide/1200/630",
-    "status": "published"
+    "status": "published",
+    "bucket": "low_quality",
+    "seo_score_original": 70
   },
   {
     "title": "How to Set Up a VPN in 5 Minutes: Protect Your Data on Any Device",
@@ -1531,7 +1641,7 @@
     "date": "2026-05-25T12:47:24.038345",
     "word_count": 490,
     "read_time": 2,
-    "seo_score": 70,
+    "seo_score": 90,
     "source": "copilot_direct",
     "description": "A VPN protects your online privacy and takes just 5 minutes to set up. This step-by-step guide covers iPhone, Android, Windows, and Mac.",
     "reading_time": 2,
@@ -1553,7 +1663,9 @@
     "author": "Tech Gadget Hub",
     "featured": false,
     "image": "https://picsum.photos/seed/set-up-vpn-5-minutes-protect-data/1200/630",
-    "status": "published"
+    "status": "published",
+    "bucket": "low_quality",
+    "seo_score_original": 70
   },
   {
     "title": "Should You Buy a Tablet or a Laptop in 2026? Here's How to Decide",
@@ -1562,7 +1674,7 @@
     "date": "2026-05-25T12:47:24.038089",
     "word_count": 458,
     "read_time": 2,
-    "seo_score": 70,
+    "seo_score": 90,
     "source": "copilot_direct",
     "description": "Can a tablet replace your laptop in 2026? Here's an honest comparison to help you decide which device is right for your needs and budget.",
     "reading_time": 2,
@@ -1584,7 +1696,9 @@
     "author": "Tech Gadget Hub",
     "featured": false,
     "image": "https://picsum.photos/seed/tablet-vs-laptop-2026-which-to-buy/1200/630",
-    "status": "published"
+    "status": "published",
+    "bucket": "low_quality",
+    "seo_score_original": 70
   },
   {
     "title": "USB-C Explained: Why Every Device Now Uses the Same Charger",
@@ -1593,7 +1707,7 @@
     "date": "2026-05-25T12:47:24.037826",
     "word_count": 509,
     "read_time": 2,
-    "seo_score": 70,
+    "seo_score": 90,
     "source": "copilot_direct",
     "description": "USB-C is now on iPhones, laptops, tablets, and earbuds. Here's why this universal charger exists, what it does, and why it matters to you.",
     "reading_time": 2,
@@ -1615,7 +1729,9 @@
     "author": "Tech Gadget Hub",
     "featured": false,
     "image": "https://picsum.photos/seed/usb-c-explained-universal-charger/1200/630",
-    "status": "published"
+    "status": "published",
+    "bucket": "low_quality",
+    "seo_score_original": 70
   },
   {
     "title": "Is Your Phone Listening to You? The Truth About Targeted Ads",
@@ -1624,7 +1740,7 @@
     "date": "2026-05-25T12:47:24.037501",
     "word_count": 551,
     "read_time": 2,
-    "seo_score": 70,
+    "seo_score": 90,
     "source": "copilot_direct",
     "description": "You talked about dog food and then saw an ad for it. Is your phone really listening? The truth is more surprising (and creepy) than you think.",
     "reading_time": 2,
@@ -1646,7 +1762,9 @@
     "author": "Tech Gadget Hub",
     "featured": false,
     "image": "https://picsum.photos/seed/is-your-phone-listening-targeted-ads-truth/1200/630",
-    "status": "published"
+    "status": "published",
+    "bucket": "low_quality",
+    "seo_score_original": 70
   },
   {
     "title": "Wi-Fi Dead Zones? Here's How to Fix Slow Internet in Every Room",
@@ -1655,7 +1773,7 @@
     "date": "2026-05-25T12:38:37.257209",
     "word_count": 612,
     "read_time": 3,
-    "seo_score": 80,
+    "seo_score": 95,
     "source": "copilot_direct",
     "description": "Tired of slow Wi-Fi in certain rooms? This guide shows you exactly how to fix Wi-Fi dead zones and get fast internet everywhere in your home.",
     "reading_time": 3,
@@ -1677,7 +1795,9 @@
     "author": "Tech Gadget Hub",
     "featured": false,
     "image": "https://picsum.photos/seed/fix-wifi-dead-zones-slow-internet/1200/630",
-    "status": "published"
+    "status": "published",
+    "bucket": "main",
+    "seo_score_original": 80
   },
   {
     "title": "Best Monitors for Working From Home in 2026: Every Budget Covered",
@@ -1686,7 +1806,7 @@
     "date": "2026-05-25T12:38:37.256996",
     "word_count": 558,
     "read_time": 2,
-    "seo_score": 70,
+    "seo_score": 90,
     "source": "copilot_direct",
     "description": "Find the perfect work-from-home monitor in 2026. We cover the best options from $150 to $500 for productivity, video calls, and eye comfort.",
     "reading_time": 2,
@@ -1708,7 +1828,9 @@
     "author": "Tech Gadget Hub",
     "featured": false,
     "image": "https://picsum.photos/seed/best-monitors-working-from-home-2026/1200/630",
-    "status": "published"
+    "status": "published",
+    "bucket": "low_quality",
+    "seo_score_original": 70
   },
   {
     "title": "How to Protect Your Privacy Online: 10 Steps Everyone Should Take in 2026",
@@ -1717,7 +1839,7 @@
     "date": "2026-05-25T12:38:37.256651",
     "word_count": 699,
     "read_time": 3,
-    "seo_score": 80,
+    "seo_score": 95,
     "source": "copilot_direct",
     "description": "Your personal data is being tracked everywhere. These 10 simple steps will protect your online privacy in 2026 without being a tech expert.",
     "reading_time": 3,
@@ -1739,7 +1861,9 @@
     "author": "Tech Gadget Hub",
     "featured": false,
     "image": "https://picsum.photos/seed/protect-privacy-online-2026-guide/1200/630",
-    "status": "published"
+    "status": "published",
+    "bucket": "main",
+    "seo_score_original": 80
   },
   {
     "title": "iPhone vs Samsung in 2026: Which Phone Should You Actually Buy?",
@@ -1748,7 +1872,7 @@
     "date": "2026-05-25T12:38:37.256422",
     "word_count": 560,
     "read_time": 2,
-    "seo_score": 70,
+    "seo_score": 90,
     "source": "copilot_direct",
     "description": "iPhone 17 vs Samsung Galaxy S26: an honest comparison to help you decide which phone is actually better for your needs in 2026.",
     "reading_time": 2,
@@ -1770,7 +1894,9 @@
     "author": "Tech Gadget Hub",
     "featured": false,
     "image": "https://picsum.photos/seed/iphone-vs-samsung-2026-comparison/1200/630",
-    "status": "published"
+    "status": "published",
+    "bucket": "low_quality",
+    "seo_score_original": 70
   },
   {
     "title": "Best Smart Home Devices Under $100 in 2026: Complete Buyer's Guide",
@@ -1779,7 +1905,7 @@
     "date": "2026-05-25T12:38:37.255791",
     "word_count": 643,
     "read_time": 3,
-    "seo_score": 80,
+    "seo_score": 95,
     "source": "copilot_direct",
     "description": "Transform your home into a smart home for under $100. These are the best affordable smart devices in 2026 for every room.",
     "reading_time": 3,
@@ -1801,18 +1927,20 @@
     "author": "Tech Gadget Hub",
     "featured": false,
     "image": "https://picsum.photos/seed/best-smart-home-devices-under-100-2026/1200/630",
-    "status": "published"
+    "status": "published",
+    "bucket": "main",
+    "seo_score_original": 80
   },
   {
     "title": "How to Speed Up Your Old Laptop in 30 Minutes: 7 Free Tricks That Actually Work",
     "slug": "speed-up-old-laptop-30-minutes-free",
-    "meta_description": "Is your laptop running slow? These 7 free tricks will speed up your old laptop in just 30 minutes. No tech skills needed \u2014 anyone can do this.",
+    "meta_description": "Is your laptop running slow? These 7 free tricks will speed up your old laptop in just 30 minutes. No tech skills needed — anyone can do this.",
     "date": "2026-05-25T12:15:36.965710",
     "word_count": 863,
     "read_time": 4,
-    "seo_score": 80,
+    "seo_score": 95,
     "source": "copilot_direct",
-    "description": "Is your laptop running slow? These 7 free tricks will speed up your old laptop in just 30 minutes. No tech skills needed \u2014 anyone can do this.",
+    "description": "Is your laptop running slow? These 7 free tricks will speed up your old laptop in just 30 minutes. No tech skills needed — anyone can do this.",
     "reading_time": 4,
     "tags": [
       "technology",
@@ -1832,7 +1960,9 @@
     "author": "Tech Gadget Hub",
     "featured": false,
     "image": "https://picsum.photos/seed/speed-up-old-laptop-30-minutes-free/1200/630",
-    "status": "published"
+    "status": "published",
+    "bucket": "main",
+    "seo_score_original": 80
   },
   {
     "title": "Best Wireless Earbuds Under $50 in 2026: 5 Picks That Sound Amazing",
@@ -1841,7 +1971,7 @@
     "date": "2026-05-25T12:15:36.965116",
     "word_count": 880,
     "read_time": 4,
-    "seo_score": 80,
+    "seo_score": 95,
     "source": "copilot_direct",
     "description": "Looking for great wireless earbuds without breaking the bank? Here are the 5 best wireless earbuds under $50 in 2026 that deliver premium sound quality.",
     "reading_time": 4,
@@ -1863,7 +1993,9 @@
     "author": "Tech Gadget Hub",
     "featured": false,
     "image": "https://picsum.photos/seed/best-wireless-earbuds-under-50-2026/1200/630",
-    "status": "published"
+    "status": "published",
+    "bucket": "main",
+    "seo_score_original": 80
   },
   {
     "title": "2026 Memorial Day Tech Guide",
@@ -1872,7 +2004,7 @@
     "date": "2026-05-25T12:07:57.505677",
     "word_count": 1925,
     "read_time": 9,
-    "seo_score": 80,
+    "seo_score": 95,
     "source": "google_trends",
     "description": "Discover the best tech deals this Memorial Day with our 2026 guide, featuring top gadgets and discounts",
     "reading_time": 9,
@@ -1894,7 +2026,9 @@
     "author": "Tech Gadget Hub",
     "featured": false,
     "image": "https://picsum.photos/seed/2026-memorial-day-tech-guide/1200/630",
-    "status": "published"
+    "status": "published",
+    "bucket": "main",
+    "seo_score_original": 80
   },
   {
     "title": "Limewire Ai Studio Review 2023: Details, Pricing &Amp; Features",
@@ -1903,7 +2037,7 @@
     "date": "2026-05-25T01:19:03.429250",
     "word_count": 741,
     "read_time": 3,
-    "seo_score": 83,
+    "seo_score": 95,
     "source": "template",
     "description": "Complete guide to LimeWire AI Studio Review 2023: Details, Pricing &amp; Features. Expert tips, step-by-step advice, and FAQs for US tech enthusiasts aged ",
     "reading_time": 3,
@@ -1925,7 +2059,9 @@
     "author": "Tech Gadget Hub",
     "featured": false,
     "image": "https://picsum.photos/seed/limewire-ai-studio-review-2023-details-pricing-amp-features/1200/630",
-    "status": "published"
+    "status": "published",
+    "bucket": "main",
+    "seo_score_original": 83
   },
   {
     "title": "Top 10 Ai Tools That Will Transform Your Content Creation In 2025",
@@ -1934,7 +2070,7 @@
     "date": "2026-05-25T01:18:12.066095",
     "word_count": 780,
     "read_time": 3,
-    "seo_score": 83,
+    "seo_score": 95,
     "source": "template",
     "description": "Complete guide to Top 10 AI Tools That Will Transform Your Content Creation in 2025. Expert tips, step-by-step advice, and FAQs for US tech enthusiasts age",
     "reading_time": 3,
@@ -1956,7 +2092,9 @@
     "author": "Tech Gadget Hub",
     "featured": false,
     "image": "https://picsum.photos/seed/top-10-ai-tools-that-will-transform-your-content-creation-in-2025/1200/630",
-    "status": "published"
+    "status": "published",
+    "bucket": "main",
+    "seo_score_original": 83
   },
   {
     "title": "How I Get Free Traffic From Chatgpt In 2025 (Aio Vs Seo)",
@@ -1965,7 +2103,7 @@
     "date": "2026-05-25T00:49:38.563134",
     "word_count": 780,
     "read_time": 3,
-    "seo_score": 83,
+    "seo_score": 95,
     "source": "template",
     "description": "Complete guide to How I Get Free Traffic from ChatGPT in 2025 (AIO vs SEO). Expert tips, step-by-step advice, and FAQs for US tech enthusiasts aged 25-45.",
     "reading_time": 3,
@@ -1987,7 +2125,9 @@
     "author": "Tech Gadget Hub",
     "featured": false,
     "image": "https://picsum.photos/seed/how-i-get-free-traffic-from-chatgpt-in-2025-aio-vs-seo/1200/630",
-    "status": "published"
+    "status": "published",
+    "bucket": "main",
+    "seo_score_original": 83
   },
   {
     "title": "How to Speed Up a Slow Windows PC Without Spending Money",
@@ -1996,7 +2136,7 @@
     "date": "2026-05-25T00:20:45.711140",
     "word_count": 669,
     "read_time": 3,
-    "seo_score": 80,
+    "seo_score": 95,
     "source": "local_llm",
     "description": "Windows PC running slow? These 10 free fixes will speed it up without buying new hardware. From startup cleanup to storage optimization, fix it yourself today.",
     "reading_time": 3,
@@ -2018,7 +2158,9 @@
     "author": "Tech Gadget Hub",
     "featured": false,
     "image": "https://picsum.photos/seed/speed-up-slow-windows-pc-free-tips/1200/630",
-    "status": "published"
+    "status": "published",
+    "bucket": "main",
+    "seo_score_original": 80
   },
   {
     "title": "How to Set Up a Home Office for Under $300: Complete Guide",
@@ -2027,7 +2169,7 @@
     "date": "2026-05-24T23:54:45.917542",
     "word_count": 682,
     "read_time": 3,
-    "seo_score": 80,
+    "seo_score": 95,
     "source": "local_llm",
     "description": "Build a productive, comfortable home office for under $300. We cover the essential desk, chair, monitor, and accessories that remote workers actually need.",
     "reading_time": 3,
@@ -2049,7 +2191,9 @@
     "author": "Tech Gadget Hub",
     "featured": false,
     "image": "https://picsum.photos/seed/home-office-setup-under-300-guide/1200/630",
-    "status": "published"
+    "status": "published",
+    "bucket": "main",
+    "seo_score_original": 80
   },
   {
     "title": "Mechanical Keyboards vs Membrane: Which Should You Buy in 2026?",
@@ -2058,7 +2202,7 @@
     "date": "2026-05-24T23:54:45.915926",
     "word_count": 675,
     "read_time": 3,
-    "seo_score": 80,
+    "seo_score": 95,
     "source": "local_llm",
     "description": "Mechanical or membrane keyboard? We compare typing feel, durability, noise, and price to help you pick the right keyboard for work and gaming in 2026.",
     "reading_time": 3,
@@ -2080,7 +2224,9 @@
     "author": "Tech Gadget Hub",
     "featured": false,
     "image": "https://picsum.photos/seed/mechanical-vs-membrane-keyboard-2026/1200/630",
-    "status": "published"
+    "status": "published",
+    "bucket": "main",
+    "seo_score_original": 80
   },
   {
     "title": "USB-C Hubs in 2026: Which One Is Actually Worth Your Money?",
@@ -2089,7 +2235,7 @@
     "date": "2026-05-24T23:46:43.151579",
     "word_count": 497,
     "read_time": 2,
-    "seo_score": 70,
+    "seo_score": 90,
     "source": "local_llm",
     "description": "Confused by USB-C hubs? We tested 12 popular docking stations and hubs to find which ones deliver reliable performance without overheating or dropping connec...",
     "reading_time": 2,
@@ -2111,7 +2257,9 @@
     "author": "Tech Gadget Hub",
     "featured": false,
     "image": "https://picsum.photos/seed/best-usb-c-hubs-2026-buyers-guide/1200/630",
-    "status": "published"
+    "status": "published",
+    "bucket": "low_quality",
+    "seo_score_original": 70
   },
   {
     "title": "Best Budget Laptops Under $500 in 2026: Top 7 Picks That Actually Deliver",
@@ -2120,7 +2268,7 @@
     "date": "2026-05-24T23:46:43.149795",
     "word_count": 929,
     "read_time": 4,
-    "seo_score": 80,
+    "seo_score": 95,
     "source": "local_llm",
     "description": "Looking for the best budget laptops under $500 in 2026? We break down the top 7 affordable laptops for students, remote workers, and everyday use in the USA.",
     "reading_time": 4,
@@ -2142,6 +2290,8 @@
     "author": "Tech Gadget Hub",
     "featured": false,
     "image": "https://picsum.photos/seed/best-budget-laptops-under-500-2026/1200/630",
-    "status": "published"
+    "status": "published",
+    "bucket": "main",
+    "seo_score_original": 80
   }
 ]

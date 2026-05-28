@@ -6,14 +6,16 @@
     "date": "2026-05-26T00:31:00.240866",
     "word_count": 573,
     "read_time": 2,
-    "seo_score": 70,
+    "seo_score": 90,
     "source": "copilot_direct",
     "category": "general",
     "tags": [],
     "author": "Health Wellness Daily",
     "featured": false,
     "image": "https://picsum.photos/seed/home-workout-routine-no-equipment-complete-guide/1200/630",
-    "status": "published"
+    "status": "published",
+    "bucket": "low_quality",
+    "seo_score_original": 70
   },
   {
     "title": "How to Start a Morning Routine That Actually Sticks",
@@ -29,7 +31,9 @@
     "author": "Health Wellness Daily",
     "featured": false,
     "image": "https://picsum.photos/seed/morning-routine-that-works-how-to-build-one/1200/630",
-    "status": "published"
+    "status": "published",
+    "bucket": "main",
+    "seo_score_original": 95
   },
   {
     "title": "Desk Stretches for Back Pain: 10 Exercises You Can Do at Work",
@@ -38,14 +42,16 @@
     "date": "2026-05-26T00:17:26.180231",
     "word_count": 717,
     "read_time": 3,
-    "seo_score": 75,
+    "seo_score": 90,
     "source": "copilot_direct",
     "category": "general",
     "tags": [],
     "author": "Health Wellness Daily",
     "featured": false,
     "image": "https://picsum.photos/seed/desk-stretches-back-pain-10-office-exercises/1200/630",
-    "status": "published"
+    "status": "published",
+    "bucket": "low_quality",
+    "seo_score_original": 75
   },
   {
     "title": "How Much Water Should You Actually Drink Per Day?",
@@ -54,14 +60,16 @@
     "date": "2026-05-26T00:02:13.315087",
     "word_count": 597,
     "read_time": 2,
-    "seo_score": 70,
+    "seo_score": 90,
     "source": "copilot_direct",
     "category": "general",
     "tags": [],
     "author": "Health Wellness Daily",
     "featured": false,
     "image": "https://picsum.photos/seed/how-much-water-drink-daily-science-based-guide/1200/630",
-    "status": "published"
+    "status": "published",
+    "bucket": "low_quality",
+    "seo_score_original": 70
   },
   {
     "title": "How to Improve Your Posture: Simple Exercises and Habits",
@@ -70,14 +78,16 @@
     "date": "2026-05-25T23:52:03.939361",
     "word_count": 621,
     "read_time": 3,
-    "seo_score": 80,
+    "seo_score": 95,
     "source": "copilot_direct",
     "category": "general",
     "tags": [],
     "author": "Health Wellness Daily",
     "featured": false,
     "image": "https://picsum.photos/seed/fix-bad-posture-simple-exercises-daily-habits/1200/630",
-    "status": "published"
+    "status": "published",
+    "bucket": "main",
+    "seo_score_original": 80
   },
   {
     "title": "How to Start a Meditation Practice: A No-Nonsense Guide",
@@ -86,14 +96,16 @@
     "date": "2026-05-25T23:43:31.295356",
     "word_count": 583,
     "read_time": 2,
-    "seo_score": 70,
+    "seo_score": 90,
     "source": "copilot_direct",
     "category": "general",
     "tags": [],
     "author": "Health Wellness Daily",
     "featured": false,
     "image": "https://picsum.photos/seed/how-to-start-meditating-simple-beginner-guide/1200/630",
-    "status": "published"
+    "status": "published",
+    "bucket": "low_quality",
+    "seo_score_original": 70
   },
   {
     "title": "How to Build a Simple Home Workout Routine With No Equipment",
@@ -102,46 +114,52 @@
     "date": "2026-05-25T23:19:26.225736",
     "word_count": 534,
     "read_time": 2,
-    "seo_score": 70,
+    "seo_score": 90,
     "source": "copilot_direct",
     "category": "general",
     "tags": [],
     "author": "Health Wellness Daily",
     "featured": false,
     "image": "https://picsum.photos/seed/home-workout-routine-no-equipment-beginners/1200/630",
-    "status": "published"
+    "status": "published",
+    "bucket": "low_quality",
+    "seo_score_original": 70
   },
   {
     "title": "How to Drink More Water: Simple Tricks That Actually Work",
     "slug": "how-to-drink-more-water-easy-tricks",
-    "meta_description": "Know you should drink more water but can't remember to? These 8 simple tricks make drinking enough water effortless \u2014 no counting ounces required.",
+    "meta_description": "Know you should drink more water but can't remember to? These 8 simple tricks make drinking enough water effortless — no counting ounces required.",
     "date": "2026-05-25T23:00:19.444275",
     "word_count": 653,
     "read_time": 3,
-    "seo_score": 83,
+    "seo_score": 95,
     "source": "copilot_direct",
     "category": "general",
     "tags": [],
     "author": "Health Wellness Daily",
     "featured": false,
     "image": "https://picsum.photos/seed/how-to-drink-more-water-easy-tricks/1200/630",
-    "status": "published"
+    "status": "published",
+    "bucket": "main",
+    "seo_score_original": 83
   },
   {
     "title": "Meal Timing and Weight Loss: Does When You Eat Actually Matter?",
     "slug": "meal-timing-weight-loss-does-when-you-eat-matter",
-    "meta_description": "Intermittent fasting, late-night eating, breakfast skipping \u2014 does when you eat actually matter for weight loss? Here's what the research really says.",
+    "meta_description": "Intermittent fasting, late-night eating, breakfast skipping — does when you eat actually matter for weight loss? Here's what the research really says.",
     "date": "2026-05-25T23:00:19.442616",
     "word_count": 707,
     "read_time": 3,
-    "seo_score": 80,
+    "seo_score": 95,
     "source": "copilot_direct",
     "category": "general",
     "tags": [],
     "author": "Health Wellness Daily",
     "featured": false,
     "image": "https://picsum.photos/seed/meal-timing-weight-loss-does-when-you-eat-matter/1200/630",
-    "status": "published"
+    "status": "published",
+    "bucket": "main",
+    "seo_score_original": 80
   },
   {
     "title": "Beginner's Guide to Meditation: How to Start When Your Mind Won't Shut Up",
@@ -150,14 +168,16 @@
     "date": "2026-05-25T22:49:39.544114",
     "word_count": 635,
     "read_time": 3,
-    "seo_score": 80,
+    "seo_score": 95,
     "source": "copilot_direct",
     "category": "general",
     "tags": [],
     "author": "Health Wellness Daily",
     "featured": false,
     "image": "https://picsum.photos/seed/meditation-beginners-guide-mind-wont-shut-up/1200/630",
-    "status": "published"
+    "status": "published",
+    "bucket": "main",
+    "seo_score_original": 80
   },
   {
     "title": "Simple Stretches You Can Do at Your Desk to Reduce Back Pain",
@@ -166,41 +186,45 @@
     "date": "2026-05-25T22:40:55.523169",
     "word_count": 664,
     "read_time": 3,
-    "seo_score": 80,
+    "seo_score": 95,
     "source": "copilot_direct",
     "category": "general",
     "tags": [],
     "author": "Health Wellness Daily",
     "featured": false,
     "image": "https://picsum.photos/seed/desk-stretches-reduce-back-pain-work/1200/630",
-    "status": "published"
+    "status": "published",
+    "bucket": "main",
+    "seo_score_original": 80
   },
   {
     "title": "Walking for Weight Loss: How Many Steps You Actually Need",
     "slug": "walking-weight-loss-how-many-steps-per-day",
-    "meta_description": "You don't need to run to lose weight. Walking works \u2014 but how many steps do you actually need? Here's what research says about walking for weight loss.",
+    "meta_description": "You don't need to run to lose weight. Walking works — but how many steps do you actually need? Here's what research says about walking for weight loss.",
     "date": "2026-05-25T22:40:55.522515",
     "word_count": 564,
     "read_time": 2,
-    "seo_score": 70,
+    "seo_score": 90,
     "source": "copilot_direct",
     "category": "general",
     "tags": [],
     "author": "Health Wellness Daily",
     "featured": false,
     "image": "https://picsum.photos/seed/walking-weight-loss-how-many-steps-per-day/1200/630",
-    "status": "published"
+    "status": "published",
+    "bucket": "low_quality",
+    "seo_score_original": 70
   },
   {
     "title": "How to Fall Asleep in 10 Minutes: Science-Backed Techniques",
     "slug": "fall-asleep-10-minutes-science-backed-techniques",
-    "meta_description": "Can't fall asleep? These 7 science-backed techniques help you fall asleep in 10 minutes or less. No pills, no supplements \u2014 just proven methods that work ton...",
+    "meta_description": "Can't fall asleep? These 7 science-backed techniques help you fall asleep in 10 minutes or less. No pills, no supplements — just proven methods that work ton...",
     "date": "2026-05-25T22:31:07.222310",
     "word_count": 652,
     "read_time": 3,
-    "seo_score": 80,
+    "seo_score": 95,
     "source": "copilot_direct",
-    "description": "Can't fall asleep? These 7 science-backed techniques help you fall asleep in 10 minutes or less. No pills, no supplements \u2014 just proven methods that work ton...",
+    "description": "Can't fall asleep? These 7 science-backed techniques help you fall asleep in 10 minutes or less. No pills, no supplements — just proven methods that work ton...",
     "reading_time": 3,
     "tags": [
       "health",
@@ -220,7 +244,9 @@
     "author": "Health Wellness Daily",
     "featured": false,
     "image": "https://picsum.photos/seed/fall-asleep-10-minutes-science-backed-techniques/1200/630",
-    "status": "published"
+    "status": "published",
+    "bucket": "main",
+    "seo_score_original": 80
   },
   {
     "title": "The 10-Minute Morning Routine That Changes Your Entire Day",
@@ -229,7 +255,7 @@
     "date": "2026-05-25T22:23:46.572222",
     "word_count": 603,
     "read_time": 3,
-    "seo_score": 80,
+    "seo_score": 95,
     "source": "copilot_direct",
     "description": "This 10-minute morning routine boosts energy, reduces stress, and sets you up for a productive day. No 5 AM wake-ups required. Just 10 minutes after you wake...",
     "reading_time": 3,
@@ -251,7 +277,9 @@
     "author": "Health Wellness Daily",
     "featured": false,
     "image": "https://picsum.photos/seed/10-minute-morning-routine-transforms-day/1200/630",
-    "status": "published"
+    "status": "published",
+    "bucket": "main",
+    "seo_score_original": 80
   },
   {
     "title": "How Much Protein Do You Really Need? The Science Explained",
@@ -260,7 +288,7 @@
     "date": "2026-05-25T22:23:46.571545",
     "word_count": 520,
     "read_time": 2,
-    "seo_score": 70,
+    "seo_score": 90,
     "source": "copilot_direct",
     "description": "How much protein do you really need? This science-based guide breaks down daily protein needs by age, activity level, and goals. No bro-science, just facts.",
     "reading_time": 2,
@@ -282,7 +310,9 @@
     "author": "Health Wellness Daily",
     "featured": false,
     "image": "https://picsum.photos/seed/how-much-protein-need-daily-science-guide/1200/630",
-    "status": "published"
+    "status": "published",
+    "bucket": "low_quality",
+    "seo_score_original": 70
   },
   {
     "title": "Sitting All Day Is Killing You: 5 Exercises You Can Do at Your Desk",
@@ -291,7 +321,7 @@
     "date": "2026-05-25T21:55:16.890578",
     "word_count": 649,
     "read_time": 3,
-    "seo_score": 80,
+    "seo_score": 95,
     "source": "copilot_direct",
     "description": "Sitting all day at work? These 5 simple desk exercises take 2 minutes each and can reduce back pain, improve posture, and boost energy without leaving your c...",
     "reading_time": 3,
@@ -313,7 +343,9 @@
     "author": "Health Wellness Daily",
     "featured": false,
     "image": "https://picsum.photos/seed/desk-exercises-counter-sitting-all-day-work/1200/630",
-    "status": "published"
+    "status": "published",
+    "bucket": "main",
+    "seo_score_original": 80
   },
   {
     "title": "What Happens to Your Body When You Stop Eating Sugar for 30 Days",
@@ -322,7 +354,7 @@
     "date": "2026-05-25T21:55:16.889742",
     "word_count": 598,
     "read_time": 2,
-    "seo_score": 70,
+    "seo_score": 90,
     "source": "copilot_direct",
     "description": "What happens to your body when you stop eating sugar for 30 days? Week-by-week changes to energy, skin, sleep, weight, and cravings based on research.",
     "reading_time": 2,
@@ -344,7 +376,9 @@
     "author": "Health Wellness Daily",
     "featured": false,
     "image": "https://picsum.photos/seed/what-happens-quit-sugar-30-days-body/1200/630",
-    "status": "published"
+    "status": "published",
+    "bucket": "low_quality",
+    "seo_score_original": 70
   },
   {
     "title": "How to Stay Motivated to Exercise: 10 Tricks That Actually Work",
@@ -353,7 +387,7 @@
     "date": "2026-05-25 18:08",
     "word_count": 827,
     "read_time": 4,
-    "seo_score": 75,
+    "seo_score": 90,
     "source": "local_llm",
     "description": "Lost your exercise motivation? These 10 proven tricks help you stay consistent with working out, even when you don't feel like it.",
     "reading_time": 4,
@@ -375,7 +409,9 @@
     "author": "Health Wellness Daily",
     "featured": false,
     "image": "https://picsum.photos/seed/stay-motivated-exercise-tricks-work/1200/630",
-    "status": "published"
+    "status": "published",
+    "bucket": "low_quality",
+    "seo_score_original": 75
   },
   {
     "title": "How to Read Food Labels Like a Pro: A Complete Breakdown",
@@ -384,7 +420,7 @@
     "date": "2026-05-25 18:08",
     "word_count": 798,
     "read_time": 4,
-    "seo_score": 80,
+    "seo_score": 95,
     "source": "local_llm",
     "description": "Confused by nutrition labels? This simple guide teaches you exactly what to look for, what to ignore, and how to make healthier choices at the store.",
     "reading_time": 4,
@@ -406,7 +442,9 @@
     "author": "Health Wellness Daily",
     "featured": false,
     "image": "https://picsum.photos/seed/read-food-labels-like-pro-guide/1200/630",
-    "status": "published"
+    "status": "published",
+    "bucket": "main",
+    "seo_score_original": 80
   },
   {
     "title": "How to Stay Healthy While Working From Home: Complete Guide",
@@ -415,7 +453,7 @@
     "date": "2026-05-25 18:08",
     "word_count": 814,
     "read_time": 4,
-    "seo_score": 80,
+    "seo_score": 95,
     "source": "local_llm",
     "description": "Working from home? Don't let it wreck your health. These practical tips keep you active, well-fed, and mentally sharp while working remotely.",
     "reading_time": 4,
@@ -437,18 +475,20 @@
     "author": "Health Wellness Daily",
     "featured": false,
     "image": "https://picsum.photos/seed/stay-healthy-working-from-home-guide/1200/630",
-    "status": "published"
+    "status": "published",
+    "bucket": "main",
+    "seo_score_original": 80
   },
   {
     "title": "Walking vs Running: Which Is Better for Your Health?",
     "slug": "walking-vs-running-which-better-health",
-    "meta_description": "Walking or running \u2014 which is better for you? The surprising answer depends on your goals. A science-based comparison of both exercises.",
+    "meta_description": "Walking or running — which is better for you? The surprising answer depends on your goals. A science-based comparison of both exercises.",
     "date": "2026-05-25 18:08",
     "word_count": 729,
     "read_time": 4,
-    "seo_score": 80,
+    "seo_score": 95,
     "source": "local_llm",
-    "description": "Walking or running \u2014 which is better for you? The surprising answer depends on your goals. A science-based comparison of both exercises.",
+    "description": "Walking or running — which is better for you? The surprising answer depends on your goals. A science-based comparison of both exercises.",
     "reading_time": 4,
     "tags": [
       "health",
@@ -468,7 +508,9 @@
     "author": "Health Wellness Daily",
     "featured": false,
     "image": "https://picsum.photos/seed/walking-vs-running-which-better-health/1200/630",
-    "status": "published"
+    "status": "published",
+    "bucket": "main",
+    "seo_score_original": 80
   },
   {
     "title": "How to Prevent Common Sports Injuries: A Practical Guide",
@@ -477,7 +519,7 @@
     "date": "2026-05-25 18:08",
     "word_count": 745,
     "read_time": 4,
-    "seo_score": 75,
+    "seo_score": 90,
     "source": "local_llm",
     "description": "Sports injuries sideline millions every year. These prevention strategies protect your knees, ankles, shoulders, and back during exercise and sports.",
     "reading_time": 4,
@@ -499,7 +541,9 @@
     "author": "Health Wellness Daily",
     "featured": false,
     "image": "https://picsum.photos/seed/prevent-common-sports-injuries-guide/1200/630",
-    "status": "published"
+    "status": "published",
+    "bucket": "low_quality",
+    "seo_score_original": 75
   },
   {
     "title": "How to Cook Healthy When You Hate Cooking: 7 Easy Strategies",
@@ -508,7 +552,7 @@
     "date": "2026-05-25 18:08",
     "word_count": 760,
     "read_time": 4,
-    "seo_score": 80,
+    "seo_score": 95,
     "source": "local_llm",
     "description": "Hate cooking but want to eat healthier? These 7 strategies help non-cooks eat nutritious meals without spending hours in the kitchen.",
     "reading_time": 4,
@@ -530,7 +574,9 @@
     "author": "Health Wellness Daily",
     "featured": false,
     "image": "https://picsum.photos/seed/cook-healthy-hate-cooking-strategies/1200/630",
-    "status": "published"
+    "status": "published",
+    "bucket": "main",
+    "seo_score_original": 80
   },
   {
     "title": "Best Bedtime Routine for Better Sleep: A Science-Based Guide",
@@ -539,7 +585,7 @@
     "date": "2026-05-25 18:08",
     "word_count": 793,
     "read_time": 4,
-    "seo_score": 75,
+    "seo_score": 90,
     "source": "local_llm",
     "description": "Can't fall asleep? This science-based bedtime routine helps you fall asleep faster, sleep deeper, and wake up refreshed every morning.",
     "reading_time": 4,
@@ -561,7 +607,9 @@
     "author": "Health Wellness Daily",
     "featured": false,
     "image": "https://picsum.photos/seed/bedtime-routine-better-sleep-guide/1200/630",
-    "status": "published"
+    "status": "published",
+    "bucket": "low_quality",
+    "seo_score_original": 75
   },
   {
     "title": "How to Improve Your Immune System: Daily Habits That Protect You",
@@ -570,7 +618,7 @@
     "date": "2026-05-25 18:08",
     "word_count": 700,
     "read_time": 4,
-    "seo_score": 75,
+    "seo_score": 90,
     "source": "local_llm",
     "description": "Boost your immune system with these science-backed daily habits. Sleep, nutrition, exercise, and stress management for better immunity.",
     "reading_time": 4,
@@ -592,7 +640,9 @@
     "author": "Health Wellness Daily",
     "featured": false,
     "image": "https://picsum.photos/seed/improve-immune-system-daily-habits/1200/630",
-    "status": "published"
+    "status": "published",
+    "bucket": "low_quality",
+    "seo_score_original": 75
   },
   {
     "title": "Benefits of Cold Showers: What Science Says About This Trending Habit",
@@ -601,7 +651,7 @@
     "date": "2026-05-25 18:02",
     "word_count": 757,
     "read_time": 4,
-    "seo_score": 80,
+    "seo_score": 95,
     "source": "local_llm",
     "description": "Cold showers are trending in wellness circles. Do they actually work? Here's what science says about the real benefits (and limits) of cold exposure.",
     "reading_time": 4,
@@ -623,7 +673,9 @@
     "author": "Health Wellness Daily",
     "featured": false,
     "image": "https://picsum.photos/seed/benefits-cold-showers-science-trending/1200/630",
-    "status": "published"
+    "status": "published",
+    "bucket": "main",
+    "seo_score_original": 80
   },
   {
     "title": "Simple Guide to Better Digestion: Foods and Habits That Help",
@@ -632,7 +684,7 @@
     "date": "2026-05-25 18:02",
     "word_count": 721,
     "read_time": 4,
-    "seo_score": 80,
+    "seo_score": 95,
     "source": "local_llm",
     "description": "Bloating, gas, and discomfort after eating? These simple food choices and daily habits improve your digestion naturally and effectively.",
     "reading_time": 4,
@@ -654,7 +706,9 @@
     "author": "Health Wellness Daily",
     "featured": false,
     "image": "https://picsum.photos/seed/simple-guide-better-digestion-tips/1200/630",
-    "status": "published"
+    "status": "published",
+    "bucket": "main",
+    "seo_score_original": 80
   },
   {
     "title": "Eye Health in the Digital Age: How to Protect Your Vision From Screens",
@@ -663,7 +717,7 @@
     "date": "2026-05-25 18:02",
     "word_count": 783,
     "read_time": 4,
-    "seo_score": 80,
+    "seo_score": 95,
     "source": "local_llm",
     "description": "Screens are straining your eyes. These expert-backed tips protect your vision, reduce eye strain, and prevent long-term damage from digital devices.",
     "reading_time": 4,
@@ -685,18 +739,20 @@
     "author": "Health Wellness Daily",
     "featured": false,
     "image": "https://picsum.photos/seed/eye-health-digital-age-protect-vision/1200/630",
-    "status": "published"
+    "status": "published",
+    "bucket": "main",
+    "seo_score_original": 80
   },
   {
     "title": "How to Handle Anxiety: Practical Coping Strategies for Daily Life",
     "slug": "handle-anxiety-practical-coping-strategies",
-    "meta_description": "Anxiety affects 40 million Americans. These practical coping strategies help you manage anxiety in everyday situations \u2014 no meditation app required.",
+    "meta_description": "Anxiety affects 40 million Americans. These practical coping strategies help you manage anxiety in everyday situations — no meditation app required.",
     "date": "2026-05-25 18:02",
     "word_count": 831,
     "read_time": 4,
-    "seo_score": 80,
+    "seo_score": 95,
     "source": "local_llm",
-    "description": "Anxiety affects 40 million Americans. These practical coping strategies help you manage anxiety in everyday situations \u2014 no meditation app required.",
+    "description": "Anxiety affects 40 million Americans. These practical coping strategies help you manage anxiety in everyday situations — no meditation app required.",
     "reading_time": 4,
     "tags": [
       "health",
@@ -716,18 +772,20 @@
     "author": "Health Wellness Daily",
     "featured": false,
     "image": "https://picsum.photos/seed/handle-anxiety-practical-coping-strategies/1200/630",
-    "status": "published"
+    "status": "published",
+    "bucket": "main",
+    "seo_score_original": 80
   },
   {
     "title": "How to Boost Your Metabolism Naturally: Facts vs Myths",
     "slug": "boost-metabolism-naturally-facts-myths",
-    "meta_description": "Can you actually speed up your metabolism? Yes \u2014 but not how you think. Science-backed ways to boost metabolism and burn more calories naturally.",
+    "meta_description": "Can you actually speed up your metabolism? Yes — but not how you think. Science-backed ways to boost metabolism and burn more calories naturally.",
     "date": "2026-05-25 18:02",
     "word_count": 785,
     "read_time": 4,
-    "seo_score": 75,
+    "seo_score": 90,
     "source": "local_llm",
-    "description": "Can you actually speed up your metabolism? Yes \u2014 but not how you think. Science-backed ways to boost metabolism and burn more calories naturally.",
+    "description": "Can you actually speed up your metabolism? Yes — but not how you think. Science-backed ways to boost metabolism and burn more calories naturally.",
     "reading_time": 4,
     "tags": [
       "health",
@@ -747,7 +805,9 @@
     "author": "Health Wellness Daily",
     "featured": false,
     "image": "https://picsum.photos/seed/boost-metabolism-naturally-facts-myths/1200/630",
-    "status": "published"
+    "status": "published",
+    "bucket": "low_quality",
+    "seo_score_original": 75
   },
   {
     "title": "Best Healthy Snacks for Work: 20 Options That Keep You Full and Focused",
@@ -756,7 +816,7 @@
     "date": "2026-05-25 18:02",
     "word_count": 781,
     "read_time": 4,
-    "seo_score": 75,
+    "seo_score": 90,
     "source": "local_llm",
     "description": "Stop reaching for vending machine junk. These 20 healthy work snacks keep you full, focused, and energized without the sugar crash.",
     "reading_time": 4,
@@ -778,18 +838,20 @@
     "author": "Health Wellness Daily",
     "featured": false,
     "image": "https://picsum.photos/seed/best-healthy-snacks-work-full-focused/1200/630",
-    "status": "published"
+    "status": "published",
+    "bucket": "low_quality",
+    "seo_score_original": 75
   },
   {
     "title": "How to Strengthen Your Back: Exercises to Prevent and Relieve Back Pain",
     "slug": "strengthen-back-prevent-relieve-pain",
-    "meta_description": "Back pain affects 80% of Americans. These simple exercises strengthen your back, prevent injuries, and relieve existing pain \u2014 no gym needed.",
+    "meta_description": "Back pain affects 80% of Americans. These simple exercises strengthen your back, prevent injuries, and relieve existing pain — no gym needed.",
     "date": "2026-05-25 18:02",
     "word_count": 802,
     "read_time": 4,
-    "seo_score": 88,
+    "seo_score": 95,
     "source": "local_llm",
-    "description": "Back pain affects 80% of Americans. These simple exercises strengthen your back, prevent injuries, and relieve existing pain \u2014 no gym needed.",
+    "description": "Back pain affects 80% of Americans. These simple exercises strengthen your back, prevent injuries, and relieve existing pain — no gym needed.",
     "reading_time": 4,
     "tags": [
       "health",
@@ -809,7 +871,9 @@
     "author": "Health Wellness Daily",
     "featured": false,
     "image": "https://picsum.photos/seed/strengthen-back-prevent-relieve-pain/1200/630",
-    "status": "published"
+    "status": "published",
+    "bucket": "main",
+    "seo_score_original": 88
   },
   {
     "title": "Best Vitamins and Supplements: What You Actually Need in 2026",
@@ -818,7 +882,7 @@
     "date": "2026-05-25 18:02",
     "word_count": 704,
     "read_time": 4,
-    "seo_score": 75,
+    "seo_score": 90,
     "source": "local_llm",
     "description": "The supplement industry is worth $50 billion. Most of it is unnecessary. Here's what vitamins and supplements you actually need, based on science.",
     "reading_time": 4,
@@ -840,7 +904,9 @@
     "author": "Health Wellness Daily",
     "featured": false,
     "image": "https://picsum.photos/seed/best-vitamins-supplements-actually-need/1200/630",
-    "status": "published"
+    "status": "published",
+    "bucket": "low_quality",
+    "seo_score_original": 75
   },
   {
     "title": "How to Build Healthy Habits That Last: The Science of Behavior Change",
@@ -849,7 +915,7 @@
     "date": "2026-05-25 18:02",
     "word_count": 757,
     "read_time": 4,
-    "seo_score": 80,
+    "seo_score": 95,
     "source": "local_llm",
     "description": "Why do habits fail? The science of behavior change reveals how to build healthy habits that stick. Practical strategies backed by research.",
     "reading_time": 4,
@@ -871,7 +937,9 @@
     "author": "Health Wellness Daily",
     "featured": false,
     "image": "https://picsum.photos/seed/build-healthy-habits-that-last-science/1200/630",
-    "status": "published"
+    "status": "published",
+    "bucket": "main",
+    "seo_score_original": 80
   },
   {
     "title": "10 Warning Signs of Burnout and How to Recover",
@@ -880,7 +948,7 @@
     "date": "2026-05-25 17:57",
     "word_count": 815,
     "read_time": 4,
-    "seo_score": 75,
+    "seo_score": 90,
     "source": "local_llm",
     "description": "Burnout isn't just being tired. Learn the 10 warning signs, what causes it, and practical steps to recover before it derails your life.",
     "reading_time": 4,
@@ -902,7 +970,9 @@
     "author": "Health Wellness Daily",
     "featured": false,
     "image": "https://picsum.photos/seed/warning-signs-burnout-how-to-recover/1200/630",
-    "status": "published"
+    "status": "published",
+    "bucket": "low_quality",
+    "seo_score_original": 75
   },
   {
     "title": "How to Quit Sugar: A 30-Day Plan That Doesn't Make You Miserable",
@@ -911,7 +981,7 @@
     "date": "2026-05-25 17:57",
     "word_count": 799,
     "read_time": 4,
-    "seo_score": 80,
+    "seo_score": 95,
     "source": "local_llm",
     "description": "Eating too much sugar? This gradual 30-day plan helps you reduce sugar intake without misery, cravings, or giving up everything you enjoy.",
     "reading_time": 4,
@@ -933,18 +1003,20 @@
     "author": "Health Wellness Daily",
     "featured": false,
     "image": "https://picsum.photos/seed/how-to-quit-sugar-30-day-plan/1200/630",
-    "status": "published"
+    "status": "published",
+    "bucket": "main",
+    "seo_score_original": 80
   },
   {
     "title": "Beginner's Guide to Yoga: Everything You Need to Start Today",
     "slug": "beginners-guide-yoga-start-today",
-    "meta_description": "Yoga isn't just for flexible people. This beginner's guide covers everything you need to start yoga at home \u2014 no experience or fancy equipment required.",
+    "meta_description": "Yoga isn't just for flexible people. This beginner's guide covers everything you need to start yoga at home — no experience or fancy equipment required.",
     "date": "2026-05-25 17:57",
     "word_count": 719,
     "read_time": 4,
-    "seo_score": 75,
+    "seo_score": 90,
     "source": "local_llm",
-    "description": "Yoga isn't just for flexible people. This beginner's guide covers everything you need to start yoga at home \u2014 no experience or fancy equipment required.",
+    "description": "Yoga isn't just for flexible people. This beginner's guide covers everything you need to start yoga at home — no experience or fancy equipment required.",
     "reading_time": 4,
     "tags": [
       "health",
@@ -964,7 +1036,9 @@
     "author": "Health Wellness Daily",
     "featured": false,
     "image": "https://picsum.photos/seed/beginners-guide-yoga-start-today/1200/630",
-    "status": "published"
+    "status": "published",
+    "bucket": "low_quality",
+    "seo_score_original": 75
   },
   {
     "title": "How to Improve Your Posture: Simple Fixes for Desk Workers",
@@ -973,7 +1047,7 @@
     "date": "2026-05-25 17:57",
     "word_count": 747,
     "read_time": 4,
-    "seo_score": 80,
+    "seo_score": 95,
     "source": "local_llm",
     "description": "Sitting at a desk all day is wrecking your posture. These simple exercises and adjustments can fix back pain, neck strain, and rounded shoulders.",
     "reading_time": 4,
@@ -995,7 +1069,9 @@
     "author": "Health Wellness Daily",
     "featured": false,
     "image": "https://picsum.photos/seed/improve-posture-fixes-desk-workers/1200/630",
-    "status": "published"
+    "status": "published",
+    "bucket": "main",
+    "seo_score_original": 80
   },
   {
     "title": "Best Anti-Inflammatory Foods: Fight Chronic Pain and Disease With Your Diet",
@@ -1004,7 +1080,7 @@
     "date": "2026-05-25 17:57",
     "word_count": 661,
     "read_time": 3,
-    "seo_score": 90,
+    "seo_score": 95,
     "source": "local_llm",
     "description": "Chronic inflammation is linked to heart disease, cancer, and diabetes. These anti-inflammatory foods can reduce inflammation and improve your health.",
     "reading_time": 3,
@@ -1026,7 +1102,9 @@
     "author": "Health Wellness Daily",
     "featured": false,
     "image": "https://picsum.photos/seed/best-anti-inflammatory-foods-diet/1200/630",
-    "status": "published"
+    "status": "published",
+    "bucket": "main",
+    "seo_score_original": 90
   },
   {
     "title": "How to Lower Blood Pressure Naturally: 10 Lifestyle Changes That Work",
@@ -1035,7 +1113,7 @@
     "date": "2026-05-25 17:57",
     "word_count": 693,
     "read_time": 3,
-    "seo_score": 75,
+    "seo_score": 90,
     "source": "local_llm",
     "description": "High blood pressure affects 1 in 3 Americans. These 10 natural lifestyle changes can lower your blood pressure without medication.",
     "reading_time": 3,
@@ -1057,7 +1135,9 @@
     "author": "Health Wellness Daily",
     "featured": false,
     "image": "https://picsum.photos/seed/lower-blood-pressure-naturally-lifestyle/1200/630",
-    "status": "published"
+    "status": "published",
+    "bucket": "low_quality",
+    "seo_score_original": 75
   },
   {
     "title": "How to Reduce Screen Time Without Going Crazy",
@@ -1066,7 +1146,7 @@
     "date": "2026-05-25 17:57",
     "word_count": 709,
     "read_time": 4,
-    "seo_score": 75,
+    "seo_score": 90,
     "source": "local_llm",
     "description": "Spending too much time on your phone? These practical tips help you reduce screen time without willpower or extreme measures.",
     "reading_time": 4,
@@ -1088,7 +1168,9 @@
     "author": "Health Wellness Daily",
     "featured": false,
     "image": "https://picsum.photos/seed/reduce-screen-time-practical-tips/1200/630",
-    "status": "published"
+    "status": "published",
+    "bucket": "low_quality",
+    "seo_score_original": 75
   },
   {
     "title": "How to Start Running: A Complete Couch-to-5K Guide",
@@ -1097,7 +1179,7 @@
     "date": "2026-05-25 17:57",
     "word_count": 604,
     "read_time": 3,
-    "seo_score": 80,
+    "seo_score": 95,
     "source": "local_llm",
     "description": "Never run before? This beginner-friendly couch-to-5K guide will have you running 3.1 miles in 8 weeks. No experience needed.",
     "reading_time": 3,
@@ -1119,7 +1201,9 @@
     "author": "Health Wellness Daily",
     "featured": false,
     "image": "https://picsum.photos/seed/how-to-start-running-couch-to-5k/1200/630",
-    "status": "published"
+    "status": "published",
+    "bucket": "main",
+    "seo_score_original": 80
   },
   {
     "title": "Best Foods for Gut Health: What to Eat for a Happy Digestive System",
@@ -1128,7 +1212,7 @@
     "date": "2026-05-25 17:57",
     "word_count": 571,
     "read_time": 3,
-    "seo_score": 85,
+    "seo_score": 95,
     "source": "local_llm",
     "description": "Your gut health affects everything from mood to immunity. These are the best foods to eat (and avoid) for a healthy digestive system.",
     "reading_time": 3,
@@ -1150,7 +1234,9 @@
     "author": "Health Wellness Daily",
     "featured": false,
     "image": "https://picsum.photos/seed/best-foods-gut-health-digestive/1200/630",
-    "status": "published"
+    "status": "published",
+    "bucket": "main",
+    "seo_score_original": 85
   },
   {
     "title": "How to Build a Morning Routine That Actually Sticks",
@@ -1159,7 +1245,7 @@
     "date": "2026-05-25 17:57",
     "word_count": 642,
     "read_time": 3,
-    "seo_score": 80,
+    "seo_score": 95,
     "source": "local_llm",
     "description": "Stop failing at morning routines. This practical guide helps you build a morning habit that works with your real life, not against it.",
     "reading_time": 3,
@@ -1181,7 +1267,9 @@
     "author": "Health Wellness Daily",
     "featured": false,
     "image": "https://picsum.photos/seed/morning-routine-that-sticks/1200/630",
-    "status": "published"
+    "status": "published",
+    "bucket": "main",
+    "seo_score_original": 80
   },
   {
     "title": "How to Read Nutrition Labels: A Simple Guide to Healthier Choices",
@@ -1190,7 +1278,7 @@
     "date": "2026-05-25 17:18",
     "word_count": 674,
     "read_time": 3,
-    "seo_score": 75,
+    "seo_score": 90,
     "source": "local_llm",
     "description": "Confused by nutrition labels? This simple guide teaches you exactly what to look for, what to avoid, and how to make healthier food choices at the store.",
     "reading_time": 3,
@@ -1212,7 +1300,9 @@
     "author": "Health Wellness Daily",
     "featured": false,
     "image": "https://picsum.photos/seed/how-read-nutrition-labels-guide/1200/630",
-    "status": "published"
+    "status": "published",
+    "bucket": "low_quality",
+    "seo_score_original": 75
   },
   {
     "title": "Benefits of Stretching: 10 Minutes That Change Your Day",
@@ -1221,7 +1311,7 @@
     "date": "2026-05-25 17:18",
     "word_count": 675,
     "read_time": 3,
-    "seo_score": 75,
+    "seo_score": 90,
     "source": "local_llm",
     "description": "Stretching for just 10 minutes daily reduces pain, improves flexibility, and boosts energy. Here's a simple routine anyone can follow.",
     "reading_time": 3,
@@ -1243,7 +1333,9 @@
     "author": "Health Wellness Daily",
     "featured": false,
     "image": "https://picsum.photos/seed/benefits-stretching-daily-routine/1200/630",
-    "status": "published"
+    "status": "published",
+    "bucket": "low_quality",
+    "seo_score_original": 75
   },
   {
     "title": "Understanding Mental Health: When to Seek Help and Where to Find It",
@@ -1252,7 +1344,7 @@
     "date": "2026-05-25 17:18",
     "word_count": 622,
     "read_time": 3,
-    "seo_score": 80,
+    "seo_score": 95,
     "source": "local_llm",
     "description": "Mental health matters. Learn the signs that it's time to seek professional help, where to find affordable resources, and how to take the first step.",
     "reading_time": 3,
@@ -1274,7 +1366,9 @@
     "author": "Health Wellness Daily",
     "featured": false,
     "image": "https://picsum.photos/seed/understanding-mental-health-when-seek-help/1200/630",
-    "status": "published"
+    "status": "published",
+    "bucket": "main",
+    "seo_score_original": 80
   },
   {
     "title": "Home Workout for Beginners: No Equipment, 20 Minutes, Real Results",
@@ -1283,7 +1377,7 @@
     "date": "2026-05-25 17:18",
     "word_count": 756,
     "read_time": 4,
-    "seo_score": 80,
+    "seo_score": 95,
     "source": "local_llm",
     "description": "Get fit at home with this 20-minute beginner workout. No equipment needed, no gym required. Simple exercises anyone can do starting today.",
     "reading_time": 4,
@@ -1305,7 +1399,9 @@
     "author": "Health Wellness Daily",
     "featured": false,
     "image": "https://picsum.photos/seed/home-workout-beginners-no-equipment/1200/630",
-    "status": "published"
+    "status": "published",
+    "bucket": "main",
+    "seo_score_original": 80
   },
   {
     "title": "How to Drink More Water: Simple Tricks That Actually Work",
@@ -1314,7 +1410,7 @@
     "date": "2026-05-25 17:18",
     "word_count": 649,
     "read_time": 3,
-    "seo_score": 80,
+    "seo_score": 95,
     "source": "local_llm",
     "description": "Struggling to drink enough water? These simple, practical tricks make staying hydrated easy and automatic. No willpower needed.",
     "reading_time": 3,
@@ -1336,18 +1432,20 @@
     "author": "Health Wellness Daily",
     "featured": false,
     "image": "https://picsum.photos/seed/how-to-drink-more-water-daily-tips/1200/630",
-    "status": "published"
+    "status": "published",
+    "bucket": "main",
+    "seo_score_original": 80
   },
   {
     "title": "How to Manage Stress Without Medication: 12 Proven Techniques",
     "slug": "manage-stress-without-medication-techniques",
-    "meta_description": "Feeling overwhelmed? These 12 proven stress management techniques can help you reduce anxiety and improve your mental health \u2014 no medication needed.",
+    "meta_description": "Feeling overwhelmed? These 12 proven stress management techniques can help you reduce anxiety and improve your mental health — no medication needed.",
     "date": "2026-05-25 17:18",
     "word_count": 808,
     "read_time": 4,
-    "seo_score": 75,
+    "seo_score": 90,
     "source": "local_llm",
-    "description": "Feeling overwhelmed? These 12 proven stress management techniques can help you reduce anxiety and improve your mental health \u2014 no medication needed.",
+    "description": "Feeling overwhelmed? These 12 proven stress management techniques can help you reduce anxiety and improve your mental health — no medication needed.",
     "reading_time": 4,
     "tags": [
       "health",
@@ -1367,7 +1465,9 @@
     "author": "Health Wellness Daily",
     "featured": false,
     "image": "https://picsum.photos/seed/manage-stress-without-medication-techniques/1200/630",
-    "status": "published"
+    "status": "published",
+    "bucket": "low_quality",
+    "seo_score_original": 75
   },
   {
     "title": "Beginner's Guide to Meal Prep: Save Time, Money, and Eat Healthier",
@@ -1376,7 +1476,7 @@
     "date": "2026-05-25 17:18",
     "word_count": 643,
     "read_time": 3,
-    "seo_score": 80,
+    "seo_score": 95,
     "source": "local_llm",
     "description": "Learn how to meal prep like a pro. This beginner's guide covers planning, shopping, cooking, and storing meals for the entire week.",
     "reading_time": 3,
@@ -1398,7 +1498,9 @@
     "author": "Health Wellness Daily",
     "featured": false,
     "image": "https://picsum.photos/seed/meal-prep-beginners-guide-2026/1200/630",
-    "status": "published"
+    "status": "published",
+    "bucket": "main",
+    "seo_score_original": 80
   },
   {
     "title": "How to Sleep Better Tonight: 15 Science-Backed Tips",
@@ -1407,7 +1509,7 @@
     "date": "2026-05-25 17:18",
     "word_count": 877,
     "read_time": 4,
-    "seo_score": 80,
+    "seo_score": 95,
     "source": "local_llm",
     "description": "Can't sleep? These 15 science-backed tips will help you fall asleep faster, sleep deeper, and wake up refreshed. No supplements needed.",
     "reading_time": 4,
@@ -1429,7 +1531,9 @@
     "author": "Health Wellness Daily",
     "featured": false,
     "image": "https://picsum.photos/seed/how-to-sleep-better-tonight-tips/1200/630",
-    "status": "published"
+    "status": "published",
+    "bucket": "main",
+    "seo_score_original": 80
   },
   {
     "title": "10 Foods That Actually Boost Your Immune System (Backed by Science)",
@@ -1438,7 +1542,7 @@
     "date": "2026-05-25 17:18",
     "word_count": 719,
     "read_time": 4,
-    "seo_score": 80,
+    "seo_score": 95,
     "source": "local_llm",
     "description": "Strengthen your immune system naturally with these 10 science-backed foods. Easy to find, affordable, and delicious ways to stay healthy.",
     "reading_time": 4,
@@ -1460,7 +1564,9 @@
     "author": "Health Wellness Daily",
     "featured": false,
     "image": "https://picsum.photos/seed/foods-boost-immune-system-science/1200/630",
-    "status": "published"
+    "status": "published",
+    "bucket": "main",
+    "seo_score_original": 80
   },
   {
     "title": "How to Start Walking for Exercise: A Complete Beginner's Guide",
@@ -1469,7 +1575,7 @@
     "date": "2026-05-25 17:18",
     "word_count": 563,
     "read_time": 3,
-    "seo_score": 70,
+    "seo_score": 90,
     "source": "local_llm",
     "description": "Walking is the simplest and most effective exercise. This beginner's guide shows you how to start a walking routine that sticks.",
     "reading_time": 3,
@@ -1491,7 +1597,9 @@
     "author": "Health Wellness Daily",
     "featured": false,
     "image": "https://picsum.photos/seed/start-walking-exercise-beginners-guide/1200/630",
-    "status": "published"
+    "status": "published",
+    "bucket": "low_quality",
+    "seo_score_original": 70
   },
   {
     "title": "Healthy WV: Tips for a Better Life",
@@ -1500,7 +1608,7 @@
     "date": "2026-05-25T14:01:10.287285",
     "word_count": 1445,
     "read_time": 7,
-    "seo_score": 73,
+    "seo_score": 90,
     "source": "google_news",
     "description": "Improve your well-being with Healthy WV, offering expert health tips for a better life",
     "reading_time": 7,
@@ -1522,7 +1630,9 @@
     "author": "Health Wellness Daily",
     "featured": false,
     "image": "https://picsum.photos/seed/healthy-wv-health-tips/1200/630",
-    "status": "published"
+    "status": "published",
+    "bucket": "low_quality",
+    "seo_score_original": 73
   },
   {
     "title": "Franciscan Health Guide",
@@ -1531,7 +1641,7 @@
     "date": "2026-05-25T14:00:47.494598",
     "word_count": 1416,
     "read_time": 7,
-    "seo_score": 83,
+    "seo_score": 95,
     "source": "google_trends",
     "description": "Discover the Franciscan Health Guide, your trusted resource for healthcare information and medical expertise from Franciscan Health experts",
     "reading_time": 7,
@@ -1553,7 +1663,9 @@
     "author": "Health Wellness Daily",
     "featured": false,
     "image": "https://picsum.photos/seed/franciscan-health-guide/1200/630",
-    "status": "published"
+    "status": "published",
+    "bucket": "main",
+    "seo_score_original": 83
   },
   {
     "title": "Stretching Guide for People Who Sit All Day: 10 Minutes to Feel Human Again",
@@ -1562,7 +1674,7 @@
     "date": "2026-05-25T13:17:02.613134",
     "word_count": 608,
     "read_time": 3,
-    "seo_score": 75,
+    "seo_score": 90,
     "source": "copilot_direct",
     "description": "Sit at a desk all day? This 10-minute stretching routine targets every muscle that gets tight from sitting. Do it daily and feel the difference.",
     "reading_time": 3,
@@ -1584,7 +1696,9 @@
     "author": "Health Wellness Daily",
     "featured": false,
     "image": "https://picsum.photos/seed/stretching-guide-sit-all-day/1200/630",
-    "status": "published"
+    "status": "published",
+    "bucket": "low_quality",
+    "seo_score_original": 75
   },
   {
     "title": "Gut Health 101: Why It Matters and How to Improve It Naturally",
@@ -1593,7 +1707,7 @@
     "date": "2026-05-25T13:17:02.612742",
     "word_count": 594,
     "read_time": 2,
-    "seo_score": 65,
+    "seo_score": 90,
     "source": "copilot_direct",
     "description": "Your gut affects your immune system, mood, and energy. Here's what gut health actually means and simple ways to improve it naturally.",
     "reading_time": 2,
@@ -1615,7 +1729,9 @@
     "author": "Health Wellness Daily",
     "featured": false,
     "image": "https://picsum.photos/seed/gut-health-101-improve-naturally/1200/630",
-    "status": "published"
+    "status": "published",
+    "bucket": "low_quality",
+    "seo_score_original": 65
   },
   {
     "title": "Walking 30 Minutes a Day Changed My Life: Here's What Happens to Your Body",
@@ -1624,7 +1740,7 @@
     "date": "2026-05-25T13:17:02.612337",
     "word_count": 539,
     "read_time": 2,
-    "seo_score": 70,
+    "seo_score": 90,
     "source": "copilot_direct",
     "description": "Walking 30 minutes a day is the simplest exercise with the biggest impact. Here's exactly what happens to your body when you make it a daily habit.",
     "reading_time": 2,
@@ -1646,7 +1762,9 @@
     "author": "Health Wellness Daily",
     "featured": false,
     "image": "https://picsum.photos/seed/walking-30-minutes-day-health-benefits/1200/630",
-    "status": "published"
+    "status": "published",
+    "bucket": "low_quality",
+    "seo_score_original": 70
   },
   {
     "title": "Desk Posture Fix: How to Stop Hurting After 8 Hours at a Computer",
@@ -1655,7 +1773,7 @@
     "date": "2026-05-25T13:10:49.644916",
     "word_count": 629,
     "read_time": 3,
-    "seo_score": 80,
+    "seo_score": 95,
     "source": "copilot_direct",
     "description": "Your back, neck, and shoulders hurt because of how you sit. This guide fixes your desk posture with simple adjustments you can make today.",
     "reading_time": 3,
@@ -1677,18 +1795,20 @@
     "author": "Health Wellness Daily",
     "featured": false,
     "image": "https://picsum.photos/seed/desk-posture-fix-stop-hurting/1200/630",
-    "status": "published"
+    "status": "published",
+    "bucket": "main",
+    "seo_score_original": 80
   },
   {
     "title": "Why You're Always Tired Even When You Sleep Enough",
     "slug": "why-always-tired-enough-sleep",
-    "meta_description": "Sleeping 8 hours but still exhausted? These hidden causes of chronic fatigue explain why you're tired all the time \u2014 and how to fix it.",
+    "meta_description": "Sleeping 8 hours but still exhausted? These hidden causes of chronic fatigue explain why you're tired all the time — and how to fix it.",
     "date": "2026-05-25T13:10:49.644392",
     "word_count": 682,
     "read_time": 3,
-    "seo_score": 80,
+    "seo_score": 95,
     "source": "copilot_direct",
-    "description": "Sleeping 8 hours but still exhausted? These hidden causes of chronic fatigue explain why you're tired all the time \u2014 and how to fix it.",
+    "description": "Sleeping 8 hours but still exhausted? These hidden causes of chronic fatigue explain why you're tired all the time — and how to fix it.",
     "reading_time": 3,
     "tags": [
       "health",
@@ -1708,7 +1828,9 @@
     "author": "Health Wellness Daily",
     "featured": false,
     "image": "https://picsum.photos/seed/why-always-tired-enough-sleep/1200/630",
-    "status": "published"
+    "status": "published",
+    "bucket": "main",
+    "seo_score_original": 80
   },
   {
     "title": "Healthy Snacks That Actually Taste Good: 15 Ideas Under 200 Calories",
@@ -1717,7 +1839,7 @@
     "date": "2026-05-25T13:03:00.272381",
     "word_count": 632,
     "read_time": 3,
-    "seo_score": 75,
+    "seo_score": 90,
     "source": "copilot_direct",
     "description": "Healthy snacking doesn't mean suffering through rice cakes. These 15 snacks are under 200 calories each and actually taste delicious.",
     "reading_time": 3,
@@ -1739,7 +1861,9 @@
     "author": "Health Wellness Daily",
     "featured": false,
     "image": "https://picsum.photos/seed/healthy-snacks-taste-good-under-200-calories/1200/630",
-    "status": "published"
+    "status": "published",
+    "bucket": "low_quality",
+    "seo_score_original": 75
   },
   {
     "title": "Intermittent Fasting for Beginners: A No-Nonsense Guide",
@@ -1748,7 +1872,7 @@
     "date": "2026-05-25T13:03:00.271507",
     "word_count": 536,
     "read_time": 2,
-    "seo_score": 70,
+    "seo_score": 90,
     "source": "copilot_direct",
     "description": "Curious about intermittent fasting? This beginner's guide explains what it is, how to start, what to expect, and whether it actually works for weight loss.",
     "reading_time": 2,
@@ -1770,7 +1894,9 @@
     "author": "Health Wellness Daily",
     "featured": false,
     "image": "https://picsum.photos/seed/intermittent-fasting-beginners-guide-2026/1200/630",
-    "status": "published"
+    "status": "published",
+    "bucket": "low_quality",
+    "seo_score_original": 70
   },
   {
     "title": "Summer Health Tips",
@@ -1779,7 +1905,7 @@
     "date": "2026-05-25T13:01:06.600547",
     "word_count": 1823,
     "read_time": 9,
-    "seo_score": 70,
+    "seo_score": 90,
     "source": "google_news",
     "description": "Stay healthy this summer with our expert health tips, learn how to maintain a healthy lifestyle during summer",
     "reading_time": 9,
@@ -1801,18 +1927,20 @@
     "author": "Health Wellness Daily",
     "featured": false,
     "image": "https://picsum.photos/seed/summer-health-tips/1200/630",
-    "status": "published"
+    "status": "published",
+    "bucket": "low_quality",
+    "seo_score_original": 70
   },
   {
     "title": "Mental Health Days: Why Taking a Day Off Is Not Laziness",
     "slug": "mental-health-days-not-laziness",
-    "meta_description": "Feeling burned out? Taking a mental health day isn't being lazy \u2014 it's necessary for long-term productivity. Here's why and how to do it right.",
+    "meta_description": "Feeling burned out? Taking a mental health day isn't being lazy — it's necessary for long-term productivity. Here's why and how to do it right.",
     "date": "2026-05-25T12:55:19.044417",
     "word_count": 588,
     "read_time": 2,
-    "seo_score": 85,
+    "seo_score": 95,
     "source": "copilot_direct",
-    "description": "Feeling burned out? Taking a mental health day isn't being lazy \u2014 it's necessary for long-term productivity. Here's why and how to do it right.",
+    "description": "Feeling burned out? Taking a mental health day isn't being lazy — it's necessary for long-term productivity. Here's why and how to do it right.",
     "reading_time": 2,
     "tags": [
       "health",
@@ -1832,7 +1960,9 @@
     "author": "Health Wellness Daily",
     "featured": false,
     "image": "https://picsum.photos/seed/mental-health-days-not-laziness/1200/630",
-    "status": "published"
+    "status": "published",
+    "bucket": "main",
+    "seo_score_original": 85
   },
   {
     "title": "How Much Protein Do You Actually Need? The Simple Answer",
@@ -1841,7 +1971,7 @@
     "date": "2026-05-25T12:55:19.043940",
     "word_count": 470,
     "read_time": 2,
-    "seo_score": 70,
+    "seo_score": 90,
     "source": "copilot_direct",
     "description": "The internet says you need 200g of protein daily. Science says otherwise. Here's exactly how much protein you actually need based on your goals.",
     "reading_time": 2,
@@ -1863,7 +1993,9 @@
     "author": "Health Wellness Daily",
     "featured": false,
     "image": "https://picsum.photos/seed/how-much-protein-do-you-need/1200/630",
-    "status": "published"
+    "status": "published",
+    "bucket": "low_quality",
+    "seo_score_original": 70
   },
   {
     "title": "How to Build a Simple Skincare Routine That Actually Works",
@@ -1872,7 +2004,7 @@
     "date": "2026-05-25T12:55:19.043252",
     "word_count": 561,
     "read_time": 2,
-    "seo_score": 70,
+    "seo_score": 90,
     "source": "copilot_direct",
     "description": "Overwhelmed by skincare products? This beginner's guide breaks it down to just 3 steps. Clear, healthy skin doesn't require 10 products.",
     "reading_time": 2,
@@ -1894,7 +2026,9 @@
     "author": "Health Wellness Daily",
     "featured": false,
     "image": "https://picsum.photos/seed/simple-skincare-routine-beginners/1200/630",
-    "status": "published"
+    "status": "published",
+    "bucket": "low_quality",
+    "seo_score_original": 70
   },
   {
     "title": "Gut Health 101: What It Is, Why It Matters, and How to Improve It",
@@ -1903,7 +2037,7 @@
     "date": "2026-05-25T12:47:24.571281",
     "word_count": 561,
     "read_time": 2,
-    "seo_score": 70,
+    "seo_score": 90,
     "source": "copilot_direct",
     "description": "Your gut affects everything from mood to immunity. This beginner's guide explains gut health in simple terms and gives you actionable steps to improve it.",
     "reading_time": 2,
@@ -1925,7 +2059,9 @@
     "author": "Health Wellness Daily",
     "featured": false,
     "image": "https://picsum.photos/seed/gut-health-101-improve-digestion/1200/630",
-    "status": "published"
+    "status": "published",
+    "bucket": "low_quality",
+    "seo_score_original": 70
   },
   {
     "title": "Why You're Tired All the Time: 7 Surprising Reasons (and Fixes)",
@@ -1934,7 +2070,7 @@
     "date": "2026-05-25T12:47:24.569719",
     "word_count": 684,
     "read_time": 3,
-    "seo_score": 80,
+    "seo_score": 95,
     "source": "copilot_direct",
     "description": "Always feeling exhausted even after sleeping 8 hours? These 7 surprising reasons explain chronic tiredness and what you can actually do about it.",
     "reading_time": 3,
@@ -1956,7 +2092,9 @@
     "author": "Health Wellness Daily",
     "featured": false,
     "image": "https://picsum.photos/seed/why-tired-all-the-time-reasons-fixes/1200/630",
-    "status": "published"
+    "status": "published",
+    "bucket": "main",
+    "seo_score_original": 80
   },
   {
     "title": "How to Fix Your Posture: 6 Exercises You Can Do at Your Desk",
@@ -1965,7 +2103,7 @@
     "date": "2026-05-25T12:47:24.569031",
     "word_count": 511,
     "read_time": 2,
-    "seo_score": 70,
+    "seo_score": 90,
     "source": "copilot_direct",
     "description": "Sitting at a desk all day ruins your posture. These 6 simple exercises fix it without leaving your chair. Your back and neck will thank you.",
     "reading_time": 2,
@@ -1987,7 +2125,9 @@
     "author": "Health Wellness Daily",
     "featured": false,
     "image": "https://picsum.photos/seed/fix-posture-exercises-at-desk/1200/630",
-    "status": "published"
+    "status": "published",
+    "bucket": "low_quality",
+    "seo_score_original": 70
   },
   {
     "title": "What to Eat Before and After a Workout: Simple Guide for Real Results",
@@ -1996,7 +2136,7 @@
     "date": "2026-05-25T12:38:37.334222",
     "word_count": 558,
     "read_time": 2,
-    "seo_score": 70,
+    "seo_score": 90,
     "source": "copilot_direct",
     "description": "Confused about pre-workout and post-workout nutrition? This simple guide tells you exactly what to eat before and after exercise for maximum results.",
     "reading_time": 2,
@@ -2018,7 +2158,9 @@
     "author": "Health Wellness Daily",
     "featured": false,
     "image": "https://picsum.photos/seed/what-to-eat-before-after-workout/1200/630",
-    "status": "published"
+    "status": "published",
+    "bucket": "low_quality",
+    "seo_score_original": 70
   },
   {
     "title": "The 5-Minute Breathing Exercise That Reduces Stress Instantly",
@@ -2027,7 +2169,7 @@
     "date": "2026-05-25T12:38:37.333676",
     "word_count": 524,
     "read_time": 2,
-    "seo_score": 70,
+    "seo_score": 90,
     "source": "copilot_direct",
     "description": "This simple 5-minute breathing exercise is scientifically proven to reduce stress, lower blood pressure, and calm your mind. Try it anywhere, anytime.",
     "reading_time": 2,
@@ -2049,7 +2191,9 @@
     "author": "Health Wellness Daily",
     "featured": false,
     "image": "https://picsum.photos/seed/5-minute-breathing-exercise-reduce-stress/1200/630",
-    "status": "published"
+    "status": "published",
+    "bucket": "low_quality",
+    "seo_score_original": 70
   },
   {
     "title": "How to Drink More Water Without Even Thinking About It: 8 Simple Tricks",
@@ -2080,7 +2224,9 @@
     "author": "Health Wellness Daily",
     "featured": false,
     "image": "https://picsum.photos/seed/how-to-drink-more-water-simple-tricks/1200/630",
-    "status": "published"
+    "status": "published",
+    "bucket": "main",
+    "seo_score_original": 95
   },
   {
     "title": "Morning Stretching Routine: 10 Stretches You Can Do in Bed Before Getting Up",
@@ -2089,7 +2235,7 @@
     "date": "2026-05-25T12:15:37.034121",
     "word_count": 881,
     "read_time": 4,
-    "seo_score": 75,
+    "seo_score": 90,
     "source": "copilot_direct",
     "description": "Start your day right with these 10 easy morning stretches you can do in bed. Takes just 5 minutes and helps reduce stiffness, back pain, and morning grogginess.",
     "reading_time": 4,
@@ -2111,18 +2257,20 @@
     "author": "Health Wellness Daily",
     "featured": false,
     "image": "https://picsum.photos/seed/morning-stretching-routine-in-bed/1200/630",
-    "status": "published"
+    "status": "published",
+    "bucket": "low_quality",
+    "seo_score_original": 75
   },
   {
-    "title": "Indoor Sauna Therapy For Better Health: Complete Wellness Buyer\u2019S Guide For 2026",
+    "title": "Indoor Sauna Therapy For Better Health: Complete Wellness Buyer’S Guide For 2026",
     "slug": "indoor-sauna-therapy-for-better-health-complete-wellness-buyers-guide-for-2026",
-    "meta_description": "Complete guide to Indoor Sauna Therapy for Better Health: Complete Wellness Buyer\u2019s Guide for 2026. Expert tips, step-by-step advice, and FAQs for US healt",
+    "meta_description": "Complete guide to Indoor Sauna Therapy for Better Health: Complete Wellness Buyer’s Guide for 2026. Expert tips, step-by-step advice, and FAQs for US healt",
     "date": "2026-05-25T01:19:06.485271",
     "word_count": 794,
     "read_time": 3,
-    "seo_score": 83,
+    "seo_score": 95,
     "source": "template",
-    "description": "Complete guide to Indoor Sauna Therapy for Better Health: Complete Wellness Buyer\u2019s Guide for 2026. Expert tips, step-by-step advice, and FAQs for US healt",
+    "description": "Complete guide to Indoor Sauna Therapy for Better Health: Complete Wellness Buyer’s Guide for 2026. Expert tips, step-by-step advice, and FAQs for US healt",
     "reading_time": 3,
     "tags": [
       "health",
@@ -2142,18 +2290,20 @@
     "author": "Health Wellness Daily",
     "featured": false,
     "image": "https://picsum.photos/seed/indoor-sauna-therapy-for-better-health-complete-wellness-buyers-guide-for-2026/1200/630",
-    "status": "published"
+    "status": "published",
+    "bucket": "main",
+    "seo_score_original": 83
   },
   {
-    "title": "For What It\u2019S Worth: Memorial Day Sales Are Only Worth Shopping If You Know Exactly What Not To Buy",
+    "title": "For What It’S Worth: Memorial Day Sales Are Only Worth Shopping If You Know Exactly What Not To Buy",
     "slug": "for-what-its-worth-memorial-day-sales-are-only-worth-shopping-if-you-know-exactly-what-not-to-buy",
-    "meta_description": "Complete guide to For What It\u2019s Worth: Memorial Day sales are only worth shopping if you know exactly what not to buy. Expert tips, step-by-step advice, an",
+    "meta_description": "Complete guide to For What It’s Worth: Memorial Day sales are only worth shopping if you know exactly what not to buy. Expert tips, step-by-step advice, an",
     "date": "2026-05-25T01:18:15.354497",
     "word_count": 885,
     "read_time": 3,
-    "seo_score": 83,
+    "seo_score": 95,
     "source": "template",
-    "description": "Complete guide to For What It\u2019s Worth: Memorial Day sales are only worth shopping if you know exactly what not to buy. Expert tips, step-by-step advice, an",
+    "description": "Complete guide to For What It’s Worth: Memorial Day sales are only worth shopping if you know exactly what not to buy. Expert tips, step-by-step advice, an",
     "reading_time": 3,
     "tags": [
       "health",
@@ -2173,7 +2323,9 @@
     "author": "Health Wellness Daily",
     "featured": false,
     "image": "https://picsum.photos/seed/for-what-its-worth-memorial-day-sales-are-only-worth-shopping-if-you-know-exactly-what-not-to-buy/1200/630",
-    "status": "published"
+    "status": "published",
+    "bucket": "main",
+    "seo_score_original": 83
   },
   {
     "title": "Weekly Health Horoscope Predictions, May 24 To May 30, 2026: Tips For Wellness And Balance Based On Each",
@@ -2182,7 +2334,7 @@
     "date": "2026-05-25T00:49:45.836640",
     "word_count": 859,
     "read_time": 3,
-    "seo_score": 83,
+    "seo_score": 95,
     "source": "template",
     "description": "Complete guide to Weekly Health Horoscope Predictions, May 24 to May 30, 2026: Tips for wellness and balance based on each. Expert tips, step-by-step advic",
     "reading_time": 3,
@@ -2204,7 +2356,9 @@
     "author": "Health Wellness Daily",
     "featured": false,
     "image": "https://picsum.photos/seed/weekly-health-horoscope-predictions-may-24-to-may-30-2026-tips-for-wellness-and-balance-based-on-each/1200/630",
-    "status": "published"
+    "status": "published",
+    "bucket": "main",
+    "seo_score_original": 83
   },
   {
     "title": "Intermittent Fasting: Does It Actually Work for Weight Loss?",
@@ -2213,7 +2367,7 @@
     "date": "2026-05-25T00:20:46.199961",
     "word_count": 736,
     "read_time": 3,
-    "seo_score": 80,
+    "seo_score": 95,
     "source": "local_llm",
     "description": "Intermittent fasting is everywhere, but does it actually help you lose weight? We examine the evidence, who it works for, and common mistakes to avoid.",
     "reading_time": 3,
@@ -2235,7 +2389,9 @@
     "author": "Health Wellness Daily",
     "featured": false,
     "image": "https://picsum.photos/seed/intermittent-fasting-weight-loss-does-it-work/1200/630",
-    "status": "published"
+    "status": "published",
+    "bucket": "main",
+    "seo_score_original": 80
   },
   {
     "title": "The Real Benefits of Walking 10,000 Steps a Day: What Science Says",
@@ -2244,7 +2400,7 @@
     "date": "2026-05-25T00:20:46.198877",
     "word_count": 636,
     "read_time": 3,
-    "seo_score": 80,
+    "seo_score": 95,
     "source": "local_llm",
     "description": "Is 10,000 steps a day really the magic number? We look at the actual research on walking benefits, how many steps you really need, and how to build the habit.",
     "reading_time": 3,
@@ -2266,7 +2422,9 @@
     "author": "Health Wellness Daily",
     "featured": false,
     "image": "https://picsum.photos/seed/benefits-walking-10000-steps-daily-science/1200/630",
-    "status": "published"
+    "status": "published",
+    "bucket": "main",
+    "seo_score_original": 80
   },
   {
     "title": "Sleep Hygiene: 8 Proven Habits for Better Sleep Tonight",
@@ -2275,7 +2433,7 @@
     "date": "2026-05-24T23:54:46.494353",
     "word_count": 870,
     "read_time": 4,
-    "seo_score": 80,
+    "seo_score": 95,
     "source": "local_llm",
     "description": "Struggling to sleep? These 8 evidence-based sleep hygiene habits help you fall asleep faster, stay asleep longer, and wake up refreshed. No supplements needed.",
     "reading_time": 4,
@@ -2297,7 +2455,9 @@
     "author": "Health Wellness Daily",
     "featured": false,
     "image": "https://picsum.photos/seed/sleep-hygiene-8-habits-better-sleep/1200/630",
-    "status": "published"
+    "status": "published",
+    "bucket": "main",
+    "seo_score_original": 80
   },
   {
     "title": "How Much Water Should You Really Drink Per Day? The Science Explained",
@@ -2306,7 +2466,7 @@
     "date": "2026-05-24T23:54:46.493566",
     "word_count": 668,
     "read_time": 3,
-    "seo_score": 80,
+    "seo_score": 95,
     "source": "local_llm",
     "description": "Forget the 8 glasses a day myth. Here's what science actually says about daily water intake, signs of dehydration, and practical hydration tips for Americans.",
     "reading_time": 3,
@@ -2328,18 +2488,20 @@
     "author": "Health Wellness Daily",
     "featured": false,
     "image": "https://picsum.photos/seed/how-much-water-should-you-drink-daily/1200/630",
-    "status": "published"
+    "status": "published",
+    "bucket": "main",
+    "seo_score_original": 80
   },
   {
     "title": "Walking vs. Running: Which Is Actually Better for Your Health?",
     "slug": "walking-vs-running-which-is-healthier",
-    "meta_description": "Walking or running \u2014 which is better for weight loss, heart health, and longevity? We break down the science so you can choose the right exercise for your go...",
+    "meta_description": "Walking or running — which is better for weight loss, heart health, and longevity? We break down the science so you can choose the right exercise for your go...",
     "date": "2026-05-24T23:46:43.258524",
     "word_count": 690,
     "read_time": 3,
-    "seo_score": 80,
+    "seo_score": 95,
     "source": "local_llm",
-    "description": "Walking or running \u2014 which is better for weight loss, heart health, and longevity? We break down the science so you can choose the right exercise for your go...",
+    "description": "Walking or running — which is better for weight loss, heart health, and longevity? We break down the science so you can choose the right exercise for your go...",
     "reading_time": 3,
     "tags": [
       "health",
@@ -2359,7 +2521,9 @@
     "author": "Health Wellness Daily",
     "featured": false,
     "image": "https://picsum.photos/seed/walking-vs-running-which-is-healthier/1200/630",
-    "status": "published"
+    "status": "published",
+    "bucket": "main",
+    "seo_score_original": 80
   },
   {
     "title": "The 20-Minute Morning Routine That Changed How 10,000 Americans Start Their Day",
@@ -2368,7 +2532,7 @@
     "date": "2026-05-24T23:46:43.257354",
     "word_count": 560,
     "read_time": 2,
-    "seo_score": 70,
+    "seo_score": 90,
     "source": "local_llm",
     "description": "Discover the simple 20-minute morning routine backed by wellness experts that helps thousands of Americans improve energy, focus, and mood every single day.",
     "reading_time": 2,
@@ -2390,6 +2554,8 @@
     "author": "Health Wellness Daily",
     "featured": false,
     "image": "https://picsum.photos/seed/20-minute-morning-routine-better-health/1200/630",
-    "status": "published"
+    "status": "published",
+    "bucket": "low_quality",
+    "seo_score_original": 70
   }
 ]

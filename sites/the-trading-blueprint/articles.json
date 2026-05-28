@@ -6,7 +6,7 @@
     "date": "2026-05-26T12:00:00.000000",
     "word_count": 1100,
     "read_time": 5,
-    "seo_score": 80,
+    "seo_score": 95,
     "source": "copilot_direct",
     "category": "trading",
     "tags": [
@@ -16,7 +16,9 @@
     "author": "The Trading Blueprint",
     "featured": false,
     "image": "https://picsum.photos/seed/crypto-trading-beginners-bitcoin-ethereum/1200/630",
-    "status": "published"
+    "status": "published",
+    "bucket": "main",
+    "seo_score_original": 80
   },
   {
     "title": "12 Common Trading Mistakes That Destroy Accounts (And How to Fix Them)",
@@ -25,7 +27,7 @@
     "date": "2026-05-26T12:00:00.000000",
     "word_count": 1050,
     "read_time": 4,
-    "seo_score": 80,
+    "seo_score": 95,
     "source": "copilot_direct",
     "category": "trading",
     "tags": [
@@ -36,7 +38,9 @@
     "author": "The Trading Blueprint",
     "featured": false,
     "image": "https://picsum.photos/seed/common-trading-mistakes-destroy-accounts/1200/630",
-    "status": "published"
+    "status": "published",
+    "bucket": "main",
+    "seo_score_original": 80
   },
   {
     "title": "Paper Trading: Why You Must Practice Before Risking Real Money",
@@ -45,7 +49,7 @@
     "date": "2026-05-26T12:00:00.000000",
     "word_count": 900,
     "read_time": 4,
-    "seo_score": 80,
+    "seo_score": 95,
     "source": "copilot_direct",
     "category": "trading",
     "tags": [
@@ -55,7 +59,9 @@
     "author": "The Trading Blueprint",
     "featured": false,
     "image": "https://picsum.photos/seed/paper-trading-practice-before-real-money/1200/630",
-    "status": "published"
+    "status": "published",
+    "bucket": "main",
+    "seo_score_original": 80
   },
   {
     "title": "Support and Resistance: How to Find Key Price Levels That Matter",
@@ -64,7 +70,7 @@
     "date": "2026-05-26T12:00:00.000000",
     "word_count": 1000,
     "read_time": 4,
-    "seo_score": 80,
+    "seo_score": 95,
     "source": "copilot_direct",
     "category": "trading",
     "tags": [
@@ -75,7 +81,9 @@
     "author": "The Trading Blueprint",
     "featured": false,
     "image": "https://picsum.photos/seed/support-resistance-find-key-price-levels/1200/630",
-    "status": "published"
+    "status": "published",
+    "bucket": "main",
+    "seo_score_original": 80
   },
   {
     "title": "Moving Averages Explained: SMA vs EMA Trading Strategies",
@@ -84,7 +92,7 @@
     "date": "2026-05-26T12:00:00.000000",
     "word_count": 1000,
     "read_time": 4,
-    "seo_score": 80,
+    "seo_score": 95,
     "source": "copilot_direct",
     "category": "trading",
     "tags": [
@@ -95,7 +103,9 @@
     "author": "The Trading Blueprint",
     "featured": false,
     "image": "https://picsum.photos/seed/moving-averages-sma-vs-ema-trading-strategies/1200/630",
-    "status": "published"
+    "status": "published",
+    "bucket": "main",
+    "seo_score_original": 80
   },
   {
     "title": "10 Candlestick Patterns Every Trader Must Know",
@@ -104,7 +114,7 @@
     "date": "2026-05-26T12:00:00.000000",
     "word_count": 1150,
     "read_time": 5,
-    "seo_score": 80,
+    "seo_score": 95,
     "source": "copilot_direct",
     "category": "trading",
     "tags": [
@@ -115,7 +125,9 @@
     "author": "The Trading Blueprint",
     "featured": false,
     "image": "https://picsum.photos/seed/candlestick-patterns-every-trader-must-know/1200/630",
-    "status": "published"
+    "status": "published",
+    "bucket": "main",
+    "seo_score_original": 80
   },
   {
     "title": "How to Build a Trading Plan That Actually Works",
@@ -124,7 +136,7 @@
     "date": "2026-05-26T12:00:00.000000",
     "word_count": 1050,
     "read_time": 4,
-    "seo_score": 80,
+    "seo_score": 95,
     "source": "copilot_direct",
     "category": "trading",
     "tags": [
@@ -134,7 +146,9 @@
     "author": "The Trading Blueprint",
     "featured": false,
     "image": "https://picsum.photos/seed/build-trading-plan-that-works/1200/630",
-    "status": "published"
+    "status": "published",
+    "bucket": "main",
+    "seo_score_original": 80
   },
   {
     "title": "Trading Psychology: How to Master Your Emotions and Stop Losing Money",
@@ -143,7 +157,7 @@
     "date": "2026-05-26T12:00:00.000000",
     "word_count": 1100,
     "read_time": 5,
-    "seo_score": 80,
+    "seo_score": 95,
     "source": "copilot_direct",
     "category": "trading",
     "tags": [
@@ -153,7 +167,9 @@
     "author": "The Trading Blueprint",
     "featured": false,
     "image": "https://picsum.photos/seed/trading-psychology-master-emotions-stop-losing/1200/630",
-    "status": "published"
+    "status": "published",
+    "bucket": "main",
+    "seo_score_original": 80
   },
   {
     "title": "Forex Trading Basics: Currency Pairs, Pips, and How to Start",
@@ -162,7 +178,7 @@
     "date": "2026-05-26T12:00:00.000000",
     "word_count": 1100,
     "read_time": 5,
-    "seo_score": 80,
+    "seo_score": 95,
     "source": "copilot_direct",
     "category": "trading",
     "tags": [
@@ -172,7 +188,9 @@
     "author": "The Trading Blueprint",
     "featured": false,
     "image": "https://picsum.photos/seed/forex-trading-basics-currency-pairs-pips/1200/630",
-    "status": "published"
+    "status": "published",
+    "bucket": "main",
+    "seo_score_original": 80
   },
   {
     "title": "Options Trading Explained: Calls, Puts, and Strategies for Beginners",
@@ -181,7 +199,7 @@
     "date": "2026-05-26T12:00:00.000000",
     "word_count": 1200,
     "read_time": 5,
-    "seo_score": 80,
+    "seo_score": 95,
     "source": "copilot_direct",
     "category": "trading",
     "tags": [
@@ -192,7 +210,9 @@
     "author": "The Trading Blueprint",
     "featured": false,
     "image": "https://picsum.photos/seed/options-trading-explained-calls-puts-beginners/1200/630",
-    "status": "published"
+    "status": "published",
+    "bucket": "main",
+    "seo_score_original": 80
   },
   {
     "title": "Best Trading Platforms and Brokers for 2026: Honest Comparison",
@@ -201,7 +221,7 @@
     "date": "2026-05-26T12:00:00.000000",
     "word_count": 1050,
     "read_time": 4,
-    "seo_score": 80,
+    "seo_score": 95,
     "source": "copilot_direct",
     "category": "trading",
     "tags": [
@@ -212,7 +232,9 @@
     "author": "The Trading Blueprint",
     "featured": false,
     "image": "https://picsum.photos/seed/best-trading-platforms-brokers-2026/1200/630",
-    "status": "published"
+    "status": "published",
+    "bucket": "main",
+    "seo_score_original": 80
   },
   {
     "title": "Risk Management: The #1 Skill Every Trader Needs to Master",
@@ -221,7 +243,7 @@
     "date": "2026-05-26T12:00:00.000000",
     "word_count": 1150,
     "read_time": 5,
-    "seo_score": 80,
+    "seo_score": 95,
     "source": "copilot_direct",
     "category": "trading",
     "tags": [
@@ -232,7 +254,9 @@
     "author": "The Trading Blueprint",
     "featured": false,
     "image": "https://picsum.photos/seed/risk-management-trading-skill-master/1200/630",
-    "status": "published"
+    "status": "published",
+    "bucket": "main",
+    "seo_score_original": 80
   },
   {
     "title": "Day Trading vs Swing Trading: Which Style Fits You?",
@@ -241,7 +265,7 @@
     "date": "2026-05-26T12:00:00.000000",
     "word_count": 1100,
     "read_time": 5,
-    "seo_score": 80,
+    "seo_score": 95,
     "source": "copilot_direct",
     "category": "trading",
     "tags": [
@@ -252,7 +276,9 @@
     "author": "The Trading Blueprint",
     "featured": false,
     "image": "https://picsum.photos/seed/day-trading-vs-swing-trading-which-style/1200/630",
-    "status": "published"
+    "status": "published",
+    "bucket": "main",
+    "seo_score_original": 80
   },
   {
     "title": "Technical Analysis 101: How to Read Stock Charts Like a Pro",
@@ -261,7 +287,7 @@
     "date": "2026-05-26T12:00:00.000000",
     "word_count": 1180,
     "read_time": 5,
-    "seo_score": 80,
+    "seo_score": 95,
     "source": "copilot_direct",
     "category": "trading",
     "tags": [
@@ -272,7 +298,9 @@
     "author": "The Trading Blueprint",
     "featured": false,
     "image": "https://picsum.photos/seed/technical-analysis-101-read-stock-charts/1200/630",
-    "status": "published"
+    "status": "published",
+    "bucket": "main",
+    "seo_score_original": 80
   },
   {
     "title": "Stock Trading for Beginners: How to Start in 2026",
@@ -281,7 +309,7 @@
     "date": "2026-05-26T12:00:00.000000",
     "word_count": 1250,
     "read_time": 5,
-    "seo_score": 80,
+    "seo_score": 95,
     "source": "copilot_direct",
     "category": "trading",
     "tags": [
@@ -292,7 +320,9 @@
     "author": "The Trading Blueprint",
     "featured": false,
     "image": "https://picsum.photos/seed/stock-trading-beginners-how-to-start-2026/1200/630",
-    "status": "published"
+    "status": "published",
+    "bucket": "main",
+    "seo_score_original": 80
   },
   {
     "title": "Why Gold and Silver Prices Are at Record Highs in 2026",
@@ -301,7 +331,7 @@
     "date": "2026-05-27T12:00:00.000000",
     "word_count": 1800,
     "read_time": 7,
-    "seo_score": 85,
+    "seo_score": 95,
     "source": "copilot_direct",
     "category": "trading",
     "tags": [
@@ -313,7 +343,9 @@
     "author": "The Trading Blueprint",
     "featured": false,
     "image": "https://images.unsplash.com/photo-1610375461246-83df859d849d?w=1200&h=630&fit=crop",
-    "status": "published"
+    "status": "published",
+    "bucket": "main",
+    "seo_score_original": 85
   },
   {
     "title": "Why Indian Stock Markets Are Stuck: 7 Reasons Behind the Stagnation",
@@ -322,7 +354,7 @@
     "date": "2026-05-27T12:00:00.000000",
     "word_count": 1600,
     "read_time": 6,
-    "seo_score": 85,
+    "seo_score": 95,
     "source": "copilot_direct",
     "category": "trading",
     "tags": [
@@ -333,7 +365,9 @@
     "author": "The Trading Blueprint",
     "featured": false,
     "image": "https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w=1200&h=630&fit=crop",
-    "status": "published"
+    "status": "published",
+    "bucket": "main",
+    "seo_score_original": 85
   },
   {
     "title": "Why Gold and Silver Prices Are at Record Highs in 2026",
@@ -342,7 +376,7 @@
     "date": "2026-05-27T12:00:00.000000",
     "word_count": 1800,
     "read_time": 7,
-    "seo_score": 85,
+    "seo_score": 95,
     "source": "copilot_direct",
     "category": "trading",
     "tags": [
@@ -354,7 +388,9 @@
     "author": "The Trading Blueprint",
     "featured": false,
     "image": "https://images.unsplash.com/photo-1610375461246-83df859d849d?w=1200&h=630&fit=crop",
-    "status": "published"
+    "status": "published",
+    "bucket": "main",
+    "seo_score_original": 85
   },
   {
     "title": "Why Indian Stock Markets Are Stuck: 7 Reasons Behind the Stagnation",
@@ -363,7 +399,7 @@
     "date": "2026-05-27T12:00:00.000000",
     "word_count": 1600,
     "read_time": 6,
-    "seo_score": 85,
+    "seo_score": 95,
     "source": "copilot_direct",
     "category": "trading",
     "tags": [
@@ -374,6 +410,8 @@
     "author": "The Trading Blueprint",
     "featured": false,
     "image": "https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w=1200&h=630&fit=crop",
-    "status": "published"
+    "status": "published",
+    "bucket": "main",
+    "seo_score_original": 85
   }
 ]

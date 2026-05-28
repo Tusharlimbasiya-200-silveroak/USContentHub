@@ -6,7 +6,7 @@
     "date": "2026-05-26",
     "word_count": 762,
     "read_time": 2,
-    "seo_score": 80,
+    "seo_score": 95,
     "source": "copilot_direct",
     "category": "general",
     "tags": [
@@ -17,7 +17,9 @@
     "author": "Usa News Digest",
     "featured": false,
     "image": "https://picsum.photos/seed/why-car-insurance-expensive-2026-causes-tips/1200/630",
-    "status": "published"
+    "status": "published",
+    "bucket": "main",
+    "seo_score_original": 80
   },
   {
     "title": "Federal Reserve Explained: How It Affects Your Money",
@@ -26,7 +28,7 @@
     "date": "2026-05-26",
     "word_count": 773,
     "read_time": 3,
-    "seo_score": 80,
+    "seo_score": 95,
     "source": "copilot_direct",
     "category": "general",
     "tags": [
@@ -37,7 +39,9 @@
     "author": "Usa News Digest",
     "featured": false,
     "image": "https://picsum.photos/seed/federal-reserve-explained-how-affects-your-money/1200/630",
-    "status": "published"
+    "status": "published",
+    "bucket": "main",
+    "seo_score_original": 80
   },
   {
     "title": "US Immigration System Explained: Visas, Green Cards, Citi...",
@@ -46,7 +50,7 @@
     "date": "2026-05-26",
     "word_count": 748,
     "read_time": 2,
-    "seo_score": 80,
+    "seo_score": 95,
     "source": "copilot_direct",
     "category": "general",
     "tags": [
@@ -57,7 +61,9 @@
     "author": "Usa News Digest",
     "featured": false,
     "image": "https://picsum.photos/seed/us-immigration-system-visas-green-cards-citizenship/1200/630",
-    "status": "published"
+    "status": "published",
+    "bucket": "main",
+    "seo_score_original": 80
   },
   {
     "title": "Why Groceries Are Expensive in 2026: Causes Explained",
@@ -66,7 +72,7 @@
     "date": "2026-05-26",
     "word_count": 750,
     "read_time": 2,
-    "seo_score": 80,
+    "seo_score": 95,
     "source": "copilot_direct",
     "category": "general",
     "tags": [
@@ -77,7 +83,9 @@
     "author": "Usa News Digest",
     "featured": false,
     "image": "https://picsum.photos/seed/why-groceries-expensive-2026-causes-explained/1200/630",
-    "status": "published"
+    "status": "published",
+    "bucket": "main",
+    "seo_score_original": 80
   },
   {
     "title": "US Education System Explained: Schools to College",
@@ -86,7 +94,7 @@
     "date": "2026-05-26",
     "word_count": 750,
     "read_time": 2,
-    "seo_score": 80,
+    "seo_score": 95,
     "source": "copilot_direct",
     "category": "general",
     "tags": [
@@ -97,7 +105,9 @@
     "author": "Usa News Digest",
     "featured": false,
     "image": "https://picsum.photos/seed/us-education-system-explained-schools-to-college/1200/630",
-    "status": "published"
+    "status": "published",
+    "bucket": "main",
+    "seo_score_original": 80
   },
   {
     "title": "US Healthcare Options Explained: Insurance Types Guide",
@@ -106,7 +116,7 @@
     "date": "2026-05-26",
     "word_count": 761,
     "read_time": 3,
-    "seo_score": 80,
+    "seo_score": 95,
     "source": "copilot_direct",
     "category": "general",
     "tags": [
@@ -117,7 +127,9 @@
     "author": "Usa News Digest",
     "featured": false,
     "image": "https://picsum.photos/seed/us-healthcare-options-insurance-medicare-medicaid/1200/630",
-    "status": "published"
+    "status": "published",
+    "bucket": "main",
+    "seo_score_original": 80
   },
   {
     "title": "How Congress Works: Simple Guide to US Legislature",
@@ -126,7 +138,7 @@
     "date": "2026-05-26",
     "word_count": 766,
     "read_time": 2,
-    "seo_score": 80,
+    "seo_score": 95,
     "source": "copilot_direct",
     "category": "general",
     "tags": [
@@ -137,7 +149,9 @@
     "author": "Usa News Digest",
     "featured": false,
     "image": "https://picsum.photos/seed/how-congress-works-simple-guide-us-legislature/1200/630",
-    "status": "published"
+    "status": "published",
+    "bucket": "main",
+    "seo_score_original": 80
   },
   {
     "title": "US National Debt Explained: What It Means for You",
@@ -146,7 +160,7 @@
     "date": "2026-05-26",
     "word_count": 771,
     "read_time": 2,
-    "seo_score": 80,
+    "seo_score": 95,
     "source": "copilot_direct",
     "category": "general",
     "tags": [
@@ -157,7 +171,9 @@
     "author": "Usa News Digest",
     "featured": false,
     "image": "https://picsum.photos/seed/us-national-debt-explained-what-it-means/1200/630",
-    "status": "published"
+    "status": "published",
+    "bucket": "main",
+    "seo_score_original": 80
   },
   {
     "title": "What Americans Actually Spend Their Money On in 2026",
@@ -166,7 +182,7 @@
     "date": "2026-05-25T22:31:07.435698",
     "word_count": 531,
     "read_time": 2,
-    "seo_score": 70,
+    "seo_score": 90,
     "source": "copilot_direct",
     "description": "See exactly where the average American's money goes in 2026. Housing, food, transportation, healthcare, and entertainment spending data broken down by category.",
     "reading_time": 2,
@@ -188,7 +204,9 @@
     "author": "Usa News Digest",
     "featured": false,
     "image": "https://picsum.photos/seed/what-americans-spend-money-on-2026-breakdown/1200/630",
-    "status": "published"
+    "status": "published",
+    "bucket": "low_quality",
+    "seo_score_original": 70
   },
   {
     "title": "Student Loan Repayment in 2026: What Borrowers Need to Know",
@@ -197,7 +215,7 @@
     "date": "2026-05-25T22:23:46.845375",
     "word_count": 602,
     "read_time": 3,
-    "seo_score": 80,
+    "seo_score": 95,
     "source": "copilot_direct",
     "description": "Navigate student loan repayment in 2026 with this complete guide. IDR plans, PSLF, refinancing, and strategies to pay off loans faster or qualify for forgive...",
     "reading_time": 3,
@@ -219,7 +237,9 @@
     "author": "Usa News Digest",
     "featured": false,
     "image": "https://picsum.photos/seed/student-loan-repayment-2026-options-strategies/1200/630",
-    "status": "published"
+    "status": "published",
+    "bucket": "main",
+    "seo_score_original": 80
   },
   {
     "title": "The Rise of Remote Work: How It's Reshaping Where Americans Live",
@@ -228,7 +248,7 @@
     "date": "2026-05-25T22:23:46.844315",
     "word_count": 569,
     "read_time": 2,
-    "seo_score": 70,
+    "seo_score": 90,
     "source": "copilot_direct",
     "description": "Remote work is permanently changing where Americans choose to live. From city exodus to small-town booms, see how work-from-home is reshaping US geography.",
     "reading_time": 2,
@@ -250,7 +270,9 @@
     "author": "Usa News Digest",
     "featured": false,
     "image": "https://picsum.photos/seed/remote-work-reshaping-where-americans-live-trends-2026/1200/630",
-    "status": "published"
+    "status": "published",
+    "bucket": "low_quality",
+    "seo_score_original": 70
   },
   {
     "title": "How AI Is Changing American Jobs in 2026: What You Need to Know",
@@ -259,7 +281,7 @@
     "date": "2026-05-25T22:16:23.368462",
     "word_count": 599,
     "read_time": 2,
-    "seo_score": 70,
+    "seo_score": 90,
     "source": "copilot_direct",
     "description": "AI is reshaping the American workplace in 2026. Learn which jobs are most affected, which are safe, and how to future-proof your career in the age of AI.",
     "reading_time": 2,
@@ -281,7 +303,9 @@
     "author": "Usa News Digest",
     "featured": false,
     "image": "https://picsum.photos/seed/how-ai-changing-american-jobs-2026-impact/1200/630",
-    "status": "published"
+    "status": "published",
+    "bucket": "low_quality",
+    "seo_score_original": 70
   },
   {
     "title": "Is the 4-Day Work Week Coming to America? Here's Where It Stands",
@@ -290,7 +314,7 @@
     "date": "2026-05-25T22:16:23.367740",
     "word_count": 601,
     "read_time": 3,
-    "seo_score": 80,
+    "seo_score": 95,
     "source": "copilot_direct",
     "description": "The 4-day work week is gaining momentum in 2026. See which companies have adopted it, what the research shows about productivity, and whether your job could ...",
     "reading_time": 3,
@@ -312,7 +336,9 @@
     "author": "Usa News Digest",
     "featured": false,
     "image": "https://picsum.photos/seed/4-day-work-week-america-2026-status-results/1200/630",
-    "status": "published"
+    "status": "published",
+    "bucket": "main",
+    "seo_score_original": 80
   },
   {
     "title": "Why Grocery Prices Are Still High in 2026 and When They'll Drop",
@@ -321,7 +347,7 @@
     "date": "2026-05-25T22:16:23.367108",
     "word_count": 563,
     "read_time": 2,
-    "seo_score": 70,
+    "seo_score": 90,
     "source": "copilot_direct",
     "description": "Grocery prices remain elevated in 2026. Here's why food costs haven't gone back to pre-pandemic levels, which items are most affected, and when relief may come.",
     "reading_time": 2,
@@ -343,7 +369,9 @@
     "author": "Usa News Digest",
     "featured": false,
     "image": "https://picsum.photos/seed/why-grocery-prices-still-high-2026-when-drop/1200/630",
-    "status": "published"
+    "status": "published",
+    "bucket": "low_quality",
+    "seo_score_original": 70
   },
   {
     "title": "What Happens If the US Credit Rating Gets Downgraded Again?",
@@ -352,7 +380,7 @@
     "date": "2026-05-25T21:55:17.088106",
     "word_count": 487,
     "read_time": 2,
-    "seo_score": 70,
+    "seo_score": 90,
     "source": "copilot_direct",
     "description": "The US credit rating faces another potential downgrade. Learn what a credit downgrade means for mortgage rates, the stock market, your savings, and the economy.",
     "reading_time": 2,
@@ -374,7 +402,9 @@
     "author": "Usa News Digest",
     "featured": false,
     "image": "https://picsum.photos/seed/us-credit-rating-downgrade-what-it-means/1200/630",
-    "status": "published"
+    "status": "published",
+    "bucket": "low_quality",
+    "seo_score_original": 70
   },
   {
     "title": "The Real Cost of Owning a Dog in America in 2026",
@@ -383,7 +413,7 @@
     "date": "2026-05-25T21:55:17.087424",
     "word_count": 443,
     "read_time": 2,
-    "seo_score": 70,
+    "seo_score": 90,
     "source": "copilot_direct",
     "description": "How much does it really cost to own a dog in 2026? We break down food, vet bills, insurance, grooming, and hidden costs every American dog owner should know.",
     "reading_time": 2,
@@ -405,7 +435,9 @@
     "author": "Usa News Digest",
     "featured": false,
     "image": "https://picsum.photos/seed/cost-of-owning-dog-america-2026-expenses/1200/630",
-    "status": "published"
+    "status": "published",
+    "bucket": "low_quality",
+    "seo_score_original": 70
   },
   {
     "title": "Why Are So Many Fast Food Chains Closing in 2026? What's Really Going On",
@@ -414,7 +446,7 @@
     "date": "2026-05-25T21:29:43.860314",
     "word_count": 654,
     "read_time": 3,
-    "seo_score": 80,
+    "seo_score": 95,
     "source": "copilot_direct",
     "description": "Major fast food chains are closing hundreds of locations in 2026. Learn why restaurants like Red Lobster, TGI Friday's, and others are shutting down across A...",
     "reading_time": 3,
@@ -436,7 +468,9 @@
     "author": "Usa News Digest",
     "featured": false,
     "image": "https://picsum.photos/seed/fast-food-chains-closing-2026-reasons-explained/1200/630",
-    "status": "published"
+    "status": "published",
+    "bucket": "main",
+    "seo_score_original": 80
   },
   {
     "title": "Electric Vehicle Tax Credits in 2026: Which Cars Qualify and How to Claim",
@@ -445,7 +479,7 @@
     "date": "2026-05-25T21:29:43.859613",
     "word_count": 661,
     "read_time": 3,
-    "seo_score": 80,
+    "seo_score": 95,
     "source": "copilot_direct",
     "description": "Which electric vehicles qualify for the $7,500 federal tax credit in 2026? Full list of eligible EVs, income limits, price caps, and step-by-step claiming gu...",
     "reading_time": 3,
@@ -467,7 +501,9 @@
     "author": "Usa News Digest",
     "featured": false,
     "image": "https://picsum.photos/seed/electric-vehicle-tax-credits-2026-eligible-cars/1200/630",
-    "status": "published"
+    "status": "published",
+    "bucket": "main",
+    "seo_score_original": 80
   },
   {
     "title": "Medicare Open Enrollment 2026: 5 Changes You Need to Know Before October",
@@ -476,7 +512,7 @@
     "date": "2026-05-25T21:29:43.858076",
     "word_count": 700,
     "read_time": 3,
-    "seo_score": 80,
+    "seo_score": 95,
     "source": "copilot_direct",
     "description": "Medicare open enrollment starts October 2026. Learn about 5 key changes to Part D drug costs, Medicare Advantage plans, and new benefits you might be missing.",
     "reading_time": 3,
@@ -498,7 +534,9 @@
     "author": "Usa News Digest",
     "featured": false,
     "image": "https://picsum.photos/seed/medicare-open-enrollment-2026-changes-deadlines/1200/630",
-    "status": "published"
+    "status": "published",
+    "bucket": "main",
+    "seo_score_original": 80
   },
   {
     "title": "The US Housing Market in Summer 2026: Is It Finally a Buyer's Market?",
@@ -507,7 +545,7 @@
     "date": "2026-05-25T21:29:43.857365",
     "word_count": 552,
     "read_time": 2,
-    "seo_score": 70,
+    "seo_score": 90,
     "source": "copilot_direct",
     "description": "Is the US housing market finally cooling? We analyze home prices, mortgage rates, and inventory in summer 2026 to help you decide if now is the time to buy.",
     "reading_time": 2,
@@ -529,7 +567,9 @@
     "author": "Usa News Digest",
     "featured": false,
     "image": "https://picsum.photos/seed/us-housing-market-summer-2026-buyers-market/1200/630",
-    "status": "published"
+    "status": "published",
+    "bucket": "low_quality",
+    "seo_score_original": 70
   },
   {
     "title": "Social Security Changes in 2026: What Every American Needs to Know",
@@ -538,7 +578,7 @@
     "date": "2026-05-25T21:29:43.856463",
     "word_count": 669,
     "read_time": 3,
-    "seo_score": 80,
+    "seo_score": 95,
     "source": "copilot_direct",
     "description": "Social Security is changing in 2026. Learn about COLA adjustments, new retirement age rules, benefit increases, and how these changes affect your monthly check.",
     "reading_time": 3,
@@ -560,7 +600,9 @@
     "author": "Usa News Digest",
     "featured": false,
     "image": "https://picsum.photos/seed/social-security-changes-2026-benefits-cola-updates/1200/630",
-    "status": "published"
+    "status": "published",
+    "bucket": "main",
+    "seo_score_original": 80
   },
   {
     "title": "Supreme Court Explained: How It Works Simply",
@@ -569,7 +611,7 @@
     "date": "2026-05-25",
     "word_count": 733,
     "read_time": 2,
-    "seo_score": 80,
+    "seo_score": 95,
     "source": "copilot_direct",
     "category": "general",
     "tags": [
@@ -580,7 +622,9 @@
     "author": "Usa News Digest",
     "featured": false,
     "image": "https://picsum.photos/seed/supreme-court-explained-how-it-works-simply/1200/630",
-    "status": "published"
+    "status": "published",
+    "bucket": "main",
+    "seo_score_original": 80
   },
   {
     "title": "Why Car Insurance Is So Expensive 2026: Explained",
@@ -589,7 +633,7 @@
     "date": "2026-05-25",
     "word_count": 758,
     "read_time": 2,
-    "seo_score": 80,
+    "seo_score": 95,
     "source": "copilot_direct",
     "category": "general",
     "tags": [
@@ -600,7 +644,9 @@
     "author": "Usa News Digest",
     "featured": false,
     "image": "https://picsum.photos/seed/why-car-insurance-expensive-2026-explained/1200/630",
-    "status": "published"
+    "status": "published",
+    "bucket": "main",
+    "seo_score_original": 80
   },
   {
     "title": "Federal Reserve Explained: How the Fed Controls the Economy",
@@ -609,7 +655,7 @@
     "date": "2026-05-25",
     "word_count": 746,
     "read_time": 2,
-    "seo_score": 80,
+    "seo_score": 95,
     "source": "copilot_direct",
     "category": "general",
     "tags": [
@@ -620,7 +666,9 @@
     "author": "Usa News Digest",
     "featured": false,
     "image": "https://picsum.photos/seed/federal-reserve-explained-controls-economy/1200/630",
-    "status": "published"
+    "status": "published",
+    "bucket": "main",
+    "seo_score_original": 80
   },
   {
     "title": "Social Security Explained: How It Works and Its Future",
@@ -629,7 +677,7 @@
     "date": "2026-05-25",
     "word_count": 755,
     "read_time": 2,
-    "seo_score": 80,
+    "seo_score": 95,
     "source": "copilot_direct",
     "category": "general",
     "tags": [
@@ -640,7 +688,9 @@
     "author": "Usa News Digest",
     "featured": false,
     "image": "https://picsum.photos/seed/social-security-explained-how-it-works-future/1200/630",
-    "status": "published"
+    "status": "published",
+    "bucket": "main",
+    "seo_score_original": 80
   },
   {
     "title": "Why Healthcare Is So Expensive in America Explained",
@@ -649,7 +699,7 @@
     "date": "2026-05-25",
     "word_count": 734,
     "read_time": 2,
-    "seo_score": 80,
+    "seo_score": 95,
     "source": "copilot_direct",
     "category": "general",
     "tags": [
@@ -660,7 +710,9 @@
     "author": "Usa News Digest",
     "featured": false,
     "image": "https://picsum.photos/seed/why-healthcare-expensive-america-simple-explanation/1200/630",
-    "status": "published"
+    "status": "published",
+    "bucket": "main",
+    "seo_score_original": 80
   },
   {
     "title": "US Immigration System Explained: How It Actually Works",
@@ -669,7 +721,7 @@
     "date": "2026-05-25",
     "word_count": 707,
     "read_time": 2,
-    "seo_score": 80,
+    "seo_score": 95,
     "source": "copilot_direct",
     "category": "general",
     "tags": [
@@ -680,7 +732,9 @@
     "author": "Usa News Digest",
     "featured": false,
     "image": "https://picsum.photos/seed/us-immigration-system-explained-how-it-works/1200/630",
-    "status": "published"
+    "status": "published",
+    "bucket": "main",
+    "seo_score_original": 80
   },
   {
     "title": "Climate Change Effects in America 2026: State by State",
@@ -689,7 +743,7 @@
     "date": "2026-05-25",
     "word_count": 747,
     "read_time": 2,
-    "seo_score": 80,
+    "seo_score": 95,
     "source": "copilot_direct",
     "category": "general",
     "tags": [
@@ -700,7 +754,9 @@
     "author": "Usa News Digest",
     "featured": false,
     "image": "https://picsum.photos/seed/climate-change-effects-america-state-by-state-2026/1200/630",
-    "status": "published"
+    "status": "published",
+    "bucket": "main",
+    "seo_score_original": 80
   },
   {
     "title": "Electoral College Explained: How US Elections Work",
@@ -709,7 +765,7 @@
     "date": "2026-05-25",
     "word_count": 704,
     "read_time": 2,
-    "seo_score": 80,
+    "seo_score": 95,
     "source": "copilot_direct",
     "category": "general",
     "tags": [
@@ -720,7 +776,9 @@
     "author": "Usa News Digest",
     "featured": false,
     "image": "https://picsum.photos/seed/electoral-college-explained-how-us-elections-work/1200/630",
-    "status": "published"
+    "status": "published",
+    "bucket": "main",
+    "seo_score_original": 80
   },
   {
     "title": "Average American Income 2026: By Age, State & Education",
@@ -729,7 +787,7 @@
     "date": "2026-05-25",
     "word_count": 734,
     "read_time": 2,
-    "seo_score": 80,
+    "seo_score": 95,
     "source": "copilot_direct",
     "category": "general",
     "tags": [
@@ -740,7 +798,9 @@
     "author": "Usa News Digest",
     "featured": false,
     "image": "https://picsum.photos/seed/average-american-income-by-age-state-2026/1200/630",
-    "status": "published"
+    "status": "published",
+    "bucket": "main",
+    "seo_score_original": 80
   },
   {
     "title": "Student Loans 2026: What Borrowers Need to Know Now",
@@ -749,7 +809,7 @@
     "date": "2026-05-25",
     "word_count": 760,
     "read_time": 2,
-    "seo_score": 80,
+    "seo_score": 95,
     "source": "copilot_direct",
     "category": "general",
     "tags": [
@@ -760,7 +820,9 @@
     "author": "Usa News Digest",
     "featured": false,
     "image": "https://picsum.photos/seed/student-loans-2026-what-borrowers-need-to-know/1200/630",
-    "status": "published"
+    "status": "published",
+    "bucket": "main",
+    "seo_score_original": 80
   },
   {
     "title": "Remote Work in America 2026: Stats, Trends & Future",
@@ -769,7 +831,7 @@
     "date": "2026-05-25",
     "word_count": 756,
     "read_time": 2,
-    "seo_score": 80,
+    "seo_score": 95,
     "source": "copilot_direct",
     "category": "general",
     "tags": [
@@ -780,7 +842,9 @@
     "author": "Usa News Digest",
     "featured": false,
     "image": "https://picsum.photos/seed/remote-work-america-2026-stats-trends/1200/630",
-    "status": "published"
+    "status": "published",
+    "bucket": "main",
+    "seo_score_original": 80
   },
   {
     "title": "How Social Media Algorithms Work in 2026: Explained",
@@ -789,7 +853,7 @@
     "date": "2026-05-25",
     "word_count": 807,
     "read_time": 3,
-    "seo_score": 80,
+    "seo_score": 95,
     "source": "copilot_direct",
     "category": "general",
     "tags": [
@@ -800,7 +864,9 @@
     "author": "Usa News Digest",
     "featured": false,
     "image": "https://picsum.photos/seed/how-social-media-algorithms-work-2026-explained/1200/630",
-    "status": "published"
+    "status": "published",
+    "bucket": "main",
+    "seo_score_original": 80
   },
   {
     "title": "Why Are Eggs Expensive in 2026? Food Price Breakdown",
@@ -809,7 +875,7 @@
     "date": "2026-05-25",
     "word_count": 753,
     "read_time": 2,
-    "seo_score": 80,
+    "seo_score": 95,
     "source": "copilot_direct",
     "category": "general",
     "tags": [
@@ -820,7 +886,9 @@
     "author": "Usa News Digest",
     "featured": false,
     "image": "https://picsum.photos/seed/why-eggs-expensive-food-prices-2026/1200/630",
-    "status": "published"
+    "status": "published",
+    "bucket": "main",
+    "seo_score_original": 80
   },
   {
     "title": "US Healthcare System Explained: A Simple Guide",
@@ -829,7 +897,7 @@
     "date": "2026-05-25",
     "word_count": 788,
     "read_time": 3,
-    "seo_score": 80,
+    "seo_score": 95,
     "source": "copilot_direct",
     "category": "general",
     "tags": [
@@ -840,7 +908,9 @@
     "author": "Usa News Digest",
     "featured": false,
     "image": "https://picsum.photos/seed/us-healthcare-system-explained-simple-guide/1200/630",
-    "status": "published"
+    "status": "published",
+    "bucket": "main",
+    "seo_score_original": 80
   },
   {
     "title": "1994 Usa Reunion: Former Players Relive The ’94 World Cup, Look Ahead To 2026",
@@ -849,14 +919,16 @@
     "date": "2026-05-25",
     "word_count": 1100,
     "read_time": 3,
-    "seo_score": 80,
+    "seo_score": 95,
     "source": "copilot_direct",
     "category": "general",
     "tags": [],
     "author": "Usa News Digest",
     "featured": false,
     "image": "https://picsum.photos/seed/1994-usa-reunion-former-players-relive-the-94-world-cup-look-ahead-to-2026/1200/630",
-    "status": "published"
+    "status": "published",
+    "bucket": "main",
+    "seo_score_original": 80
   },
   {
     "title": "The 4-Day Work Week: Which Companies Are Doing It and Is It Working?",
@@ -865,14 +937,16 @@
     "date": "2026-05-25",
     "word_count": 825,
     "read_time": 3,
-    "seo_score": 80,
+    "seo_score": 95,
     "source": "copilot_direct",
     "category": "general",
     "tags": [],
     "author": "Usa News Digest",
     "featured": false,
     "image": "https://picsum.photos/seed/4-day-work-week-companies-results-2026/1200/630",
-    "status": "published"
+    "status": "published",
+    "bucket": "main",
+    "seo_score_original": 80
   },
   {
     "title": "AI and Your Job: What's Actually Changing in the American Workplace in 2026",
@@ -881,14 +955,16 @@
     "date": "2026-05-25",
     "word_count": 848,
     "read_time": 2,
-    "seo_score": 80,
+    "seo_score": 95,
     "source": "copilot_direct",
     "category": "general",
     "tags": [],
     "author": "Usa News Digest",
     "featured": false,
     "image": "https://picsum.photos/seed/ai-impact-jobs-american-workplace-2026/1200/630",
-    "status": "published"
+    "status": "published",
+    "bucket": "main",
+    "seo_score_original": 80
   },
   {
     "title": "AI in the Workplace: Which Jobs Are Changing and What to Do About It",
@@ -897,14 +973,16 @@
     "date": "2026-05-25",
     "word_count": 1061,
     "read_time": 2,
-    "seo_score": 80,
+    "seo_score": 95,
     "source": "copilot_direct",
     "category": "general",
     "tags": [],
     "author": "Usa News Digest",
     "featured": false,
     "image": "https://picsum.photos/seed/ai-workplace-jobs-changing-how-to-adapt-2026/1200/630",
-    "status": "published"
+    "status": "published",
+    "bucket": "main",
+    "seo_score_original": 80
   },
   {
     "title": "Current Epidemic Trends (Based On Rt) For States",
@@ -913,14 +991,16 @@
     "date": "2026-05-25",
     "word_count": 1197,
     "read_time": 3,
-    "seo_score": 80,
+    "seo_score": 95,
     "source": "copilot_direct",
     "category": "general",
     "tags": [],
     "author": "Usa News Digest",
     "featured": false,
     "image": "https://picsum.photos/seed/current-epidemic-trends-based-on-rt-for-states-cfa-modeling-and-forecasting-centers-for-disease-control-and-prevention-cdc-gov/1200/630",
-    "status": "published"
+    "status": "published",
+    "bucket": "main",
+    "seo_score_original": 80
   },
   {
     "title": "Electric Vehicles in 2026: What You Need to Know Before Buying",
@@ -929,14 +1009,16 @@
     "date": "2026-05-25",
     "word_count": 856,
     "read_time": 3,
-    "seo_score": 80,
+    "seo_score": 95,
     "source": "copilot_direct",
     "category": "general",
     "tags": [],
     "author": "Usa News Digest",
     "featured": false,
     "image": "https://picsum.photos/seed/electric-vehicles-2026-what-to-know/1200/630",
-    "status": "published"
+    "status": "published",
+    "bucket": "main",
+    "seo_score_original": 80
   },
   {
     "title": "Electric Vehicles in 2026: Are They Actually Worth It Now?",
@@ -945,14 +1027,16 @@
     "date": "2026-05-25",
     "word_count": 823,
     "read_time": 2,
-    "seo_score": 80,
+    "seo_score": 95,
     "source": "copilot_direct",
     "category": "general",
     "tags": [],
     "author": "Usa News Digest",
     "featured": false,
     "image": "https://picsum.photos/seed/electric-vehicles-2026-worth-it/1200/630",
-    "status": "published"
+    "status": "published",
+    "bucket": "main",
+    "seo_score_original": 80
   },
   {
     "title": "Gen Z vs Millennials: How Younger Americans Are Living Differently",
@@ -961,14 +1045,16 @@
     "date": "2026-05-25",
     "word_count": 813,
     "read_time": 3,
-    "seo_score": 80,
+    "seo_score": 95,
     "source": "copilot_direct",
     "category": "general",
     "tags": [],
     "author": "Usa News Digest",
     "featured": false,
     "image": "https://picsum.photos/seed/gen-z-vs-millennials-lifestyle-differences/1200/630",
-    "status": "published"
+    "status": "published",
+    "bucket": "main",
+    "seo_score_original": 80
   },
   {
     "title": "Housing Market 2026: What First-Time Buyers Need to Know",
@@ -977,14 +1063,16 @@
     "date": "2026-05-25",
     "word_count": 802,
     "read_time": 3,
-    "seo_score": 80,
+    "seo_score": 95,
     "source": "copilot_direct",
     "category": "general",
     "tags": [],
     "author": "Usa News Digest",
     "featured": false,
     "image": "https://picsum.photos/seed/housing-market-2026-first-time-buyers/1200/630",
-    "status": "published"
+    "status": "published",
+    "bucket": "main",
+    "seo_score_original": 80
   },
   {
     "title": "Housing Market Predictions For 2026",
@@ -993,14 +1081,16 @@
     "date": "2026-05-25",
     "word_count": 979,
     "read_time": 3,
-    "seo_score": 80,
+    "seo_score": 95,
     "source": "copilot_direct",
     "category": "general",
     "tags": [],
     "author": "Usa News Digest",
     "featured": false,
     "image": "https://picsum.photos/seed/housing-market-predictions-for-2026/1200/630",
-    "status": "published"
+    "status": "published",
+    "bucket": "main",
+    "seo_score_original": 80
   },
   {
     "title": "How Americans Are Spending Their Money Differently in 2026",
@@ -1009,14 +1099,16 @@
     "date": "2026-05-25",
     "word_count": 784,
     "read_time": 2,
-    "seo_score": 80,
+    "seo_score": 95,
     "source": "copilot_direct",
     "category": "general",
     "tags": [],
     "author": "Usa News Digest",
     "featured": false,
     "image": "https://picsum.photos/seed/how-americans-spending-money-differently-2026/1200/630",
-    "status": "published"
+    "status": "published",
+    "bucket": "main",
+    "seo_score_original": 80
   },
   {
     "title": "How to Vote in 2026: Your Complete Guide to the Midterm Elec",
@@ -1025,7 +1117,7 @@
     "date": "2026-05-25",
     "word_count": 793,
     "read_time": 3,
-    "seo_score": 80,
+    "seo_score": 95,
     "source": "copilot_direct",
     "category": "general",
     "tags": [
@@ -1036,7 +1128,9 @@
     "author": "Usa News Digest",
     "featured": false,
     "image": "https://picsum.photos/seed/how-to-vote-2026-midterm-elections-guide/1200/630",
-    "status": "published"
+    "status": "published",
+    "bucket": "main",
+    "seo_score_original": 80
   },
   {
     "title": "Memorial Day 2026: What's Open, What's Closed, and How Americans Are Celebrating",
@@ -1045,14 +1139,16 @@
     "date": "2026-05-25",
     "word_count": 832,
     "read_time": 3,
-    "seo_score": 80,
+    "seo_score": 95,
     "source": "copilot_direct",
     "category": "general",
     "tags": [],
     "author": "Usa News Digest",
     "featured": false,
     "image": "https://picsum.photos/seed/memorial-day-2026-guide-open-closed/1200/630",
-    "status": "published"
+    "status": "published",
+    "bucket": "main",
+    "seo_score_original": 80
   },
   {
     "title": "Remote Work in 2026: Which Companies Are Calling Workers Back and Who's Staying Remote",
@@ -1061,14 +1157,16 @@
     "date": "2026-05-25",
     "word_count": 831,
     "read_time": 3,
-    "seo_score": 80,
+    "seo_score": 95,
     "source": "copilot_direct",
     "category": "general",
     "tags": [],
     "author": "Usa News Digest",
     "featured": false,
     "image": "https://picsum.photos/seed/remote-work-2026-companies-return-office/1200/630",
-    "status": "published"
+    "status": "published",
+    "bucket": "main",
+    "seo_score_original": 80
   },
   {
     "title": "The Rise of Remote Work: How It's Reshaping American Cities in 2026",
@@ -1077,14 +1175,16 @@
     "date": "2026-05-25",
     "word_count": 1027,
     "read_time": 3,
-    "seo_score": 80,
+    "seo_score": 95,
     "source": "copilot_direct",
     "category": "general",
     "tags": [],
     "author": "Usa News Digest",
     "featured": false,
     "image": "https://picsum.photos/seed/remote-work-reshaping-american-cities-2026-trends/1200/630",
-    "status": "published"
+    "status": "published",
+    "bucket": "main",
+    "seo_score_original": 80
   },
   {
     "title": "The Rise of AI in 2026: How It's Changing Everyday Life in A",
@@ -1093,7 +1193,7 @@
     "date": "2026-05-25",
     "word_count": 887,
     "read_time": 4,
-    "seo_score": 80,
+    "seo_score": 95,
     "source": "copilot_direct",
     "category": "general",
     "tags": [
@@ -1104,7 +1204,9 @@
     "author": "Usa News Digest",
     "featured": false,
     "image": "https://picsum.photos/seed/rise-of-ai-2026-changing-everyday-life/1200/630",
-    "status": "published"
+    "status": "published",
+    "bucket": "main",
+    "seo_score_original": 80
   },
   {
     "title": "Social Media in 2026: How Platforms Are Changing and What It Means for You",
@@ -1113,14 +1215,16 @@
     "date": "2026-05-25",
     "word_count": 881,
     "read_time": 2,
-    "seo_score": 80,
+    "seo_score": 95,
     "source": "copilot_direct",
     "category": "general",
     "tags": [],
     "author": "Usa News Digest",
     "featured": false,
     "image": "https://picsum.photos/seed/social-media-changes-2026-trends/1200/630",
-    "status": "published"
+    "status": "published",
+    "bucket": "main",
+    "seo_score_original": 80
   },
   {
     "title": "Social Media's Impact on Teen Mental Health: What Parents Need to Know in 2026",
@@ -1129,14 +1233,16 @@
     "date": "2026-05-25",
     "word_count": 838,
     "read_time": 2,
-    "seo_score": 80,
+    "seo_score": 95,
     "source": "copilot_direct",
     "category": "general",
     "tags": [],
     "author": "Usa News Digest",
     "featured": false,
     "image": "https://picsum.photos/seed/social-media-teen-mental-health-parents-2026/1200/630",
-    "status": "published"
+    "status": "published",
+    "bucket": "main",
+    "seo_score_original": 80
   },
   {
     "title": "Student Loan Update 2026: What Borrowers Need to Know Right Now",
@@ -1145,14 +1251,16 @@
     "date": "2026-05-25",
     "word_count": 802,
     "read_time": 3,
-    "seo_score": 80,
+    "seo_score": 95,
     "source": "copilot_direct",
     "category": "general",
     "tags": [],
     "author": "Usa News Digest",
     "featured": false,
     "image": "https://picsum.photos/seed/student-loan-update-2026-what-to-know/1200/630",
-    "status": "published"
+    "status": "published",
+    "bucket": "main",
+    "seo_score_original": 80
   },
   {
     "title": "Summer 2026 Travel Predictions: Where Americans Are Going Th",
@@ -1161,7 +1269,7 @@
     "date": "2026-05-25",
     "word_count": 778,
     "read_time": 3,
-    "seo_score": 80,
+    "seo_score": 95,
     "source": "copilot_direct",
     "category": "general",
     "tags": [
@@ -1172,7 +1280,9 @@
     "author": "Usa News Digest",
     "featured": false,
     "image": "https://picsum.photos/seed/summer-2026-travel-predictions-trends/1200/630",
-    "status": "published"
+    "status": "published",
+    "bucket": "main",
+    "seo_score_original": 80
   },
   {
     "title": "Summer 2026 Travel Season: What to Expect at Airports, Gas Prices, and Hotels",
@@ -1181,14 +1291,16 @@
     "date": "2026-05-25",
     "word_count": 769,
     "read_time": 3,
-    "seo_score": 80,
+    "seo_score": 95,
     "source": "copilot_direct",
     "category": "general",
     "tags": [],
     "author": "Usa News Digest",
     "featured": false,
     "image": "https://picsum.photos/seed/summer-2026-travel-season-what-to-expect/1200/630",
-    "status": "published"
+    "status": "published",
+    "bucket": "main",
+    "seo_score_original": 80
   },
   {
     "title": "Why Everything Feels More Expensive in 2026: The Real Story Behind Prices",
@@ -1197,14 +1309,16 @@
     "date": "2026-05-25",
     "word_count": 870,
     "read_time": 3,
-    "seo_score": 80,
+    "seo_score": 95,
     "source": "copilot_direct",
     "category": "general",
     "tags": [],
     "author": "Usa News Digest",
     "featured": false,
     "image": "https://picsum.photos/seed/why-everything-expensive-2026-inflation/1200/630",
-    "status": "published"
+    "status": "published",
+    "bucket": "main",
+    "seo_score_original": 80
   },
   {
     "title": "Why Grocery Prices Haven't Come Down Despite Lower Inflation in 2026",
@@ -1213,14 +1327,16 @@
     "date": "2026-05-24",
     "word_count": 1031,
     "read_time": 2,
-    "seo_score": 80,
+    "seo_score": 95,
     "source": "copilot_direct",
     "category": "general",
     "tags": [],
     "author": "Usa News Digest",
     "featured": false,
     "image": "https://picsum.photos/seed/grocery-prices-still-high-2026-explained/1200/630",
-    "status": "published"
+    "status": "published",
+    "bucket": "main",
+    "seo_score_original": 80
   },
   {
     "title": "Remote Work in 2026: How It's Reshaping Where Americans Choose to Live",
@@ -1229,14 +1345,16 @@
     "date": "2026-05-24",
     "word_count": 1024,
     "read_time": 3,
-    "seo_score": 80,
+    "seo_score": 95,
     "source": "copilot_direct",
     "category": "general",
     "tags": [],
     "author": "Usa News Digest",
     "featured": false,
     "image": "https://picsum.photos/seed/remote-work-reshaping-where-americans-live-2026/1200/630",
-    "status": "published"
+    "status": "published",
+    "bucket": "main",
+    "seo_score_original": 80
   },
   {
     "title": "How the Rising Cost of Car Insurance Is Hitting American Drivers in 2026",
@@ -1245,14 +1363,16 @@
     "date": "2026-05-24",
     "word_count": 1039,
     "read_time": 2,
-    "seo_score": 80,
+    "seo_score": 95,
     "source": "copilot_direct",
     "category": "general",
     "tags": [],
     "author": "Usa News Digest",
     "featured": false,
     "image": "https://picsum.photos/seed/rising-car-insurance-costs-usa-2026/1200/630",
-    "status": "published"
+    "status": "published",
+    "bucket": "main",
+    "seo_score_original": 80
   },
   {
     "title": "The Student Loan Landscape in 2026: What Borrowers Need to Know",
@@ -1261,13 +1381,15 @@
     "date": "2026-05-24",
     "word_count": 1057,
     "read_time": 3,
-    "seo_score": 80,
+    "seo_score": 95,
     "source": "copilot_direct",
     "category": "general",
     "tags": [],
     "author": "Usa News Digest",
     "featured": false,
     "image": "https://picsum.photos/seed/student-loan-landscape-2026-borrowers-guide/1200/630",
-    "status": "published"
+    "status": "published",
+    "bucket": "main",
+    "seo_score_original": 80
   }
 ]

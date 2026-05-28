@@ -6,7 +6,7 @@
     "date": "2026-05-26",
     "word_count": 770,
     "read_time": 3,
-    "seo_score": 80,
+    "seo_score": 95,
     "source": "copilot_direct",
     "category": "general",
     "tags": [
@@ -17,7 +17,9 @@
     "author": "Recipe Kitchen Usa",
     "featured": false,
     "image": "https://picsum.photos/seed/grilling-for-beginners-complete-guide-pro/1200/630",
-    "status": "published"
+    "status": "published",
+    "bucket": "main",
+    "seo_score_original": 80
   },
   {
     "title": "Easy Homemade Breakfast Recipes: Quick Morning Meals",
@@ -26,7 +28,7 @@
     "date": "2026-05-26",
     "word_count": 790,
     "read_time": 3,
-    "seo_score": 80,
+    "seo_score": 95,
     "source": "copilot_direct",
     "category": "general",
     "tags": [
@@ -37,7 +39,9 @@
     "author": "Recipe Kitchen Usa",
     "featured": false,
     "image": "https://picsum.photos/seed/easy-homemade-breakfast-recipes-quick-morning/1200/630",
-    "status": "published"
+    "status": "published",
+    "bucket": "main",
+    "seo_score_original": 80
   },
   {
     "title": "Easy Air Fryer Recipes for Beginners: Quick Crispy Meals",
@@ -46,7 +50,7 @@
     "date": "2026-05-26",
     "word_count": 763,
     "read_time": 2,
-    "seo_score": 80,
+    "seo_score": 95,
     "source": "copilot_direct",
     "category": "general",
     "tags": [
@@ -57,7 +61,9 @@
     "author": "Recipe Kitchen Usa",
     "featured": false,
     "image": "https://picsum.photos/seed/easy-air-fryer-recipes-beginners-quick-crispy/1200/630",
-    "status": "published"
+    "status": "published",
+    "bucket": "main",
+    "seo_score_original": 80
   },
   {
     "title": "Budget One-Pot Soups: Feed Your Family Under $10",
@@ -66,7 +72,7 @@
     "date": "2026-05-26",
     "word_count": 776,
     "read_time": 3,
-    "seo_score": 80,
+    "seo_score": 95,
     "source": "copilot_direct",
     "category": "general",
     "tags": [
@@ -77,7 +83,9 @@
     "author": "Recipe Kitchen Usa",
     "featured": false,
     "image": "https://picsum.photos/seed/budget-one-pot-soups-feed-family-under-10/1200/630",
-    "status": "published"
+    "status": "published",
+    "bucket": "main",
+    "seo_score_original": 80
   },
   {
     "title": "Restaurant-Quality Pasta at Home: Techniques That Work",
@@ -86,7 +94,7 @@
     "date": "2026-05-26",
     "word_count": 788,
     "read_time": 3,
-    "seo_score": 80,
+    "seo_score": 95,
     "source": "copilot_direct",
     "category": "general",
     "tags": [
@@ -97,7 +105,9 @@
     "author": "Recipe Kitchen Usa",
     "featured": false,
     "image": "https://picsum.photos/seed/restaurant-quality-pasta-at-home-techniques/1200/630",
-    "status": "published"
+    "status": "published",
+    "bucket": "main",
+    "seo_score_original": 80
   },
   {
     "title": "Easy Slow Cooker Recipes for Busy Families 2026",
@@ -106,7 +116,7 @@
     "date": "2026-05-26",
     "word_count": 786,
     "read_time": 3,
-    "seo_score": 80,
+    "seo_score": 95,
     "source": "copilot_direct",
     "category": "general",
     "tags": [
@@ -117,7 +127,9 @@
     "author": "Recipe Kitchen Usa",
     "featured": false,
     "image": "https://picsum.photos/seed/easy-slow-cooker-recipes-busy-families-2026/1200/630",
-    "status": "published"
+    "status": "published",
+    "bucket": "main",
+    "seo_score_original": 80
   },
   {
     "title": "How to Cook Perfect Rice Every Time: Complete Guide",
@@ -126,7 +138,7 @@
     "date": "2026-05-26",
     "word_count": 742,
     "read_time": 2,
-    "seo_score": 80,
+    "seo_score": 95,
     "source": "copilot_direct",
     "category": "general",
     "tags": [
@@ -137,7 +149,9 @@
     "author": "Recipe Kitchen Usa",
     "featured": false,
     "image": "https://picsum.photos/seed/how-to-cook-perfect-rice-every-time-guide/1200/630",
-    "status": "published"
+    "status": "published",
+    "bucket": "main",
+    "seo_score_original": 80
   },
   {
     "title": "Healthy Meal Prep Ideas: Tasty and Easy Recipes",
@@ -146,7 +160,7 @@
     "date": "2026-05-26",
     "word_count": 747,
     "read_time": 2,
-    "seo_score": 80,
+    "seo_score": 95,
     "source": "copilot_direct",
     "category": "general",
     "tags": [
@@ -157,7 +171,9 @@
     "author": "Recipe Kitchen Usa",
     "featured": false,
     "image": "https://picsum.photos/seed/healthy-meal-prep-ideas-tasty-easy-recipes/1200/630",
-    "status": "published"
+    "status": "published",
+    "bucket": "main",
+    "seo_score_original": 80
   },
   {
     "title": "Breakfast Ideas When You're Tired of the Same Thing Every Morning",
@@ -166,7 +182,7 @@
     "date": "2026-05-25T22:31:07.382243",
     "word_count": 609,
     "read_time": 3,
-    "seo_score": 75,
+    "seo_score": 90,
     "source": "copilot_direct",
     "description": "Bored of your usual breakfast? These 15 easy breakfast ideas take 5-15 minutes and will break you out of the cereal-and-toast rut. Savory, sweet, and make-ah...",
     "reading_time": 3,
@@ -188,7 +204,9 @@
     "author": "Recipe Kitchen Usa",
     "featured": false,
     "image": "https://picsum.photos/seed/breakfast-ideas-bored-same-thing-morning/1200/630",
-    "status": "published"
+    "status": "published",
+    "bucket": "low_quality",
+    "seo_score_original": 75
   },
   {
     "title": "10 Instant Pot Recipes for Beginners That You Can't Mess Up",
@@ -197,7 +215,7 @@
     "date": "2026-05-25T22:31:07.381638",
     "word_count": 708,
     "read_time": 3,
-    "seo_score": 80,
+    "seo_score": 95,
     "source": "copilot_direct",
     "description": "New to the Instant Pot? These 10 foolproof recipes are perfect for beginners. From chili to rice to pulled pork, each one is simple, fast, and delicious.",
     "reading_time": 3,
@@ -219,7 +237,9 @@
     "author": "Recipe Kitchen Usa",
     "featured": false,
     "image": "https://picsum.photos/seed/instant-pot-recipes-beginners-easy-cant-fail/1200/630",
-    "status": "published"
+    "status": "published",
+    "bucket": "main",
+    "seo_score_original": 80
   },
   {
     "title": "How to Season a Cast Iron Skillet (And Why It's Your Best Kitchen Tool)",
@@ -228,7 +248,7 @@
     "date": "2026-05-25T22:23:46.799166",
     "word_count": 695,
     "read_time": 3,
-    "seo_score": 80,
+    "seo_score": 95,
     "source": "copilot_direct",
     "description": "Learn how to season a cast iron skillet step by step. Plus why cast iron is the best cooking tool you'll ever own and how to care for it to last a lifetime.",
     "reading_time": 3,
@@ -250,7 +270,9 @@
     "author": "Recipe Kitchen Usa",
     "featured": false,
     "image": "https://picsum.photos/seed/season-cast-iron-skillet-complete-guide/1200/630",
-    "status": "published"
+    "status": "published",
+    "bucket": "main",
+    "seo_score_original": 80
   },
   {
     "title": "How to Cook Perfect Rice Every Time (Stovetop Method)",
@@ -259,7 +281,7 @@
     "date": "2026-05-25T22:16:23.315632",
     "word_count": 594,
     "read_time": 2,
-    "seo_score": 70,
+    "seo_score": 90,
     "source": "copilot_direct",
     "description": "Stop making mushy or crunchy rice. This foolproof stovetop method produces perfect fluffy rice every time. Works for white, brown, basmati, and jasmine rice.",
     "reading_time": 2,
@@ -281,7 +303,9 @@
     "author": "Recipe Kitchen Usa",
     "featured": false,
     "image": "https://picsum.photos/seed/cook-perfect-rice-stovetop-method-guide/1200/630",
-    "status": "published"
+    "status": "published",
+    "bucket": "low_quality",
+    "seo_score_original": 70
   },
   {
     "title": "The Ultimate Guide to Meal Prepping for Beginners",
@@ -290,7 +314,7 @@
     "date": "2026-05-25T22:16:23.314710",
     "word_count": 577,
     "read_time": 2,
-    "seo_score": 70,
+    "seo_score": 90,
     "source": "copilot_direct",
     "description": "New to meal prepping? This complete beginner's guide covers planning, shopping, cooking, and storing a full week of meals in just 2 hours on Sunday.",
     "reading_time": 2,
@@ -312,7 +336,9 @@
     "author": "Recipe Kitchen Usa",
     "featured": false,
     "image": "https://picsum.photos/seed/meal-prep-beginners-complete-guide-recipes/1200/630",
-    "status": "published"
+    "status": "published",
+    "bucket": "low_quality",
+    "seo_score_original": 70
   },
   {
     "title": "5 Sauces That Turn Any Boring Meal Into Restaurant Quality",
@@ -321,7 +347,7 @@
     "date": "2026-05-25T22:16:23.313873",
     "word_count": 593,
     "read_time": 2,
-    "seo_score": 70,
+    "seo_score": 90,
     "source": "copilot_direct",
     "description": "Master these 5 simple sauces and transform boring chicken, rice, or vegetables into restaurant-quality meals. Each takes under 10 minutes with basic ingredie...",
     "reading_time": 2,
@@ -343,7 +369,9 @@
     "author": "Recipe Kitchen Usa",
     "featured": false,
     "image": "https://picsum.photos/seed/easy-sauces-make-meal-restaurant-quality/1200/630",
-    "status": "published"
+    "status": "published",
+    "bucket": "low_quality",
+    "seo_score_original": 70
   },
   {
     "title": "How to Actually Save Money on Groceries Without Coupons",
@@ -352,7 +380,7 @@
     "date": "2026-05-25T21:55:17.058352",
     "word_count": 697,
     "read_time": 3,
-    "seo_score": 80,
+    "seo_score": 95,
     "source": "copilot_direct",
     "description": "Save $200+ per month on groceries without clipping a single coupon. These 12 practical strategies work at any store and take zero extra time.",
     "reading_time": 3,
@@ -374,7 +402,9 @@
     "author": "Recipe Kitchen Usa",
     "featured": false,
     "image": "https://picsum.photos/seed/save-money-groceries-without-coupons-strategies/1200/630",
-    "status": "published"
+    "status": "published",
+    "bucket": "main",
+    "seo_score_original": 80
   },
   {
     "title": "Air Fryer vs Oven: When to Use Each and Why It Actually Matters",
@@ -383,7 +413,7 @@
     "date": "2026-05-25T21:29:43.769466",
     "word_count": 776,
     "read_time": 3,
-    "seo_score": 80,
+    "seo_score": 95,
     "source": "copilot_direct",
     "description": "Air fryer or oven? This honest comparison explains when each appliance wins, which foods work best in each, energy costs, and whether you actually need an ai...",
     "reading_time": 3,
@@ -405,7 +435,9 @@
     "author": "Recipe Kitchen Usa",
     "featured": false,
     "image": "https://picsum.photos/seed/air-fryer-vs-oven-comparison-when-to-use/1200/630",
-    "status": "published"
+    "status": "published",
+    "bucket": "main",
+    "seo_score_original": 80
   },
   {
     "title": "How to Stock a Pantry for Under $50: The Budget Cook's Essential List",
@@ -414,7 +446,7 @@
     "date": "2026-05-25T21:29:43.768507",
     "word_count": 664,
     "read_time": 3,
-    "seo_score": 80,
+    "seo_score": 95,
     "source": "copilot_direct",
     "description": "Build a well-stocked pantry for under $50. This essential grocery list covers staples that let you cook dozens of meals without running to the store every ni...",
     "reading_time": 3,
@@ -436,7 +468,9 @@
     "author": "Recipe Kitchen Usa",
     "featured": false,
     "image": "https://picsum.photos/seed/stock-pantry-under-50-budget-essential-list/1200/630",
-    "status": "published"
+    "status": "published",
+    "bucket": "main",
+    "seo_score_original": 80
   },
   {
     "title": "Slow Cooker Dump Meals: 7 Recipes Where You Just Dump and Go",
@@ -445,7 +479,7 @@
     "date": "2026-05-25T21:29:43.767448",
     "word_count": 733,
     "read_time": 3,
-    "seo_score": 88,
+    "seo_score": 95,
     "source": "copilot_direct",
     "description": "7 incredibly easy slow cooker dump meals. Literally dump the ingredients, set it, and come home to a delicious dinner. Perfect for busy families on a budget.",
     "reading_time": 3,
@@ -467,7 +501,9 @@
     "author": "Recipe Kitchen Usa",
     "featured": false,
     "image": "https://picsum.photos/seed/slow-cooker-dump-meals-easy-recipes/1200/630",
-    "status": "published"
+    "status": "published",
+    "bucket": "main",
+    "seo_score_original": 88
   },
   {
     "title": "5 Make-Ahead Breakfasts That Save 30 Minutes Every Morning",
@@ -476,7 +512,7 @@
     "date": "2026-05-25T21:29:43.766565",
     "word_count": 776,
     "read_time": 3,
-    "seo_score": 80,
+    "seo_score": 95,
     "source": "copilot_direct",
     "description": "Stop skipping breakfast. These 5 make-ahead breakfast recipes take 30 minutes of Sunday prep and give you healthy, delicious breakfasts all week long.",
     "reading_time": 3,
@@ -498,7 +534,9 @@
     "author": "Recipe Kitchen Usa",
     "featured": false,
     "image": "https://picsum.photos/seed/make-ahead-breakfasts-save-time-morning-recipes/1200/630",
-    "status": "published"
+    "status": "published",
+    "bucket": "main",
+    "seo_score_original": 80
   },
   {
     "title": "The Complete Guide to Grilling Season 2026: Tips, Techniques, and Recipes",
@@ -507,7 +545,7 @@
     "date": "2026-05-25T21:29:43.765623",
     "word_count": 763,
     "read_time": 3,
-    "seo_score": 80,
+    "seo_score": 95,
     "source": "copilot_direct",
     "description": "Master grilling season with this complete guide. Learn essential grilling techniques, temperature charts, marinades, and easy recipes for burgers, chicken, r...",
     "reading_time": 3,
@@ -529,7 +567,9 @@
     "author": "Recipe Kitchen Usa",
     "featured": false,
     "image": "https://picsum.photos/seed/grilling-season-2026-complete-guide-tips-recipes/1200/630",
-    "status": "published"
+    "status": "published",
+    "bucket": "main",
+    "seo_score_original": 80
   },
   {
     "title": "Feed Family of 4 for $100/Week: Budget Grocery Tips",
@@ -538,7 +578,7 @@
     "date": "2026-05-25",
     "word_count": 724,
     "read_time": 2,
-    "seo_score": 80,
+    "seo_score": 95,
     "source": "copilot_direct",
     "category": "general",
     "tags": [
@@ -549,7 +589,9 @@
     "author": "Recipe Kitchen Usa",
     "featured": false,
     "image": "https://picsum.photos/seed/budget-grocery-shopping-feed-family-100-week/1200/630",
-    "status": "published"
+    "status": "published",
+    "bucket": "main",
+    "seo_score_original": 80
   },
   {
     "title": "Restaurant Quality Burgers at Home: Perfect Recipe",
@@ -558,7 +600,7 @@
     "date": "2026-05-25",
     "word_count": 756,
     "read_time": 2,
-    "seo_score": 80,
+    "seo_score": 95,
     "source": "copilot_direct",
     "category": "general",
     "tags": [
@@ -569,7 +611,9 @@
     "author": "Recipe Kitchen Usa",
     "featured": false,
     "image": "https://picsum.photos/seed/restaurant-quality-burgers-at-home-perfect-recipe/1200/630",
-    "status": "published"
+    "status": "published",
+    "bucket": "main",
+    "seo_score_original": 80
   },
   {
     "title": "One-Pan Chicken Dinner Recipes: 5 Easy Sheet Pan Meals",
@@ -578,7 +622,7 @@
     "date": "2026-05-25",
     "word_count": 731,
     "read_time": 2,
-    "seo_score": 80,
+    "seo_score": 95,
     "source": "copilot_direct",
     "category": "general",
     "tags": [
@@ -589,7 +633,9 @@
     "author": "Recipe Kitchen Usa",
     "featured": false,
     "image": "https://picsum.photos/seed/one-pan-chicken-vegetable-dinner-recipes-easy/1200/630",
-    "status": "published"
+    "status": "published",
+    "bucket": "main",
+    "seo_score_original": 80
   },
   {
     "title": "15-Minute Dinners: 7 Quick Easy Weeknight Recipes",
@@ -598,7 +644,7 @@
     "date": "2026-05-25",
     "word_count": 732,
     "read_time": 2,
-    "seo_score": 80,
+    "seo_score": 95,
     "source": "copilot_direct",
     "category": "general",
     "tags": [
@@ -609,7 +655,9 @@
     "author": "Recipe Kitchen Usa",
     "featured": false,
     "image": "https://picsum.photos/seed/15-minute-dinners-quick-easy-weeknight-recipes/1200/630",
-    "status": "published"
+    "status": "published",
+    "bucket": "main",
+    "seo_score_original": 80
   },
   {
     "title": "Cast Iron Skillet Guide: Beginner's Cooking Tips",
@@ -618,7 +666,7 @@
     "date": "2026-05-25",
     "word_count": 757,
     "read_time": 2,
-    "seo_score": 80,
+    "seo_score": 95,
     "source": "copilot_direct",
     "category": "general",
     "tags": [
@@ -629,7 +677,9 @@
     "author": "Recipe Kitchen Usa",
     "featured": false,
     "image": "https://picsum.photos/seed/cast-iron-skillet-beginners-guide-cooking/1200/630",
-    "status": "published"
+    "status": "published",
+    "bucket": "main",
+    "seo_score_original": 80
   },
   {
     "title": "10 Freezer Meals to Prep Today and Eat All Month",
@@ -638,7 +688,7 @@
     "date": "2026-05-25",
     "word_count": 779,
     "read_time": 2,
-    "seo_score": 80,
+    "seo_score": 95,
     "source": "copilot_direct",
     "category": "general",
     "tags": [
@@ -649,7 +699,9 @@
     "author": "Recipe Kitchen Usa",
     "featured": false,
     "image": "https://picsum.photos/seed/freezer-meals-prep-today-eat-all-month-2026/1200/630",
-    "status": "published"
+    "status": "published",
+    "bucket": "main",
+    "seo_score_original": 80
   },
   {
     "title": "8 Best Homemade Soup Recipes for Every Season",
@@ -658,7 +710,7 @@
     "date": "2026-05-25",
     "word_count": 752,
     "read_time": 2,
-    "seo_score": 80,
+    "seo_score": 95,
     "source": "copilot_direct",
     "category": "general",
     "tags": [
@@ -669,7 +721,9 @@
     "author": "Recipe Kitchen Usa",
     "featured": false,
     "image": "https://picsum.photos/seed/best-homemade-soup-recipes-every-season/1200/630",
-    "status": "published"
+    "status": "published",
+    "bucket": "main",
+    "seo_score_original": 80
   },
   {
     "title": "Easy Homemade Pizza Dough Recipe: Simple & Perfect",
@@ -678,7 +732,7 @@
     "date": "2026-05-25",
     "word_count": 689,
     "read_time": 2,
-    "seo_score": 80,
+    "seo_score": 95,
     "source": "copilot_direct",
     "category": "general",
     "tags": [
@@ -689,7 +743,9 @@
     "author": "Recipe Kitchen Usa",
     "featured": false,
     "image": "https://picsum.photos/seed/homemade-pizza-dough-easy-recipe/1200/630",
-    "status": "published"
+    "status": "published",
+    "bucket": "main",
+    "seo_score_original": 80
   },
   {
     "title": "How to Cook Steak at Home: Steakhouse Quality Guide",
@@ -698,7 +754,7 @@
     "date": "2026-05-25",
     "word_count": 681,
     "read_time": 2,
-    "seo_score": 80,
+    "seo_score": 95,
     "source": "copilot_direct",
     "category": "general",
     "tags": [
@@ -709,7 +765,9 @@
     "author": "Recipe Kitchen Usa",
     "featured": false,
     "image": "https://picsum.photos/seed/how-to-cook-steak-at-home-steakhouse-quality/1200/630",
-    "status": "published"
+    "status": "published",
+    "bucket": "main",
+    "seo_score_original": 80
   },
   {
     "title": "Easy 5-Ingredient Dinners When You Don't Want to Cook",
@@ -718,7 +776,7 @@
     "date": "2026-05-25",
     "word_count": 750,
     "read_time": 2,
-    "seo_score": 80,
+    "seo_score": 95,
     "source": "copilot_direct",
     "category": "general",
     "tags": [
@@ -729,7 +787,9 @@
     "author": "Recipe Kitchen Usa",
     "featured": false,
     "image": "https://picsum.photos/seed/5-ingredient-dinners-dont-feel-like-cooking/1200/630",
-    "status": "published"
+    "status": "published",
+    "bucket": "main",
+    "seo_score_original": 80
   },
   {
     "title": "15 Best Air Fryer Recipes for Beginners 2026",
@@ -738,7 +798,7 @@
     "date": "2026-05-25",
     "word_count": 797,
     "read_time": 3,
-    "seo_score": 80,
+    "seo_score": 95,
     "source": "copilot_direct",
     "category": "general",
     "tags": [
@@ -749,7 +809,9 @@
     "author": "Recipe Kitchen Usa",
     "featured": false,
     "image": "https://picsum.photos/seed/air-fryer-recipes-beginners-just-got-one/1200/630",
-    "status": "published"
+    "status": "published",
+    "bucket": "main",
+    "seo_score_original": 80
   },
   {
     "title": "Budget Meals Under $5 Per Person: 10 Cheap Dinner Ideas",
@@ -758,7 +820,7 @@
     "date": "2026-05-25",
     "word_count": 775,
     "read_time": 3,
-    "seo_score": 80,
+    "seo_score": 95,
     "source": "copilot_direct",
     "category": "general",
     "tags": [
@@ -769,7 +831,9 @@
     "author": "Recipe Kitchen Usa",
     "featured": false,
     "image": "https://picsum.photos/seed/budget-meals-under-5-dollars-per-person/1200/630",
-    "status": "published"
+    "status": "published",
+    "bucket": "main",
+    "seo_score_original": 80
   },
   {
     "title": "10 Easy Sheet Pan Dinners for Busy Weeknights",
@@ -778,7 +842,7 @@
     "date": "2026-05-25",
     "word_count": 776,
     "read_time": 3,
-    "seo_score": 80,
+    "seo_score": 95,
     "source": "copilot_direct",
     "category": "general",
     "tags": [
@@ -789,7 +853,9 @@
     "author": "Recipe Kitchen Usa",
     "featured": false,
     "image": "https://picsum.photos/seed/easy-sheet-pan-dinners-busy-weeknights/1200/630",
-    "status": "published"
+    "status": "published",
+    "bucket": "main",
+    "seo_score_original": 80
   },
   {
     "title": "15 Best Slow Cooker Recipes for Busy Families 2026",
@@ -798,7 +864,7 @@
     "date": "2026-05-25",
     "word_count": 824,
     "read_time": 3,
-    "seo_score": 80,
+    "seo_score": 95,
     "source": "copilot_direct",
     "category": "general",
     "tags": [
@@ -809,7 +875,9 @@
     "author": "Recipe Kitchen Usa",
     "featured": false,
     "image": "https://picsum.photos/seed/best-slow-cooker-recipes-busy-families/1200/630",
-    "status": "published"
+    "status": "published",
+    "bucket": "main",
+    "seo_score_original": 80
   },
   {
     "title": "Sunday Meal Prep: How to Prep a Week of Meals in 2 Hours",
@@ -818,7 +886,7 @@
     "date": "2026-05-25",
     "word_count": 762,
     "read_time": 2,
-    "seo_score": 80,
+    "seo_score": 95,
     "source": "copilot_direct",
     "category": "general",
     "tags": [
@@ -829,7 +897,9 @@
     "author": "Recipe Kitchen Usa",
     "featured": false,
     "image": "https://picsum.photos/seed/sunday-meal-prep-entire-week-guide/1200/630",
-    "status": "published"
+    "status": "published",
+    "bucket": "main",
+    "seo_score_original": 80
   },
   {
     "title": "10-Minute Lunches for Weight Loss",
@@ -838,14 +908,16 @@
     "date": "2026-05-25",
     "word_count": 869,
     "read_time": 2,
-    "seo_score": 80,
+    "seo_score": 95,
     "source": "copilot_direct",
     "category": "general",
     "tags": [],
     "author": "Recipe Kitchen Usa",
     "featured": false,
     "image": "https://picsum.photos/seed/10-minute-lunches-meal-prep-ideas/1200/630",
-    "status": "published"
+    "status": "published",
+    "bucket": "main",
+    "seo_score_original": 80
   },
   {
     "title": "15-Minute Dinners: 7 Recipes for Busy Weeknights",
@@ -854,14 +926,16 @@
     "date": "2026-05-25",
     "word_count": 976,
     "read_time": 2,
-    "seo_score": 80,
+    "seo_score": 95,
     "source": "copilot_direct",
     "category": "general",
     "tags": [],
     "author": "Recipe Kitchen Usa",
     "featured": false,
     "image": "https://picsum.photos/seed/15-minute-dinners-7-quick-recipes-weeknights/1200/630",
-    "status": "published"
+    "status": "published",
+    "bucket": "main",
+    "seo_score_original": 80
   },
   {
     "title": "8 Of Ina Garten’S Most Delicious Bread Recipes",
@@ -870,14 +944,16 @@
     "date": "2026-05-25",
     "word_count": 1037,
     "read_time": 10,
-    "seo_score": 80,
+    "seo_score": 95,
     "source": "copilot_direct",
     "category": "general",
     "tags": [],
     "author": "Recipe Kitchen Usa",
     "featured": false,
     "image": "https://picsum.photos/seed/8-of-ina-gartens-most-delicious-bread-recipes/1200/630",
-    "status": "published"
+    "status": "published",
+    "bucket": "main",
+    "seo_score_original": 80
   },
   {
     "title": "Air Fryer Recipes for Beginners: 5 Things to Make First",
@@ -886,14 +962,16 @@
     "date": "2026-05-25",
     "word_count": 811,
     "read_time": 3,
-    "seo_score": 80,
+    "seo_score": 95,
     "source": "copilot_direct",
     "category": "general",
     "tags": [],
     "author": "Recipe Kitchen Usa",
     "featured": false,
     "image": "https://picsum.photos/seed/air-fryer-recipes-beginners-5-best/1200/630",
-    "status": "published"
+    "status": "published",
+    "bucket": "main",
+    "seo_score_original": 80
   },
   {
     "title": "The Best Homemade Pizza Dough: Easy Recipe Even for Beginners",
@@ -902,14 +980,16 @@
     "date": "2026-05-25",
     "word_count": 833,
     "read_time": 3,
-    "seo_score": 80,
+    "seo_score": 95,
     "source": "copilot_direct",
     "category": "general",
     "tags": [],
     "author": "Recipe Kitchen Usa",
     "featured": false,
     "image": "https://picsum.photos/seed/best-homemade-pizza-dough-easy-recipe/1200/630",
-    "status": "published"
+    "status": "published",
+    "bucket": "main",
+    "seo_score_original": 80
   },
   {
     "title": "Best Meal Kits for Home Cooks",
@@ -918,14 +998,16 @@
     "date": "2026-05-25",
     "word_count": 950,
     "read_time": 3,
-    "seo_score": 80,
+    "seo_score": 95,
     "source": "copilot_direct",
     "category": "general",
     "tags": [],
     "author": "Recipe Kitchen Usa",
     "featured": false,
     "image": "https://picsum.photos/seed/best-meal-kits-for-home-cooks/1200/630",
-    "status": "published"
+    "status": "published",
+    "bucket": "main",
+    "seo_score_original": 80
   },
   {
     "title": "Best Smoothie Recipes for Every Goal: Energy, Weight Loss, P",
@@ -934,7 +1016,7 @@
     "date": "2026-05-25",
     "word_count": 749,
     "read_time": 3,
-    "seo_score": 80,
+    "seo_score": 95,
     "source": "copilot_direct",
     "category": "general",
     "tags": [
@@ -945,7 +1027,9 @@
     "author": "Recipe Kitchen Usa",
     "featured": false,
     "image": "https://picsum.photos/seed/best-smoothie-recipes-every-goal/1200/630",
-    "status": "published"
+    "status": "published",
+    "bucket": "main",
+    "seo_score_original": 80
   },
   {
     "title": "Breakfast Ideas When You're Tired of Cereal: 7 Easy Morning Meals",
@@ -954,14 +1038,16 @@
     "date": "2026-05-25",
     "word_count": 794,
     "read_time": 3,
-    "seo_score": 80,
+    "seo_score": 95,
     "source": "copilot_direct",
     "category": "general",
     "tags": [],
     "author": "Recipe Kitchen Usa",
     "featured": false,
     "image": "https://picsum.photos/seed/breakfast-ideas-tired-of-cereal/1200/630",
-    "status": "published"
+    "status": "published",
+    "bucket": "main",
+    "seo_score_original": 80
   },
   {
     "title": "Best Crockpot Dump Meals: 10 Recipes You Prep in 5 Minutes",
@@ -970,7 +1056,7 @@
     "date": "2026-05-25",
     "word_count": 833,
     "read_time": 4,
-    "seo_score": 80,
+    "seo_score": 95,
     "source": "copilot_direct",
     "category": "general",
     "tags": [
@@ -981,7 +1067,9 @@
     "author": "Recipe Kitchen Usa",
     "featured": false,
     "image": "https://picsum.photos/seed/crockpot-dump-meals-easy-recipes/1200/630",
-    "status": "published"
+    "status": "published",
+    "bucket": "main",
+    "seo_score_original": 80
   },
   {
     "title": "15 Easy 30-Minute Dinners for Busy Weeknights",
@@ -990,7 +1078,7 @@
     "date": "2026-05-25",
     "word_count": 825,
     "read_time": 4,
-    "seo_score": 80,
+    "seo_score": 95,
     "source": "copilot_direct",
     "category": "general",
     "tags": [
@@ -1001,7 +1089,9 @@
     "author": "Recipe Kitchen Usa",
     "featured": false,
     "image": "https://picsum.photos/seed/easy-30-minute-dinners-busy-weeknights/1200/630",
-    "status": "published"
+    "status": "published",
+    "bucket": "main",
+    "seo_score_original": 80
   },
   {
     "title": "5 Easy Pasta Recipes Every Beginner Cook Should Master",
@@ -1010,14 +1100,16 @@
     "date": "2026-05-25",
     "word_count": 817,
     "read_time": 3,
-    "seo_score": 80,
+    "seo_score": 95,
     "source": "copilot_direct",
     "category": "general",
     "tags": [],
     "author": "Recipe Kitchen Usa",
     "featured": false,
     "image": "https://picsum.photos/seed/easy-pasta-recipes-beginner-cook/1200/630",
-    "status": "published"
+    "status": "published",
+    "bucket": "main",
+    "seo_score_original": 80
   },
   {
     "title": "How to Grill the Perfect Steak: A Foolproof Guide for Any Skill Level",
@@ -1026,14 +1118,16 @@
     "date": "2026-05-25",
     "word_count": 825,
     "read_time": 3,
-    "seo_score": 80,
+    "seo_score": 95,
     "source": "copilot_direct",
     "category": "general",
     "tags": [],
     "author": "Recipe Kitchen Usa",
     "featured": false,
     "image": "https://picsum.photos/seed/grill-perfect-steak-foolproof-guide/1200/630",
-    "status": "published"
+    "status": "published",
+    "bucket": "main",
+    "seo_score_original": 80
   },
   {
     "title": "How to Make Perfect Homemade Pizza: Better Than Delivery",
@@ -1042,7 +1136,7 @@
     "date": "2026-05-25",
     "word_count": 743,
     "read_time": 3,
-    "seo_score": 80,
+    "seo_score": 95,
     "source": "copilot_direct",
     "category": "general",
     "tags": [
@@ -1053,7 +1147,9 @@
     "author": "Recipe Kitchen Usa",
     "featured": false,
     "image": "https://picsum.photos/seed/homemade-pizza-recipe-better-than-delivery/1200/630",
-    "status": "published"
+    "status": "published",
+    "bucket": "main",
+    "seo_score_original": 80
   },
   {
     "title": "How to Make Homemade Soup: The Master Recipe for Any Soup",
@@ -1062,14 +1158,16 @@
     "date": "2026-05-25",
     "word_count": 850,
     "read_time": 3,
-    "seo_score": 80,
+    "seo_score": 95,
     "source": "copilot_direct",
     "category": "general",
     "tags": [],
     "author": "Recipe Kitchen Usa",
     "featured": false,
     "image": "https://picsum.photos/seed/homemade-soup-master-recipe-any-flavor/1200/630",
-    "status": "published"
+    "status": "published",
+    "bucket": "main",
+    "seo_score_original": 80
   },
   {
     "title": "I Tried Hungryroot For 4 Weeks In A Row — The Meal Kit Is “Perfect” For Busy Home Cooks",
@@ -1078,14 +1176,16 @@
     "date": "2026-05-25",
     "word_count": 1176,
     "read_time": 2,
-    "seo_score": 80,
+    "seo_score": 95,
     "source": "copilot_direct",
     "category": "general",
     "tags": [],
     "author": "Recipe Kitchen Usa",
     "featured": false,
     "image": "https://picsum.photos/seed/i-tried-hungryroot-for-4-weeks-in-a-row-the-meal-kit-is-perfect-for-busy-home-cooks/1200/630",
-    "status": "published"
+    "status": "published",
+    "bucket": "main",
+    "seo_score_original": 80
   },
   {
     "title": "5 Marinades That Transform Boring Chicken Into Something Amazing",
@@ -1094,14 +1194,16 @@
     "date": "2026-05-25",
     "word_count": 838,
     "read_time": 4,
-    "seo_score": 80,
+    "seo_score": 95,
     "source": "copilot_direct",
     "category": "general",
     "tags": [],
     "author": "Recipe Kitchen Usa",
     "featured": false,
     "image": "https://picsum.photos/seed/marinades-transform-boring-chicken/1200/630",
-    "status": "published"
+    "status": "published",
+    "bucket": "main",
+    "seo_score_original": 80
   },
   {
     "title": "Meal Prep for Absolute Beginners: Your First Week Plan",
@@ -1110,14 +1212,16 @@
     "date": "2026-05-25",
     "word_count": 830,
     "read_time": 2,
-    "seo_score": 80,
+    "seo_score": 95,
     "source": "copilot_direct",
     "category": "general",
     "tags": [],
     "author": "Recipe Kitchen Usa",
     "featured": false,
     "image": "https://picsum.photos/seed/meal-prep-beginners-first-week-plan/1200/630",
-    "status": "published"
+    "status": "published",
+    "bucket": "main",
+    "seo_score_original": 80
   },
   {
     "title": "How to Meal Prep Breakfast for the Entire Week: 5 Easy Ideas",
@@ -1126,7 +1230,7 @@
     "date": "2026-05-25",
     "word_count": 750,
     "read_time": 3,
-    "seo_score": 80,
+    "seo_score": 95,
     "source": "copilot_direct",
     "category": "general",
     "tags": [
@@ -1137,7 +1241,9 @@
     "author": "Recipe Kitchen Usa",
     "featured": false,
     "image": "https://picsum.photos/seed/meal-prep-breakfast-ideas-week/1200/630",
-    "status": "published"
+    "status": "published",
+    "bucket": "main",
+    "seo_score_original": 80
   },
   {
     "title": "5 One-Pan Chicken Dinners That Are Ready in 25 Minutes",
@@ -1146,14 +1252,16 @@
     "date": "2026-05-25",
     "word_count": 814,
     "read_time": 2,
-    "seo_score": 80,
+    "seo_score": 95,
     "source": "copilot_direct",
     "category": "general",
     "tags": [],
     "author": "Recipe Kitchen Usa",
     "featured": false,
     "image": "https://picsum.photos/seed/one-pan-chicken-dinners-25-minutes/1200/630",
-    "status": "published"
+    "status": "published",
+    "bucket": "main",
+    "seo_score_original": 80
   },
   {
     "title": "One-Pan Chicken and Vegetables: The Easiest Healthy Dinner",
@@ -1162,14 +1270,16 @@
     "date": "2026-05-25",
     "word_count": 790,
     "read_time": 3,
-    "seo_score": 80,
+    "seo_score": 95,
     "source": "copilot_direct",
     "category": "general",
     "tags": [],
     "author": "Recipe Kitchen Usa",
     "featured": false,
     "image": "https://picsum.photos/seed/one-pan-chicken-vegetables-easy-dinner/1200/630",
-    "status": "published"
+    "status": "published",
+    "bucket": "main",
+    "seo_score_original": 80
   },
   {
     "title": "How to Make Restaurant-Quality Burgers at Home",
@@ -1178,14 +1288,16 @@
     "date": "2026-05-25",
     "word_count": 1030,
     "read_time": 4,
-    "seo_score": 80,
+    "seo_score": 95,
     "source": "copilot_direct",
     "category": "general",
     "tags": [],
     "author": "Recipe Kitchen Usa",
     "featured": false,
     "image": "https://picsum.photos/seed/restaurant-quality-burgers-at-home-recipe/1200/630",
-    "status": "published"
+    "status": "published",
+    "bucket": "main",
+    "seo_score_original": 80
   },
   {
     "title": "How to Make Restaurant-Quality Fried Rice at Home",
@@ -1194,14 +1306,16 @@
     "date": "2026-05-25",
     "word_count": 851,
     "read_time": 2,
-    "seo_score": 80,
+    "seo_score": 95,
     "source": "copilot_direct",
     "category": "general",
     "tags": [],
     "author": "Recipe Kitchen Usa",
     "featured": false,
     "image": "https://picsum.photos/seed/restaurant-quality-fried-rice-at-home/1200/630",
-    "status": "published"
+    "status": "published",
+    "bucket": "main",
+    "seo_score_original": 80
   },
   {
     "title": "Slow Cooker Dump Dinners: 10 Meals You Prep in 5 Minutes",
@@ -1210,14 +1324,16 @@
     "date": "2026-05-25",
     "word_count": 837,
     "read_time": 4,
-    "seo_score": 80,
+    "seo_score": 95,
     "source": "copilot_direct",
     "category": "general",
     "tags": [],
     "author": "Recipe Kitchen Usa",
     "featured": false,
     "image": "https://picsum.photos/seed/slow-cooker-dump-dinners-5-minutes-prep/1200/630",
-    "status": "published"
+    "status": "published",
+    "bucket": "main",
+    "seo_score_original": 80
   },
   {
     "title": "Spice Up Your Cooking Skills With Help From Your Phone",
@@ -1226,14 +1342,16 @@
     "date": "2026-05-25",
     "word_count": 1066,
     "read_time": 3,
-    "seo_score": 80,
+    "seo_score": 95,
     "source": "copilot_direct",
     "category": "general",
     "tags": [],
     "author": "Recipe Kitchen Usa",
     "featured": false,
     "image": "https://picsum.photos/seed/spice-up-your-cooking-skills-with-help-from-your-phone/1200/630",
-    "status": "published"
+    "status": "published",
+    "bucket": "main",
+    "seo_score_original": 80
   },
   {
     "title": "10 Freezer Meals You Can Prep Today and Eat All Month",
@@ -1242,14 +1360,16 @@
     "date": "2026-05-24",
     "word_count": 1058,
     "read_time": 4,
-    "seo_score": 80,
+    "seo_score": 95,
     "source": "copilot_direct",
     "category": "general",
     "tags": [],
     "author": "Recipe Kitchen Usa",
     "featured": false,
     "image": "https://picsum.photos/seed/10-freezer-meals-prep-today-eat-all-month/1200/630",
-    "status": "published"
+    "status": "published",
+    "bucket": "main",
+    "seo_score_original": 80
   },
   {
     "title": "The Beginner's Guide to Cooking with a Cast Iron Skillet",
@@ -1258,14 +1378,16 @@
     "date": "2026-05-24",
     "word_count": 1137,
     "read_time": 3,
-    "seo_score": 80,
+    "seo_score": 95,
     "source": "copilot_direct",
     "category": "general",
     "tags": [],
     "author": "Recipe Kitchen Usa",
     "featured": false,
     "image": "https://picsum.photos/seed/beginners-guide-cast-iron-skillet-cooking/1200/630",
-    "status": "published"
+    "status": "published",
+    "bucket": "main",
+    "seo_score_original": 80
   },
   {
     "title": "The Ultimate Meal Prep Guide: Save $200 a Month on Groceries",
@@ -1274,14 +1396,16 @@
     "date": "2026-05-24",
     "word_count": 1026,
     "read_time": 3,
-    "seo_score": 80,
+    "seo_score": 95,
     "source": "copilot_direct",
     "category": "general",
     "tags": [],
     "author": "Recipe Kitchen Usa",
     "featured": false,
     "image": "https://picsum.photos/seed/meal-prep-guide-save-money-groceries/1200/630",
-    "status": "published"
+    "status": "published",
+    "bucket": "main",
+    "seo_score_original": 80
   },
   {
     "title": "5 One-Pan Dinners Ready in 30 Minutes for Busy Weeknights",
@@ -1290,13 +1414,15 @@
     "date": "2026-05-24",
     "word_count": 1101,
     "read_time": 3,
-    "seo_score": 80,
+    "seo_score": 95,
     "source": "copilot_direct",
     "category": "general",
     "tags": [],
     "author": "Recipe Kitchen Usa",
     "featured": false,
     "image": "https://picsum.photos/seed/one-pan-dinners-30-minutes-easy-recipes/1200/630",
-    "status": "published"
+    "status": "published",
+    "bucket": "main",
+    "seo_score_original": 80
   }
 ]

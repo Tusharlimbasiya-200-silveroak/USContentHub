@@ -6,7 +6,7 @@
     "date": "2026-05-26",
     "word_count": 754,
     "read_time": 2,
-    "seo_score": 80,
+    "seo_score": 95,
     "source": "copilot_direct",
     "category": "general",
     "tags": [
@@ -17,7 +17,9 @@
     "author": "Usa Travel Explorer",
     "featured": false,
     "image": "https://picsum.photos/seed/budget-us-travel-guide-students-young-adults/1200/630",
-    "status": "published"
+    "status": "published",
+    "bucket": "main",
+    "seo_score_original": 80
   },
   {
     "title": "Best US Beaches Not in Florida or Hawaii: Hidden Gems",
@@ -26,7 +28,7 @@
     "date": "2026-05-26",
     "word_count": 786,
     "read_time": 3,
-    "seo_score": 80,
+    "seo_score": 95,
     "source": "copilot_direct",
     "category": "general",
     "tags": [
@@ -37,7 +39,9 @@
     "author": "Usa Travel Explorer",
     "featured": false,
     "image": "https://picsum.photos/seed/best-us-beaches-not-florida-hawaii-hidden-gems/1200/630",
-    "status": "published"
+    "status": "published",
+    "bucket": "main",
+    "seo_score_original": 80
   },
   {
     "title": "Best State Fairs and Festivals in America: Worth the Trip",
@@ -46,7 +50,7 @@
     "date": "2026-05-26",
     "word_count": 781,
     "read_time": 3,
-    "seo_score": 80,
+    "seo_score": 95,
     "source": "copilot_direct",
     "category": "general",
     "tags": [
@@ -57,7 +61,9 @@
     "author": "Usa Travel Explorer",
     "featured": false,
     "image": "https://picsum.photos/seed/best-state-fairs-festivals-america-worth-trip/1200/630",
-    "status": "published"
+    "status": "published",
+    "bucket": "main",
+    "seo_score_original": 80
   },
   {
     "title": "Affordable Weekend Getaways for Couples Under $500",
@@ -66,7 +72,7 @@
     "date": "2026-05-26",
     "word_count": 697,
     "read_time": 2,
-    "seo_score": 80,
+    "seo_score": 95,
     "source": "copilot_direct",
     "category": "general",
     "tags": [
@@ -77,7 +83,9 @@
     "author": "Usa Travel Explorer",
     "featured": false,
     "image": "https://picsum.photos/seed/affordable-weekend-getaways-couples-under-500/1200/630",
-    "status": "published"
+    "status": "published",
+    "bucket": "main",
+    "seo_score_original": 80
   },
   {
     "title": "How to Save Money on Hotels: 12 Booking Tricks",
@@ -86,7 +94,7 @@
     "date": "2026-05-26",
     "word_count": 781,
     "read_time": 3,
-    "seo_score": 80,
+    "seo_score": 95,
     "source": "copilot_direct",
     "category": "general",
     "tags": [
@@ -97,7 +105,9 @@
     "author": "Usa Travel Explorer",
     "featured": false,
     "image": "https://picsum.photos/seed/save-money-on-hotels-booking-tricks-work/1200/630",
-    "status": "published"
+    "status": "published",
+    "bucket": "main",
+    "seo_score_original": 80
   },
   {
     "title": "Best Cheap Eats in US Cities: Local Food Guide",
@@ -106,7 +116,7 @@
     "date": "2026-05-26",
     "word_count": 767,
     "read_time": 2,
-    "seo_score": 80,
+    "seo_score": 95,
     "source": "copilot_direct",
     "category": "general",
     "tags": [
@@ -117,7 +127,9 @@
     "author": "Usa Travel Explorer",
     "featured": false,
     "image": "https://picsum.photos/seed/best-cheap-eats-us-cities-local-food-guide/1200/630",
-    "status": "published"
+    "status": "published",
+    "bucket": "main",
+    "seo_score_original": 80
   },
   {
     "title": "Best Mountain Destinations in the US: All Seasons Guide",
@@ -126,7 +138,7 @@
     "date": "2026-05-26",
     "word_count": 738,
     "read_time": 2,
-    "seo_score": 80,
+    "seo_score": 95,
     "source": "copilot_direct",
     "category": "general",
     "tags": [
@@ -137,7 +149,9 @@
     "author": "Usa Travel Explorer",
     "featured": false,
     "image": "https://picsum.photos/seed/best-mountain-destinations-us-all-seasons/1200/630",
-    "status": "published"
+    "status": "published",
+    "bucket": "main",
+    "seo_score_original": 80
   },
   {
     "title": "Cross-Country Road Trip Planning Guide: US Route Tips",
@@ -146,7 +160,7 @@
     "date": "2026-05-26",
     "word_count": 715,
     "read_time": 2,
-    "seo_score": 80,
+    "seo_score": 95,
     "source": "copilot_direct",
     "category": "general",
     "tags": [
@@ -157,7 +171,9 @@
     "author": "Usa Travel Explorer",
     "featured": false,
     "image": "https://picsum.photos/seed/cross-country-road-trip-planning-guide-us-route/1200/630",
-    "status": "published"
+    "status": "published",
+    "bucket": "main",
+    "seo_score_original": 80
   },
   {
     "title": "Best National Parks for Beginners: Easy First Visits",
@@ -166,7 +182,7 @@
     "date": "2026-05-26",
     "word_count": 798,
     "read_time": 3,
-    "seo_score": 80,
+    "seo_score": 95,
     "source": "copilot_direct",
     "category": "general",
     "tags": [
@@ -177,7 +193,9 @@
     "author": "Usa Travel Explorer",
     "featured": false,
     "image": "https://picsum.photos/seed/best-national-parks-beginners-easy-first-visits/1200/630",
-    "status": "published"
+    "status": "published",
+    "bucket": "main",
+    "seo_score_original": 80
   },
   {
     "title": "How to Plan a Trip to Washington DC on a Budget",
@@ -186,7 +204,7 @@
     "date": "2026-05-25T22:31:07.334826",
     "word_count": 577,
     "read_time": 2,
-    "seo_score": 70,
+    "seo_score": 90,
     "source": "copilot_direct",
     "description": "Visit Washington DC without breaking the bank. Free museums, affordable hotels, cheap eats, and a day-by-day itinerary for the best budget trip to the nation...",
     "reading_time": 2,
@@ -208,7 +226,9 @@
     "author": "Usa Travel Explorer",
     "featured": false,
     "image": "https://picsum.photos/seed/washington-dc-budget-travel-guide-free-museums/1200/630",
-    "status": "published"
+    "status": "published",
+    "bucket": "low_quality",
+    "seo_score_original": 70
   },
   {
     "title": "The 10 Best National Parks for First-Time Visitors",
@@ -217,7 +237,7 @@
     "date": "2026-05-25T22:31:07.334269",
     "word_count": 739,
     "read_time": 3,
-    "seo_score": 80,
+    "seo_score": 95,
     "source": "copilot_direct",
     "description": "Never been to a national park? These 10 parks are perfect for beginners — easy to access, stunning scenery, beginner-friendly trails, and affordable to visit.",
     "reading_time": 3,
@@ -239,7 +259,9 @@
     "author": "Usa Travel Explorer",
     "featured": false,
     "image": "https://picsum.photos/seed/best-national-parks-first-time-visitors-guide-2026/1200/630",
-    "status": "published"
+    "status": "published",
+    "bucket": "main",
+    "seo_score_original": 80
   },
   {
     "title": "How to Find Cheap Flights: 10 Tricks That Actually Work in 2026",
@@ -248,7 +270,7 @@
     "date": "2026-05-25T22:23:46.753321",
     "word_count": 621,
     "read_time": 3,
-    "seo_score": 80,
+    "seo_score": 95,
     "source": "copilot_direct",
     "description": "Save hundreds on flights with these 10 proven tricks for 2026. From booking timing to hidden city ticketing, these strategies work for domestic and internati...",
     "reading_time": 3,
@@ -270,7 +292,9 @@
     "author": "Usa Travel Explorer",
     "featured": false,
     "image": "https://picsum.photos/seed/find-cheap-flights-2026-tricks-that-work/1200/630",
-    "status": "published"
+    "status": "published",
+    "bucket": "main",
+    "seo_score_original": 80
   },
   {
     "title": "Airport Hacks That Actually Save You Time and Money",
@@ -279,7 +303,7 @@
     "date": "2026-05-25T22:16:23.265720",
     "word_count": 630,
     "read_time": 3,
-    "seo_score": 80,
+    "seo_score": 95,
     "source": "copilot_direct",
     "description": "These airport hacks save real time and money. From booking tips to TSA tricks, lounge access, and avoiding fees, fly smarter with these 15 travel hacks.",
     "reading_time": 3,
@@ -301,7 +325,9 @@
     "author": "Usa Travel Explorer",
     "featured": false,
     "image": "https://picsum.photos/seed/airport-hacks-save-time-money-flying-2026/1200/630",
-    "status": "published"
+    "status": "published",
+    "bucket": "main",
+    "seo_score_original": 80
   },
   {
     "title": "How to Take a Road Trip Across America: A First-Timer's Planning Guide",
@@ -310,7 +336,7 @@
     "date": "2026-05-25T22:16:23.264957",
     "word_count": 591,
     "read_time": 2,
-    "seo_score": 70,
+    "seo_score": 90,
     "source": "copilot_direct",
     "description": "Planning your first cross-country road trip? This complete guide covers route planning, budgeting, what to pack, where to stay, and tips for driving across A...",
     "reading_time": 2,
@@ -332,7 +358,9 @@
     "author": "Usa Travel Explorer",
     "featured": false,
     "image": "https://picsum.photos/seed/cross-country-road-trip-usa-planning-guide/1200/630",
-    "status": "published"
+    "status": "published",
+    "bucket": "low_quality",
+    "seo_score_original": 70
   },
   {
     "title": "10 Free Things to Do in Every Major US City",
@@ -341,7 +369,7 @@
     "date": "2026-05-25T22:16:23.263760",
     "word_count": 581,
     "read_time": 2,
-    "seo_score": 70,
+    "seo_score": 90,
     "source": "copilot_direct",
     "description": "Discover free activities in America's top cities. From free museums to parks, markets, and views, explore NYC, LA, Chicago, DC, and more without spending a d...",
     "reading_time": 2,
@@ -363,7 +391,9 @@
     "author": "Usa Travel Explorer",
     "featured": false,
     "image": "https://picsum.photos/seed/free-things-do-every-major-us-city-guide/1200/630",
-    "status": "published"
+    "status": "published",
+    "bucket": "low_quality",
+    "seo_score_original": 70
   },
   {
     "title": "The Best Beach Towns in America That Aren't Overcrowded",
@@ -372,7 +402,7 @@
     "date": "2026-05-25T21:55:17.013076",
     "word_count": 570,
     "read_time": 2,
-    "seo_score": 70,
+    "seo_score": 90,
     "source": "copilot_direct",
     "description": "Escape the crowds at these 10 beautiful American beach towns. Stunning coastline, fewer tourists, affordable lodging, and real small-town charm.",
     "reading_time": 2,
@@ -394,7 +424,9 @@
     "author": "Usa Travel Explorer",
     "featured": false,
     "image": "https://picsum.photos/seed/best-uncrowded-beach-towns-america-2026/1200/630",
-    "status": "published"
+    "status": "published",
+    "bucket": "low_quality",
+    "seo_score_original": 70
   },
   {
     "title": "How to Pack a Carry-On for a 2-Week Trip: The Complete Packing List",
@@ -403,7 +435,7 @@
     "date": "2026-05-25T21:55:17.011568",
     "word_count": 535,
     "read_time": 2,
-    "seo_score": 70,
+    "seo_score": 90,
     "source": "copilot_direct",
     "description": "Pack everything you need for a 2-week trip in a carry-on bag. This complete packing list and strategy eliminates checked bag fees and overpacking forever.",
     "reading_time": 2,
@@ -425,7 +457,9 @@
     "author": "Usa Travel Explorer",
     "featured": false,
     "image": "https://picsum.photos/seed/pack-carry-on-2-week-trip-packing-list/1200/630",
-    "status": "published"
+    "status": "published",
+    "bucket": "low_quality",
+    "seo_score_original": 70
   },
   {
     "title": "Avoiding Tourist Traps: 10 Overrated US Attractions and What to Do Instead",
@@ -434,7 +468,7 @@
     "date": "2026-05-25T21:29:42.913262",
     "word_count": 923,
     "read_time": 4,
-    "seo_score": 80,
+    "seo_score": 95,
     "source": "copilot_direct",
     "description": "Skip these 10 overrated US tourist traps and visit the better alternatives instead. Save money, avoid crowds, and have a more authentic American travel exper...",
     "reading_time": 4,
@@ -456,7 +490,9 @@
     "author": "Usa Travel Explorer",
     "featured": false,
     "image": "https://picsum.photos/seed/overrated-tourist-traps-usa-better-alternatives/1200/630",
-    "status": "published"
+    "status": "published",
+    "bucket": "main",
+    "seo_score_original": 80
   },
   {
     "title": "America's Best Free Museums: 15 World-Class Museums That Cost Nothing",
@@ -465,7 +501,7 @@
     "date": "2026-05-25T21:29:42.912774",
     "word_count": 741,
     "read_time": 3,
-    "seo_score": 80,
+    "seo_score": 95,
     "source": "copilot_direct",
     "description": "Visit 15 world-class American museums for free. From the Smithsonian to the Getty, these incredible museums charge zero admission and rival any paid museum i...",
     "reading_time": 3,
@@ -487,7 +523,9 @@
     "author": "Usa Travel Explorer",
     "featured": false,
     "image": "https://picsum.photos/seed/best-free-museums-america-world-class-list/1200/630",
-    "status": "published"
+    "status": "published",
+    "bucket": "main",
+    "seo_score_original": 80
   },
   {
     "title": "How to Plan a 4th of July Weekend Trip on a Budget",
@@ -496,7 +534,7 @@
     "date": "2026-05-25T21:29:42.912214",
     "word_count": 684,
     "read_time": 3,
-    "seo_score": 80,
+    "seo_score": 95,
     "source": "copilot_direct",
     "description": "Plan an affordable 4th of July weekend getaway in 2026. Budget tips for travel, accommodation, food, and the best affordable destinations for Independence Day.",
     "reading_time": 3,
@@ -518,7 +556,9 @@
     "author": "Usa Travel Explorer",
     "featured": false,
     "image": "https://picsum.photos/seed/4th-of-july-weekend-trip-budget-planning-2026/1200/630",
-    "status": "published"
+    "status": "published",
+    "bucket": "main",
+    "seo_score_original": 80
   },
   {
     "title": "Train Travel in America: The Best Amtrak Routes Worth Taking in 2026",
@@ -527,7 +567,7 @@
     "date": "2026-05-25T21:29:42.911637",
     "word_count": 729,
     "read_time": 3,
-    "seo_score": 80,
+    "seo_score": 95,
     "source": "copilot_direct",
     "description": "Discover the most scenic Amtrak train routes in America for 2026. From the California Zephyr to the Coast Starlight, these train trips offer stunning views a...",
     "reading_time": 3,
@@ -549,7 +589,9 @@
     "author": "Usa Travel Explorer",
     "featured": false,
     "image": "https://picsum.photos/seed/best-amtrak-routes-scenic-train-travel-2026/1200/630",
-    "status": "published"
+    "status": "published",
+    "bucket": "main",
+    "seo_score_original": 80
   },
   {
     "title": "The 7 Best Lake Towns in America for a Summer Getaway",
@@ -558,7 +600,7 @@
     "date": "2026-05-25T21:29:42.909219",
     "word_count": 933,
     "read_time": 4,
-    "seo_score": 80,
+    "seo_score": 95,
     "source": "copilot_direct",
     "description": "Discover the 7 best lake towns in America for your summer vacation. From Lake Tahoe to Finger Lakes, find affordable lakeside getaways with stunning views an...",
     "reading_time": 4,
@@ -580,7 +622,9 @@
     "author": "Usa Travel Explorer",
     "featured": false,
     "image": "https://picsum.photos/seed/best-lake-towns-america-summer-getaway-2026/1200/630",
-    "status": "published"
+    "status": "published",
+    "bucket": "main",
+    "seo_score_original": 80
   },
   {
     "title": "Save Money on Hotels: Booking Tips and Tricks 2026",
@@ -589,7 +633,7 @@
     "date": "2026-05-25",
     "word_count": 723,
     "read_time": 2,
-    "seo_score": 80,
+    "seo_score": 95,
     "source": "copilot_direct",
     "category": "general",
     "tags": [
@@ -600,7 +644,9 @@
     "author": "Usa Travel Explorer",
     "featured": false,
     "image": "https://picsum.photos/seed/save-money-hotels-booking-tips-tricks-2026/1200/630",
-    "status": "published"
+    "status": "published",
+    "bucket": "main",
+    "seo_score_original": 80
   },
   {
     "title": "Best Lake Vacations in America for Families 2026",
@@ -609,7 +655,7 @@
     "date": "2026-05-25",
     "word_count": 743,
     "read_time": 2,
-    "seo_score": 80,
+    "seo_score": 95,
     "source": "copilot_direct",
     "category": "general",
     "tags": [
@@ -620,7 +666,9 @@
     "author": "Usa Travel Explorer",
     "featured": false,
     "image": "https://picsum.photos/seed/best-lake-vacations-america-families-2026/1200/630",
-    "status": "published"
+    "status": "published",
+    "bucket": "main",
+    "seo_score_original": 80
   },
   {
     "title": "Best Fall Foliage Destinations in the US 2026",
@@ -629,7 +677,7 @@
     "date": "2026-05-25",
     "word_count": 748,
     "read_time": 2,
-    "seo_score": 80,
+    "seo_score": 95,
     "source": "copilot_direct",
     "category": "general",
     "tags": [
@@ -640,7 +688,9 @@
     "author": "Usa Travel Explorer",
     "featured": false,
     "image": "https://picsum.photos/seed/best-fall-foliage-destinations-america-2026/1200/630",
-    "status": "published"
+    "status": "published",
+    "bucket": "main",
+    "seo_score_original": 80
   },
   {
     "title": "Best Weekend Getaways From Major US Cities 2026",
@@ -649,7 +699,7 @@
     "date": "2026-05-25",
     "word_count": 725,
     "read_time": 2,
-    "seo_score": 80,
+    "seo_score": 95,
     "source": "copilot_direct",
     "category": "general",
     "tags": [
@@ -660,7 +710,9 @@
     "author": "Usa Travel Explorer",
     "featured": false,
     "image": "https://picsum.photos/seed/best-weekend-getaways-major-us-cities-2026/1200/630",
-    "status": "published"
+    "status": "published",
+    "bucket": "main",
+    "seo_score_original": 80
   },
   {
     "title": "Disney World on a Budget: Save Money Planning Guide",
@@ -669,7 +721,7 @@
     "date": "2026-05-25",
     "word_count": 725,
     "read_time": 2,
-    "seo_score": 80,
+    "seo_score": 95,
     "source": "copilot_direct",
     "category": "general",
     "tags": [
@@ -680,7 +732,9 @@
     "author": "Usa Travel Explorer",
     "featured": false,
     "image": "https://picsum.photos/seed/disney-world-budget-save-money-planning-guide/1200/630",
-    "status": "published"
+    "status": "published",
+    "bucket": "main",
+    "seo_score_original": 80
   },
   {
     "title": "10 Most Scenic Drives in America: Best Road Trips",
@@ -689,7 +743,7 @@
     "date": "2026-05-25",
     "word_count": 770,
     "read_time": 3,
-    "seo_score": 80,
+    "seo_score": 95,
     "source": "copilot_direct",
     "category": "general",
     "tags": [
@@ -700,7 +754,9 @@
     "author": "Usa Travel Explorer",
     "featured": false,
     "image": "https://picsum.photos/seed/most-scenic-drives-america-best-road-trips/1200/630",
-    "status": "published"
+    "status": "published",
+    "bucket": "main",
+    "seo_score_original": 80
   },
   {
     "title": "Best Free Things to Do in Major US Cities 2026",
@@ -709,7 +765,7 @@
     "date": "2026-05-25",
     "word_count": 730,
     "read_time": 2,
-    "seo_score": 80,
+    "seo_score": 95,
     "source": "copilot_direct",
     "category": "general",
     "tags": [
@@ -720,7 +776,9 @@
     "author": "Usa Travel Explorer",
     "featured": false,
     "image": "https://picsum.photos/seed/best-free-things-to-do-major-us-cities/1200/630",
-    "status": "published"
+    "status": "published",
+    "bucket": "main",
+    "seo_score_original": 80
   },
   {
     "title": "Hawaii on a Budget: Save Money in Paradise 2026",
@@ -729,7 +787,7 @@
     "date": "2026-05-25",
     "word_count": 720,
     "read_time": 2,
-    "seo_score": 80,
+    "seo_score": 95,
     "source": "copilot_direct",
     "category": "general",
     "tags": [
@@ -740,7 +798,9 @@
     "author": "Usa Travel Explorer",
     "featured": false,
     "image": "https://picsum.photos/seed/hawaii-budget-travel-save-money-paradise/1200/630",
-    "status": "published"
+    "status": "published",
+    "bucket": "main",
+    "seo_score_original": 80
   },
   {
     "title": "Traveling With Kids: Tips to Keep Everyone Happy",
@@ -749,7 +809,7 @@
     "date": "2026-05-25",
     "word_count": 692,
     "read_time": 2,
-    "seo_score": 80,
+    "seo_score": 95,
     "source": "copilot_direct",
     "category": "general",
     "tags": [
@@ -760,7 +820,9 @@
     "author": "Usa Travel Explorer",
     "featured": false,
     "image": "https://picsum.photos/seed/traveling-with-kids-tips-keep-everyone-happy/1200/630",
-    "status": "published"
+    "status": "published",
+    "bucket": "main",
+    "seo_score_original": 80
   },
   {
     "title": "10 Best Food Cities in America: A Foodie's Guide",
@@ -769,7 +831,7 @@
     "date": "2026-05-25",
     "word_count": 831,
     "read_time": 3,
-    "seo_score": 80,
+    "seo_score": 95,
     "source": "copilot_direct",
     "category": "general",
     "tags": [
@@ -780,7 +842,9 @@
     "author": "Usa Travel Explorer",
     "featured": false,
     "image": "https://picsum.photos/seed/best-food-cities-america-foodie-guide/1200/630",
-    "status": "published"
+    "status": "published",
+    "bucket": "main",
+    "seo_score_original": 80
   },
   {
     "title": "Camping for Beginners: Complete First Trip Guide 2026",
@@ -789,7 +853,7 @@
     "date": "2026-05-25",
     "word_count": 785,
     "read_time": 3,
-    "seo_score": 80,
+    "seo_score": 95,
     "source": "copilot_direct",
     "category": "general",
     "tags": [
@@ -800,7 +864,9 @@
     "author": "Usa Travel Explorer",
     "featured": false,
     "image": "https://picsum.photos/seed/camping-beginners-first-trip-guide/1200/630",
-    "status": "published"
+    "status": "published",
+    "bucket": "main",
+    "seo_score_original": 80
   },
   {
     "title": "12 Best Small Towns in America Worth Visiting 2026",
@@ -809,7 +875,7 @@
     "date": "2026-05-25",
     "word_count": 801,
     "read_time": 3,
-    "seo_score": 80,
+    "seo_score": 95,
     "source": "copilot_direct",
     "category": "general",
     "tags": [
@@ -820,7 +886,9 @@
     "author": "Usa Travel Explorer",
     "featured": false,
     "image": "https://picsum.photos/seed/best-small-towns-america-hidden-gems-visit/1200/630",
-    "status": "published"
+    "status": "published",
+    "bucket": "main",
+    "seo_score_original": 80
   },
   {
     "title": "How to Find Cheap Flights 2026: Best Tips & Tricks",
@@ -829,7 +897,7 @@
     "date": "2026-05-25",
     "word_count": 772,
     "read_time": 2,
-    "seo_score": 80,
+    "seo_score": 95,
     "source": "copilot_direct",
     "category": "general",
     "tags": [
@@ -840,7 +908,9 @@
     "author": "Usa Travel Explorer",
     "featured": false,
     "image": "https://picsum.photos/seed/how-to-find-cheap-flights-best-tips-2026/1200/630",
-    "status": "published"
+    "status": "published",
+    "bucket": "main",
+    "seo_score_original": 80
   },
   {
     "title": "8 Best Beach Towns in America for Your Next Vacation",
@@ -849,7 +919,7 @@
     "date": "2026-05-25",
     "word_count": 807,
     "read_time": 3,
-    "seo_score": 80,
+    "seo_score": 95,
     "source": "copilot_direct",
     "category": "general",
     "tags": [
@@ -860,7 +930,9 @@
     "author": "Usa Travel Explorer",
     "featured": false,
     "image": "https://picsum.photos/seed/best-beach-towns-america-vacation/1200/630",
-    "status": "published"
+    "status": "published",
+    "bucket": "main",
+    "seo_score_original": 80
   },
   {
     "title": "Ultimate Road Trip Packing List 2026: What to Bring",
@@ -869,7 +941,7 @@
     "date": "2026-05-25",
     "word_count": 735,
     "read_time": 2,
-    "seo_score": 80,
+    "seo_score": 95,
     "source": "copilot_direct",
     "category": "general",
     "tags": [
@@ -880,7 +952,9 @@
     "author": "Usa Travel Explorer",
     "featured": false,
     "image": "https://picsum.photos/seed/road-trip-packing-list-everything-you-need/1200/630",
-    "status": "published"
+    "status": "published",
+    "bucket": "main",
+    "seo_score_original": 80
   },
   {
     "title": "10 Best Summer Travel Destinations Across The Us For 2026",
@@ -889,14 +963,16 @@
     "date": "2026-05-25",
     "word_count": 1059,
     "read_time": 3,
-    "seo_score": 80,
+    "seo_score": 95,
     "source": "copilot_direct",
     "category": "general",
     "tags": [],
     "author": "Usa Travel Explorer",
     "featured": false,
     "image": "https://picsum.photos/seed/10-best-summer-travel-destinations-across-the-us-for-2026/1200/630",
-    "status": "published"
+    "status": "published",
+    "bucket": "main",
+    "seo_score_original": 80
   },
   {
     "title": "10 Most Underrated Small Towns in America Worth Visiting",
@@ -905,14 +981,16 @@
     "date": "2026-05-25",
     "word_count": 1045,
     "read_time": 3,
-    "seo_score": 80,
+    "seo_score": 95,
     "source": "copilot_direct",
     "category": "general",
     "tags": [],
     "author": "Usa Travel Explorer",
     "featured": false,
     "image": "https://picsum.photos/seed/10-underrated-small-towns-america-visit/1200/630",
-    "status": "published"
+    "status": "published",
+    "bucket": "main",
+    "seo_score_original": 80
   },
   {
     "title": "How to Get Through Airport Security Faster: Insider Tips That Work",
@@ -921,14 +999,16 @@
     "date": "2026-05-25",
     "word_count": 792,
     "read_time": 3,
-    "seo_score": 80,
+    "seo_score": 95,
     "source": "copilot_direct",
     "category": "general",
     "tags": [],
     "author": "Usa Travel Explorer",
     "featured": false,
     "image": "https://picsum.photos/seed/airport-security-faster-tips/1200/630",
-    "status": "published"
+    "status": "published",
+    "bucket": "main",
+    "seo_score_original": 80
   },
   {
     "title": "Best Cheap Eats in Every Major US City: $10 or Less Meals",
@@ -937,14 +1017,16 @@
     "date": "2026-05-25",
     "word_count": 845,
     "read_time": 2,
-    "seo_score": 80,
+    "seo_score": 95,
     "source": "copilot_direct",
     "category": "general",
     "tags": [],
     "author": "Usa Travel Explorer",
     "featured": false,
     "image": "https://picsum.photos/seed/best-cheap-eats-major-us-cities/1200/630",
-    "status": "published"
+    "status": "published",
+    "bucket": "main",
+    "seo_score_original": 80
   },
   {
     "title": "America's Best Fall Foliage Destinations: Where to See Autumn Colors in 2026",
@@ -953,14 +1035,16 @@
     "date": "2026-05-25",
     "word_count": 802,
     "read_time": 3,
-    "seo_score": 80,
+    "seo_score": 95,
     "source": "copilot_direct",
     "category": "general",
     "tags": [],
     "author": "Usa Travel Explorer",
     "featured": false,
     "image": "https://picsum.photos/seed/best-fall-foliage-destinations-2026/1200/630",
-    "status": "published"
+    "status": "published",
+    "bucket": "main",
+    "seo_score_original": 80
   },
   {
     "title": "Best National Parks for Beginners: 8 Parks Perfect for First",
@@ -969,7 +1053,7 @@
     "date": "2026-05-25",
     "word_count": 859,
     "read_time": 4,
-    "seo_score": 80,
+    "seo_score": 95,
     "source": "copilot_direct",
     "category": "general",
     "tags": [
@@ -980,7 +1064,9 @@
     "author": "Usa Travel Explorer",
     "featured": false,
     "image": "https://picsum.photos/seed/best-national-parks-beginners-first-time/1200/630",
-    "status": "published"
+    "status": "published",
+    "bucket": "main",
+    "seo_score_original": 80
   },
   {
     "title": "Best National Parks for Beginners: Where to Go If You've Never Been",
@@ -989,14 +1075,16 @@
     "date": "2026-05-25",
     "word_count": 847,
     "read_time": 4,
-    "seo_score": 80,
+    "seo_score": 95,
     "source": "copilot_direct",
     "category": "general",
     "tags": [],
     "author": "Usa Travel Explorer",
     "featured": false,
     "image": "https://picsum.photos/seed/best-national-parks-beginners-first-visit/1200/630",
-    "status": "published"
+    "status": "published",
+    "bucket": "main",
+    "seo_score_original": 80
   },
   {
     "title": "10 Best Road Trip Routes in America: Scenic Drives You Must",
@@ -1005,7 +1093,7 @@
     "date": "2026-05-25",
     "word_count": 882,
     "read_time": 4,
-    "seo_score": 80,
+    "seo_score": 95,
     "source": "copilot_direct",
     "category": "general",
     "tags": [
@@ -1016,7 +1104,9 @@
     "author": "Usa Travel Explorer",
     "featured": false,
     "image": "https://picsum.photos/seed/best-road-trip-routes-america-scenic/1200/630",
-    "status": "published"
+    "status": "published",
+    "bucket": "main",
+    "seo_score_original": 80
   },
   {
     "title": "Best Road Trip Snacks That Won't Make a Mess in Your Car",
@@ -1025,14 +1115,16 @@
     "date": "2026-05-25",
     "word_count": 806,
     "read_time": 2,
-    "seo_score": 80,
+    "seo_score": 95,
     "source": "copilot_direct",
     "category": "general",
     "tags": [],
     "author": "Usa Travel Explorer",
     "featured": false,
     "image": "https://picsum.photos/seed/best-road-trip-snacks-no-mess/1200/630",
-    "status": "published"
+    "status": "published",
+    "bucket": "main",
+    "seo_score_original": 80
   },
   {
     "title": "7 Epic US Road Trips",
@@ -1041,14 +1133,16 @@
     "date": "2026-05-25",
     "word_count": 985,
     "read_time": 2,
-    "seo_score": 80,
+    "seo_score": 95,
     "source": "copilot_direct",
     "category": "general",
     "tags": [],
     "author": "Usa Travel Explorer",
     "featured": false,
     "image": "https://picsum.photos/seed/best-road-trips-usa/1200/630",
-    "status": "published"
+    "status": "published",
+    "bucket": "main",
+    "seo_score_original": 80
   },
   {
     "title": "Best State Parks in America That Rival National Parks (Without the Crowds)",
@@ -1057,14 +1151,16 @@
     "date": "2026-05-25",
     "word_count": 832,
     "read_time": 3,
-    "seo_score": 80,
+    "seo_score": 95,
     "source": "copilot_direct",
     "category": "general",
     "tags": [],
     "author": "Usa Travel Explorer",
     "featured": false,
     "image": "https://picsum.photos/seed/best-state-parks-america-no-crowds/1200/630",
-    "status": "published"
+    "status": "published",
+    "bucket": "main",
+    "seo_score_original": 80
   },
   {
     "title": "10 Free Things to Do in New York City That Tourists Miss",
@@ -1073,14 +1169,16 @@
     "date": "2026-05-25",
     "word_count": 825,
     "read_time": 4,
-    "seo_score": 80,
+    "seo_score": 95,
     "source": "copilot_direct",
     "category": "general",
     "tags": [],
     "author": "Usa Travel Explorer",
     "featured": false,
     "image": "https://picsum.photos/seed/free-things-new-york-city-tourists-miss/1200/630",
-    "status": "published"
+    "status": "published",
+    "bucket": "main",
+    "seo_score_original": 80
   },
   {
     "title": "Hidden Gems of the American Southwest: Beyond the Grand Canyon",
@@ -1089,14 +1187,16 @@
     "date": "2026-05-25",
     "word_count": 848,
     "read_time": 3,
-    "seo_score": 80,
+    "seo_score": 95,
     "source": "copilot_direct",
     "category": "general",
     "tags": [],
     "author": "Usa Travel Explorer",
     "featured": false,
     "image": "https://picsum.photos/seed/hidden-gems-american-southwest-travel/1200/630",
-    "status": "published"
+    "status": "published",
+    "bucket": "main",
+    "seo_score_original": 80
   },
   {
     "title": "Mackinac Island Named Best Summer Travel Destination For 2026",
@@ -1105,14 +1205,16 @@
     "date": "2026-05-25",
     "word_count": 1039,
     "read_time": 2,
-    "seo_score": 80,
+    "seo_score": 95,
     "source": "copilot_direct",
     "category": "general",
     "tags": [],
     "author": "Usa Travel Explorer",
     "featured": false,
     "image": "https://picsum.photos/seed/mackinac-island-named-best-summer-travel-destination-for-2026/1200/630",
-    "status": "published"
+    "status": "published",
+    "bucket": "main",
+    "seo_score_original": 80
   },
   {
     "title": "How to Plan a US National Park Trip on a $500 Budget",
@@ -1121,14 +1223,16 @@
     "date": "2026-05-25",
     "word_count": 1048,
     "read_time": 4,
-    "seo_score": 80,
+    "seo_score": 95,
     "source": "copilot_direct",
     "category": "general",
     "tags": [],
     "author": "Usa Travel Explorer",
     "featured": false,
     "image": "https://picsum.photos/seed/national-park-trip-500-budget-planning-guide/1200/630",
-    "status": "published"
+    "status": "published",
+    "bucket": "main",
+    "seo_score_original": 80
   },
   {
     "title": "How to Pack a Carry-On for a 2-Week Trip: The Complete Guide",
@@ -1137,14 +1241,16 @@
     "date": "2026-05-25",
     "word_count": 802,
     "read_time": 3,
-    "seo_score": 80,
+    "seo_score": 95,
     "source": "copilot_direct",
     "category": "general",
     "tags": [],
     "author": "Usa Travel Explorer",
     "featured": false,
     "image": "https://picsum.photos/seed/pack-carry-on-2-week-trip-guide/1200/630",
-    "status": "published"
+    "status": "published",
+    "bucket": "main",
+    "seo_score_original": 80
   },
   {
     "title": "Road Trip Essentials: Everything You Need for a Perfect Drive",
@@ -1153,14 +1259,16 @@
     "date": "2026-05-25",
     "word_count": 820,
     "read_time": 2,
-    "seo_score": 80,
+    "seo_score": 95,
     "source": "copilot_direct",
     "category": "general",
     "tags": [],
     "author": "Usa Travel Explorer",
     "featured": false,
     "image": "https://picsum.photos/seed/road-trip-essentials-packing-list/1200/630",
-    "status": "published"
+    "status": "published",
+    "bucket": "main",
+    "seo_score_original": 80
   },
   {
     "title": "Solo Travel in America: Best Cities to Visit Alone for the First Time",
@@ -1169,14 +1277,16 @@
     "date": "2026-05-25",
     "word_count": 828,
     "read_time": 3,
-    "seo_score": 80,
+    "seo_score": 95,
     "source": "copilot_direct",
     "category": "general",
     "tags": [],
     "author": "Usa Travel Explorer",
     "featured": false,
     "image": "https://picsum.photos/seed/solo-travel-america-best-cities/1200/630",
-    "status": "published"
+    "status": "published",
+    "bucket": "main",
+    "seo_score_original": 80
   },
   {
     "title": "How to Travel Across America on a $1,000 Budget: A 7-Day Plan",
@@ -1185,14 +1295,16 @@
     "date": "2026-05-25",
     "word_count": 790,
     "read_time": 2,
-    "seo_score": 80,
+    "seo_score": 95,
     "source": "copilot_direct",
     "category": "general",
     "tags": [],
     "author": "Usa Travel Explorer",
     "featured": false,
     "image": "https://picsum.photos/seed/travel-america-1000-budget-7-days/1200/630",
-    "status": "published"
+    "status": "published",
+    "bucket": "main",
+    "seo_score_original": 80
   },
   {
     "title": "How to Travel on a Budget: 20 Money-Saving Tips for 2026",
@@ -1201,7 +1313,7 @@
     "date": "2026-05-25",
     "word_count": 915,
     "read_time": 4,
-    "seo_score": 80,
+    "seo_score": 95,
     "source": "copilot_direct",
     "category": "general",
     "tags": [
@@ -1212,7 +1324,9 @@
     "author": "Usa Travel Explorer",
     "featured": false,
     "image": "https://picsum.photos/seed/travel-on-budget-money-saving-tips-2026/1200/630",
-    "status": "published"
+    "status": "published",
+    "bucket": "main",
+    "seo_score_original": 80
   },
   {
     "title": "5 Underrated National Parks You've Never Heard Of (But Should Visit in 2026)",
@@ -1221,14 +1335,16 @@
     "date": "2026-05-25",
     "word_count": 823,
     "read_time": 2,
-    "seo_score": 80,
+    "seo_score": 95,
     "source": "copilot_direct",
     "category": "general",
     "tags": [],
     "author": "Usa Travel Explorer",
     "featured": false,
     "image": "https://picsum.photos/seed/underrated-national-parks-visit-2026/1200/630",
-    "status": "published"
+    "status": "published",
+    "bucket": "main",
+    "seo_score_original": 80
   },
   {
     "title": "Usa’S Top Culinary Capitals 2026: Why New York, Chicago, New Orleans And More Are The World’S Must‑Taste Destinations",
@@ -1237,14 +1353,16 @@
     "date": "2026-05-25",
     "word_count": 1143,
     "read_time": 3,
-    "seo_score": 80,
+    "seo_score": 95,
     "source": "copilot_direct",
     "category": "general",
     "tags": [],
     "author": "Usa Travel Explorer",
     "featured": false,
     "image": "https://picsum.photos/seed/usas-top-culinary-capitals-2026-why-new-york-chicago-new-orleans-and-more-are-the-worlds-must-taste-destinations/1200/630",
-    "status": "published"
+    "status": "published",
+    "bucket": "main",
+    "seo_score_original": 80
   },
   {
     "title": "Yellowstone National Park: First-Timer's Complete Guide for 2026",
@@ -1253,14 +1371,16 @@
     "date": "2026-05-25",
     "word_count": 816,
     "read_time": 3,
-    "seo_score": 80,
+    "seo_score": 95,
     "source": "copilot_direct",
     "category": "general",
     "tags": [],
     "author": "Usa Travel Explorer",
     "featured": false,
     "image": "https://picsum.photos/seed/yellowstone-national-park-first-timer-guide-2026/1200/630",
-    "status": "published"
+    "status": "published",
+    "bucket": "main",
+    "seo_score_original": 80
   },
   {
     "title": "Flying vs Driving: When Does a Road Trip Actually Save You Money?",
@@ -1269,14 +1389,16 @@
     "date": "2026-05-24",
     "word_count": 1052,
     "read_time": 2,
-    "seo_score": 80,
+    "seo_score": 95,
     "source": "copilot_direct",
     "category": "general",
     "tags": [],
     "author": "Usa Travel Explorer",
     "featured": false,
     "image": "https://picsum.photos/seed/flying-vs-driving-cost-comparison-2026/1200/630",
-    "status": "published"
+    "status": "published",
+    "bucket": "main",
+    "seo_score_original": 80
   },
   {
     "title": "How to Plan a National Parks Road Trip on a Budget",
@@ -1285,14 +1407,16 @@
     "date": "2026-05-24",
     "word_count": 992,
     "read_time": 3,
-    "seo_score": 80,
+    "seo_score": 95,
     "source": "copilot_direct",
     "category": "general",
     "tags": [],
     "author": "Usa Travel Explorer",
     "featured": false,
     "image": "https://picsum.photos/seed/national-parks-road-trip-budget-guide/1200/630",
-    "status": "published"
+    "status": "published",
+    "bucket": "main",
+    "seo_score_original": 80
   },
   {
     "title": "10 Underrated Road Trip Destinations in America You Haven't Considered",
@@ -1301,14 +1425,16 @@
     "date": "2026-05-24",
     "word_count": 1080,
     "read_time": 3,
-    "seo_score": 80,
+    "seo_score": 95,
     "source": "copilot_direct",
     "category": "general",
     "tags": [],
     "author": "Usa Travel Explorer",
     "featured": false,
     "image": "https://picsum.photos/seed/underrated-road-trip-destinations-america-2026/1200/630",
-    "status": "published"
+    "status": "published",
+    "bucket": "main",
+    "seo_score_original": 80
   },
   {
     "title": "A First-Timer's Guide to Visiting Washington, D.C. on a Budget",
@@ -1317,13 +1443,15 @@
     "date": "2026-05-24",
     "word_count": 1091,
     "read_time": 2,
-    "seo_score": 80,
+    "seo_score": 95,
     "source": "copilot_direct",
     "category": "general",
     "tags": [],
     "author": "Usa Travel Explorer",
     "featured": false,
     "image": "https://picsum.photos/seed/washington-dc-budget-travel-guide-first-timers/1200/630",
-    "status": "published"
+    "status": "published",
+    "bucket": "main",
+    "seo_score_original": 80
   }
 ]
