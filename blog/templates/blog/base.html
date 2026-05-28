@@ -9,9 +9,6 @@
       gtag('js', new Date());
       gtag('config', 'G-PJ50891X0J');
     </script>
-    <!-- Google AdSense -->
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2673860903932624"
-         crossorigin="anonymous"></script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <title>{% block title %}USA Content Hub{% endblock %}</title>
@@ -21,8 +18,12 @@
     <meta name="theme-color" content="#2563eb" media="(prefers-color-scheme: light)">
     <meta name="theme-color" content="#0f172a" media="(prefers-color-scheme: dark)">
     <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📚</text></svg>">
-    <link rel="preconnect" href="https://picsum.photos" crossorigin>
+    <!-- Resource hints: preconnect for above-fold external origins, dns-prefetch for the rest -->
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://picsum.photos" crossorigin>
+    <link rel="dns-prefetch" href="https://www.googletagmanager.com">
+    <link rel="dns-prefetch" href="https://www.google-analytics.com">
+    <link rel="dns-prefetch" href="https://pagead2.googlesyndication.com">
     <link rel="alternate" type="application/rss+xml" title="USA Content Hub RSS" href="{% url 'blog:rss_feed' %}">
     <link rel="alternate" type="application/atom+xml" title="USA Content Hub Atom" href="{% url 'blog:atom_feed' %}">
     <meta property="og:site_name" content="USA Content Hub">
@@ -390,5 +391,9 @@
     </script>
 
     {% block extra_js %}{% endblock %}
+
+    <!-- Google AdSense — loaded after page content to avoid blocking first render -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2673860903932624"
+         crossorigin="anonymous"></script>
 </body>
 </html>

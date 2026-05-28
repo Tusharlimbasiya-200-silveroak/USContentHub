@@ -86,12 +86,24 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = 'writeflow.urls'
 
+_TEMPLATE_LOADERS = [
+    'django.template.loaders.filesystem.Loader',
+    'django.template.loaders.app_directories.Loader',
+]
+
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'DIRS': [BASE_DIR / 'blog' / 'templates'],
-        'APP_DIRS': True,
+        'APP_DIRS': False,
         'OPTIONS': {
+            # In production, wrap loaders in cached.Loader so templates are
+            # parsed once and reused — eliminates repeated disk I/O per request.
+            'loaders': (
+                _TEMPLATE_LOADERS
+                if DEBUG
+                else [('django.template.loaders.cached.Loader', _TEMPLATE_LOADERS)]
+            ),
             'context_processors': [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
@@ -190,6 +202,9 @@ USE_TZ = True
 STATIC_URL = 'static/'
 STATIC_ROOT = BASE_DIR / 'staticfiles'
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+# CompressedManifestStaticFilesStorage appends a content hash to filenames,
+# so files can be cached indefinitely — browsers fetch a new URL on any change.
+WHITENOISE_MAX_AGE = 31536000  # 1 year
 
 # Media files (user-uploaded content)
 MEDIA_URL = '/media/'
