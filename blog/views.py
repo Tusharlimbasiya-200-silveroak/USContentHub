@@ -11,6 +11,7 @@ from django.core.cache import cache
 from django.core.paginator import Paginator
 from django.core.validators import validate_email
 from django.db.models import Avg, Count, F, Q
+from django.db import transaction
 from django.http import HttpResponse, JsonResponse
 from django.shortcuts import get_object_or_404, redirect, render
 from django.utils.feedgenerator import Atom1Feed
@@ -118,8 +119,10 @@ class ArticleDetailView(DetailView):
             cache.set(cache_key, related, 600)
         ctx["related"] = related
         ctx["tags"] = article.tags.all()
-        ctx["comments"] = article.comments.filter(is_approved=True)
-        ctx["comment_count"] = ctx["comments"].count()
+        # Evaluate queryset once; reuse the list for both count and display
+        comments = list(article.comments.filter(is_approved=True))
+        ctx["comments"] = comments
+        ctx["comment_count"] = len(comments)
         ctx["avg_rating"] = article.average_rating()
         ctx["rating_count"] = article.rating_count()
         # Check if current user has rated
@@ -183,7 +186,7 @@ class PublicationView(ListView):
 
     def get_queryset(self):
         self.publication = get_object_or_404(Publication, slug=self.kwargs["slug"])
-        return Article.objects.filter(status="published", publication=self.publication).prefetch_related("tags")
+        return Article.objects.filter(status="published", publication=self.publication).select_related("publication").prefetch_related("tags")
 
     def get_context_data(self, **kwargs):
         ctx = super().get_context_data(**kwargs)
@@ -200,7 +203,7 @@ class TagView(ListView):
 
     def get_queryset(self):
         self.tag = get_object_or_404(Tag, name=self.kwargs["tag_name"])
-        return Article.objects.filter(status="published", tags=self.tag).select_related("publication")
+        return Article.objects.filter(status="published", tags=self.tag).select_related("publication").prefetch_related("tags")
 
     def get_context_data(self, **kwargs):
         ctx = super().get_context_data(**kwargs)
@@ -220,7 +223,7 @@ class SearchView(ListView):
             return Article.objects.filter(
                 Q(title__icontains=self.query) | Q(content__icontains=self.query) | Q(subtitle__icontains=self.query),
                 status="published",
-            ).select_related("publication")
+            ).select_related("publication").prefetch_related("tags")
         return Article.objects.none()
 
     def get_context_data(self, **kwargs):
@@ -280,7 +283,7 @@ class ReadingListView(ListView):
         slugs_param = self.request.GET.get("slugs", "")
         if slugs_param:
             slugs = [s.strip() for s in slugs_param.split(",") if s.strip()][:100]
-            return Article.objects.filter(status="published", slug__in=slugs).select_related("publication")
+            return Article.objects.filter(status="published", slug__in=slugs).select_related("publication").prefetch_related("tags")
         return Article.objects.none()
 
 
@@ -290,7 +293,7 @@ class ArticleRSSFeed(Feed):
     description = "Latest articles on Tech, Health, Finance, Travel, Recipes & News"
 
     def items(self):
-        return Article.objects.filter(status="published").order_by("-published_at")[:20]
+        return Article.objects.filter(status="published").select_related("publication").order_by("-published_at")[:20]
 
     def item_title(self, item):
         return item.title
@@ -378,10 +381,11 @@ def rate_article(request, slug):
         return JsonResponse({"success": False, "error": "Score must be between 1 and 5."}, status=400)
 
     try:
-        rating, created = ArticleRating.objects.update_or_create(
-            article=article, ip_address=ip,
-            defaults={"score": score},
-        )
+        with transaction.atomic():
+            rating, created = ArticleRating.objects.update_or_create(
+                article=article, ip_address=ip,
+                defaults={"score": score},
+            )
         avg = article.average_rating()
         count = article.rating_count()
         return JsonResponse({"success": True, "avg_rating": avg, "rating_count": count, "your_score": score})
@@ -492,12 +496,16 @@ def logout_view(request):
 def toggle_bookmark(request, slug):
     article = get_object_or_404(Article, slug=slug, status="published")
     try:
-        profile, _ = UserProfile.objects.get_or_create(user=request.user)
-        if profile.bookmarks.filter(pk=article.pk).exists():
-            profile.bookmarks.remove(article)
-            return JsonResponse({"bookmarked": False})
-        profile.bookmarks.add(article)
-        return JsonResponse({"bookmarked": True})
+        with transaction.atomic():
+            profile, _ = UserProfile.objects.get_or_create(user=request.user)
+            # Lock the profile row so concurrent requests from the same user
+            # don't race past the exists() check simultaneously.
+            UserProfile.objects.select_for_update().filter(pk=profile.pk).get()
+            if profile.bookmarks.filter(pk=article.pk).exists():
+                profile.bookmarks.remove(article)
+                return JsonResponse({"bookmarked": False})
+            profile.bookmarks.add(article)
+            return JsonResponse({"bookmarked": True})
     except Exception as exc:
         logger.error("toggle_bookmark: DB write failed — %s: %s", type(exc).__name__, exc, exc_info=True)
         return JsonResponse({"bookmarked": False, "error": "Bookmark temporarily unavailable."}, status=503)
@@ -506,11 +514,11 @@ def toggle_bookmark(request, slug):
 @login_required
 def user_bookmarks(request):
     profile, _ = UserProfile.objects.get_or_create(user=request.user)
-    articles = profile.bookmarks.filter(status="published").select_related("publication")
+    articles = profile.bookmarks.filter(status="published").select_related("publication").prefetch_related("tags")
     return render(request, "blog/user_bookmarks.html", {"articles": articles})
 
 
 def custom_404(request, exception=None):
     """Branded 404 handler — registered as handler404 in writeflow/urls.py."""
-    recent = Article.objects.filter(status="published").order_by("-published_at")[:4]
+    recent = Article.objects.filter(status="published").select_related("publication").order_by("-published_at")[:4]
     return render(request, "blog/404.html", {"recent_articles": recent}, status=404)
