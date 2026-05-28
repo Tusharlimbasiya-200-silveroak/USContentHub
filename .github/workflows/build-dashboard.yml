@@ -20,23 +20,57 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Generate dashboard stats
+      - name: Generate dashboard stats and update dashboard.html
         run: |
           echo "Counting articles across all sites..."
           total=0
+
+          TECH=0; HEALTH=0; FINANCE=0; TRAVEL=0; RECIPES=0; NEWS=0; TRADING=0
+
           for site_dir in sites/*/; do
             site_name=$(basename "$site_dir")
-            count=$(find "$site_dir" -maxdepth 1 -name "*.html" ! -name "index.html" ! -name "about.html" ! -name "contact.html" ! -name "privacy.html" | wc -l)
+            if [[ "$site_name" == "_low_quality" || "$site_name" == "blog-platform" ]]; then
+              continue
+            fi
+            count=$(find "$site_dir" -maxdepth 1 -name "*.html" \
+              ! -name "index.html" ! -name "about.html" \
+              ! -name "contact.html" ! -name "privacy.html" | wc -l)
             total=$((total + count))
             echo "  $site_name: $count articles"
+            case "$site_name" in
+              tech-gadget-hub)       TECH=$count ;;
+              health-wellness-daily) HEALTH=$count ;;
+              smart-money-guide)     FINANCE=$count ;;
+              usa-travel-explorer)   TRAVEL=$count ;;
+              recipe-kitchen-usa)    RECIPES=$count ;;
+              usa-news-digest)       NEWS=$count ;;
+              the-trading-blueprint) TRADING=$count ;;
+            esac
           done
           echo "Total: $total articles"
+
+          # Patch per-site article counts in the JS publications array
+          sed -i "s/{ name: \"Tech Gadget Hub\".*articles: [0-9]*/\0/;/slug: \"tech-gadget-hub\"/{ s/articles: [0-9]*/articles: $TECH/; }" dashboard.html || true
+          sed -i "/slug: \"tech-gadget-hub\"/{ s/articles: [0-9]*/articles: $TECH/; }" dashboard.html
+          sed -i "/slug: \"health-wellness-daily\"/{ s/articles: [0-9]*/articles: $HEALTH/; }" dashboard.html
+          sed -i "/slug: \"smart-money-guide\"/{ s/articles: [0-9]*/articles: $FINANCE/; }" dashboard.html
+          sed -i "/slug: \"usa-travel-explorer\"/{ s/articles: [0-9]*/articles: $TRAVEL/; }" dashboard.html
+          sed -i "/slug: \"recipe-kitchen-usa\"/{ s/articles: [0-9]*/articles: $RECIPES/; }" dashboard.html
+          sed -i "/slug: \"usa-news-digest\"/{ s/articles: [0-9]*/articles: $NEWS/; }" dashboard.html
+          sed -i "/slug: \"the-trading-blueprint\"/{ s/articles: [0-9]*/articles: $TRADING/; }" dashboard.html
+
+          # Update the total articles count in the stat strip
+          sed -i "s/<div class=\"value\" id=\"totalArticles\">[0-9]*</<div class=\"value\" id=\"totalArticles\">$total</" dashboard.html
+
+          echo "Dashboard patched — total: $total"
 
       - name: Commit dashboard updates
         run: |
           git config user.name "USContentHub Bot"
           git config user.email "bot@uscontenthub.com"
           git add dashboard.html
-          git diff --staged --quiet || git commit -m "Update dashboard - $(date +'%Y-%m-%d')"
+          git diff --staged --quiet || git commit -m "chore: update dashboard counts - $(date +'%Y-%m-%d') [skip ci]"
           git push
