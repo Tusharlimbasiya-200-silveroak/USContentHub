@@ -1,3 +1,5 @@
+from urllib.parse import quote
+
 from django.contrib.sitemaps import Sitemap
 
 from .models import Article, Publication, Tag
@@ -37,7 +39,8 @@ class TagSitemap(Sitemap):
         return Tag.objects.all().order_by("name")
 
     def location(self, obj):
-        return f"/tag/{obj.name}/"
+        # URL-encode tag names so spaces → %20 (required for valid XML sitemap)
+        return f"/tag/{quote(obj.name, safe='')}/"
 
 
 class StaticSitemap(Sitemap):
