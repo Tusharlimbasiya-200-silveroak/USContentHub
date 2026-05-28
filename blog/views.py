@@ -327,7 +327,7 @@ def contact_page(request):
 
 def _send_newsletter_welcome(email):
     """Send a branded welcome email to a new newsletter subscriber.
-    Uses fail_silently=True — email failure must never break subscription flow."""
+    Returns True on success, False on SMTP failure (never raises)."""
     try:
         subject = "Welcome to USA Content Hub Newsletter!"
         text_body = render_to_string("blog/emails/newsletter_welcome.txt")
@@ -339,14 +339,17 @@ def _send_newsletter_welcome(email):
             to=[email],
         )
         msg.attach_alternative(html_body, "text/html")
-        msg.send(fail_silently=True)
+        msg.send(fail_silently=False)          # raise so we can log the real error
         logger.info("Newsletter welcome email sent to %s", email)
+        return True
     except Exception as exc:
-        logger.error("newsletter welcome email failed for %s: %s", email, exc)
+        logger.error("SMTP ERROR — newsletter welcome failed for %s: %s", email, exc)
+        return False
 
 
 def _send_contact_emails(name, email, subject, message, ip):
-    """Send contact form notification to admin + confirmation to sender."""
+    """Send contact form notification to admin + confirmation to sender.
+    Returns True if both emails sent, False on any SMTP failure."""
     try:
         # 1. Notify site admin
         admin_body = render_to_string("blog/emails/contact_notification.txt", {
@@ -360,7 +363,7 @@ def _send_contact_emails(name, email, subject, message, ip):
             to=[settings.CONTACT_EMAIL],
             reply_to=[email],
         )
-        msg_admin.send(fail_silently=True)
+        msg_admin.send(fail_silently=False)    # raise so we log the real SMTP error
 
         # 2. Confirmation to sender
         confirm_body = f"Hi {name},\n\nWe received your message and will reply within 1–2 business days.\n\nSubject: {subject}\n\n—\nUSA Content Hub"
@@ -374,10 +377,60 @@ def _send_contact_emails(name, email, subject, message, ip):
             to=[email],
         )
         msg_confirm.attach_alternative(confirm_html, "text/html")
-        msg_confirm.send(fail_silently=True)
+        msg_confirm.send(fail_silently=False)  # raise so we log the real SMTP error
+
         logger.info("Contact emails sent: admin + confirmation to %s", email)
+        return True
     except Exception as exc:
-        logger.error("contact email sending failed: %s", exc)
+        logger.error("SMTP ERROR — contact emails failed (name=%s email=%s): %s", name, email, exc)
+        return False
+
+# ── SMTP Diagnostic (admin-only) ─────────────────────────────
+def smtp_diagnostic(request):
+    """Safe SMTP config check + optional test send.
+    Protected by a secret key — never exposes the SMTP password.
+    Usage: /smtp-diagnostic/?key=YOUR_SECRET_KEY[&send=1]
+    """
+    import os
+    secret = os.environ.get("SMTP_DIAGNOSTIC_KEY", "")
+    if not secret or request.GET.get("key") != secret:
+        from django.http import Http404
+        raise Http404
+
+    backend  = getattr(settings, "EMAIL_BACKEND", "not set")
+    host     = getattr(settings, "EMAIL_HOST", "not set")
+    port     = getattr(settings, "EMAIL_PORT", "not set")
+    use_tls  = getattr(settings, "EMAIL_USE_TLS", "not set")
+    user     = getattr(settings, "EMAIL_HOST_USER", "not set")
+    from_email = getattr(settings, "DEFAULT_FROM_EMAIL", "not set")
+    contact  = getattr(settings, "CONTACT_EMAIL", "not set")
+
+    info = {
+        "EMAIL_BACKEND":    backend,
+        "EMAIL_HOST":       host,
+        "EMAIL_PORT":       port,
+        "EMAIL_USE_TLS":    use_tls,
+        "EMAIL_HOST_USER":  user,
+        "DEFAULT_FROM_EMAIL": from_email,
+        "CONTACT_EMAIL":    contact,
+        "password_set":     bool(getattr(settings, "EMAIL_HOST_PASSWORD", "")),
+    }
+
+    if request.GET.get("send") == "1":
+        try:
+            from django.core.mail import send_mail
+            send_mail(
+                subject="SMTP Diagnostic Test — USA Content Hub",
+                message="This is a test email from the SMTP diagnostic endpoint.",
+                from_email=from_email,
+                recipient_list=[contact],
+                fail_silently=False,
+            )
+            info["test_send"] = "SUCCESS — check inbox"
+        except Exception as exc:
+            info["test_send"] = f"FAILED: {exc}"
+
+    return JsonResponse(info)
 
 
 # ── Contact Form Submit ───────────────────────────────────────

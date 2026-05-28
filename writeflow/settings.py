@@ -343,6 +343,11 @@ else:
 
 CONTACT_EMAIL = os.environ.get('CONTACT_EMAIL', 'tusharlimbasiya200@gmail.com')
 
+# SMTP diagnostic endpoint — set this env var in Vercel to enable the endpoint
+# Usage: /smtp-diagnostic/?key=YOUR_VALUE[&send=1]
+# Remove or leave unset to disable the endpoint entirely (404).
+SMTP_DIAGNOSTIC_KEY = os.environ.get('SMTP_DIAGNOSTIC_KEY', '')
+
 # ============================================================
 # LOGGING — track errors and slow queries in production
 # ============================================================
