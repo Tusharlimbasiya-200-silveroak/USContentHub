@@ -1,0 +1,14 @@
+New Contact Form Submission — USA Content Hub
+=============================================
+
+From:    {{ name }}
+Email:   {{ email }}
+Subject: {{ subject }}
+
+Message:
+--------
+{{ message }}
+
+--
+Sent from: https://us-content-hub.vercel.app/contact/
+IP: {{ ip }}

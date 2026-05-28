@@ -1,0 +1,20 @@
+Welcome to USA Content Hub!
+
+Hi there,
+
+Thanks for subscribing to the USA Content Hub newsletter!
+You'll now get the best articles on US news, technology, health, finance,
+travel, and lifestyle delivered to your inbox.
+
+What you'll get:
+  - Breaking US news and analysis
+  - Tech gadget reviews and tips
+  - Health and wellness guides
+  - Personal finance strategies
+  - Travel destinations and deals
+
+Start reading: https://us-content-hub.vercel.app/
+
+--
+USA Content Hub
+https://us-content-hub.vercel.app/

@@ -2,18 +2,21 @@ import logging
 import re
 from html import escape
 
+from django.conf import settings
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.contrib.syndication.views import Feed
 from django.core.cache import cache
+from django.core.mail import EmailMultiAlternatives
 from django.core.paginator import Paginator
 from django.core.validators import validate_email
-from django.db.models import Avg, Count, F, Q
 from django.db import transaction
+from django.db.models import Avg, Count, F, Q
 from django.http import HttpResponse, JsonResponse
 from django.shortcuts import get_object_or_404, redirect, render
+from django.template.loader import render_to_string
 from django.utils.feedgenerator import Atom1Feed
 from django.views.decorators.cache import cache_page
 from django.views.decorators.http import require_POST
@@ -323,6 +326,100 @@ def contact_page(request):
     return render(request, "blog/contact.html")
 
 
+# ── Email helpers ─────────────────────────────────────────────
+
+def _send_newsletter_welcome(email):
+    """Send a branded welcome email to a new newsletter subscriber.
+    Uses fail_silently=True — email failure must never break subscription flow."""
+    try:
+        subject = "Welcome to USA Content Hub Newsletter!"
+        text_body = render_to_string("blog/emails/newsletter_welcome.txt")
+        html_body = render_to_string("blog/emails/newsletter_welcome.html")
+        msg = EmailMultiAlternatives(
+            subject=subject,
+            body=text_body,
+            from_email=settings.DEFAULT_FROM_EMAIL,
+            to=[email],
+        )
+        msg.attach_alternative(html_body, "text/html")
+        msg.send(fail_silently=True)
+        logger.info("Newsletter welcome email sent to %s", email)
+    except Exception as exc:
+        logger.error("newsletter welcome email failed for %s: %s", email, exc)
+
+
+def _send_contact_emails(name, email, subject, message, ip):
+    """Send contact form notification to admin + confirmation to sender."""
+    try:
+        # 1. Notify site admin
+        admin_body = render_to_string("blog/emails/contact_notification.txt", {
+            "name": name, "email": email, "subject": subject,
+            "message": message, "ip": ip,
+        })
+        msg_admin = EmailMultiAlternatives(
+            subject=f"[Contact] {subject} — from {name}",
+            body=admin_body,
+            from_email=settings.DEFAULT_FROM_EMAIL,
+            to=[settings.CONTACT_EMAIL],
+            reply_to=[email],
+        )
+        msg_admin.send(fail_silently=True)
+
+        # 2. Confirmation to sender
+        confirm_body = f"Hi {name},\n\nWe received your message and will reply within 1–2 business days.\n\nSubject: {subject}\n\n—\nUSA Content Hub"
+        confirm_html = render_to_string("blog/emails/contact_confirmation.html", {
+            "name": name, "email": email, "subject": subject, "message": message,
+        })
+        msg_confirm = EmailMultiAlternatives(
+            subject="We received your message — USA Content Hub",
+            body=confirm_body,
+            from_email=settings.DEFAULT_FROM_EMAIL,
+            to=[email],
+        )
+        msg_confirm.attach_alternative(confirm_html, "text/html")
+        msg_confirm.send(fail_silently=True)
+        logger.info("Contact emails sent: admin + confirmation to %s", email)
+    except Exception as exc:
+        logger.error("contact email sending failed: %s", exc)
+
+
+# ── Contact Form Submit ───────────────────────────────────────
+@require_POST
+def contact_submit(request):
+    """Handle contact form POST. Sends admin notification + user confirmation."""
+    ip = _get_client_ip(request)
+
+    # Rate limit: max 3 contact submissions per IP per hour
+    rate_key = f"contact_rate_{ip}"
+    count = cache.get(rate_key, 0)
+    if count >= 3:
+        return JsonResponse(
+            {"success": False, "error": "Too many submissions. Please try again later."},
+            status=429,
+        )
+
+    name    = escape(request.POST.get("name", "").strip()[:100])
+    email   = request.POST.get("email", "").strip()[:254]
+    subject = escape(request.POST.get("subject", "").strip()[:200])
+    message = escape(request.POST.get("message", "").strip()[:5000])
+
+    if not name or len(name) < 2:
+        return JsonResponse({"success": False, "error": "Name must be at least 2 characters."}, status=400)
+    if not message or len(message) < 10:
+        return JsonResponse({"success": False, "error": "Message must be at least 10 characters."}, status=400)
+    if not subject or len(subject) < 3:
+        return JsonResponse({"success": False, "error": "Subject must be at least 3 characters."}, status=400)
+    try:
+        validate_email(email)
+    except Exception:
+        return JsonResponse({"success": False, "error": "Invalid email address."}, status=400)
+
+    _send_contact_emails(name, email, subject, message, ip)
+    cache.set(rate_key, count + 1, 3600)
+
+    return JsonResponse({"success": True, "message": "Message sent! We'll reply within 1–2 business days."})
+
+
 @cache_page(86400)
 def privacy_page(request):
     return render(request, "blog/privacy.html")
@@ -360,7 +457,9 @@ def newsletter_subscribe(request):
         if not subscriber.is_active:
             subscriber.is_active = True
             subscriber.save()
-        return JsonResponse({"success": True, "message": "Successfully subscribed!"})
+        # Send welcome email to new subscriber
+        _send_newsletter_welcome(email)
+        return JsonResponse({"success": True, "message": "Successfully subscribed! Check your inbox."})
     except Exception:
         # Graceful fallback when DB writes are unavailable (e.g. read-only SQLite on Vercel)
         return JsonResponse({"success": True, "message": "Thanks! We'll be in touch soon."})
