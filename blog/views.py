@@ -385,54 +385,6 @@ def _send_contact_emails(name, email, subject, message, ip):
         logger.error("SMTP ERROR — contact emails failed (name=%s email=%s): %s", name, email, exc)
         return False
 
-# ── SMTP Diagnostic (admin-only) ─────────────────────────────
-def smtp_diagnostic(request):
-    """Safe SMTP config check + optional test send.
-    Protected by a secret key — never exposes the SMTP password.
-    Usage: /smtp-diagnostic/?key=YOUR_SECRET_KEY[&send=1]
-    """
-    import os
-    secret = os.environ.get("SMTP_DIAGNOSTIC_KEY", "")
-    if not secret or request.GET.get("key") != secret:
-        from django.http import Http404
-        raise Http404
-
-    backend  = getattr(settings, "EMAIL_BACKEND", "not set")
-    host     = getattr(settings, "EMAIL_HOST", "not set")
-    port     = getattr(settings, "EMAIL_PORT", "not set")
-    use_tls  = getattr(settings, "EMAIL_USE_TLS", "not set")
-    user     = getattr(settings, "EMAIL_HOST_USER", "not set")
-    from_email = getattr(settings, "DEFAULT_FROM_EMAIL", "not set")
-    contact  = getattr(settings, "CONTACT_EMAIL", "not set")
-
-    info = {
-        "EMAIL_BACKEND":    backend,
-        "EMAIL_HOST":       host,
-        "EMAIL_PORT":       port,
-        "EMAIL_USE_TLS":    use_tls,
-        "EMAIL_HOST_USER":  user,
-        "DEFAULT_FROM_EMAIL": from_email,
-        "CONTACT_EMAIL":    contact,
-        "password_set":     bool(getattr(settings, "EMAIL_HOST_PASSWORD", "")),
-    }
-
-    if request.GET.get("send") == "1":
-        try:
-            from django.core.mail import send_mail
-            send_mail(
-                subject="SMTP Diagnostic Test — USA Content Hub",
-                message="This is a test email from the SMTP diagnostic endpoint.",
-                from_email=from_email,
-                recipient_list=[contact],
-                fail_silently=False,
-            )
-            info["test_send"] = "SUCCESS — check inbox"
-        except Exception as exc:
-            info["test_send"] = f"FAILED: {exc}"
-
-    return JsonResponse(info)
-
-
 # ── Contact Form Submit ───────────────────────────────────────
 @require_POST
 def contact_submit(request):
