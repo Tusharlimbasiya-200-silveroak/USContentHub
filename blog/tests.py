@@ -297,7 +297,7 @@ class ArticleDetailViewTest(BaseTestCase):
     def test_schema_json_in_response(self):
         response = self.client.get(reverse("blog:article", args=["test-article-one"]))
         self.assertContains(response, "application/ld+json")
-        self.assertContains(response, '"@type": "Article"')
+        self.assertContains(response, '"@type": "NewsArticle"')
 
     def test_breadcrumbs_in_context(self):
         response = self.client.get(reverse("blog:article", args=["test-article-one"]))

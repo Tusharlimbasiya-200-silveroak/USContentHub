@@ -21,7 +21,7 @@
 <script type="application/ld+json">
 [{
     "@context": "https://schema.org",
-    "@type": "Article",
+    "@type": "NewsArticle",
     "mainEntityOfPage": {
         "@type": "WebPage",
         "@id": "{{ site_url }}/article/{{ article.slug }}/"
@@ -37,7 +37,9 @@
         "height": 630
     },
     "wordCount": {{ article.word_count }},
-    {% if article.publication %}"articleSection": "{{ article.publication.name|escapejs }}",{% endif %}
+    "inLanguage": "en-US",
+    {% if article.publication %}"articleSection": "{{ article.publication.name|escapejs }}",
+    "keywords": "{% for tag in article.tags.all %}{{ tag.name }}{% if not forloop.last %}, {% endif %}{% endfor %}",{% endif %}
     "author": {
         "@type": "Organization",
         "name": "USA Content Hub",
@@ -49,7 +51,9 @@
         "url": "{{ site_url }}/",
         "logo": {
             "@type": "ImageObject",
-            "url": "https://picsum.photos/seed/usacontenthub/600/60"
+            "url": "{{ site_url }}/static/blog/logo.png",
+            "width": 200,
+            "height": 60
         }
     }
     {% if avg_rating and rating_count %}

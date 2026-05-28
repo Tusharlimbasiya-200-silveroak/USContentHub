@@ -41,6 +41,45 @@
     <meta name="twitter:image" content="{% block twitter_image %}https://picsum.photos/seed/usacontenthub/1200/630{% endblock %}">
     <!-- Pinterest domain verification -->
     <meta name="p:domain_verify" content="0fd9e315649e6a279c78a137c7bf9443"/>
+    <!-- WebSite + Organization structured data — enables Google Sitelinks Search Box -->
+    <script type="application/ld+json">
+    [
+      {
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        "name": "USA Content Hub",
+        "alternateName": ["US Content Hub", "USContentHub"],
+        "url": "{{ site_url }}/",
+        "description": "USA Content Hub — trusted source for US news, tech, health, finance, travel and recipes.",
+        "inLanguage": "en-US",
+        "potentialAction": {
+          "@type": "SearchAction",
+          "target": {
+            "@type": "EntryPoint",
+            "urlTemplate": "{{ site_url }}/search/?q={search_term_string}"
+          },
+          "query-input": "required name=search_term_string"
+        }
+      },
+      {
+        "@context": "https://schema.org",
+        "@type": "Organization",
+        "name": "USA Content Hub",
+        "url": "{{ site_url }}/",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "{{ site_url }}/static/blog/logo.png",
+          "width": 200,
+          "height": 60
+        },
+        "description": "Trusted source for US news, technology, health, finance, travel and lifestyle content.",
+        "foundingDate": "2024",
+        "sameAs": [
+          "https://www.pinterest.com/usacontenthub/"
+        ]
+      }
+    ]
+    </script>
     <link rel="stylesheet" href="{% static 'blog/style.css' %}?v=32">
     <style>
     @media print {

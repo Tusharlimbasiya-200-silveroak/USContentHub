@@ -1,23 +1,10 @@
 {% extends "blog/base.html" %}
 
-{% block title %}USA Content Hub — Tech, Health, Finance, Travel, Recipes & News{% endblock %}
+{% block title %}USA Content Hub | US News, Tech, Health, Finance & Travel Blog{% endblock %}
+{% block description %}USA Content Hub — your daily source for US news, technology, health tips, personal finance, travel guides and recipes. 433+ expert articles across 7 publications.{% endblock %}
 {% block canonical %}{{ site_url }}/{% endblock %}
 
 {% block extra_head %}
-<script type="application/ld+json">
-[{
-    "@context": "https://schema.org",
-    "@type": "WebSite",
-    "name": "USA Content Hub",
-    "url": "{{ site_url }}/",
-    "description": "Quality articles on technology, health, personal finance, travel, recipes, and US news.",
-    "potentialAction": {
-        "@type": "SearchAction",
-        "target": "{{ site_url }}/search/?q={search_term_string}",
-        "query-input": "required name=search_term_string"
-    }
-}]
-</script>
 <style>
 /* ── Welcome Hero (authenticated only) ─────────────────────── */
 .user-hero {

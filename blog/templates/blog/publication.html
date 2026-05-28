@@ -1,6 +1,6 @@
 {% extends "blog/base.html" %}
 
-{% block title %}{{ publication.name }} — USA Content Hub{% endblock %}
+{% block title %}{{ publication.name }} — Latest US Articles | USA Content Hub{% endblock %}
 {% block description %}{{ publication.description|truncatechars:160 }}{% endblock %}
 {% block canonical %}{{ site_url }}/pub/{{ publication.slug }}/{% endblock %}
 {% block og_title %}{{ publication.name }}{% endblock %}
@@ -9,6 +9,19 @@
 {% block twitter_title %}{{ publication.name }}{% endblock %}
 {% block twitter_description %}{{ publication.description|truncatechars:200 }}{% endblock %}
 {% block main_class %}full-width{% endblock %}
+
+{% block extra_head %}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {"@type": "ListItem", "position": 1, "name": "Home", "item": "{{ site_url }}/"},
+    {"@type": "ListItem", "position": 2, "name": "{{ publication.name|escapejs }}", "item": "{{ site_url }}/pub/{{ publication.slug }}/"}
+  ]
+}
+</script>
+{% endblock %}
 
 {% block header %}
 <header class="site-header" style="background:{{ publication.color }}20;">
