@@ -46,27 +46,65 @@
 {% block extra_js %}
 <script>
 (function(){
-    var list=RL.get();
-    if(list.length===0){
-        window.location.href='/reading-list/';
+    var list = RL.get();
+    var slugs = list.map(function(x){ return x.slug; }).join(',');
+
+    // If user has saved articles but landed without ?slugs (e.g. typed the URL
+    // manually or used a stale bookmark), reload with the correct slugs so
+    // Django can fetch and render them.
+    if (list.length > 0 && !new URLSearchParams(window.location.search).has('slugs')) {
+        window.location.href = '/reading-list/?slugs=' + encodeURIComponent(slugs);
         return;
     }
-    var clearBtn=document.getElementById('clearBtn');
-    if(list.length>0 && clearBtn) clearBtn.style.display='block';
+
+    // If list is empty, do nothing — Django already shows the empty-state block.
+    var clearBtn = document.getElementById('clearBtn');
+    if (list.length > 0 && clearBtn) clearBtn.style.display = 'block';
 })();
 
 function removeFromList(slug){
     RL.remove(slug);
-    var card=document.querySelector('[data-slug="'+slug+'"]');
-    if(card){card.style.transition='opacity .3s';card.style.opacity='0';setTimeout(function(){card.remove();
-        if(!document.querySelector('.article-card')){location.href='/reading-list/';}
-    },300);}
+    var card = document.querySelector('[data-slug="'+slug+'"]');
+    if(card){
+        card.style.transition = 'opacity .3s';
+        card.style.opacity = '0';
+        setTimeout(function(){
+            card.remove();
+            // No more cards visible → show the empty state without a redirect loop.
+            if(!document.querySelector('.article-card')){
+                var grid = document.getElementById('readingListGrid');
+                if(grid){
+                    grid.innerHTML = '<div style="grid-column:1/-1;text-align:center;padding:4rem 2rem;">'
+                        + '<div style="font-size:4rem;margin-bottom:1rem;">📑</div>'
+                        + '<h3 style="margin-bottom:.5rem;">Your reading list is empty</h3>'
+                        + '<p style="color:var(--text-light);margin-bottom:1.5rem;">Save articles by clicking the 🔖 Save button on any article page.</p>'
+                        + '<a href="/" style="padding:10px 24px;background:var(--primary);color:#fff;border-radius:20px;text-decoration:none;font-size:.9rem;font-weight:600;">Browse Articles</a>'
+                        + '</div>';
+                }
+                var clearBtn = document.getElementById('clearBtn');
+                if(clearBtn) clearBtn.style.display = 'none';
+            }
+        }, 300);
+    }
 }
 
 function clearReadingList(){
-    if(!confirm('Remove all articles from your reading list?'))return;
+    if(!confirm('Remove all articles from your reading list?')) return;
     RL.set([]);
-    location.href='/reading-list/';
+    // Replace URL without slugs so a reload shows the empty state,
+    // then update the DOM directly instead of triggering a server round-trip.
+    history.replaceState(null, '', '/reading-list/');
+    var grid = document.getElementById('readingListGrid');
+    if(grid){
+        grid.innerHTML = '<div style="grid-column:1/-1;text-align:center;padding:4rem 2rem;">'
+            + '<div style="font-size:4rem;margin-bottom:1rem;">📑</div>'
+            + '<h3 style="margin-bottom:.5rem;">Your reading list is empty</h3>'
+            + '<p style="color:var(--text-light);margin-bottom:1.5rem;">Save articles by clicking the 🔖 Save button on any article page.</p>'
+            + '<a href="/" style="padding:10px 24px;background:var(--primary);color:#fff;border-radius:20px;text-decoration:none;font-size:.9rem;font-weight:600;">Browse Articles</a>'
+            + '</div>';
+    }
+    var clearBtn = document.getElementById('clearBtn');
+    if(clearBtn) clearBtn.style.display = 'none';
 }
 </script>
 {% endblock %}
