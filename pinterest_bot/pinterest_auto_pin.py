@@ -81,7 +81,7 @@ TRACKER_FILE = BOT_DIR / "pinned_tracker.json"
 # ── Config from environment ───────────────────────────────────────────────────
 PINTEREST_ACCESS_TOKEN = os.environ.get("PINTEREST_ACCESS_TOKEN", "")
 SITE_URL = os.environ.get("SITE_URL", "https://us-content-hub.vercel.app").rstrip("/")
-PINS_PER_SESSION = int(os.environ.get("PINS_PER_SESSION", "7"))
+PINS_PER_SESSION = int(os.environ.get("PINS_PER_SESSION", "8"))
 DRY_RUN = os.environ.get("DRY_RUN", "false").lower() == "true"
 PINTEREST_API_BASE = "https://api.pinterest.com/v5"
 

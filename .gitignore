@@ -71,3 +71,6 @@ htmlcov/
 # ── Node (if any tooling added later) ────────────────────────
 node_modules/
 npm-debug.log*
+
+# ── Pinterest setup output (contains board IDs — not sensitive, but local) ───
+pinterest_bot/board_ids.json

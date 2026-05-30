@@ -25,9 +25,9 @@ on:
           - 'morning'
           - 'evening'
       pins_per_session:
-        description: 'Max pins to post this session (default: 7, one per niche)'
+        description: 'Max pins to post this session (default: 8, one per niche)'
         required: false
-        default: '7'
+        default: '8'
         type: string
       dry_run:
         description: 'Dry run — generate images but do NOT post to Pinterest'
@@ -91,9 +91,10 @@ jobs:
           PINTEREST_BOARD_RECIPES: ${{ secrets.PINTEREST_BOARD_RECIPES }}
           PINTEREST_BOARD_NEWS:    ${{ secrets.PINTEREST_BOARD_NEWS }}
           PINTEREST_BOARD_TRADING: ${{ secrets.PINTEREST_BOARD_TRADING }}
+          PINTEREST_BOARD_AUTO:    ${{ secrets.PINTEREST_BOARD_AUTO }}
           SITE_URL:                ${{ secrets.SITE_URL }}
           SESSION:                 ${{ steps.session.outputs.name }}
-          PINS_PER_SESSION:        ${{ github.event.inputs.pins_per_session || '7' }}
+          PINS_PER_SESSION:        ${{ github.event.inputs.pins_per_session || '8' }}
           DRY_RUN:                 ${{ github.event.inputs.dry_run || 'false' }}
         run: python pinterest_bot/pinterest_auto_pin.py
 
@@ -118,7 +119,7 @@ jobs:
           echo "|---|---|" >> $GITHUB_STEP_SUMMARY
           echo "| **Date** | $(date -u +%Y-%m-%d) |" >> $GITHUB_STEP_SUMMARY
           echo "| **Session** | ${{ steps.session.outputs.name }} |" >> $GITHUB_STEP_SUMMARY
-          echo "| **Pins requested** | ${{ github.event.inputs.pins_per_session || '7' }} |" >> $GITHUB_STEP_SUMMARY
+          echo "| **Pins requested** | ${{ github.event.inputs.pins_per_session || '8' }} |" >> $GITHUB_STEP_SUMMARY
           echo "| **Dry run** | ${{ github.event.inputs.dry_run || 'false' }} |" >> $GITHUB_STEP_SUMMARY
           PINNED=$(python3 -c "import json; d=json.load(open('pinterest_bot/pinned_tracker.json')); print(len(d))")
           echo "| **Total articles pinned to date** | $PINNED |" >> $GITHUB_STEP_SUMMARY
