@@ -23,6 +23,7 @@ REQUIRED GITHUB SECRETS:
   PINTEREST_BOARD_RECIPES → Board ID for recipe-kitchen-usa
   PINTEREST_BOARD_NEWS    → Board ID for usa-news-digest
   PINTEREST_BOARD_TRADING → Board ID for the-trading-blueprint
+  PINTEREST_BOARD_AUTO    → Board ID for auto-cars
   SITE_URL                → Your live site URL (e.g. https://us-content-hub.vercel.app)
 
 OPTIONAL ENV VARS:
@@ -155,6 +156,15 @@ PUBLICATIONS = {
         "hashtags": [
             "#StockMarket", "#TradingTips", "#Investing", "#FinanceTips",
             "#WealthBuilding", "#StockTrading", "#DayTrading",
+        ],
+    },
+    "auto-cars": {
+        "board_id": os.environ.get("PINTEREST_BOARD_AUTO", ""),
+        "name": "Auto & Cars",
+        "color": (220, 38, 38),      # #dc2626 red
+        "hashtags": [
+            "#CarLaunch", "#IndianCars", "#NewCarIndia", "#ElectricVehicle",
+            "#CarReview", "#TataCars", "#HatchbackIndia",
         ],
     },
 }

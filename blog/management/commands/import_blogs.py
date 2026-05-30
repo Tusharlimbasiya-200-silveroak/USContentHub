@@ -33,6 +33,9 @@ SITES = [
     {"folder": "the-trading-blueprint", "name": "The Trading Blueprint", "icon": "📈",
      "desc": "Stock market strategies, technical analysis, and trading psychology for American traders",
      "color": "#059669", "tags": ["trading", "stocks", "forex", "technical-analysis"]},
+    {"folder": "auto-cars", "name": "Auto & Cars", "icon": "🚗",
+     "desc": "Latest car launches, reviews, pricing, and auto news from India and around the world.",
+     "color": "#dc2626", "tags": ["cars", "hatchback", "electric-vehicle", "auto-news"]},
 ]
 
 

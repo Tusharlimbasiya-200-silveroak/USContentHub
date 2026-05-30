@@ -45,7 +45,7 @@ jobs:
               | grep -Ev "$EXCLUDED" \
               | jq -R -s -c 'split("\n") | map(select(length > 0))')
             if [ "$CHANGED" = "[]" ] || [ -z "$CHANGED" ]; then
-              CHANGED='["tech-gadget-hub","health-wellness-daily","smart-money-guide","usa-travel-explorer","recipe-kitchen-usa","usa-news-digest","the-trading-blueprint"]'
+              CHANGED='["tech-gadget-hub","health-wellness-daily","smart-money-guide","usa-travel-explorer","recipe-kitchen-usa","usa-news-digest","the-trading-blueprint","auto-cars"]'
             fi
             echo "sites=$CHANGED" >> $GITHUB_OUTPUT
           fi

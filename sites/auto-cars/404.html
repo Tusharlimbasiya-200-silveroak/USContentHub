@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en-US" dir="ltr">
+<head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-PJ50891X0J"></script>
+    <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-PJ50891X0J');</script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>404 — Page Not Found | Auto &amp; Cars</title>
+    <meta name="robots" content="noindex, follow">
+    <link rel="stylesheet" href="style.css?v=1">
+    <script>(function(){var t=localStorage.getItem('theme');if(t)document.documentElement.setAttribute('data-theme',t);})();</script>
+    <style>
+        .error-page{display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:60vh;text-align:center;padding:40px 20px}
+        .error-code{font-size:6rem;font-weight:800;color:var(--primary);line-height:1}
+        .error-msg{font-size:1.4rem;font-weight:700;margin:16px 0 8px;color:var(--text)}
+        .error-sub{color:var(--text-light);margin-bottom:28px}
+        .error-btn{display:inline-flex;align-items:center;gap:8px;padding:12px 28px;background:var(--primary);color:#fff;border-radius:var(--radius);font-weight:700;font-size:.95rem;text-decoration:none;transition:all var(--transition)}
+        .error-btn:hover{background:var(--primary-dark);transform:translateY(-2px);color:#fff}
+    </style>
+</head>
+<body>
+    <nav class="platform-bar" aria-label="Platform navigation">
+        <div class="platform-bar-inner">
+            <a href="https://Tusharlimbasiya-200-silveroak.github.io/blog-platform/" class="platform-home">📚 USA Content Hub</a>
+            <div class="platform-links" role="navigation">
+                <a href="https://Tusharlimbasiya-200-silveroak.github.io/auto-cars/">🚗 Auto</a>
+            </div>
+            <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle dark mode"><span class="icon" id="themeIcon">🌙</span></button>
+        </div>
+    </nav>
+    <header class="site-header">
+        <div class="container">
+            <a href="index.html" class="logo">🚗 Auto &amp; Cars</a>
+        </div>
+    </header>
+    <main>
+        <div class="error-page">
+            <div class="error-code">404</div>
+            <h1 class="error-msg">Page Not Found</h1>
+            <p class="error-sub">The page you're looking for doesn't exist or has been moved.</p>
+            <a href="index.html" class="error-btn">← Back to Home</a>
+        </div>
+    </main>
+    <footer class="site-footer"><div class="container"><p>&copy; 2026 Auto &amp; Cars.</p></div></footer>
+    <script>function toggleTheme(){var h=document.documentElement,c=h.getAttribute('data-theme'),n=(c==='dark')?'light':'dark';h.setAttribute('data-theme',n);localStorage.setItem('theme',n);document.getElementById('themeIcon').textContent=(n==='dark')?'☀️':'🌙';}(function(){var t=localStorage.getItem('theme');if(!t&&window.matchMedia('(prefers-color-scheme:dark)').matches)t='dark';var i=document.getElementById('themeIcon');if(i)i.textContent=(t==='dark')?'☀️':'🌙';})();</script>
+</body>
+</html>
