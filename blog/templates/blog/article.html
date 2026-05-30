@@ -119,12 +119,12 @@
         <div class="article-meta">
             <time datetime="{{ article.published_at|date:'Y-m-d' }}" itemprop="datePublished">📅 {{ article.published_at|date:'M d, Y' }}</time>
             <span class="read-time">⏱️ {{ article.read_time }} min read</span>
-            <span>📝 {{ article.word_count }} words</span>
-            <span>👁️ {{ article.views }} views</span>
+            <span class="word-count">📝 {{ article.word_count }} words</span>
+            <span class="views-count">👁️ {{ article.views }} views</span>
             <button class="bookmark-btn" id="bookmarkBtn" onclick="toggleBookmark()" title="Save to Reading List" style="background:none;border:1px solid var(--border);border-radius:20px;padding:4px 12px;cursor:pointer;font-size:.82rem;color:var(--text-light);transition:all .2s;">
                 <span id="bookmarkIcon">🔖</span> <span id="bookmarkText">Save</span>
             </button>
-            <button onclick="window.print()" style="background:none;border:1px solid var(--border);border-radius:20px;padding:4px 12px;cursor:pointer;font-size:.82rem;color:var(--text-light);" title="Print article">🖨️ Print</button>
+            <button onclick="window.print()" style="background:none;border:1px solid var(--border);border-radius:20px;padding:4px 12px;cursor:pointer;font-size:.82rem;color:var(--text-light);" title="Print article" class="print-btn">🖨️ Print</button>
         </div>
     </header>
 
