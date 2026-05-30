@@ -11,6 +11,13 @@ import os
 
 from django.core.wsgi import get_wsgi_application
 
+# Load .env for local development (no-op in production where env vars are set by the host)
+try:
+    from dotenv import load_dotenv
+    load_dotenv()
+except ImportError:
+    pass
+
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'writeflow.settings')
 
 application = get_wsgi_application()
