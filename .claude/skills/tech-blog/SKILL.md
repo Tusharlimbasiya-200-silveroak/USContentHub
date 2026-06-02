@@ -54,10 +54,17 @@ python3 manage.py runserver 8799   # run_in_background
 ```
 
 ### 4. User review — REQUIRED GATE
-Show the user:
+First, email the draft to the reviewer (tusharlimbasiya200@gmail.com, override via REVIEW_EMAIL in .env):
+```bash
+python3 send_review_email.py drafts/<slug>.json
+```
+(If SMTP isn't configured it prints a warning instead of sending — tell the user, but continue the in-chat review either way.)
+
+Then show the user:
 - Title, subtitle, word count, read time, tags
 - The full article text (readable, converted from HTML) in chat
 - Local preview link: `http://127.0.0.1:8799/article/<slug>/`
+- Whether the review email was sent
 
 Then ask explicitly (AskUserQuestion): **"Publish this article live?"** with options Yes / Edit something / No.
 - **Edit** → apply requested changes to the JSON, re-run publish_draft.py, show the diff of what changed, ask again.
