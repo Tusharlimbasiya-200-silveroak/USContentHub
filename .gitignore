@@ -61,6 +61,9 @@ Desktop.ini
 # ── Temporary staging directories ────────────────────────────
 _tmp_*/
 
+# ── Tech-blog agent drafts (review staging — articles live in db.sqlite3) ──
+drafts/
+
 # ── Vercel local cache ────────────────────────────────────────
 .vercel/
 
@@ -76,3 +79,6 @@ npm-debug.log*
 
 # ── Pinterest setup output (contains board IDs — not sensitive, but local) ───
 pinterest_bot/board_ids.json
+
+# ── Claude Code local settings (machine-specific) ──
+.claude/settings.local.json
