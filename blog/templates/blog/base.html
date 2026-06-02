@@ -174,7 +174,10 @@
                 <!-- Auth -->
                 {% if user.is_authenticated %}
                 <a href="{% url 'blog:user_bookmarks' %}" class="nav-btn nav-btn-outline">📑 Saved</a>
-                <a href="{% url 'blog:logout' %}"          class="nav-btn nav-btn-ghost">Logout</a>
+                <form method="post" action="{% url 'blog:logout' %}" style="display:inline;margin:0">
+                  {% csrf_token %}
+                  <button type="submit" class="nav-btn nav-btn-ghost" style="cursor:pointer;border:none;background:none;padding:0">Logout</button>
+                </form>
                 {% else %}
                 <a href="{% url 'blog:login' %}"    class="nav-btn nav-btn-ghost">Login</a>
                 <a href="{% url 'blog:register' %}" class="nav-btn nav-btn-filled">Register</a>
@@ -209,7 +212,10 @@
             <div class="mobile-auth-row">
                 {% if user.is_authenticated %}
                 <a href="{% url 'blog:user_bookmarks' %}" class="nav-btn nav-btn-outline" style="flex:1;justify-content:center">📑 Saved</a>
-                <a href="{% url 'blog:logout' %}"          class="nav-btn nav-btn-ghost"   style="flex:1;justify-content:center">Logout</a>
+                <form method="post" action="{% url 'blog:logout' %}" style="flex:1;display:flex;margin:0">
+                  {% csrf_token %}
+                  <button type="submit" class="nav-btn nav-btn-ghost" style="flex:1;justify-content:center;cursor:pointer;border:none;background:none;padding:0">Logout</button>
+                </form>
                 {% else %}
                 <a href="{% url 'blog:login' %}"    class="nav-btn nav-btn-outline" style="flex:1;justify-content:center">Login</a>
                 <a href="{% url 'blog:register' %}" class="nav-btn nav-btn-filled"  style="flex:1;justify-content:center">Register →</a>

@@ -25,10 +25,12 @@ ENV/
 # ── Django ──────────────────────────────────────────────────
 *.log
 local_settings.py
-db.sqlite3
 db.sqlite3-journal
-staticfiles/
 media/
+# NOTE: db.sqlite3 and staticfiles/ are intentionally committed —
+# Vercel bundles the repo as the deployment artifact, so the SQLite DB
+# and collectstatic output (incl. staticfiles.json manifest) must be in git.
+# Run `python3 manage.py collectstatic --noinput` before each deploy.
 
 # ── Environment / secrets ────────────────────────────────────
 .env

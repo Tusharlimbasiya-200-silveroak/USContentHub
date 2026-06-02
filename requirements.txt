@@ -1,10 +1,14 @@
 django>=6.0
 pillow>=12.0
 django-allauth>=65.0
-cryptography>=48.0
+cryptography>=41.0
 pyjwt>=2.0
 requests>=2.31
+# .env file loading for local development
+python-dotenv>=1.0
 # Static file serving
 whitenoise>=6.7
 # PostgreSQL (optional — set DATABASE_URL env var to enable)
 psycopg2-binary>=2.9
+# Redis cache + sessions (optional — set REDIS_URL env var to enable)
+redis>=4.6

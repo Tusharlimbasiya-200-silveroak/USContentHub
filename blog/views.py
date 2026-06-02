@@ -571,6 +571,7 @@ def login_view(request):
     return render(request, "blog/login.html")
 
 
+@require_POST
 def logout_view(request):
     logout(request)
     return redirect("blog:home")

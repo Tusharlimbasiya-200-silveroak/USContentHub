@@ -631,8 +631,15 @@ class AuthViewTest(BaseTestCase):
     def test_logout(self):
         User.objects.create_user("logoutuser", "lo@test.com", "testpass123")
         self.client.login(username="logoutuser", password="testpass123")
-        response = self.client.get(reverse("blog:logout"))
+        response = self.client.post(reverse("blog:logout"))
         self.assertEqual(response.status_code, 302)
+
+    def test_logout_get_not_allowed(self):
+        # Logout is POST-only (CSRF-protected); GET must be rejected.
+        User.objects.create_user("logoutuser2", "lo2@test.com", "testpass123")
+        self.client.login(username="logoutuser2", password="testpass123")
+        response = self.client.get(reverse("blog:logout"))
+        self.assertEqual(response.status_code, 405)
 
     def test_register_redirect_if_logged_in(self):
         User.objects.create_user("existing", "ex@test.com", "testpass123")

@@ -207,9 +207,27 @@ USE_TZ = True
 
 STATIC_URL = 'static/'
 STATIC_ROOT = BASE_DIR / 'staticfiles'
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
-# CompressedManifestStaticFilesStorage appends a content hash to filenames,
-# so files can be cached indefinitely — browsers fetch a new URL on any change.
+
+# Django 4.2+ uses STORAGES dict; STATICFILES_STORAGE is removed in Django 6.x.
+# whitenoise.storage.CompressedManifestStaticFilesStorage adds content hashes
+# to filenames so files can be cached indefinitely — browsers fetch a new URL
+# on any change, and whitenoise serves pre-compressed .gz / .br variants.
+# Manifest storage requires `collectstatic` to have run, so tests fall back
+# to the plain staticfiles backend (no manifest lookup).
+import sys
+_TESTING = 'test' in sys.argv
+STORAGES = {
+    "default": {
+        "BACKEND": "django.core.files.storage.FileSystemStorage",
+    },
+    "staticfiles": {
+        "BACKEND": (
+            "django.contrib.staticfiles.storage.StaticFilesStorage"
+            if _TESTING
+            else "whitenoise.storage.CompressedManifestStaticFilesStorage"
+        ),
+    },
+}
 WHITENOISE_MAX_AGE = 31536000  # 1 year
 
 # Media files (user-uploaded content)
