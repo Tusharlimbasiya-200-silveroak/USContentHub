@@ -70,11 +70,7 @@ def _otp_publish(request):
             }
         )
         for tag_name in d.get("tags", []):
-            tag_slug = re.sub(r"[^a-z0-9]+", "-", tag_name.lower()).strip("-")
-            tag, _ = Tag.objects.get_or_create(
-                slug=tag_slug,
-                defaults={"name": tag_name}
-            )
+            tag, _ = Tag.objects.get_or_create(name=tag_name)
             art.tags.add(tag)
         return JsonResponse({"ok": True, "created": created, "slug": art.slug, "words": words})
     except Exception as exc:
