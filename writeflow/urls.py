@@ -45,25 +45,6 @@ def robots_txt(request):
         f"Sitemap: {site_url}/sitemap.xml",
         f"Host: {site_url}",
     ]
-    # TEMP DIAGNOSTIC — remove after deploy debugging (2026-06-02)
-    if request.GET.get("diag") == "1":
-        import os as _os
-        from django.db import connection as _conn
-        from blog.models import Article as _A
-        _db = str(_conn.settings_dict.get("NAME", "?"))
-        try:
-            _size = _os.path.getsize(_db)
-        except OSError:
-            _size = -1
-        _latest = _A.objects.order_by("-published_at").values_list("slug", flat=True).first()
-        lines += [
-            "",
-            f"# engine: {_conn.settings_dict['ENGINE'].rsplit('.', 1)[-1]}",
-            f"# db: {_db} ({_size} bytes)",
-            f"# articles: {_A.objects.filter(status='published').count()}",
-            f"# latest: {_latest}",
-            f"# cwd: {_os.getcwd()}",
-        ]
     return HttpResponse("\n".join(lines), content_type="text/plain")
 
 
