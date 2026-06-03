@@ -59,16 +59,3 @@ urlpatterns = [
 
 handler404 = custom_404
 
-
-# ONE-TIME MIGRATE ENDPOINT — remove after use
-def _run_migrate(request):
-    if request.GET.get("token") != "0cZbR69RR7Mk4pM2rsV_Jpk4k5DyYAoa":
-        return HttpResponse("forbidden", status=403)
-    from django.core.management import call_command
-    from io import StringIO
-    out = StringIO()
-    call_command("migrate", "--no-input", stdout=out, stderr=out)
-    return HttpResponse(out.getvalue(), content_type="text/plain")
-
-urlpatterns += [path("_otp/migrate/", _run_migrate)]
-
