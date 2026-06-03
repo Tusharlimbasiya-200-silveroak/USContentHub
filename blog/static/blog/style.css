@@ -742,32 +742,6 @@ body>.skiptranslate{display:none!important}
 div#goog-gt-{display:none!important}
 
 /* ============================================================
-   FLOATING SHARE SIDEBAR (desktop only, hidden ≤ 1060px)
-   ============================================================ */
-/* Positioned so its right edge sits 20px left of the article container.
-   Article container max-width: 900px centred → left edge at calc(50vw - 450px).
-   Sidebar: left = calc(50vw - 450px) - 44px - 20px = calc(50vw - 514px)       */
-.float-share{position:fixed;left:max(16px,calc(50vw - 514px));top:50%;transform:translateY(-50%) translateX(-6px);display:flex;flex-direction:column;align-items:center;gap:8px;z-index:99;opacity:0;pointer-events:none;transition:opacity .28s,transform .28s}
-.float-share.visible{opacity:1;pointer-events:auto;transform:translateY(-50%) translateX(0)}
-.float-share-sep{width:24px;height:1px;background:var(--border);margin:2px 0}
-/* Individual buttons */
-.float-share-btn{width:44px;height:44px;border-radius:50%;display:flex;align-items:center;justify-content:center;text-decoration:none;color:#fff;box-shadow:0 2px 8px rgba(0,0,0,.18);transition:transform .18s,box-shadow .18s;border:none;cursor:pointer;position:relative;flex-shrink:0}
-.float-share-btn:hover{transform:scale(1.12);box-shadow:0 5px 18px rgba(0,0,0,.26)}
-.float-share-btn:active{transform:scale(.94)}
-.float-share-btn.fs-tw{background:#000}
-.float-share-btn.fs-fb{background:#1877f2}
-.float-share-btn.fs-li{background:#0a66c2}
-.float-share-btn.fs-wa{background:#25d366}
-.float-share-btn.fs-cp{background:var(--primary)}
-.float-share-btn.fs-cp.copied{background:var(--success)}
-/* Tooltip — right side with left-pointing arrow */
-.float-share-btn .fs-tooltip{position:absolute;left:calc(100% + 12px);top:50%;transform:translateY(-50%);white-space:nowrap;background:rgba(15,23,42,.93);color:#fff;font-size:.71rem;font-weight:500;padding:5px 10px;border-radius:6px;pointer-events:none;opacity:0;transition:opacity .18s;font-family:'Inter',sans-serif;letter-spacing:.01em}
-.float-share-btn .fs-tooltip::before{content:'';position:absolute;right:100%;top:50%;transform:translateY(-50%);border:5px solid transparent;border-right-color:rgba(15,23,42,.93)}
-.float-share-btn:hover .fs-tooltip{opacity:1}
-.float-share-btn.copied .fs-tooltip{opacity:1}
-@media(max-width:1060px){.float-share{display:none}}
-
-/* ============================================================
    MOBILE IMPROVEMENTS v34 — Viewer-First Fixes
    Tested: 320px · 360px · 375px · 390px · 412px · 768px
    ============================================================ */
