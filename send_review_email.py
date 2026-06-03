@@ -48,7 +48,7 @@ def main():
     tags = ", ".join(draft.get("tags", []))
 
     subject = f"📝 Review: {draft['title']}"
-    live_url = f"https://us-content-hub.vercel.app/article/{slug}/"
+    live_url = f"{settings.SITE_URL}/article/{slug}/"
     local_url = f"http://127.0.0.1:8799/article/{slug}/"
 
     html = f"""

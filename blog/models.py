@@ -14,7 +14,6 @@ class Publication(models.Model):
     description = models.TextField(blank=True, default="")
     color = models.CharField(max_length=7, default="#2563eb")
     icon = models.CharField(max_length=10, default="📚")
-    github_url = models.URLField(blank=True, default="")
     created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):

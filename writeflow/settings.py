@@ -11,6 +11,9 @@ https://docs.djangoproject.com/en/6.0/ref/settings/
 """
 
 from pathlib import Path
+import os
+import sys
+import urllib.parse as _urlparse
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -18,8 +21,6 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/6.0/howto/deployment/checklist/
-
-import os
 
 SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY', 'django-insecure-dev-only-change-in-production')
 DEBUG = os.environ.get('DJANGO_DEBUG', 'True').lower() in ('true', '1')
@@ -128,7 +129,6 @@ WSGI_APPLICATION = 'writeflow.wsgi.application'
 _DATABASE_URL = os.environ.get('DATABASE_URL', '')
 
 if _DATABASE_URL.startswith('postgres'):
-    import urllib.parse as _urlparse
     _parsed = _urlparse.urlparse(_DATABASE_URL)
     _qs = dict(_urlparse.parse_qsl(_parsed.query))
     # Build OPTIONS from URL query params so channel_binding, sslmode, etc. are honoured
@@ -148,7 +148,6 @@ if _DATABASE_URL.startswith('postgres'):
         }
     }
 elif _DATABASE_URL.startswith('mysql'):
-    import urllib.parse as _urlparse
     _parsed = _urlparse.urlparse(_DATABASE_URL)
     DATABASES = {
         'default': {
@@ -214,7 +213,6 @@ STATIC_ROOT = BASE_DIR / 'staticfiles'
 # on any change, and whitenoise serves pre-compressed .gz / .br variants.
 # Manifest storage requires `collectstatic` to have run, so tests fall back
 # to the plain staticfiles backend (no manifest lookup).
-import sys
 _TESTING = 'test' in sys.argv
 STORAGES = {
     "default": {

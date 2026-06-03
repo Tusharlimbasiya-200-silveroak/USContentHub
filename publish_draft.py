@@ -20,6 +20,7 @@ Draft JSON schema:
 """
 import json
 import os
+import re
 import sys
 
 import django
@@ -81,8 +82,6 @@ def get_publication(slug):
 def upsert_article(draft, status):
     pub = get_publication(draft.get("publication", "tech-pulse"))
     # Strip HTML tags for an honest word count
-    import re
-
     text = re.sub(r"<[^>]+>", " ", draft["content"])
     words = len(text.split())
     read_time = max(1, round(words / WORDS_PER_MINUTE))
