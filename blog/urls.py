@@ -28,6 +28,10 @@ urlpatterns = [
     path("accounts/login/", views.login_view, name="login"),
     path("accounts/logout/", views.logout_view, name="logout"),
     path("accounts/bookmarks/", views.user_bookmarks, name="user_bookmarks"),
+    # ── Global RSS / Atom feeds ──
     path("feed/rss/", views.ArticleRSSFeed(), name="rss_feed"),
     path("feed/atom/", views.ArticleAtomFeed(), name="atom_feed"),
+    # ── Per-publication RSS / Atom feeds ──
+    path("feed/pub/<slug:slug>/rss/", views.PublicationRSSFeed(), name="pub_rss_feed"),
+    path("feed/pub/<slug:slug>/atom/", views.PublicationAtomFeed(), name="pub_atom_feed"),
 ]

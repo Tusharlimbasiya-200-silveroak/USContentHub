@@ -500,6 +500,48 @@ class ArticleAtomFeed(ArticleRSSFeed):
     subtitle = ArticleRSSFeed.description
 
 
+class PublicationRSSFeed(Feed):
+    """Per-publication RSS feed: /feed/pub/<slug>/rss/"""
+
+    def get_object(self, request, slug):
+        return get_object_or_404(Publication, slug=slug)
+
+    def title(self, pub):
+        return f"{pub.name} — USA Content Hub"
+
+    def link(self, pub):
+        return f"/pub/{pub.slug}/"
+
+    def description(self, pub):
+        return f"Latest articles from {pub.name} on USA Content Hub"
+
+    def items(self, pub):
+        return (
+            Article.objects.filter(status="published", publication=pub)
+            .select_related("publication")
+            .order_by("-published_at")[:20]
+        )
+
+    def item_title(self, item):
+        return item.title
+
+    def item_description(self, item):
+        return item.meta_description or item.subtitle
+
+    def item_link(self, item):
+        return f"/article/{item.slug}/"
+
+    def item_pubdate(self, item):
+        return item.published_at
+
+
+class PublicationAtomFeed(PublicationRSSFeed):
+    feed_type = Atom1Feed
+
+    def subtitle(self, pub):
+        return f"Latest articles from {pub.name} on USA Content Hub"
+
+
 # ── Auth views ────────────────────────────────────────────────────────────────
 
 def register_view(request):

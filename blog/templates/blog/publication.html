@@ -11,6 +11,8 @@
 {% block main_class %}full-width{% endblock %}
 
 {% block extra_head %}
+<link rel="alternate" type="application/rss+xml" title="{{ publication.name }} RSS Feed" href="/feed/pub/{{ publication.slug }}/rss/">
+<link rel="alternate" type="application/atom+xml" title="{{ publication.name }} Atom Feed" href="/feed/pub/{{ publication.slug }}/atom/">
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -28,6 +30,10 @@
     <div class="container">
         <h1 class="logo">{{ publication.icon }} {{ publication.name }}</h1>
         <p class="tagline">{{ publication.description }}</p>
+        <div style="margin-top:.75rem;display:flex;gap:.75rem;flex-wrap:wrap;justify-content:center;">
+            <a href="/feed/pub/{{ publication.slug }}/rss/" style="display:inline-flex;align-items:center;gap:5px;font-size:.8rem;padding:5px 14px;border-radius:20px;background:#f97316;color:#fff;text-decoration:none;">📡 RSS Feed</a>
+            <a href="/feed/pub/{{ publication.slug }}/atom/" style="display:inline-flex;align-items:center;gap:5px;font-size:.8rem;padding:5px 14px;border-radius:20px;background:#8b5cf6;color:#fff;text-decoration:none;">⚡ Atom Feed</a>
+        </div>
     </div>
 </header>
 {% endblock %}

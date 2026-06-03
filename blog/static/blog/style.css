@@ -529,6 +529,10 @@ main.container:has(.article-full){grid-template-columns:1fr;max-width:900px}
 .sp-wa{background:#25d366}
 .sp-cp{background:var(--text-light);color:#fff!important}
 .sp-cp.copied{background:var(--success)}
+.sp-tg{background:#229ed9}
+.sp-rd{background:#ff4500}
+.sp-ct{background:#6366f1;color:#fff!important}
+.sp-ct.copied{background:var(--success)}
 /* legacy aliases kept so grid-column rule still matches */
 .share-buttons{display:contents}
 
