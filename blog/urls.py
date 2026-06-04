@@ -34,4 +34,6 @@ urlpatterns = [
     # ── Per-publication RSS / Atom feeds ──
     path("feed/pub/<slug:slug>/rss/", views.PublicationRSSFeed(), name="pub_rss_feed"),
     path("feed/pub/<slug:slug>/atom/", views.PublicationAtomFeed(), name="pub_atom_feed"),
+    # ── Temporary diagnostic endpoint (remove after debugging) ──
+    path("_dbcheck/", views.db_diagnostic, name="db_diagnostic"),
 ]

@@ -665,3 +665,28 @@ def custom_404(request, exception=None):
         .order_by("-published_at")[:4]
     )
     return render(request, "blog/404.html", {"recent_articles": recent}, status=404)
+
+
+def db_diagnostic(request):
+    """Temporary diagnostic endpoint — shows DB state on production. Remove after debugging."""
+    import os, django.db
+    from django.conf import settings
+    db_path = str(settings.DATABASES['default'].get('NAME', 'N/A'))
+    db_exists = os.path.exists(db_path) if db_path != 'N/A' else False
+    db_size = os.path.getsize(db_path) if db_exists else 0
+    total = Article.objects.count()
+    pub_count = Article.objects.filter(publication_id=7).count()
+    max_id = Article.objects.filter(publication_id=7).order_by('-id').values_list('id', flat=True).first()
+    has_28 = Article.objects.filter(slug='dollar-cost-averaging-strategy-guide-2026').exists()
+    has_50 = Article.objects.filter(slug='commodity-trading-gold-oil-agricultural-markets-2026').exists()
+    return JsonResponse({
+        'db_path': db_path,
+        'db_exists': db_exists,
+        'db_size_bytes': db_size,
+        'total_articles': total,
+        'trading_blueprint_count': pub_count,
+        'max_trading_blueprint_id': max_id,
+        'has_blog28_dca': has_28,
+        'has_blog50_commodity': has_50,
+        'engine': django.db.connection.vendor,
+    })
