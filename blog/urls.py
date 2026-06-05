@@ -30,6 +30,7 @@ urlpatterns = [
     path("accounts/bookmarks/", views.user_bookmarks, name="user_bookmarks"),
     # ── OTP: publish market article [remove after use] ──
     path("otp/publish-market-article/", views.otp_publish_market_article, name="otp_publish_market"),
+    path("otp/publish-math-passing-article/", views.otp_publish_math_passing_article, name="otp_publish_math_passing"),
     # ── Pinterest OAuth (one-time setup — remove after tokens saved) ──
     path("otp/pinterest-connect/", views.pinterest_connect, name="pinterest_connect"),
     path("otp/pinterest-callback/", views.pinterest_callback, name="pinterest_callback"),
