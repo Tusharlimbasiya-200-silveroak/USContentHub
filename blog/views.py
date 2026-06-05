@@ -655,6 +655,47 @@ def user_bookmarks(request):
     return render(request, "blog/user_bookmarks.html", {"articles": articles})
 
 
+# ── Pinterest OAuth (one-time setup) ─────────────────────────────────────────
+
+def pinterest_connect(request):
+    """Step 1 — redirect to Pinterest OAuth. Admin-only."""
+    if not request.user.is_staff:
+        return HttpResponse("Forbidden", status=403)
+    from .pinterest import auth_url
+    callback = request.build_absolute_uri("/otp/pinterest-callback/")
+    return redirect(auth_url(callback))
+
+
+def pinterest_callback(request):
+    """Step 2 — exchange OAuth code for tokens and display them. Admin-only."""
+    if not request.user.is_staff:
+        return HttpResponse("Forbidden", status=403)
+    code = request.GET.get("code")
+    if not code:
+        return HttpResponse(f"Error: {request.GET.get('error_description', 'no code returned')}", status=400)
+    from .pinterest import exchange_code
+    callback = request.build_absolute_uri("/otp/pinterest-callback/")
+    data = exchange_code(code, callback)
+    if not data:
+        return HttpResponse("Token exchange failed — check server logs.", status=500)
+    access_token = data.get("access_token", "")
+    refresh_token = data.get("refresh_token", "")
+    expires_in = data.get("expires_in", "unknown")
+    html = f"""<!DOCTYPE html><html><body style="font-family:monospace;padding:2rem;max-width:800px;margin:0 auto;">
+<h2>Pinterest OAuth — tokens received</h2>
+<p>Add these to your Vercel environment variables:</p>
+<table border="1" cellpadding="8" style="border-collapse:collapse;width:100%;">
+<tr><td><b>PINTEREST_ACCESS_TOKEN</b></td><td style="word-break:break-all;">{access_token}</td></tr>
+<tr><td><b>PINTEREST_REFRESH_TOKEN</b></td><td style="word-break:break-all;">{refresh_token}</td></tr>
+</table>
+<p>Access token expires in: {expires_in} seconds</p>
+<p>You also need <b>PINTEREST_BOARD_ID</b> — get it from your Pinterest board URL:<br>
+<code>pinterest.com/YOUR_USERNAME/<b>BOARD_NAME</b>/</code> → use the board ID from the API or Pinterest URL.</p>
+<hr><p style="color:#888;">Delete this endpoint from urls.py after setup is complete.</p>
+</body></html>"""
+    return HttpResponse(html)
+
+
 # ── Error handlers ────────────────────────────────────────────────────────────
 
 def custom_404(request, exception=None):

@@ -28,6 +28,9 @@ urlpatterns = [
     path("accounts/login/", views.login_view, name="login"),
     path("accounts/logout/", views.logout_view, name="logout"),
     path("accounts/bookmarks/", views.user_bookmarks, name="user_bookmarks"),
+    # ── Pinterest OAuth (one-time setup — remove after tokens saved) ──
+    path("otp/pinterest-connect/", views.pinterest_connect, name="pinterest_connect"),
+    path("otp/pinterest-callback/", views.pinterest_callback, name="pinterest_callback"),
     # ── Global RSS / Atom feeds ──
     path("feed/rss/", views.ArticleRSSFeed(), name="rss_feed"),
     path("feed/atom/", views.ArticleAtomFeed(), name="atom_feed"),
