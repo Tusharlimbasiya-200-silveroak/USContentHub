@@ -112,7 +112,8 @@
     <div class="article-cover">
         <img src="{{ article.cover_image }}" alt="{{ article.title }}"
              loading="eager" decoding="async" fetchpriority="high"
-             width="1200" height="630" itemprop="image">
+             width="1200" height="630" itemprop="image"
+             onerror="this.onerror=null;this.src='https://picsum.photos/seed/usacontenthub/1200/630';">
     </div>
     {% endif %}
 
@@ -285,7 +286,7 @@
         {% for r in related %}
         <article class="article-card">
             <div class="card-image">
-                <img src="{{ r.cover_image|default:'https://picsum.photos/seed/usacontenthub/640/360' }}" alt="{{ r.title }}" loading="lazy" decoding="async" width="640" height="360">
+                <img src="{{ r.cover_image|default:'https://picsum.photos/seed/usacontenthub/640/360' }}" alt="{{ r.title }}" loading="lazy" decoding="async" width="640" height="360" onerror="this.onerror=null;this.src='https://picsum.photos/seed/usacontenthub/640/360';">
             </div>
             <div class="card-body">
                 <h3><a href="{% url 'blog:article' r.slug %}">{{ r.title }}</a></h3>

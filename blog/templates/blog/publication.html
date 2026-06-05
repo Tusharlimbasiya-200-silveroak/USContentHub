@@ -49,7 +49,7 @@
             <div class="card-image">
                 <img src="{{ article.cover_image|default:'https://picsum.photos/seed/usacontenthub/640/360' }}" alt="{{ article.title }}"
                      loading="{% if forloop.counter <= 3 %}eager{% else %}lazy{% endif %}" decoding="async"
-                     width="640" height="360">
+                     width="640" height="360" onerror="this.onerror=null;this.src='https://picsum.photos/seed/usacontenthub/640/360';">
             </div>
             <div class="card-body">
                 <h3><a href="{% url 'blog:article' article.slug %}">{{ article.title }}</a></h3>
