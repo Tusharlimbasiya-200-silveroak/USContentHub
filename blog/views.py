@@ -701,48 +701,6 @@ def pinterest_callback(request):
     return HttpResponse(html)
 
 
-# ── OTP: publish approved Tech Pulse article [remove after use] ──────────────
-
-def otp_publish_gemma_4_article(request):
-    if request.GET.get("key") != "gemma4-2026-6d2f8b1c9e4a":
-        raise Http404()
-
-    import json
-    from pathlib import Path
-    from django.utils import timezone
-
-    path = Path(__file__).resolve().parent.parent / "drafts" / "google-gemma-4-12b-local-multimodal-ai-developer-guide-2026.json"
-    draft = json.loads(path.read_text(encoding="utf-8"))
-    pub, _ = Publication.objects.get_or_create(
-        slug=draft.get("publication", "tech-pulse"),
-        defaults={
-            "name": "Tech Pulse",
-            "description": "Developer-focused technology news: Python and language releases, AI/ML model updates, frameworks, tooling, and what's new across tech.",
-            "color": "#7c3aed",
-            "icon": "🧠",
-        },
-    )
-    article, _ = Article.objects.update_or_create(
-        slug=draft["slug"],
-        defaults={
-            "title": draft["title"],
-            "subtitle": draft.get("subtitle", ""),
-            "content": draft["content"],
-            "cover_image": draft.get("cover_image", ""),
-            "publication": pub,
-            "status": "published",
-            "read_time": 7,
-            "word_count": 1380,
-            "meta_description": draft.get("meta_description", ""),
-            "published_at": timezone.now(),
-        },
-    )
-    tags = [Tag.objects.get_or_create(name=t.strip().lower())[0] for t in draft.get("tags", [])]
-    article.tags.set(tags)
-    cache.clear()
-    return HttpResponse(f'Published: <a href="/article/{article.slug}/">{article.title}</a>')
-
-
 # ── OTP: publish market article [remove after use] ───────────────────────────
 
 def otp_publish_market_article(request):
