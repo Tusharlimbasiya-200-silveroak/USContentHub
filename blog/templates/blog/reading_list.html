@@ -15,7 +15,7 @@
         {% for article in articles %}
         <article class="article-card" data-slug="{{ article.slug }}">
             <div class="card-image">
-                <img src="{{ article.cover_image }}" alt="{{ article.title }}" loading="lazy" decoding="async" width="640" height="360">
+                <img src="{{ article.cover_image|default:'https://picsum.photos/seed/usacontenthub/640/360' }}" alt="{{ article.title }}" loading="lazy" decoding="async" width="640" height="360">
             </div>
             <div class="card-body">
                 <h3><a href="{% url 'blog:article' article.slug %}">{{ article.title }}</a></h3>
