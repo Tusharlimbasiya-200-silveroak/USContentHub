@@ -873,63 +873,6 @@ def otp_publish_market_article(request):
     return HttpResponse(f'✅ Published! <a href="/article/{article.slug}/">View: {article.title}</a>')
 
 
-def otp_clean_article_html_artifacts(request):
-    cut_markers = [
-        r'<section[^>]+class="[^"]*faq-section[^"]*"',
-        r'<section[^>]+class="[^"]*newsletter[^"]*"',
-        r'<div[^>]+class="[^"]*newsletter[^"]*"',
-        r'<section[^>]+class="[^"]*related[^"]*"',
-        r'<div[^>]+class="[^"]*related[^"]*"',
-        r'<section[^>]+class="[^"]*share[^"]*"',
-        r'<div[^>]+class="[^"]*share[^"]*"',
-        r'<footer\b',
-        r'📖\s*You Might Also Like',
-        r'About\s*</h2>',
-    ]
-    suspect_patterns = [
-        "<html",
-        "<body",
-        "article-header",
-        "You Might Also Like",
-        "© 2026",
-        "faq-section",
-    ]
-
-    updated = 0
-    skipped = 0
-    for article in Article.objects.filter(status="published"):
-        content = article.content or ""
-        if not any(pattern in content for pattern in suspect_patterns):
-            skipped += 1
-            continue
-
-        source_match = re.search(r'(<h2>Sources &amp; [\s\S]+)$', content, re.I)
-        source_section = source_match.group(1).strip() if source_match else ""
-        main = content[: source_match.start()] if source_match else content
-        main = re.sub(r'<header[^>]+class="[^"]*article-header[^"]*"[\s\S]*?</header>', '', main, flags=re.I)
-        main = re.sub(r'<!DOCTYPE[^>]*>|</?html[^>]*>|</?body[^>]*>', '', main, flags=re.I)
-
-        cut_at = None
-        for marker in cut_markers:
-            match = re.search(marker, main, re.I)
-            if match and (cut_at is None or match.start() < cut_at):
-                cut_at = match.start()
-        if cut_at is not None:
-            main = main[:cut_at]
-
-        cleaned = main.strip()
-        if source_section:
-            cleaned = cleaned.rstrip() + "\n" + source_section
-        if cleaned and cleaned != content:
-            article.content = cleaned
-            article.save(update_fields=["content", "updated_at"])
-            updated += 1
-        else:
-            skipped += 1
-
-    return HttpResponse(f"Cleaned article HTML artifacts: {updated}; skipped: {skipped}")
-
-
 # ── Error handlers ────────────────────────────────────────────────────────────
 
 def custom_404(request, exception=None):
