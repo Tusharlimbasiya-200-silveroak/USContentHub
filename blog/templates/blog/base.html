@@ -23,7 +23,8 @@
     <link rel="preconnect" href="https://picsum.photos" crossorigin>
     <link rel="dns-prefetch" href="https://www.googletagmanager.com">
     <link rel="dns-prefetch" href="https://www.google-analytics.com">
-    <link rel="dns-prefetch" href="https://pagead2.googlesyndication.com">
+    <link rel="preconnect" href="https://pagead2.googlesyndication.com" crossorigin>
+    <link rel="preconnect" href="https://googleads.g.doubleclick.net" crossorigin>
     <link rel="alternate" type="application/rss+xml" title="USA Content Hub RSS" href="{% url 'blog:rss_feed' %}">
     <link rel="alternate" type="application/atom+xml" title="USA Content Hub Atom" href="{% url 'blog:atom_feed' %}">
     <meta property="og:site_name" content="USA Content Hub">
@@ -82,6 +83,7 @@
       }
     ]
     </script>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2673860903932624" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="{% static 'blog/style.css' %}?v=35">
     <style>
     @media print {
@@ -439,8 +441,6 @@
 
     {% block extra_js %}{% endblock %}
 
-    <!-- Google AdSense — loaded after page content to avoid blocking first render -->
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2673860903932624"
-         crossorigin="anonymous"></script>
+
 </body>
 </html>
