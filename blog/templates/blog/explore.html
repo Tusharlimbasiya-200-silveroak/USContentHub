@@ -23,7 +23,7 @@
     {% if all_tags %}
     <div class="tag-cloud" style="margin-bottom:2rem;">
         {% for tag in all_tags %}
-        <a href="{% url 'blog:tag' tag.name %}" class="tag-link" style="font-size:{% if tag.count > 10 %}1.1rem{% elif tag.count > 5 %}1rem{% else %}.9rem{% endif %}">{{ tag.name }} <span style="opacity:.6;font-size:.75rem;">({{ tag.count }})</span></a>
+        <a href="/tag/{{ tag.name|urlencode:"" }}/" class="tag-link" style="font-size:{% if tag.count > 10 %}1.1rem{% elif tag.count > 5 %}1rem{% else %}.9rem{% endif %}">{{ tag.name }} <span style="opacity:.6;font-size:.75rem;">({{ tag.count }})</span></a>
         {% endfor %}
     </div>
     {% endif %}
