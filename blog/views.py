@@ -1,5 +1,4 @@
 import logging
-import json
 import os
 import re
 from html import escape
@@ -872,41 +871,6 @@ def otp_publish_market_article(request):
     )
     article.tags.set(tags)
     return HttpResponse(f'✅ Published! <a href="/article/{article.slug}/">View: {article.title}</a>')
-
-
-def otp_publish_math_passing_article(request):
-    from django.utils import timezone
-
-    draft_path = os.path.join(
-        os.path.dirname(os.path.dirname(os.path.abspath(__file__))),
-        "drafts",
-        "math-of-passing-one-step-evaluation-risk-limits.json",
-    )
-    with open(draft_path, encoding="utf-8") as f:
-        draft = json.load(f)
-
-    pub = Publication.objects.get(slug=draft["publication"])
-    text = re.sub(r"<[^>]+>", " ", draft["content"])
-    words = len(text.split())
-    article, created = Article.objects.update_or_create(
-        slug=draft["slug"],
-        defaults={
-            "title": draft["title"],
-            "subtitle": draft.get("subtitle", ""),
-            "content": draft["content"],
-            "cover_image": draft.get("cover_image", ""),
-            "publication": pub,
-            "status": "published",
-            "read_time": max(1, round(words / 200)),
-            "word_count": words,
-            "meta_description": draft.get("meta_description", ""),
-            "published_at": timezone.now(),
-        },
-    )
-    tags = [Tag.objects.get_or_create(name=name.strip().lower())[0] for name in draft.get("tags", [])]
-    article.tags.set(tags)
-    verb = "Published" if created else "Updated"
-    return HttpResponse(f'{verb}: <a href="/article/{article.slug}/">{article.title}</a>')
 
 
 # ── Error handlers ────────────────────────────────────────────────────────────
