@@ -17,6 +17,7 @@ urlpatterns = [
     path("article/<slug:slug>/rate/", views.rate_article, name="rate_article"),
     path("article/<slug:slug>/bookmark/", views.toggle_bookmark, name="toggle_bookmark"),
     path("pub/<slug:slug>/", views.PublicationView.as_view(), name="publication"),
+    path("tag/", views.TagView.as_view(), name="tag_query"),
     path("tag/<path:tag_name>/", views.TagView.as_view(), name="tag"),
     path("search/", views.SearchView.as_view(), name="search"),
     path("explore/", views.ExploreView.as_view(), name="explore"),

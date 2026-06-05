@@ -105,7 +105,8 @@ class TagView(ListView):
     paginate_by = 12
 
     def get_queryset(self):
-        self.tag = get_object_or_404(Tag, name=self.kwargs["tag_name"])
+        tag_name = self.kwargs.get("tag_name") or self.request.GET.get("name", "")
+        self.tag = get_object_or_404(Tag, name=tag_name)
         return (
             Article.objects.filter(status="published", tags=self.tag)
             .select_related("publication")

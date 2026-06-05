@@ -449,7 +449,7 @@
         <h3 class="sidebar-title" style="font-size:.85rem;font-weight:700;margin-bottom:12px;">Popular Topics</h3>
         <div class="tag-cloud">
             {% for tag in popular_tags %}
-            <a href="/tag/{{ tag.name|urlencode:"" }}/" class="tag-link">{{ tag.name }}</a>
+            <a href="/tag/?name={{ tag.name|urlencode }}" class="tag-link">{{ tag.name }}</a>
             {% endfor %}
         </div>
     </div>

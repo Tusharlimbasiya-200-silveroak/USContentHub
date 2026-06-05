@@ -169,7 +169,7 @@
     {% if tags %}
     <div class="article-tags">
         {% for tag in tags %}
-        <a href="/tag/{{ tag.name|urlencode:"" }}/" class="tag-link">{{ tag.name }}</a>
+        <a href="/tag/?name={{ tag.name|urlencode }}" class="tag-link">{{ tag.name }}</a>
         {% endfor %}
     </div>
     {% endif %}
