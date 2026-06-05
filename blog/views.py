@@ -265,6 +265,10 @@ class ArticleDetailView(DetailView):
         ctx["user_rated"] = ArticleRating.objects.filter(
             article=article, ip_address=get_client_ip(self.request)
         ).exists()
+        ctx["is_bookmarked"] = False
+        if self.request.user.is_authenticated:
+            profile, _ = UserProfile.objects.get_or_create(user=self.request.user)
+            ctx["is_bookmarked"] = profile.bookmarks.filter(pk=article.pk).exists()
 
         # Breadcrumbs
         ctx["breadcrumbs"] = [("Home", "/")]

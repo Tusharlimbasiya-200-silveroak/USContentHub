@@ -372,8 +372,10 @@ function submitRating(score) {
 /* Bookmark */
 var articleSlug='{{ article.slug }}';
 var articleTitle='{{ article.title|escapejs }}';
+var userAuthenticated={{ request.user.is_authenticated|yesno:"true,false" }};
+var serverBookmarked={{ is_bookmarked|yesno:"true,false" }};
 function updateBookmarkUI(){
-    var saved=RL.has(articleSlug);
+    var saved=userAuthenticated?serverBookmarked:RL.has(articleSlug);
     document.getElementById('bookmarkIcon').textContent=saved?'✅':'🔖';
     document.getElementById('bookmarkText').textContent=saved?'Saved':'Save';
     var btn=document.getElementById('bookmarkBtn');
@@ -381,8 +383,30 @@ function updateBookmarkUI(){
     btn.style.borderColor=saved?'var(--primary)':'var(--border)';
 }
 function toggleBookmark(){
-    if(RL.has(articleSlug)){RL.remove(articleSlug);}else{RL.add(articleSlug,articleTitle);}
-    updateBookmarkUI();
+    if(!userAuthenticated){
+        if(RL.has(articleSlug)){RL.remove(articleSlug);}else{RL.add(articleSlug,articleTitle);}
+        updateBookmarkUI();
+        return;
+    }
+    var btn=document.getElementById('bookmarkBtn');
+    var csrf=document.querySelector('[name=csrfmiddlewaretoken]');
+    if(!csrf){return;}
+    btn.disabled=true;
+    var fd=new FormData();
+    fd.append('csrfmiddlewaretoken',csrf.value);
+    fetch('/article/{{ article.slug }}/bookmark/',{method:'POST',body:fd,headers:{'X-CSRFToken':csrf.value}})
+    .then(function(r){
+        if(r.redirected){window.location.href=r.url;return null;}
+        if(!r.ok){throw new Error('Bookmark failed');}
+        return r.json();
+    })
+    .then(function(d){
+        if(!d)return;
+        serverBookmarked=!!d.bookmarked;
+        updateBookmarkUI();
+    })
+    .catch(function(){alert('Could not update saved article. Please try again.');})
+    .finally(function(){btn.disabled=false;});
 }
 updateBookmarkUI();
 
