@@ -120,54 +120,40 @@ WSGI_APPLICATION = 'writeflow.wsgi.application'
 
 
 # ============================================================
-# DATABASE — PostgreSQL in production, SQLite in development
-# Set DATABASE_URL env var to switch:
-#   postgres://user:pass@host:5432/dbname   → PostgreSQL
-#   mysql://user:pass@host:3306/dbname      → MySQL (PythonAnywhere free tier)
-#   (not set)                               → SQLite (local dev / tests)
+# DATABASE — PostgreSQL only
+# Set DATABASE_URL env var (required):
+#   postgres://user:pass@host:5432/dbname
+#   postgresql://user:pass@host:5432/dbname
+# Local dev: set DATABASE_URL in your .env file.
 # ============================================================
 _DATABASE_URL = os.environ.get('DATABASE_URL', '')
 
-if _DATABASE_URL.startswith('postgres'):
-    _parsed = _urlparse.urlparse(_DATABASE_URL)
-    _qs = dict(_urlparse.parse_qsl(_parsed.query))
-    # Build OPTIONS from URL query params so channel_binding, sslmode, etc. are honoured
-    _pg_options = {'sslmode': _qs.get('sslmode', 'require')}
-    if 'channel_binding' in _qs:
-        _pg_options['channel_binding'] = _qs['channel_binding']
-    DATABASES = {
-        'default': {
-            'ENGINE': 'django.db.backends.postgresql',
-            'NAME': _parsed.path.lstrip('/'),
-            'USER': _parsed.username or '',
-            'PASSWORD': _parsed.password or '',
-            'HOST': _parsed.hostname or 'localhost',
-            'PORT': _parsed.port or 5432,
-            'CONN_MAX_AGE': 0,   # 0 = close after each request (correct for serverless/pooler)
-            'OPTIONS': _pg_options,
-        }
+if not _DATABASE_URL or not _DATABASE_URL.startswith(('postgres://', 'postgresql://')):
+    from django.core.exceptions import ImproperlyConfigured
+    raise ImproperlyConfigured(
+        "DATABASE_URL environment variable is required and must be a PostgreSQL URL "
+        "(postgres://user:pass@host:5432/dbname). "
+        "Set it in your .env file for local development or in your hosting environment for production."
+    )
+
+_parsed = _urlparse.urlparse(_DATABASE_URL)
+_qs = dict(_urlparse.parse_qsl(_parsed.query))
+_pg_options = {'sslmode': _qs.get('sslmode', 'require')}
+if 'channel_binding' in _qs:
+    _pg_options['channel_binding'] = _qs['channel_binding']
+
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': _parsed.path.lstrip('/'),
+        'USER': _parsed.username or '',
+        'PASSWORD': _parsed.password or '',
+        'HOST': _parsed.hostname or 'localhost',
+        'PORT': _parsed.port or 5432,
+        'CONN_MAX_AGE': 0,
+        'OPTIONS': _pg_options,
     }
-elif _DATABASE_URL.startswith('mysql'):
-    _parsed = _urlparse.urlparse(_DATABASE_URL)
-    DATABASES = {
-        'default': {
-            'ENGINE': 'django.db.backends.mysql',
-            'NAME': _parsed.path.lstrip('/'),
-            'USER': _parsed.username or '',
-            'PASSWORD': _parsed.password or '',
-            'HOST': _parsed.hostname or 'localhost',
-            'PORT': _parsed.port or 3306,
-            'CONN_MAX_AGE': 600,
-        }
-    }
-else:
-    # Development / test fallback — SQLite
-    DATABASES = {
-        'default': {
-            'ENGINE': 'django.db.backends.sqlite3',
-            'NAME': BASE_DIR / 'db.sqlite3',
-        }
-    }
+}
 
 
 # Password validation
