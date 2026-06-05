@@ -29,7 +29,6 @@ urlpatterns = [
     path("accounts/login/", views.login_view, name="login"),
     path("accounts/logout/", views.logout_view, name="logout"),
     path("accounts/bookmarks/", views.user_bookmarks, name="user_bookmarks"),
-    path("otp/publish-node-26-article/", views.otp_publish_node_26_article_from_draft, name="otp_publish_node_26_article"),
     # ── OTP: publish market article [remove after use] ──
     path("otp/publish-market-article/", views.otp_publish_market_article, name="otp_publish_market"),
     # ── Pinterest OAuth (one-time setup — remove after tokens saved) ──
