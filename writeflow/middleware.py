@@ -8,10 +8,7 @@ including error pages and redirects.
 class SecurityHeadersMiddleware:
     """
     Adds security headers that Django's built-in SecurityMiddleware
-    does not cover:
-      - Permissions-Policy: restricts browser feature access
-      - Cross-Origin-Resource-Policy: prevents cross-origin resource leaks
-      - Cross-Origin-Embedder-Policy: required for SharedArrayBuffer
+    does not cover.
     """
 
     def __init__(self, get_response):
@@ -27,8 +24,16 @@ class SecurityHeadersMiddleware:
                 "payment=(), usb=(), magnetometer=(), gyroscope=()"
             )
 
-        # Prevent other sites from loading your resources (images, scripts) cross-origin
+        if "X-Permitted-Cross-Domain-Policies" not in response:
+            response["X-Permitted-Cross-Domain-Policies"] = "none"
+
+        if "Cross-Origin-Opener-Policy" not in response:
+            response["Cross-Origin-Opener-Policy"] = "same-origin"
+
         if "Cross-Origin-Resource-Policy" not in response:
             response["Cross-Origin-Resource-Policy"] = "same-origin"
+
+        if request.path.startswith(("/admin/", "/accounts/")):
+            response["Cache-Control"] = "no-store, max-age=0"
 
         return response

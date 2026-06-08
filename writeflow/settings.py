@@ -120,40 +120,46 @@ WSGI_APPLICATION = 'writeflow.wsgi.application'
 
 
 # ============================================================
-# DATABASE — PostgreSQL only
-# Set DATABASE_URL env var (required):
+# DATABASE — PostgreSQL in production, SQLite fallback in debug
+# Set DATABASE_URL env var for production:
 #   postgres://user:pass@host:5432/dbname
 #   postgresql://user:pass@host:5432/dbname
-# Local dev: set DATABASE_URL in your .env file.
+# Local dev: set DATABASE_URL in your .env file to use Postgres, or omit it to use SQLite.
 # ============================================================
 _DATABASE_URL = os.environ.get('DATABASE_URL', '')
 
-if not _DATABASE_URL or not _DATABASE_URL.startswith(('postgres://', 'postgresql://')):
+if _DATABASE_URL.startswith(('postgres://', 'postgresql://')):
+    _parsed = _urlparse.urlparse(_DATABASE_URL)
+    _qs = dict(_urlparse.parse_qsl(_parsed.query))
+    _pg_options = {'sslmode': _qs.get('sslmode', 'require')}
+    if 'channel_binding' in _qs:
+        _pg_options['channel_binding'] = _qs['channel_binding']
+
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.postgresql',
+            'NAME': _parsed.path.lstrip('/'),
+            'USER': _parsed.username or '',
+            'PASSWORD': _parsed.password or '',
+            'HOST': _parsed.hostname or 'localhost',
+            'PORT': _parsed.port or 5432,
+            'CONN_MAX_AGE': 0,
+            'OPTIONS': _pg_options,
+        }
+    }
+elif DEBUG:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': BASE_DIR / 'db.sqlite3',
+        }
+    }
+else:
     from django.core.exceptions import ImproperlyConfigured
     raise ImproperlyConfigured(
-        "DATABASE_URL environment variable is required and must be a PostgreSQL URL "
-        "(postgres://user:pass@host:5432/dbname). "
-        "Set it in your .env file for local development or in your hosting environment for production."
+        "DATABASE_URL environment variable is required in production and must be a PostgreSQL URL "
+        "(postgres://user:pass@host:5432/dbname)."
     )
-
-_parsed = _urlparse.urlparse(_DATABASE_URL)
-_qs = dict(_urlparse.parse_qsl(_parsed.query))
-_pg_options = {'sslmode': _qs.get('sslmode', 'require')}
-if 'channel_binding' in _qs:
-    _pg_options['channel_binding'] = _qs['channel_binding']
-
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': _parsed.path.lstrip('/'),
-        'USER': _parsed.username or '',
-        'PASSWORD': _parsed.password or '',
-        'HOST': _parsed.hostname or 'localhost',
-        'PORT': _parsed.port or 5432,
-        'CONN_MAX_AGE': 0,
-        'OPTIONS': _pg_options,
-    }
-}
 
 
 # Password validation
@@ -223,6 +229,16 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 LOGIN_URL = '/accounts/login/'
 LOGOUT_URL = '/accounts/logout/'
 
+# Keep abusive requests from consuming memory on serverless workers.
+DATA_UPLOAD_MAX_MEMORY_SIZE = 1 * 1024 * 1024
+FILE_UPLOAD_MAX_MEMORY_SIZE = 1 * 1024 * 1024
+DATA_UPLOAD_MAX_NUMBER_FIELDS = 100
+
+SESSION_COOKIE_HTTPONLY = True
+SESSION_COOKIE_SAMESITE = 'Lax'
+CSRF_COOKIE_HTTPONLY = True
+CSRF_COOKIE_SAMESITE = 'Lax'
+
 # ============================================================
 # CACHING — Redis in production (set REDIS_URL), LocMemCache for dev/tests
 # Example: REDIS_URL=redis://localhost:6379/0
@@ -275,7 +291,8 @@ if not DEBUG:
     SECURE_CONTENT_TYPE_NOSNIFF = True
     X_FRAME_OPTIONS = 'DENY'
     SECURE_REFERRER_POLICY = 'strict-origin-when-cross-origin'
-    SECURE_SSL_REDIRECT = bool(os.environ.get('DJANGO_SECURE_SSL', ''))
+    SECURE_SSL_REDIRECT = os.environ.get('DJANGO_SECURE_SSL', '').lower() in ('true', '1')
+    SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
     SESSION_COOKIE_SECURE = True
     CSRF_COOKIE_SECURE = True
     SECURE_HSTS_SECONDS = 31536000

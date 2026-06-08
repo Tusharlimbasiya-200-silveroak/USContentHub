@@ -15,6 +15,7 @@ from django.db import transaction
 from django.db.models import Count, F, Q
 from django.http import Http404, HttpResponse, JsonResponse
 from django.shortcuts import get_object_or_404, redirect, render
+from django.utils.http import url_has_allowed_host_and_scheme
 from django.utils.feedgenerator import Atom1Feed
 from django.views.decorators.http import require_POST
 from django.views.generic import DetailView, ListView
@@ -327,6 +328,15 @@ def add_comment(request, slug):
 
 @require_POST
 def newsletter_subscribe(request):
+    ip = get_client_ip(request)
+    rate_key = f"newsletter_rate_{ip}"
+    if check_rate_limit(rate_key, 20):
+        return JsonResponse(
+            {"success": False, "error": "Too many subscription attempts. Please try again later."},
+            status=429,
+        )
+    bump_rate_counter(rate_key, 3600)
+
     email = request.POST.get("email", "").strip().lower()[:254]
     if not email:
         return JsonResponse({"success": False, "error": "Email is required."}, status=400)
@@ -383,7 +393,20 @@ def contact_submit(request):
     except Exception:
         return JsonResponse({"success": False, "error": "Invalid email address."}, status=400)
 
-    send_contact_emails(name, email, subject, message, ip)
+    try:
+        sent = send_contact_emails(name, email, subject, message, ip)
+    except Exception as exc:
+        logger.error(
+            "contact_submit: email delivery failed — %s: %s", type(exc).__name__, exc, exc_info=True
+        )
+        sent = False
+
+    if not sent:
+        return JsonResponse(
+            {"success": False, "error": "Message delivery is temporarily unavailable. Please try again later."},
+            status=503,
+        )
+
     bump_rate_counter(rate_key, 3600)
     return JsonResponse({"success": True, "message": "Message sent! We'll reply within 1–2 business days."})
 
@@ -417,6 +440,14 @@ def pinterest_verify(request):
 def rate_article(request, slug):
     article = get_object_or_404(Article, slug=slug, status="published")
     ip = get_client_ip(request)
+    rate_key = f"rating_rate_{ip}"
+
+    if check_rate_limit(rate_key, 60):
+        return JsonResponse(
+            {"success": False, "error": "Too many rating attempts. Please try again later."},
+            status=429,
+        )
+    bump_rate_counter(rate_key, 3600)
 
     try:
         score = int(request.POST.get("score", 0))
@@ -553,6 +584,14 @@ def register_view(request):
     if request.user.is_authenticated:
         return redirect("blog:home")
     if request.method == "POST":
+        ip = get_client_ip(request)
+        rate_key = f"register_rate_{ip}"
+        if check_rate_limit(rate_key, 10):
+            return render(request, "blog/register.html", {
+                "errors": ["Too many registration attempts. Please try again later."],
+            }, status=429)
+        bump_rate_counter(rate_key, 3600)
+
         username = request.POST.get("username", "").strip()[:150]
         email    = request.POST.get("email", "").strip().lower()[:254]
         password  = request.POST.get("password", "")
@@ -606,12 +645,27 @@ def login_view(request):
     if request.user.is_authenticated:
         return redirect("blog:home")
     if request.method == "POST":
+        ip = get_client_ip(request)
+        rate_key = f"login_rate_{ip}"
+        if check_rate_limit(rate_key, 20):
+            return render(request, "blog/login.html", {
+                "error": "Too many login attempts. Please try again later.",
+            }, status=429)
+        bump_rate_counter(rate_key, 900)
+
         username = request.POST.get("username", "").strip()
         password = request.POST.get("password", "")
         user = authenticate(request, username=username, password=password)
         if user:
             login(request, user)
-            return redirect(request.GET.get("next", "/"))
+            next_url = request.GET.get("next") or "/"
+            if not url_has_allowed_host_and_scheme(
+                next_url,
+                allowed_hosts={request.get_host()},
+                require_https=request.is_secure(),
+            ):
+                next_url = "/"
+            return redirect(next_url)
         return render(request, "blog/login.html", {
             "error": "Invalid username or password.", "username": username,
         })
@@ -704,6 +758,9 @@ def pinterest_callback(request):
 # ── OTP: publish market article [remove after use] ───────────────────────────
 
 def otp_publish_market_article(request):
+    if not request.user.is_staff:
+        return HttpResponse("Forbidden", status=403)
+
     from django.utils.text import slugify
     from django.utils import timezone
     from blog.models import Publication, Tag

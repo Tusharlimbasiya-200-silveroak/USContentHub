@@ -35,6 +35,8 @@ media/
 # ── Environment / secrets ────────────────────────────────────
 .env
 .env.local
+.env.prod
+.env.prod.*
 .env.*.local
 
 # ── Windows metadata artifacts ───────────────────────────────

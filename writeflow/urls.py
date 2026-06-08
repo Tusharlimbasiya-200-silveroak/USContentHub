@@ -28,7 +28,6 @@ def robots_txt(request):
         "Disallow: /api/",
         "",
         f"Sitemap: {site_url}/sitemap.xml",
-        f"Host: {site_url}",
     ]
     return HttpResponse("\n".join(lines), content_type="text/plain")
 
