@@ -10,7 +10,7 @@ Write one technical blog article end-to-end: research → draft → user review 
 ## Hard rules
 
 1. **NEVER commit or push without the user's explicit "yes"** for THIS specific article. Approval of a past article never carries over.
-2. The article is inserted into the local `db.sqlite3` for preview — that is safe because nothing is live until `git push` (Vercel bundles the repo).
+2. The article is inserted into the configured PostgreSQL database as a draft for review. Do not mark it published until the user approves.
 3. If the user rejects or asks for changes, never leave the rejected version in the DB before any push.
 4. All facts must come from research done NOW (WebSearch/WebFetch) — never write tech "news" from memory; your knowledge is stale by definition.
 
@@ -44,11 +44,11 @@ Content format (match existing site articles):
 - Cover image: a topically relevant `images.unsplash.com` URL with `?w=1200`.
 - Slug must not collide: check `DATABASE_URL= python3 manage.py shell -c "from blog.models import Article; print(Article.objects.filter(slug='<slug>').exists())"`.
 
-### 3. Stage locally for preview
+### 3. Stage for review
 ```bash
-DATABASE_URL= python3 publish_draft.py drafts/<slug>.json --publish
+python3 publish_draft.py drafts/<slug>.json
 ```
-(Local insert only — NOT live until pushed.) Then start a local server if one isn't running (pick a free port, NOT 8765 — it's occupied):
+(Draft insert only — not visible on public article pages because the status is `draft`.) Then start a local server if one isn't running (pick a free port, NOT 8765 — it's occupied):
 ```bash
 python3 manage.py runserver 8799   # run_in_background
 ```
@@ -63,24 +63,22 @@ python3 send_review_email.py drafts/<slug>.json
 Then show the user:
 - Title, subtitle, word count, read time, tags
 - The full article text (readable, converted from HTML) in chat
-- Local preview link: `http://127.0.0.1:8799/article/<slug>/`
+- Local preview status: draft stored in PostgreSQL; public article URL is available only after approval/publish
 - Whether the review email was sent
 
 Then ask explicitly (AskUserQuestion): **"Publish this article live?"** with options Yes / Edit something / No.
 - **Edit** → apply requested changes to the JSON, re-run publish_draft.py, show the diff of what changed, ask again.
-- **No** → `DATABASE_URL= python3 publish_draft.py --delete <slug>` and `git checkout -- db.sqlite3` if it has no other intended changes. Keep the JSON in drafts/ (gitignored) in case they change their mind.
+- **No** → `python3 publish_draft.py --delete <slug>`. Keep the JSON in drafts/ (gitignored) in case they change their mind.
 
 ### 5. On "yes" — push live
 ```bash
-git add db.sqlite3
-git commit -m "content: Tech Pulse — <article title>"
-git push origin main
+python3 publish_draft.py drafts/<slug>.json --publish
 ```
-- Commit ONLY `db.sqlite3` (plus staticfiles/ if CSS/JS changed — then run collectstatic first; not needed for content-only posts).
-- Wait for the Vercel deploy (poll, background): the article URL `https://us-content-hub.vercel.app/article/<slug>/` returns 200.
+- Content-only posts are stored in PostgreSQL and do not require a git commit.
+- Poll the article URL `https://us-content-hub.vercel.app/article/<slug>/` until it returns 200.
 - Confirm to the user with the live URL.
 
 ## Notes
 - The `tech-pulse` publication is auto-created by publish_draft.py on first use (Tech Pulse 🧠, purple #7c3aed).
-- Always prefix manage.py/script commands with `DATABASE_URL=` so they hit SQLite (the deploy artifact), not local Postgres.
+- Always run manage.py/script commands with the intended PostgreSQL `DATABASE_URL` loaded from the environment.
 - One article per invocation. For a batch, finish the review cycle for each before starting the next.

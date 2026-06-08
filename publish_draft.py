@@ -25,6 +25,12 @@ import sys
 
 import django
 
+try:
+    from dotenv import load_dotenv
+    load_dotenv(os.environ.get("DOTENV_FILE", ".env"), override=True)
+except ImportError:
+    pass
+
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "writeflow.settings")
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 django.setup()

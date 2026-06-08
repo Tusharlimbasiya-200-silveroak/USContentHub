@@ -135,7 +135,7 @@ Required GitHub Secrets:
 ## Tech Stack
 
 - **Backend**: Django 6.x + WhiteNoise + django-allauth
-- **Database**: PostgreSQL (production) / SQLite (development)
+- **Database**: PostgreSQL
 - **Cache**: Redis (production) / LocMemCache (development)
 - **Hosting**: Vercel (Django) + GitHub Pages (static sites)
 - **Automation**: GitHub Actions (deploy, Pinterest bot, dashboard)
