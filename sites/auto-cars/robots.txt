@@ -1,4 +1,0 @@
-User-agent: *
-Allow: /
-
-Sitemap: https://Tusharlimbasiya-200-silveroak.github.io/auto-cars/sitemap.xml

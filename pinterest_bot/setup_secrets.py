@@ -93,13 +93,6 @@ PUBLICATIONS = [
         "description": "Stock market strategies, trading tips, and investing insights",
         "emoji":       "📈",
     },
-    {
-        "slug":        "auto-cars",
-        "secret_name": "PINTEREST_BOARD_AUTO",
-        "board_name":  "Auto & Cars",
-        "description": "Car launches, reviews, pricing and auto news from India",
-        "emoji":       "🚗",
-    },
 ]
 
 SITE_URL = "https://us-content-hub.vercel.app"

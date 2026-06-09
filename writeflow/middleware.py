@@ -35,5 +35,12 @@ class SecurityHeadersMiddleware:
 
         if request.path.startswith(("/admin/", "/accounts/")):
             response["Cache-Control"] = "no-store, max-age=0"
+        elif (
+            request.method in {"GET", "HEAD"}
+            and response.status_code == 200
+            and "Set-Cookie" not in response
+            and not request.path.startswith(("/contact/", "/csrf/", "/newsletter/", "/api/"))
+        ):
+            response["Cache-Control"] = "public, max-age=60, s-maxage=300, stale-while-revalidate=86400"
 
         return response

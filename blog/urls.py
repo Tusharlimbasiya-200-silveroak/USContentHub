@@ -23,6 +23,7 @@ urlpatterns = [
     path("explore/", views.ExploreView.as_view(), name="explore"),
     path("reading-list/", views.ReadingListView.as_view(), name="reading_list"),
     path("newsletter/subscribe/", views.newsletter_subscribe, name="newsletter_subscribe"),
+    path("csrf/", views.csrf_token, name="csrf_token"),
     path("api/articles/", views.load_more_articles, name="load_more"),
     # ── Custom Auth (takes precedence over allauth for these paths) ──
     path("accounts/register/", views.register_view, name="register"),

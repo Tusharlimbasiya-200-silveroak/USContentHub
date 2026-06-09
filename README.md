@@ -63,6 +63,7 @@ USContentHub/
 
 - Python 3.11+
 - pip
+- PostgreSQL connection string (`DATABASE_URL`), for example Neon in production
 
 ### Setup
 
@@ -80,7 +81,7 @@ pip install -r requirements.txt
 
 # 4. Copy environment file and configure
 cp .env.example .env
-# Edit .env — at minimum set DJANGO_SECRET_KEY
+# Edit .env — set DJANGO_SECRET_KEY and DATABASE_URL
 
 # 5. Run migrations
 python manage.py migrate
@@ -110,8 +111,10 @@ The Django app is deployed to Vercel via `api/index.py`. Required environment va
 |---|---|
 | `DJANGO_SECRET_KEY` | Strong random key — required |
 | `DJANGO_DEBUG` | Set to `False` in production |
-| `DATABASE_URL` | PostgreSQL connection string |
-| `REDIS_URL` | Redis connection string (optional) |
+| `DATABASE_URL` | PostgreSQL/Neon connection string — required |
+| `DJANGO_ALLOWED_HOSTS` | Comma-separated allowed hosts; include custom domains |
+| `DATABASE_TEST_NAME` | Optional explicit test DB name for `manage.py test` |
+| `REDIS_URL` | Redis/Upstash connection string — recommended for production scale |
 | `SITE_URL` | Your production URL |
 | `EMAIL_HOST` | SMTP host for newsletter emails |
 | `EMAIL_HOST_USER` | SMTP username |
@@ -120,7 +123,7 @@ The Django app is deployed to Vercel via `api/index.py`. Required environment va
 
 ### GitHub Pages (Static sites)
 
-Each `sites/<publication>/` folder is deployed to its own GitHub Pages repo via the `deploy-sites.yml` workflow. Triggered on any push to `sites/**`.
+Each active `sites/<publication>/` folder is deployed to its own GitHub Pages repo via the `deploy-sites.yml` workflow. Triggered on any push to `sites/**`.
 
 ### Pinterest Bot
 

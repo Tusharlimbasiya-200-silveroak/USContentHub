@@ -34,7 +34,7 @@ jobs:
         id: changes
         run: |
           # Sites that should NEVER be deployed to GitHub Pages
-          EXCLUDED="^(_low_quality|blog-platform)$"
+          EXCLUDED="^(_low_quality|blog-platform|auto-cars)$"
 
           if [ "${{ github.event.inputs.site }}" != "" ]; then
             echo "sites=[\"${{ github.event.inputs.site }}\"]" >> $GITHUB_OUTPUT
@@ -45,7 +45,7 @@ jobs:
               | grep -Ev "$EXCLUDED" \
               | jq -R -s -c 'split("\n") | map(select(length > 0))')
             if [ "$CHANGED" = "[]" ] || [ -z "$CHANGED" ]; then
-              CHANGED='["tech-gadget-hub","health-wellness-daily","smart-money-guide","usa-travel-explorer","recipe-kitchen-usa","usa-news-digest","the-trading-blueprint","auto-cars"]'
+              CHANGED='["tech-gadget-hub","health-wellness-daily","smart-money-guide","usa-travel-explorer","recipe-kitchen-usa","usa-news-digest","the-trading-blueprint"]'
             fi
             echo "sites=$CHANGED" >> $GITHUB_OUTPUT
           fi

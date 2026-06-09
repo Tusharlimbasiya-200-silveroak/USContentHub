@@ -30,7 +30,7 @@ class Tag(models.Model):
 class Article(models.Model):
     STATUS_CHOICES = [("draft", "Draft"), ("published", "Published")]
 
-    title = models.CharField(max_length=300)
+    title = models.CharField(max_length=500)
     subtitle = models.CharField(max_length=500, blank=True, default="")
     slug = models.SlugField(max_length=300, unique=True)
     content = models.TextField()

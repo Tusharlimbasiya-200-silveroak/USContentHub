@@ -8,7 +8,7 @@ requests>=2.31
 python-dotenv>=1.0
 # Static file serving
 whitenoise>=6.7
-# PostgreSQL (optional — set DATABASE_URL env var to enable)
+# PostgreSQL database driver
 psycopg2-binary>=2.9
-# Redis cache + sessions (optional — set REDIS_URL env var to enable)
+# Redis cache + sessions (set REDIS_URL in production for shared cache/rate limits)
 redis>=4.6

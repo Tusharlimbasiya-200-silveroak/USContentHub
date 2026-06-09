@@ -62,6 +62,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'django.contrib.sitemaps',
     'django.contrib.sites',
+    'django.contrib.postgres',
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
@@ -155,6 +156,9 @@ DATABASES = {
         'PORT': _parsed.port or 5432,
         'CONN_MAX_AGE': 0,
         'OPTIONS': _pg_options,
+        'TEST': {
+            'NAME': os.environ.get('DATABASE_TEST_NAME', f"test_{_parsed.path.lstrip('/')}")
+        },
     }
 }
 
@@ -250,9 +254,6 @@ if _REDIS_URL:
             'BACKEND': 'django.core.cache.backends.redis.RedisCache',
             'LOCATION': _REDIS_URL,
             'TIMEOUT': 300,
-            'OPTIONS': {
-                'MAX_ENTRIES': 1000,
-            },
         }
     }
 else:

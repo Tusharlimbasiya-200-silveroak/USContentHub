@@ -7,17 +7,20 @@ from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
+from django.contrib.postgres.search import SearchQuery, SearchRank, SearchVector
 from django.contrib.syndication.views import Feed
 from django.core.cache import cache
 from django.core.paginator import Paginator
 from django.core.validators import validate_email
+from django.middleware.csrf import get_token
 from django.db import transaction
-from django.db.models import Count, F, Q
+from django.db.models import Count, F
 from django.http import Http404, HttpResponse, JsonResponse
 from django.shortcuts import get_object_or_404, redirect, render
 from django.utils.http import url_has_allowed_host_and_scheme
 from django.utils.feedgenerator import Atom1Feed
-from django.views.decorators.http import require_POST
+from django.views.decorators.csrf import ensure_csrf_cookie
+from django.views.decorators.http import require_GET, require_POST
 from django.views.generic import DetailView, ListView
 
 from .helpers import (
@@ -129,15 +132,19 @@ class SearchView(ListView):
     def get_queryset(self):
         self.query = self.request.GET.get("q", "").strip()[:200]
         if self.query and len(self.query) >= 2:
+            vector = (
+                SearchVector("title", weight="A")
+                + SearchVector("subtitle", weight="B")
+                + SearchVector("content", weight="C")
+            )
+            search_query = SearchQuery(self.query, search_type="websearch")
             return (
-                Article.objects.filter(
-                    Q(title__icontains=self.query)
-                    | Q(content__icontains=self.query)
-                    | Q(subtitle__icontains=self.query),
-                    status="published",
-                )
+                Article.objects.filter(status="published")
+                .annotate(search=vector, rank=SearchRank(vector, search_query))
+                .filter(search=search_query)
                 .select_related("publication")
                 .prefetch_related("tags")
+                .order_by("-rank", "-published_at")
             )
         return Article.objects.none()
 
@@ -357,6 +364,12 @@ def newsletter_subscribe(request):
     except Exception:
         # Graceful fallback when DB writes are unavailable
         return JsonResponse({"success": True, "message": "Thanks! We'll be in touch soon."})
+
+
+@require_GET
+@ensure_csrf_cookie
+def csrf_token(request):
+    return JsonResponse({"success": True, "csrfToken": get_token(request)})
 
 
 # ── Contact ───────────────────────────────────────────────────────────────────
