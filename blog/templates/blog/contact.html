@@ -1,59 +1,126 @@
 {% extends "blog/base.html" %}
 
-{% block title %}Contact — USA Content Hub{% endblock %}
-{% block description %}Get in touch with USA Content Hub. We'd love to hear from you.{% endblock %}
+{% block title %}Contact Us - USA Content Hub{% endblock %}
+{% block description %}Contact USA Content Hub for feedback, corrections, topic ideas, partnerships, advertising questions, and general support.{% endblock %}
 {% block canonical %}{{ site_url }}/contact/{% endblock %}
+{% block og_title %}Contact USA Content Hub{% endblock %}
+{% block og_description %}Send USA Content Hub feedback, corrections, topic ideas, partnership notes, or general questions.{% endblock %}
 {% block og_url %}{{ site_url }}/contact/{% endblock %}
+{% block twitter_title %}Contact USA Content Hub{% endblock %}
+{% block twitter_description %}Send USA Content Hub feedback, corrections, topic ideas, partnership notes, or general questions.{% endblock %}
+
+{% block extra_head %}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "ContactPage",
+  "name": "Contact USA Content Hub",
+  "url": "{{ site_url }}/contact/",
+  "description": "Contact USA Content Hub for feedback, corrections, ideas, partnerships, advertising questions, and general support.",
+  "isPartOf": {
+    "@type": "WebSite",
+    "name": "USA Content Hub",
+    "url": "{{ site_url }}/"
+  }
+}
+</script>
+{% endblock %}
 
 {% block content %}
-<div class="page-content" style="max-width:700px;margin:0 auto;grid-column:1/-1;">
-    <h1 style="font-size:2rem;margin-bottom:1.5rem;">Contact Us</h1>
+<section class="page-content" style="grid-column:1/-1;max-width:1120px;margin:0 auto;padding:18px 0 44px;">
+    <div style="display:grid;grid-template-columns:minmax(0,.9fr) minmax(320px,1.1fr);gap:1.25rem;align-items:stretch;">
+        <div style="position:relative;overflow:hidden;border-radius:28px;background:radial-gradient(circle at 20% 20%,rgba(96,165,250,.45),transparent 32%),linear-gradient(145deg,#020617 0%,#111827 48%,#312e81 100%);color:#fff;padding:clamp(1.7rem,4vw,3rem);box-shadow:var(--shadow-lg);">
+            <p style="display:inline-flex;margin-bottom:1rem;padding:7px 13px;border:1px solid rgba(255,255,255,.22);border-radius:999px;background:rgba(255,255,255,.08);font-size:.8rem;font-weight:800;letter-spacing:.05em;text-transform:uppercase;">Contact USA Content Hub</p>
+            <h1 style="font-size:clamp(2.3rem,5vw,4.25rem);line-height:1;letter-spacing:-.055em;margin-bottom:1rem;">Tell us what we should know.</h1>
+            <p style="font-size:1.06rem;line-height:1.8;color:#cbd5e1;margin-bottom:1.5rem;">Questions, feedback, corrections, story ideas, partnership requests, and advertising notes all belong here. Send a clear message and we will route it to the right place.</p>
 
-    <div class="article-content" style="padding:2rem;">
-        <p style="font-size:1.05rem;line-height:1.8;margin-bottom:1.5rem;">
-            Have a question, suggestion, or feedback? We'd love to hear from you.
-            Fill out the form below and we'll get back to you within 1–2 business days.
-        </p>
-
-        <form id="contactForm" method="POST" style="margin-top:1.5rem;">
-            {% csrf_token %}
-
-            <div style="margin-bottom:1rem;">
-                <label for="contactName" style="display:block;font-weight:600;margin-bottom:.4rem;font-size:.9rem;">Name</label>
-                <input type="text" id="contactName" name="name" placeholder="Your name"
-                       required minlength="2" maxlength="100"
-                       style="width:100%;padding:10px 14px;border:1px solid var(--border);border-radius:var(--radius);background:var(--bg);color:var(--text);font-size:.9rem;">
+            <div style="display:grid;gap:.85rem;margin-top:1.4rem;">
+                <div style="padding:1rem;border:1px solid rgba(255,255,255,.16);border-radius:18px;background:rgba(255,255,255,.07);">
+                    <strong style="display:block;color:#fff;">Editorial feedback</strong>
+                    <span style="display:block;color:#cbd5e1;font-size:.92rem;line-height:1.6;margin-top:.25rem;">Corrections, source suggestions, topic ideas, and article requests.</span>
+                </div>
+                <div style="padding:1rem;border:1px solid rgba(255,255,255,.16);border-radius:18px;background:rgba(255,255,255,.07);">
+                    <strong style="display:block;color:#fff;">Business inquiries</strong>
+                    <span style="display:block;color:#cbd5e1;font-size:.92rem;line-height:1.6;margin-top:.25rem;">Partnerships, sponsorships, advertising, and publication opportunities.</span>
+                </div>
+                <div style="padding:1rem;border:1px solid rgba(255,255,255,.16);border-radius:18px;background:rgba(255,255,255,.07);">
+                    <strong style="display:block;color:#fff;">Support</strong>
+                    <span style="display:block;color:#cbd5e1;font-size:.92rem;line-height:1.6;margin-top:.25rem;">Account, saved articles, newsletter, or site experience questions.</span>
+                </div>
             </div>
+        </div>
 
-            <div style="margin-bottom:1rem;">
-                <label for="contactEmail" style="display:block;font-weight:600;margin-bottom:.4rem;font-size:.9rem;">Email</label>
-                <input type="email" id="contactEmail" name="email" placeholder="you@example.com"
-                       required
-                       style="width:100%;padding:10px 14px;border:1px solid var(--border);border-radius:var(--radius);background:var(--bg);color:var(--text);font-size:.9rem;">
-            </div>
+        <div class="article-content" style="padding:clamp(1.35rem,3vw,2.2rem);border-radius:28px;box-shadow:var(--shadow-lg);">
+            <h2 style="font-size:clamp(1.55rem,3vw,2.2rem);letter-spacing:-.03em;margin-bottom:.45rem;">Send a Message</h2>
+            <p style="color:var(--text-light);line-height:1.75;margin-bottom:1.4rem;">We usually reply within 1-2 business days when a response is needed. Please include links, article titles, or details that help us understand your request.</p>
 
-            <div style="margin-bottom:1rem;">
-                <label for="contactSubject" style="display:block;font-weight:600;margin-bottom:.4rem;font-size:.9rem;">Subject</label>
-                <input type="text" id="contactSubject" name="subject" placeholder="What's this about?"
-                       required minlength="3" maxlength="200"
-                       style="width:100%;padding:10px 14px;border:1px solid var(--border);border-radius:var(--radius);background:var(--bg);color:var(--text);font-size:.9rem;">
-            </div>
+            <form id="contactForm" method="POST" style="display:grid;gap:1rem;">
+                {% csrf_token %}
 
-            <div style="margin-bottom:1.25rem;">
-                <label for="contactMessage" style="display:block;font-weight:600;margin-bottom:.4rem;font-size:.9rem;">Message</label>
-                <textarea id="contactMessage" name="message" placeholder="Your message..."
-                          required minlength="10" maxlength="5000" rows="6"
-                          style="width:100%;padding:10px 14px;border:1px solid var(--border);border-radius:var(--radius);background:var(--bg);color:var(--text);font-size:.9rem;resize:vertical;font-family:inherit;"></textarea>
-            </div>
+                <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;">
+                    <div>
+                        <label for="contactName" style="display:block;font-weight:800;margin-bottom:.4rem;font-size:.9rem;">Name</label>
+                        <input type="text" id="contactName" name="name" placeholder="Your name" required minlength="2" maxlength="100" autocomplete="name" style="width:100%;padding:12px 14px;border:1px solid var(--border);border-radius:14px;background:var(--bg);color:var(--text);font-size:.95rem;">
+                    </div>
+                    <div>
+                        <label for="contactEmail" style="display:block;font-weight:800;margin-bottom:.4rem;font-size:.9rem;">Email</label>
+                        <input type="email" id="contactEmail" name="email" placeholder="you@example.com" required autocomplete="email" style="width:100%;padding:12px 14px;border:1px solid var(--border);border-radius:14px;background:var(--bg);color:var(--text);font-size:.95rem;">
+                    </div>
+                </div>
 
-            <button type="submit" id="contactBtn"
-                    style="padding:12px 32px;background:var(--primary);color:#fff;border:none;border-radius:20px;cursor:pointer;font-size:.95rem;font-weight:600;transition:all .2s;">
-                Send Message
-            </button>
-            <p id="contactMsg" style="display:none;margin-top:.75rem;font-weight:600;font-size:.95rem;"></p>
-        </form>
+                <div>
+                    <label for="contactTopic" style="display:block;font-weight:800;margin-bottom:.4rem;font-size:.9rem;">Reason</label>
+                    <select id="contactTopic" name="topic" style="width:100%;padding:12px 14px;border:1px solid var(--border);border-radius:14px;background:var(--bg);color:var(--text);font-size:.95rem;">
+                        <option value="General question">General question</option>
+                        <option value="Correction or update">Correction or update</option>
+                        <option value="Story idea">Story idea</option>
+                        <option value="Partnership or advertising">Partnership or advertising</option>
+                        <option value="Technical support">Technical support</option>
+                    </select>
+                </div>
+
+                <div>
+                    <label for="contactSubject" style="display:block;font-weight:800;margin-bottom:.4rem;font-size:.9rem;">Subject</label>
+                    <input type="text" id="contactSubject" name="subject" placeholder="What is this about?" required minlength="3" maxlength="200" style="width:100%;padding:12px 14px;border:1px solid var(--border);border-radius:14px;background:var(--bg);color:var(--text);font-size:.95rem;">
+                </div>
+
+                <div>
+                    <label for="contactMessage" style="display:block;font-weight:800;margin-bottom:.4rem;font-size:.9rem;">Message</label>
+                    <textarea id="contactMessage" name="message" placeholder="Tell us the details..." required minlength="10" maxlength="5000" rows="7" style="width:100%;padding:12px 14px;border:1px solid var(--border);border-radius:14px;background:var(--bg);color:var(--text);font-size:.95rem;resize:vertical;font-family:inherit;"></textarea>
+                    <p style="margin:.35rem 0 0;color:var(--text-muted);font-size:.82rem;line-height:1.5;">Please do not send passwords, private financial details, or sensitive personal information.</p>
+                </div>
+
+                <button type="submit" id="contactBtn" style="justify-self:start;padding:13px 24px;background:linear-gradient(135deg,var(--primary),#7c3aed);color:#fff;border:none;border-radius:999px;cursor:pointer;font-size:.95rem;font-weight:900;box-shadow:0 10px 24px rgba(37,99,235,.24);transition:all .2s;">
+                    Send Message
+                </button>
+                <p id="contactMsg" role="status" aria-live="polite" style="display:none;margin-top:.1rem;font-weight:800;font-size:.95rem;"></p>
+            </form>
+        </div>
     </div>
-</div>
+
+    <div style="display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1rem;margin-top:1.25rem;">
+        <div style="background:var(--card-bg);border:1px solid var(--border);border-radius:20px;padding:1.25rem;box-shadow:var(--shadow-sm);">
+            <h2 style="font-size:1.08rem;margin-bottom:.4rem;">Corrections</h2>
+            <p style="color:var(--text-light);font-size:.93rem;line-height:1.65;">Send the article URL, the line or claim involved, and the source that supports the correction.</p>
+        </div>
+        <div style="background:var(--card-bg);border:1px solid var(--border);border-radius:20px;padding:1.25rem;box-shadow:var(--shadow-sm);">
+            <h2 style="font-size:1.08rem;margin-bottom:.4rem;">Story Ideas</h2>
+            <p style="color:var(--text-light);font-size:.93rem;line-height:1.65;">Tell us the topic, why it matters now, and which publication it fits best.</p>
+        </div>
+        <div style="background:var(--card-bg);border:1px solid var(--border);border-radius:20px;padding:1.25rem;box-shadow:var(--shadow-sm);">
+            <h2 style="font-size:1.08rem;margin-bottom:.4rem;">Partnerships</h2>
+            <p style="color:var(--text-light);font-size:.93rem;line-height:1.65;">Include your organization, campaign goal, timeline, and the best contact person.</p>
+        </div>
+    </div>
+</section>
+
+<style>
+@media (max-width: 820px) {
+    .page-content > div[style*="minmax(0,.9fr"] { grid-template-columns: 1fr !important; }
+    .page-content div[style*="grid-template-columns:1fr 1fr"] { grid-template-columns: 1fr !important; }
+    .page-content > div[style*="repeat(3"] { grid-template-columns: 1fr !important; }
+}
+</style>
 {% endblock %}
 
 {% block extra_js %}
@@ -63,16 +130,18 @@ document.getElementById('contactForm').addEventListener('submit', function(e) {
     var btn = document.getElementById('contactBtn');
     var msg = document.getElementById('contactMsg');
     var csrf = this.querySelector('[name=csrfmiddlewaretoken]').value;
+    var topic = document.getElementById('contactTopic').value;
+    var subject = document.getElementById('contactSubject').value;
 
     btn.disabled = true;
-    btn.textContent = 'Sending…';
+    btn.textContent = 'Sending...';
     msg.style.display = 'none';
 
     var body = new URLSearchParams({
         csrfmiddlewaretoken: csrf,
-        name:    document.getElementById('contactName').value,
-        email:   document.getElementById('contactEmail').value,
-        subject: document.getElementById('contactSubject').value,
+        name: document.getElementById('contactName').value,
+        email: document.getElementById('contactEmail').value,
+        subject: '[' + topic + '] ' + subject,
         message: document.getElementById('contactMessage').value,
     });
 
@@ -88,17 +157,17 @@ document.getElementById('contactForm').addEventListener('submit', function(e) {
     .then(function(d) {
         if (d.success) {
             msg.style.color = '#10b981';
-            msg.textContent = '✅ ' + d.message;
+            msg.textContent = d.message;
             document.getElementById('contactForm').reset();
         } else {
             msg.style.color = '#ef4444';
-            msg.textContent = '❌ ' + (d.error || 'Something went wrong. Please try again.');
+            msg.textContent = d.error || 'Something went wrong. Please try again.';
         }
         msg.style.display = 'block';
     })
     .catch(function() {
         msg.style.color = '#ef4444';
-        msg.textContent = '❌ Network error. Please try again.';
+        msg.textContent = 'Network error. Please try again.';
         msg.style.display = 'block';
     })
     .finally(function() {

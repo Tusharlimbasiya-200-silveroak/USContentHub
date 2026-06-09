@@ -1,56 +1,115 @@
 {% extends "blog/base.html" %}
 
-{% block title %}About — USA Content Hub{% endblock %}
-{% block description %}Learn about USA Content Hub — your source for quality articles on technology, health, finance, travel, recipes, and US news.{% endblock %}
+{% block title %}About Us - USA Content Hub{% endblock %}
+{% block description %}Learn about USA Content Hub, an independent digital publication network delivering practical, reader-first articles on news, finance, trading, tech, travel, food, autos, and lifestyle.{% endblock %}
 {% block canonical %}{{ site_url }}/about/{% endblock %}
+{% block og_title %}About USA Content Hub{% endblock %}
+{% block og_description %}Independent, practical, reader-first coverage across the topics Americans search, read, and use every day.{% endblock %}
 {% block og_url %}{{ site_url }}/about/{% endblock %}
+{% block twitter_title %}About USA Content Hub{% endblock %}
+{% block twitter_description %}Independent, practical, reader-first coverage across the topics Americans search, read, and use every day.{% endblock %}
+
+{% block extra_head %}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "AboutPage",
+  "name": "About USA Content Hub",
+  "url": "{{ site_url }}/about/",
+  "description": "USA Content Hub is an independent digital publication network for practical articles across news, finance, trading, technology, travel, recipes, autos, and lifestyle.",
+  "isPartOf": {
+    "@type": "WebSite",
+    "name": "USA Content Hub",
+    "url": "{{ site_url }}/"
+  }
+}
+</script>
+{% endblock %}
 
 {% block content %}
-<div class="page-content" style="max-width:800px;margin:0 auto;grid-column:1/-1;">
-    <h1 style="font-size:2rem;margin-bottom:1.5rem;">About USA Content Hub</h1>
-
-    <div class="article-content" style="padding:2rem;">
-        <p style="font-size:1.1rem;line-height:1.8;margin-bottom:1.5rem;">
-            <strong>USA Content Hub</strong> is your go-to destination for quality, well-researched articles covering the topics that matter most to Americans.
-        </p>
-
-        <h2 style="margin-top:2rem;">What We Cover</h2>
-        <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:1rem;margin:1.5rem 0;">
-            <div style="padding:1.25rem;background:var(--bg-light);border-radius:var(--radius);border:1px solid var(--border);">
-                <h3 style="font-size:1rem;margin-bottom:.5rem;">💻 Technology</h3>
-                <p style="font-size:.88rem;color:var(--text-light);">Gadgets, apps, AI, cybersecurity, and practical tech advice.</p>
-            </div>
-            <div style="padding:1.25rem;background:var(--bg-light);border-radius:var(--radius);border:1px solid var(--border);">
-                <h3 style="font-size:1rem;margin-bottom:.5rem;">🏃 Health & Wellness</h3>
-                <p style="font-size:.88rem;color:var(--text-light);">Fitness, nutrition, mental health, and healthy living tips.</p>
-            </div>
-            <div style="padding:1.25rem;background:var(--bg-light);border-radius:var(--radius);border:1px solid var(--border);">
-                <h3 style="font-size:1rem;margin-bottom:.5rem;">💰 Personal Finance</h3>
-                <p style="font-size:.88rem;color:var(--text-light);">Budgeting, investing, saving strategies, and financial literacy.</p>
-            </div>
-            <div style="padding:1.25rem;background:var(--bg-light);border-radius:var(--radius);border:1px solid var(--border);">
-                <h3 style="font-size:1rem;margin-bottom:.5rem;">✈️ Travel</h3>
-                <p style="font-size:.88rem;color:var(--text-light);">US travel guides, hidden gems, road trips, and national parks.</p>
-            </div>
-            <div style="padding:1.25rem;background:var(--bg-light);border-radius:var(--radius);border:1px solid var(--border);">
-                <h3 style="font-size:1rem;margin-bottom:.5rem;">🍳 Recipes</h3>
-                <p style="font-size:.88rem;color:var(--text-light);">Easy, healthy recipes and cooking tips for everyday meals.</p>
-            </div>
-            <div style="padding:1.25rem;background:var(--bg-light);border-radius:var(--radius);border:1px solid var(--border);">
-                <h3 style="font-size:1rem;margin-bottom:.5rem;">📰 US News</h3>
-                <p style="font-size:.88rem;color:var(--text-light);">Current events, trends, and stories shaping America.</p>
+<section class="page-content" style="grid-column:1/-1;max-width:1120px;margin:0 auto;padding:18px 0 44px;">
+    <div style="position:relative;overflow:hidden;border-radius:28px;background:linear-gradient(135deg,#0f172a 0%,#1d4ed8 52%,#7c3aed 100%);color:#fff;padding:clamp(2rem,5vw,4rem);box-shadow:var(--shadow-lg);">
+        <div style="position:absolute;right:-120px;top:-120px;width:320px;height:320px;border-radius:50%;background:rgba(255,255,255,.13);"></div>
+        <div style="position:absolute;left:-80px;bottom:-120px;width:260px;height:260px;border-radius:50%;background:rgba(245,158,11,.18);"></div>
+        <div style="position:relative;max-width:780px;">
+            <p style="display:inline-flex;margin-bottom:1rem;padding:7px 13px;border:1px solid rgba(255,255,255,.24);border-radius:999px;background:rgba(255,255,255,.1);font-size:.82rem;font-weight:700;letter-spacing:.04em;text-transform:uppercase;">Independent digital publishing</p>
+            <h1 style="font-size:clamp(2.35rem,6vw,4.7rem);line-height:.98;letter-spacing:-.055em;margin-bottom:1.25rem;">Useful stories for smarter everyday decisions.</h1>
+            <p style="font-size:clamp(1.02rem,2vw,1.24rem);line-height:1.8;color:#dbeafe;max-width:680px;">USA Content Hub brings together focused publications covering the topics people actually use: market news, trading ideas, personal finance, technology, health, travel, recipes, cars, and practical lifestyle guidance.</p>
+            <div style="display:flex;gap:.75rem;flex-wrap:wrap;margin-top:1.8rem;">
+                <a href="{% url 'blog:explore' %}" style="display:inline-flex;align-items:center;gap:.45rem;padding:12px 20px;border-radius:999px;background:#fff;color:#1d4ed8;font-weight:800;text-decoration:none;">Explore articles</a>
+                <a href="{% url 'blog:contact' %}" style="display:inline-flex;align-items:center;gap:.45rem;padding:12px 20px;border-radius:999px;border:1px solid rgba(255,255,255,.32);color:#fff;font-weight:800;text-decoration:none;">Contact us</a>
             </div>
         </div>
-
-        <h2 style="margin-top:2rem;">Our Mission</h2>
-        <p style="line-height:1.8;">
-            We believe in delivering clear, actionable content that helps you make better decisions — whether you're choosing a laptop, planning a road trip, or building an emergency fund. Every article is written to be practical, honest, and easy to understand.
-        </p>
-
-        <h2 style="margin-top:2rem;">Stay Connected</h2>
-        <p style="line-height:1.8;">
-            Subscribe to our <a href="{% url 'blog:rss_feed' %}">RSS feed</a> to stay updated with the latest articles, or <a href="{% url 'blog:contact' %}">get in touch</a> if you have questions or feedback.
-        </p>
     </div>
-</div>
+
+    <div style="display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1rem;margin:1.25rem 0 2rem;">
+        <div style="background:var(--card-bg);border:1px solid var(--border);border-radius:18px;padding:1.35rem;box-shadow:var(--shadow-sm);">
+            <strong style="display:block;font-size:1.9rem;line-height:1;color:var(--primary);">Multi-topic</strong>
+            <span style="display:block;margin-top:.55rem;color:var(--text-light);font-size:.92rem;line-height:1.6;">A network of focused publications instead of one crowded feed.</span>
+        </div>
+        <div style="background:var(--card-bg);border:1px solid var(--border);border-radius:18px;padding:1.35rem;box-shadow:var(--shadow-sm);">
+            <strong style="display:block;font-size:1.9rem;line-height:1;color:var(--primary);">Practical</strong>
+            <span style="display:block;margin-top:.55rem;color:var(--text-light);font-size:.92rem;line-height:1.6;">Articles built to explain what matters, why it matters, and what to watch next.</span>
+        </div>
+        <div style="background:var(--card-bg);border:1px solid var(--border);border-radius:18px;padding:1.35rem;box-shadow:var(--shadow-sm);">
+            <strong style="display:block;font-size:1.9rem;line-height:1;color:var(--primary);">Reader-first</strong>
+            <span style="display:block;margin-top:.55rem;color:var(--text-light);font-size:.92rem;line-height:1.6;">Clear language, useful context, and no unnecessary noise.</span>
+        </div>
+    </div>
+
+    <div style="display:grid;grid-template-columns:minmax(0,1.08fr) minmax(280px,.92fr);gap:1.25rem;align-items:start;">
+        <article class="article-content" style="padding:clamp(1.4rem,3vw,2.2rem);border-radius:24px;">
+            <h2 style="font-size:clamp(1.65rem,3vw,2.3rem);letter-spacing:-.03em;margin-bottom:1rem;">What We Do</h2>
+            <p style="font-size:1.06rem;line-height:1.9;color:var(--text-light);margin-bottom:1.15rem;">USA Content Hub is designed for readers who want helpful information without digging through dozens of tabs. We publish accessible explainers, current market coverage, guides, how-to content, and practical roundups across high-interest categories.</p>
+            <p style="font-size:1.06rem;line-height:1.9;color:var(--text-light);margin-bottom:1.15rem;">Our goal is simple: make useful content easier to find, easier to understand, and easier to act on. Whether someone is reading about a market trend, planning dinner, comparing travel ideas, or learning a new technology topic, the article should respect their time.</p>
+
+            <h2 style="font-size:clamp(1.45rem,3vw,2rem);letter-spacing:-.025em;margin:2rem 0 1rem;">Our Editorial Promise</h2>
+            <div style="display:grid;gap:.9rem;">
+                <div style="display:flex;gap:.85rem;align-items:flex-start;padding:1rem;border:1px solid var(--border);border-radius:16px;background:var(--bg-light);">
+                    <span aria-hidden="true" style="width:30px;height:30px;border-radius:10px;background:var(--primary-light);color:var(--primary);display:inline-flex;align-items:center;justify-content:center;font-weight:900;flex:0 0 auto;">1</span>
+                    <div><strong>Clarity first.</strong><p style="margin:.2rem 0 0;color:var(--text-light);font-size:.94rem;line-height:1.65;">We avoid bloated wording and explain topics in plain language.</p></div>
+                </div>
+                <div style="display:flex;gap:.85rem;align-items:flex-start;padding:1rem;border:1px solid var(--border);border-radius:16px;background:var(--bg-light);">
+                    <span aria-hidden="true" style="width:30px;height:30px;border-radius:10px;background:var(--primary-light);color:var(--primary);display:inline-flex;align-items:center;justify-content:center;font-weight:900;flex:0 0 auto;">2</span>
+                    <div><strong>Practical value.</strong><p style="margin:.2rem 0 0;color:var(--text-light);font-size:.94rem;line-height:1.65;">Every page should give readers context, next steps, examples, or a useful takeaway.</p></div>
+                </div>
+                <div style="display:flex;gap:.85rem;align-items:flex-start;padding:1rem;border:1px solid var(--border);border-radius:16px;background:var(--bg-light);">
+                    <span aria-hidden="true" style="width:30px;height:30px;border-radius:10px;background:var(--primary-light);color:var(--primary);display:inline-flex;align-items:center;justify-content:center;font-weight:900;flex:0 0 auto;">3</span>
+                    <div><strong>Topical focus.</strong><p style="margin:.2rem 0 0;color:var(--text-light);font-size:.94rem;line-height:1.65;">We organize coverage into publications so readers can follow the subjects they care about.</p></div>
+                </div>
+            </div>
+        </article>
+
+        <aside style="display:grid;gap:1rem;">
+            <div style="background:var(--card-bg);border:1px solid var(--border);border-radius:24px;padding:1.4rem;box-shadow:var(--shadow-sm);">
+                <h2 style="font-size:1.22rem;margin-bottom:.9rem;">Topics We Cover</h2>
+                <div style="display:flex;flex-wrap:wrap;gap:.55rem;">
+                    <span style="padding:8px 12px;border-radius:999px;background:var(--bg-light);border:1px solid var(--border);font-weight:700;font-size:.86rem;">US news</span>
+                    <span style="padding:8px 12px;border-radius:999px;background:var(--bg-light);border:1px solid var(--border);font-weight:700;font-size:.86rem;">Trading</span>
+                    <span style="padding:8px 12px;border-radius:999px;background:var(--bg-light);border:1px solid var(--border);font-weight:700;font-size:.86rem;">Finance</span>
+                    <span style="padding:8px 12px;border-radius:999px;background:var(--bg-light);border:1px solid var(--border);font-weight:700;font-size:.86rem;">Technology</span>
+                    <span style="padding:8px 12px;border-radius:999px;background:var(--bg-light);border:1px solid var(--border);font-weight:700;font-size:.86rem;">Health</span>
+                    <span style="padding:8px 12px;border-radius:999px;background:var(--bg-light);border:1px solid var(--border);font-weight:700;font-size:.86rem;">Travel</span>
+                    <span style="padding:8px 12px;border-radius:999px;background:var(--bg-light);border:1px solid var(--border);font-weight:700;font-size:.86rem;">Recipes</span>
+                    <span style="padding:8px 12px;border-radius:999px;background:var(--bg-light);border:1px solid var(--border);font-weight:700;font-size:.86rem;">Autos</span>
+                </div>
+            </div>
+            <div style="background:linear-gradient(135deg,var(--bg-warm),var(--card-bg));border:1px solid var(--border);border-radius:24px;padding:1.4rem;box-shadow:var(--shadow-sm);">
+                <h2 style="font-size:1.22rem;margin-bottom:.65rem;">Stay Connected</h2>
+                <p style="color:var(--text-light);line-height:1.75;margin-bottom:1rem;">Follow the latest articles through RSS or send us ideas, corrections, partnership notes, and feedback.</p>
+                <div style="display:flex;gap:.6rem;flex-wrap:wrap;">
+                    <a href="{% url 'blog:rss_feed' %}" style="display:inline-flex;padding:10px 15px;border-radius:999px;background:var(--primary);color:#fff;font-weight:800;">RSS Feed</a>
+                    <a href="{% url 'blog:contact' %}" style="display:inline-flex;padding:10px 15px;border-radius:999px;border:1px solid var(--border);font-weight:800;">Get in Touch</a>
+                </div>
+            </div>
+        </aside>
+    </div>
+</section>
+
+<style>
+@media (max-width: 760px) {
+    .page-content > div[style*="repeat(3"] { grid-template-columns: 1fr !important; }
+    .page-content > div[style*="minmax(0,1.08fr"] { grid-template-columns: 1fr !important; }
+}
+</style>
 {% endblock %}
