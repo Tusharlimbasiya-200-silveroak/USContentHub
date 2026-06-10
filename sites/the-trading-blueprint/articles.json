@@ -368,50 +368,5 @@
     "status": "published",
     "bucket": "main",
     "seo_score_original": 85
-  },
-  {
-    "title": "Why Gold and Silver Prices Are at Record Highs in 2026",
-    "slug": "why-gold-silver-prices-record-high-2026",
-    "meta_description": "Gold is testing $5,000/oz and silver has broken $80. Here's why precious metals are surging in 2026 — from US-Iran tensions to central bank buying and the $40 trillion debt crisis.",
-    "date": "2026-05-27T12:00:00.000000",
-    "word_count": 1800,
-    "read_time": 7,
-    "seo_score": 95,
-    "source": "copilot_direct",
-    "category": "trading",
-    "tags": [
-      "gold",
-      "silver",
-      "commodities",
-      "trading"
-    ],
-    "author": "The Trading Blueprint",
-    "featured": false,
-    "image": "https://images.unsplash.com/photo-1610375461246-83df859d849d?w=1200&h=630&fit=crop",
-    "status": "published",
-    "bucket": "main",
-    "seo_score_original": 85
-  },
-  {
-    "title": "Why Indian Stock Markets Are Stuck: 7 Reasons Behind the Stagnation",
-    "slug": "why-indian-stock-market-stuck-stagnant-2026",
-    "meta_description": "Sensex and Nifty 50 can't catch a break in 2026. From massive FII outflows to US-Iran war fallout, here are 7 real reasons why Indian markets are stagnant — and what comes next.",
-    "date": "2026-05-27T12:00:00.000000",
-    "word_count": 1600,
-    "read_time": 6,
-    "seo_score": 95,
-    "source": "copilot_direct",
-    "category": "trading",
-    "tags": [
-      "stocks",
-      "trading",
-      "investing"
-    ],
-    "author": "The Trading Blueprint",
-    "featured": false,
-    "image": "https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w=1200&h=630&fit=crop",
-    "status": "published",
-    "bucket": "main",
-    "seo_score_original": 85
   }
 ]

@@ -533,27 +533,34 @@ function loadMoreArticles() {
 
 function toggleBookmark(btn) {
     var slug = btn.dataset.slug;
-    var title = btn.dataset.title;
     var csrf = document.querySelector('[name=csrfmiddlewaretoken]');
     if (!csrf) return;
     var fd = new FormData();
     fd.append('csrfmiddlewaretoken', csrf.value);
-    fetch('/article/'+slug+'/bookmark/', {method:'POST', body:fd})
-    .then(function(r){return r.json();})
+    btn.disabled = true;
+    fetch('/article/'+slug+'/bookmark/', {method:'POST', body:fd, headers:{'X-CSRFToken':csrf.value}, credentials:'same-origin'})
+    .then(function(r){
+        if (r.redirected) { window.location.href = r.url; return null; }
+        return r.json().then(function(d){ if(!r.ok){ throw d; } return d; });
+    })
     .then(function(d){
+        if (!d) return;
         if (d.bookmarked) {
             btn.style.background = 'var(--primary-light)';
             btn.style.borderColor = 'var(--primary)';
             btn.style.color = 'var(--primary)';
             btn.title = 'Bookmarked';
+            btn.textContent = '✅';
         } else {
             btn.style.background = 'none';
             btn.style.borderColor = 'var(--border)';
             btn.style.color = 'var(--text-muted)';
             btn.title = 'Bookmark';
+            btn.textContent = '🔖';
         }
     })
-    .catch(function(){});
+    .catch(function(){ btn.title = 'Could not save. Try again.'; })
+    .finally(function(){ btn.disabled = false; });
 }
 </script>
 {% endblock %}

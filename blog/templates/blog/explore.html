@@ -1,58 +1,236 @@
 {% extends "blog/base.html" %}
-{% block title %}Explore — USA Content Hub{% endblock %}
-{% block description %}Explore trending articles, publications, and topics on USA Content Hub.{% endblock %}
+{% block title %}Explore USA Content Hub | Trending Articles, Topics & Publications{% endblock %}
+{% block description %}Explore USA Content Hub by topic, publication, latest stories, and most-read articles across technology, health, money, travel, recipes, news, and trading.{% endblock %}
 {% block canonical %}{{ site_url }}/explore/{% endblock %}
+{% block og_title %}Explore USA Content Hub{% endblock %}
+{% block og_description %}Find trending articles, topic collections, and publication guides across USA Content Hub.{% endblock %}
 {% block og_url %}{{ site_url }}/explore/{% endblock %}
-{% block main_class %}full-width{% endblock %}
+{% block twitter_title %}Explore USA Content Hub{% endblock %}
+{% block twitter_description %}Find trending articles, topic collections, and publication guides across USA Content Hub.{% endblock %}
+{% block main_class %}full-width explore-page{% endblock %}
+
+{% block extra_head %}
+<style>
+.explore-page { padding-top: 22px; }
+.explore-hero {
+    position: relative;
+    overflow: hidden;
+    border: 1px solid rgba(99,102,241,.18);
+    border-radius: 30px;
+    padding: clamp(1.4rem, 4vw, 3rem);
+    background:
+        radial-gradient(circle at 18% 15%, rgba(96,165,250,.28), transparent 30%),
+        radial-gradient(circle at 85% 20%, rgba(236,72,153,.18), transparent 32%),
+        linear-gradient(135deg, #050816 0%, #111827 50%, #1e1b4b 100%);
+    color: #fff;
+    box-shadow: var(--shadow-lg);
+}
+.explore-hero-grid { display: grid; grid-template-columns: minmax(0, 1.25fr) minmax(280px, .75fr); gap: 1.5rem; align-items: end; position: relative; z-index: 1; }
+.explore-kicker { display: inline-flex; align-items: center; gap: 8px; padding: 7px 12px; border: 1px solid rgba(255,255,255,.18); border-radius: 999px; background: rgba(255,255,255,.08); color: #bfdbfe; font-size: .78rem; font-weight: 900; letter-spacing: .08em; text-transform: uppercase; }
+.explore-hero h1 { max-width: 780px; margin: 1rem 0 .7rem; font-size: clamp(2.4rem, 6vw, 5.6rem); line-height: .94; letter-spacing: -.065em; }
+.explore-hero-copy { max-width: 720px; color: #cbd5e1; font-size: clamp(.98rem, 2vw, 1.15rem); line-height: 1.75; }
+.explore-search { margin-top: 1.3rem; display: flex; max-width: 680px; padding: 7px; border: 1px solid rgba(255,255,255,.14); border-radius: 18px; background: rgba(255,255,255,.09); backdrop-filter: blur(12px); }
+.explore-search input { flex: 1; min-width: 0; border: 0; outline: 0; background: transparent; color: #fff; padding: 12px 14px; font-size: .98rem; }
+.explore-search input::placeholder { color: #94a3b8; }
+.explore-search button { border: 0; border-radius: 13px; padding: 0 20px; background: linear-gradient(135deg, #2563eb, #7c3aed); color: #fff; font-weight: 900; cursor: pointer; }
+.explore-stats { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: .8rem; }
+.explore-stat { padding: 1rem; border: 1px solid rgba(255,255,255,.13); border-radius: 18px; background: rgba(255,255,255,.075); }
+.explore-stat strong { display: block; font-size: 1.65rem; line-height: 1; }
+.explore-stat span { color: #cbd5e1; font-size: .78rem; font-weight: 800; text-transform: uppercase; letter-spacing: .06em; }
+.explore-section { margin-top: 2rem; }
+.explore-section-head { display: flex; align-items: end; justify-content: space-between; gap: 1rem; margin-bottom: 1rem; }
+.explore-section-head h2 { margin: 0; font-size: clamp(1.35rem, 3vw, 2rem); letter-spacing: -.035em; }
+.explore-section-head p { max-width: 620px; color: var(--text-light); font-size: .94rem; line-height: 1.65; }
+.explore-publications { display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); gap: .8rem; }
+.explore-pub-card { position: relative; min-height: 180px; padding: 1rem; border: 1px solid var(--border); border-radius: 22px; background: var(--card-bg); box-shadow: var(--shadow-sm); overflow: hidden; text-decoration: none; color: var(--text); transition: transform .22s, box-shadow .22s, border-color .22s; }
+.explore-pub-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-lg); border-color: var(--primary); color: var(--text); }
+.explore-pub-card::before { content: ''; position: absolute; inset: 0 0 auto; height: 5px; background: var(--pub-color, var(--primary)); }
+.explore-pub-icon { width: 50px; height: 50px; display: grid; place-items: center; margin-bottom: .85rem; border-radius: 16px; background: var(--primary-light); font-size: 1.7rem; }
+.explore-pub-card h3 { margin: 0 0 .45rem; font-size: .98rem; line-height: 1.25; }
+.explore-pub-card p { margin: 0; color: var(--text-light); font-size: .78rem; line-height: 1.45; }
+.explore-count { display: inline-flex; margin-top: .85rem; padding: 3px 9px; border-radius: 999px; background: var(--bg-light); color: var(--text-light); font-size: .72rem; font-weight: 800; }
+.explore-topics { display: flex; flex-wrap: wrap; gap: .6rem; }
+.explore-topic { display: inline-flex; align-items: center; gap: 7px; padding: 8px 13px; border-radius: 999px; border: 1px solid var(--border); background: var(--card-bg); color: var(--text); font-size: .86rem; font-weight: 800; box-shadow: var(--shadow-sm); }
+.explore-topic:hover { background: var(--primary); color: #fff; border-color: var(--primary); }
+.explore-topic span { opacity: .58; font-size: .74rem; }
+.explore-feature-grid { display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(280px, .85fr); gap: 1rem; }
+.explore-lead { min-height: 420px; border-radius: 26px; overflow: hidden; background: #111827; position: relative; box-shadow: var(--shadow-lg); }
+.explore-lead img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; filter: brightness(.6); }
+.explore-lead-body { position: absolute; inset: auto 0 0; padding: clamp(1.2rem, 3vw, 2rem); color: #fff; background: linear-gradient(to top, rgba(0,0,0,.86), transparent); }
+.explore-lead-body h2 { max-width: 780px; margin: .4rem 0; font-size: clamp(1.55rem, 3.5vw, 3rem); line-height: 1.05; letter-spacing: -.045em; }
+.explore-lead-body a { color: #fff; }
+.explore-lead-body p { max-width: 680px; color: #cbd5e1; line-height: 1.65; }
+.explore-side-list { display: grid; gap: .8rem; }
+.explore-mini { display: grid; grid-template-columns: 96px minmax(0, 1fr); gap: .85rem; padding: .75rem; border: 1px solid var(--border); border-radius: 18px; background: var(--card-bg); box-shadow: var(--shadow-sm); }
+.explore-mini img { width: 96px; height: 80px; object-fit: cover; border-radius: 13px; }
+.explore-mini h3 { margin: 0 0 .35rem; font-size: .94rem; line-height: 1.28; }
+.explore-mini-meta { color: var(--text-muted); font-size: .74rem; font-weight: 700; }
+.explore-latest-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1rem; }
+.explore-cta { display: flex; align-items: center; justify-content: space-between; gap: 1rem; margin-top: 2rem; padding: 1.3rem; border: 1px solid var(--border); border-radius: 24px; background: linear-gradient(135deg, var(--card-bg), var(--bg-light)); }
+.explore-cta strong { display: block; font-size: 1.1rem; }
+.explore-cta span { color: var(--text-light); font-size: .9rem; }
+.explore-cta a { display: inline-flex; align-items: center; gap: 7px; padding: 10px 16px; border-radius: 999px; background: #f97316; color: #fff; font-weight: 900; white-space: nowrap; }
+.explore-badge { display: inline-flex; align-items: center; gap: 5px; padding: 4px 9px; border-radius: 999px; background: rgba(37,99,235,.12); color: var(--primary); font-size: .73rem; font-weight: 900; }
+@media (max-width: 1100px) { .explore-publications { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
+@media (max-width: 860px) { .explore-hero-grid, .explore-feature-grid { grid-template-columns: 1fr; } .explore-latest-grid { grid-template-columns: 1fr 1fr; } }
+@media (max-width: 620px) { .explore-search { flex-direction: column; } .explore-search button { padding: 12px 16px; } .explore-stats, .explore-publications, .explore-latest-grid { grid-template-columns: 1fr; } .explore-section-head, .explore-cta { align-items: stretch; flex-direction: column; } .explore-lead { min-height: 360px; } }
+</style>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "CollectionPage",
+  "name": "Explore USA Content Hub",
+  "description": "Browse publications, topics, latest stories, and popular articles on USA Content Hub.",
+  "url": "{{ site_url }}/explore/"
+}
+</script>
+{% endblock %}
+
 {% block content %}
-<section>
-    <h2>Explore by Publication</h2>
-    <div class="articles-grid" style="margin-bottom:2rem;">
-        {% for pub in publications_with_counts %}
-        <div class="article-card" style="text-align:center;padding:2rem;">
-            <div style="font-size:3rem;margin-bottom:1rem;">{{ pub.icon }}</div>
-            <h3><a href="{% url 'blog:publication' pub.slug %}" style="color:var(--text);text-decoration:none;">{{ pub.name }}</a></h3>
-            <p style="color:var(--text-light);font-size:.9rem;">{{ pub.description|truncatechars:100 }}</p>
-            <span style="display:inline-block;margin-top:.5rem;padding:4px 12px;background:var(--primary-light);color:var(--primary);border-radius:20px;font-size:.78rem;font-weight:600;">{{ pub.article_count }} articles</span>
+<section class="explore-hero" aria-labelledby="explore-title">
+    <div class="explore-hero-grid">
+        <div>
+            <span class="explore-kicker">Start Here</span>
+            <h1 id="explore-title">Find the right story faster.</h1>
+            <p class="explore-hero-copy">Search across USA Content Hub, jump into a publication, follow a topic, or start with what readers are already choosing today.</p>
+            <form class="explore-search" action="{% url 'blog:search' %}" method="get" role="search">
+                <input type="search" name="q" placeholder="Search tech, health, money, travel, recipes, news..." aria-label="Search articles">
+                <button type="submit">Search</button>
+            </form>
         </div>
+        <div class="explore-stats" aria-label="Site statistics">
+            <div class="explore-stat"><strong>{{ total_articles }}</strong><span>Published guides</span></div>
+            <div class="explore-stat"><strong>{{ publications_with_counts|length }}</strong><span>Publications</span></div>
+            <div class="explore-stat"><strong>{{ all_tags|length }}</strong><span>Topics</span></div>
+            <div class="explore-stat"><strong>Free</strong><span>RSS updates</span></div>
+        </div>
+    </div>
+</section>
+
+<section class="explore-section" aria-labelledby="pubs-title">
+    <div class="explore-section-head">
+        <div>
+            <h2 id="pubs-title">Explore by Publication</h2>
+            <p>Choose the vertical that matches what you need right now: buying guides, health habits, money explainers, travel planning, recipes, daily news, or trading education.</p>
+        </div>
+    </div>
+    <div class="explore-publications">
+        {% for pub in publications_with_counts %}
+        <a class="explore-pub-card" href="{% url 'blog:publication' pub.slug %}" style="--pub-color:{{ pub.color }};">
+            <div class="explore-pub-icon">{{ pub.icon }}</div>
+            <h3>{{ pub.name }}</h3>
+            <p>{{ pub.description|truncatechars:92 }}</p>
+            <span class="explore-count">{{ pub.article_count }} article{{ pub.article_count|pluralize }}</span>
+        </a>
         {% endfor %}
     </div>
+</section>
 
-    <h2>Browse by Topic</h2>
-    <p style="color:var(--text-light);font-size:.9rem;margin-bottom:1rem;">Click any tag to see all related articles</p>
-    {% if all_tags %}
-    <div class="tag-cloud" style="margin-bottom:2rem;">
-        {% for tag in all_tags %}
-        <a href="/tag/?name={{ tag.name|urlencode }}" class="tag-link" style="font-size:{% if tag.count > 10 %}1.1rem{% elif tag.count > 5 %}1rem{% else %}.9rem{% endif %}">{{ tag.name }} <span style="opacity:.6;font-size:.75rem;">({{ tag.count }})</span></a>
+{% if popular_tags %}
+<section class="explore-section" aria-labelledby="topics-title">
+    <div class="explore-section-head">
+        <div>
+            <h2 id="topics-title">Recommended Topics</h2>
+            <p>Compact shortcuts for when you know the subject but not the exact article.</p>
+        </div>
+        <a href="#all-topics" class="read-more">View all topics</a>
+    </div>
+    <div class="explore-topics">
+        {% for tag in popular_tags %}
+        <a href="/tag/?name={{ tag.name|urlencode }}" class="explore-topic">{{ tag.name }} <span>{{ tag.count }}</span></a>
         {% endfor %}
     </div>
-    {% endif %}
+</section>
+{% endif %}
 
-    <h2>🔥 Most Popular Articles</h2>
-    <div class="articles-grid">
+{% if trending %}
+<section class="explore-section" aria-labelledby="popular-title">
+    <div class="explore-section-head">
+        <div>
+            <h2 id="popular-title">Most Read Right Now</h2>
+            <p>Start with the lead story, then scan the ranked rail for what readers are opening next.</p>
+        </div>
+    </div>
+    <div class="explore-feature-grid">
         {% for article in trending %}
+            {% if forloop.first %}
+            <article class="explore-lead">
+                <img src="{{ article.cover_image|default:'https://picsum.photos/seed/usacontenthub/1200/630' }}" alt="{{ article.title }}" loading="eager" decoding="async" width="1200" height="630" onerror="this.onerror=null;this.src='https://picsum.photos/seed/usacontenthub/1200/630';">
+                <div class="explore-lead-body">
+                    {% if article.publication %}<span class="explore-badge">{{ article.publication.icon }} {{ article.publication.name }}</span>{% endif %}
+                    <h2><a href="{% url 'blog:article' article.slug %}">{{ article.title }}</a></h2>
+                    <p>{{ article.meta_description|default:article.subtitle|truncatechars:190 }}</p>
+                    <a href="{% url 'blog:article' article.slug %}" class="read-more" style="color:#fff;margin-top:.75rem;display:inline-flex;">Read the lead story</a>
+                </div>
+            </article>
+            <div class="explore-side-list">
+            {% elif forloop.counter <= 6 %}
+                <article class="explore-mini">
+                    <img src="{{ article.cover_image|default:'https://picsum.photos/seed/usacontenthub/320/240' }}" alt="{{ article.title }}" loading="lazy" decoding="async" width="320" height="240" onerror="this.onerror=null;this.src='https://picsum.photos/seed/usacontenthub/320/240';">
+                    <div>
+                        {% if article.publication %}<div class="explore-mini-meta">{{ forloop.counter }} · {{ article.publication.icon }} {{ article.publication.name }}</div>{% else %}<div class="explore-mini-meta">{{ forloop.counter }}</div>{% endif %}
+                        <h3><a href="{% url 'blog:article' article.slug %}">{{ article.title }}</a></h3>
+                        <div class="explore-mini-meta">{{ article.read_time }} min read · {{ article.views }} views</div>
+                    </div>
+                </article>
+            {% endif %}
+            {% if forloop.counter == 6 or forloop.last %}</div>{% endif %}
+        {% endfor %}
+    </div>
+</section>
+{% endif %}
+
+{% if latest_articles %}
+<section class="explore-section" aria-labelledby="latest-title">
+    <div class="explore-section-head">
+        <div>
+            <h2 id="latest-title">Latest Guides</h2>
+            <p>Freshly published articles from across the network.</p>
+        </div>
+    </div>
+    <div class="explore-latest-grid">
+        {% for article in latest_articles %}
         <article class="article-card">
             <div class="card-image">
                 <img src="{{ article.cover_image|default:'https://picsum.photos/seed/usacontenthub/640/360' }}" alt="{{ article.title }}" loading="lazy" decoding="async" width="640" height="360" onerror="this.onerror=null;this.src='https://picsum.photos/seed/usacontenthub/640/360';">
             </div>
             <div class="card-body">
+                {% if article.publication %}<span class="explore-badge">{{ article.publication.icon }} {{ article.publication.name }}</span>{% endif %}
                 <h3><a href="{% url 'blog:article' article.slug %}">{{ article.title }}</a></h3>
                 <div class="article-meta">
-                    <time datetime="{{ article.published_at|date:'Y-m-d' }}">📅 {{ article.published_at|date:'Y-m-d' }}</time>
-                    <span class="read-time">⏱️ {{ article.read_time }} min</span>
-                    <span>👁️ {{ article.views }}</span>
+                    <time datetime="{{ article.published_at|date:'Y-m-d' }}">{{ article.published_at|date:'M j, Y' }}</time>
+                    <span class="read-time">{{ article.read_time }} min</span>
                 </div>
-                {% if article.publication %}
-                <span class="pub-badge" style="font-size:.75rem;color:var(--primary);">{{ article.publication.icon }} {{ article.publication.name }}</span>
-                {% endif %}
+                <p class="article-excerpt">{{ article.meta_description|default:article.subtitle|truncatechars:135 }}</p>
                 <a href="{% url 'blog:article' article.slug %}" class="read-more">Read More</a>
             </div>
         </article>
         {% endfor %}
     </div>
+</section>
+{% endif %}
 
-    <div style="text-align:center;margin-top:2rem;">
-        <a href="{% url 'blog:rss_feed' %}" style="display:inline-flex;align-items:center;gap:6px;padding:10px 24px;background:var(--bg-light);border:1px solid var(--border);border-radius:20px;color:var(--text);text-decoration:none;font-size:.9rem;font-weight:600;">📡 Subscribe via RSS</a>
+{% if all_tags %}
+<section class="explore-section" id="all-topics" aria-labelledby="all-topics-title">
+    <div class="explore-section-head">
+        <div>
+            <h2 id="all-topics-title">All Topics</h2>
+            <p>Use this complete index when you want to browse the long tail of subjects.</p>
+        </div>
     </div>
+    <div class="explore-topics">
+        {% for tag in all_tags %}
+        <a href="/tag/?name={{ tag.name|urlencode }}" class="explore-topic">{{ tag.name }} <span>{{ tag.count }}</span></a>
+        {% endfor %}
+    </div>
+</section>
+{% endif %}
+
+<section class="explore-cta" aria-label="Subscribe to USA Content Hub">
+    <div>
+        <strong>Want a simple feed of everything new?</strong>
+        <span>Subscribe with RSS and follow new articles from every USA Content Hub publication.</span>
+    </div>
+    <a href="{% url 'blog:rss_feed' %}">RSS Feed</a>
 </section>
 {% endblock %}
