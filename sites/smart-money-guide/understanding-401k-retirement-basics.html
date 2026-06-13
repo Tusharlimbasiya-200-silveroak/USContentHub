@@ -29,7 +29,7 @@
     <meta property="og:url" content="https://Tusharlimbasiya-200-silveroak.github.io/smart-money-guide/understanding-401k-retirement-basics.html">
     <meta property="og:site_name" content="Smart Money Guide">
     <meta property="og:locale" content="en_US">
-    <meta property="og:image" content="https://picsum.photos/seed/understanding-401k-retirement-basics/1200/630">
+    <meta property="og:image" content="https://loremflickr.com/1200/630/understanding,401k">
     <meta property="og:image:width" content="1200">
     <meta property="og:image:height" content="630">
     <meta property="article:published_time" content="2026-05-25">
@@ -38,7 +38,7 @@
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Understanding 401(k): What It Is and Why You Should Care (Even If You&#39;re Young)">
     <meta name="twitter:description" content="What is a 401k and why does it matter? This simple guide explains how 401k plans work, employer matching, and why starting young is your biggest advantage.">
-    <meta name="twitter:image" content="https://picsum.photos/seed/understanding-401k-retirement-basics/1200/630">
+    <meta name="twitter:image" content="https://loremflickr.com/1200/630/understanding,401k">
 
     <!-- Structured Data -->
     <script type="application/ld+json">
@@ -47,7 +47,7 @@
         "@type": "Article",
         "headline": "Understanding 401(k): What It Is and Why You Should Care (Even If You&#39;re Young)",
         "description": "What is a 401k and why does it matter? This simple guide explains how 401k plans work, employer matching, and why starting young is your biggest advantage.",
-        "image": "https://picsum.photos/seed/understanding-401k-retirement-basics/1200/630",
+        "image": "https://loremflickr.com/1200/630/understanding,401k",
         "datePublished": "2026-05-25",
         "dateModified": "2026-05-25",
         "author": {"@type": "Organization", "name": "Smart Money Guide"},
@@ -79,8 +79,8 @@
     <!-- Critical CSS inline + external stylesheet -->
     
     <!-- Resource Hints -->
-    <link rel="preconnect" href="https://picsum.photos" crossorigin>
-    <link rel="dns-prefetch" href="https://picsum.photos">
+    <link rel="preconnect" href="https://loremflickr.com" crossorigin>
+    <link rel="dns-prefetch" href="https://loremflickr.com">
     <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="preload" href="style.css?v=3" as="style">
@@ -127,12 +127,12 @@
 
     <!-- Hero Image -->
     <div class="hero-image">
-        <img src="https://picsum.photos/seed/understanding-401k-retirement-basics/1200/600"
+        <img src="https://loremflickr.com/1200/600/understanding,401k"
              alt="Understanding 401(k): What It Is and Why You Should Care (Even If You&#39;re Young)"
              loading="eager" decoding="async"
              width="1200" height="600"
              fetchpriority="high">
-        <span class="image-credit">Photo: <a href="https://picsum.photos" target="_blank" rel="noopener noreferrer">Picsum</a></span>
+        <span class="image-credit">Photo: <a href="https://loremflickr.com" target="_blank" rel="noopener noreferrer">loremflickr</a></span>
     </div>
 
     <!-- Header Ad -->
@@ -140,6 +140,7 @@
 
     <main class="container" id="main-content">
         <article class="article-content" itemscope itemtype="https://schema.org/Article">
+                <nav class="breadcrumb" aria-label="Breadcrumb"><a href="index.html">Home</a><span class="sep">&rsaquo;</span><span class="current">Understanding 401(k): What It Is and Why You Should Care (Even If You&#39;re Young)</span></nav>
             <header class="article-header">
                 <h1 itemprop="headline">Understanding 401(k): What It Is and Why You Should Care (Even If You&#39;re Young)</h1>
                 <div class="article-meta">
@@ -154,7 +155,7 @@
             <div class="article-body" itemprop="articleBody">
                 <p>Your employer offers a 401(k) plan. You signed up during onboarding because HR told you to, but you have no idea what it actually does or why it matters. Or maybe you skipped it because "retirement is 40 years away." Either way, understanding your 401(k) could be the difference between retiring at 60 or working until 70.</p>
 
-<figure class="article-image"><img src="https://picsum.photos/seed/retirement-401k/800/450" alt="Growing savings chart representing retirement" loading="lazy" width="800" height="450"><figcaption>A 401(k) is the most powerful wealth-building tool most people ignore</figcaption></figure>
+<figure class="article-image"><img src="https://loremflickr.com/800/450/retirement,401k" alt="Growing savings chart representing retirement" loading="lazy" width="800" height="450"><figcaption>A 401(k) is the most powerful wealth-building tool most people ignore</figcaption></figure>
 
 <h2>What Is a 401(k)?</h2>
 <p>It's a retirement savings account offered through your employer. You contribute money from your paycheck (before taxes), it grows tax-free, and you withdraw it in retirement. Think of it as a special savings account with tax superpowers.</p>
@@ -289,8 +290,11 @@
         <div class="container">
             
             <p>&copy; 2026 Smart Money Guide. All rights reserved.</p>
-            <nav aria-label="Footer navigation">
+            <nav aria-label="Footer navigation" data-enhanced="1">
                 <a href="index.html">Home</a>
+                <a href="about.html">About</a>
+                <a href="contact.html">Contact</a>
+                <a href="privacy.html">Privacy</a>
                 <a href="sitemap.xml">Sitemap</a>
             </nav>
         </div>
@@ -353,5 +357,25 @@
             .catch(e => console.log('SW failed', e));
     }
     </script>
+<script>
+/* related-articles v1 */
+(function(){
+  var grid=document.getElementById('relatedGrid'); if(!grid) return;
+  var cur=location.pathname.split('/').pop().replace(/\.html$/,'');
+  function esc(s){return (s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');}
+  fetch('articles.json').then(function(r){return r.json();}).then(function(d){
+    var idx=-1,i; for(i=0;i<d.length;i++){if(d[i].slug===cur){idx=i;break;}}
+    var others=d.filter(function(a){return a.slug!==cur;});
+    if(!others.length){grid.parentElement.style.display='none';return;}
+    var start=(idx>0?idx:0)%others.length;
+    var pick=others.slice(start).concat(others.slice(0,start)).slice(0,3);
+    grid.innerHTML=pick.map(function(a){
+      return '<article class="r-card"><h3><a href="'+a.slug+'.html">'+esc(a.title)+'</a></h3>'
+        +'<p class="r-excerpt">'+esc(a.meta_description||'')+'</p>'
+        +'<a href="'+a.slug+'.html" class="read-more">Read More \u2192</a></article>';
+    }).join('');
+  }).catch(function(){grid.parentElement.style.display='none';});
+})();
+</script>
 </body>
 </html>

@@ -7,12 +7,12 @@
   "theme_color": "#2563eb",
   "icons": [
     {
-      "src": "https://picsum.photos/seed/health-wellness-daily/192/192",
+      "src": "https://loremflickr.com/192/192/health,wellness",
       "sizes": "192x192",
       "type": "image/jpeg"
     },
     {
-      "src": "https://picsum.photos/seed/health-wellness-daily/512/512",
+      "src": "https://loremflickr.com/512/512/health,wellness",
       "sizes": "512x512",
       "type": "image/jpeg"
     }

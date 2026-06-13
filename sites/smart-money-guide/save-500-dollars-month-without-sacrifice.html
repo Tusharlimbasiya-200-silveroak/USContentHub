@@ -29,7 +29,7 @@
     <meta property="og:url" content="https://Tusharlimbasiya-200-silveroak.github.io/smart-money-guide/save-500-dollars-month-without-sacrifice.html">
     <meta property="og:site_name" content="Smart Money Guide">
     <meta property="og:locale" content="en_US">
-    <meta property="og:image" content="https://picsum.photos/seed/save-500-dollars-month-without-sacrifice/1200/630">
+    <meta property="og:image" content="https://loremflickr.com/1200/630/save,dollars">
     <meta property="og:image:width" content="1200">
     <meta property="og:image:height" content="630">
     <meta property="article:published_time" content="2026-05-25">
@@ -38,7 +38,7 @@
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="How to Save $500 a Month Without Feeling Like You&#39;re Missing Out">
     <meta name="twitter:description" content="Learn how to save $500 a month without drastically changing your lifestyle. These practical money-saving strategies help you keep more cash without feeling d...">
-    <meta name="twitter:image" content="https://picsum.photos/seed/save-500-dollars-month-without-sacrifice/1200/630">
+    <meta name="twitter:image" content="https://loremflickr.com/1200/630/save,dollars">
 
     <!-- Structured Data -->
     <script type="application/ld+json">
@@ -47,7 +47,7 @@
         "@type": "Article",
         "headline": "How to Save $500 a Month Without Feeling Like You&#39;re Missing Out",
         "description": "Learn how to save $500 a month without drastically changing your lifestyle. These practical money-saving strategies help you keep more cash without feeling d...",
-        "image": "https://picsum.photos/seed/save-500-dollars-month-without-sacrifice/1200/630",
+        "image": "https://loremflickr.com/1200/630/save,dollars",
         "datePublished": "2026-05-25",
         "dateModified": "2026-05-25",
         "author": {"@type": "Organization", "name": "Smart Money Guide"},
@@ -79,8 +79,8 @@
     <!-- Critical CSS inline + external stylesheet -->
     
     <!-- Resource Hints -->
-    <link rel="preconnect" href="https://picsum.photos" crossorigin>
-    <link rel="dns-prefetch" href="https://picsum.photos">
+    <link rel="preconnect" href="https://loremflickr.com" crossorigin>
+    <link rel="dns-prefetch" href="https://loremflickr.com">
     <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="preload" href="style.css?v=3" as="style">
@@ -127,12 +127,12 @@
 
     <!-- Hero Image -->
     <div class="hero-image">
-        <img src="https://picsum.photos/seed/save-500-dollars-month-without-sacrifice/1200/600"
+        <img src="https://loremflickr.com/1200/600/save,dollars"
              alt="How to Save $500 a Month Without Feeling Like You&#39;re Missing Out"
              loading="eager" decoding="async"
              width="1200" height="600"
              fetchpriority="high">
-        <span class="image-credit">Photo: <a href="https://picsum.photos" target="_blank" rel="noopener noreferrer">Picsum</a></span>
+        <span class="image-credit">Photo: <a href="https://loremflickr.com" target="_blank" rel="noopener noreferrer">loremflickr</a></span>
     </div>
 
     <!-- Header Ad -->
@@ -140,6 +140,7 @@
 
     <main class="container" id="main-content">
         <article class="article-content" itemscope itemtype="https://schema.org/Article">
+                <nav class="breadcrumb" aria-label="Breadcrumb"><a href="index.html">Home</a><span class="sep">&rsaquo;</span><span class="current">How to Save $500 a Month Without Feeling Like You&#39;re Missing Out</span></nav>
             <header class="article-header">
                 <h1 itemprop="headline">How to Save $500 a Month Without Feeling Like You&#39;re Missing Out</h1>
                 <div class="article-meta">
@@ -156,7 +157,7 @@
 
 <p>Think of your monthly spending like a bucket of water with small holes in it. You keep filling the bucket (your paycheck), but the water keeps draining out through tiny leaks. This guide helps you find and plug those leaks — without throwing away the bucket.</p>
 
-<figure class="article-image"><img src="https://picsum.photos/seed/savings-money/800/450" alt="Jar of savings with coins and dollar bills" loading="lazy" width="800" height="450"><figcaption>Small changes add up to big savings over time</figcaption></figure>
+<figure class="article-image"><img src="https://loremflickr.com/800/450/savings,money" alt="Jar of savings with coins and dollar bills" loading="lazy" width="800" height="450"><figcaption>Small changes add up to big savings over time</figcaption></figure>
 
 <h2>The Hidden Subscriptions Drain: $50-100/Month</h2>
 <p>The average American pays for 4-5 subscription services they barely use. Open your bank statement right now and look for recurring charges. You'll probably find at least one or two you forgot about.</p>
@@ -282,8 +283,11 @@
         <div class="container">
             
             <p>&copy; 2026 Smart Money Guide. All rights reserved.</p>
-            <nav aria-label="Footer navigation">
+            <nav aria-label="Footer navigation" data-enhanced="1">
                 <a href="index.html">Home</a>
+                <a href="about.html">About</a>
+                <a href="contact.html">Contact</a>
+                <a href="privacy.html">Privacy</a>
                 <a href="sitemap.xml">Sitemap</a>
             </nav>
         </div>
@@ -346,5 +350,25 @@
             .catch(e => console.log('SW failed', e));
     }
     </script>
+<script>
+/* related-articles v1 */
+(function(){
+  var grid=document.getElementById('relatedGrid'); if(!grid) return;
+  var cur=location.pathname.split('/').pop().replace(/\.html$/,'');
+  function esc(s){return (s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');}
+  fetch('articles.json').then(function(r){return r.json();}).then(function(d){
+    var idx=-1,i; for(i=0;i<d.length;i++){if(d[i].slug===cur){idx=i;break;}}
+    var others=d.filter(function(a){return a.slug!==cur;});
+    if(!others.length){grid.parentElement.style.display='none';return;}
+    var start=(idx>0?idx:0)%others.length;
+    var pick=others.slice(start).concat(others.slice(0,start)).slice(0,3);
+    grid.innerHTML=pick.map(function(a){
+      return '<article class="r-card"><h3><a href="'+a.slug+'.html">'+esc(a.title)+'</a></h3>'
+        +'<p class="r-excerpt">'+esc(a.meta_description||'')+'</p>'
+        +'<a href="'+a.slug+'.html" class="read-more">Read More \u2192</a></article>';
+    }).join('');
+  }).catch(function(){grid.parentElement.style.display='none';});
+})();
+</script>
 </body>
 </html>

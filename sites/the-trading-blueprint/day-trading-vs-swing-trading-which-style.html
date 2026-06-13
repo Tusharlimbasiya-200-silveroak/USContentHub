@@ -29,7 +29,7 @@
     <meta property="og:url" content="https://Tusharlimbasiya-200-silveroak.github.io/the-trading-blueprint/day-trading-vs-swing-trading-which-style.html">
     <meta property="og:site_name" content="The Trading Blueprint">
     <meta property="og:locale" content="en_US">
-    <meta property="og:image" content="https://picsum.photos/seed/day-trading-vs-swing-trading-which-style/1200/630">
+    <meta property="og:image" content="https://loremflickr.com/1200/630/day,trading">
     <meta property="og:image:width" content="1200">
     <meta property="og:image:height" content="630">
     <meta property="article:published_time" content="2026-05-26">
@@ -38,7 +38,7 @@
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Day Trading vs Swing Trading: Which Style Fits You?">
     <meta name="twitter:description" content="Day trading vs swing trading — learn the key differences in time commitment, capital needs, risk, and returns to find the trading style that matches your lifestyle.">
-    <meta name="twitter:image" content="https://picsum.photos/seed/day-trading-vs-swing-trading-which-style/1200/630">
+    <meta name="twitter:image" content="https://loremflickr.com/1200/630/day,trading">
 
     <!-- Structured Data -->
     <script type="application/ld+json">
@@ -47,7 +47,7 @@
         "@type": "Article",
         "headline": "Day Trading vs Swing Trading: Which Style Fits You?",
         "description": "Day trading vs swing trading — learn the key differences in time commitment, capital needs, risk, and returns to find the trading style that matches your lifestyle.",
-        "image": "https://picsum.photos/seed/day-trading-vs-swing-trading-which-style/1200/630",
+        "image": "https://loremflickr.com/1200/630/day,trading",
         "datePublished": "2026-05-26",
         "dateModified": "2026-05-26",
         "author": {"@type": "Organization", "name": "The Trading Blueprint"},
@@ -73,8 +73,8 @@
     
 
     <!-- Resource Hints -->
-    <link rel="preconnect" href="https://picsum.photos" crossorigin>
-    <link rel="dns-prefetch" href="https://picsum.photos">
+    <link rel="preconnect" href="https://loremflickr.com" crossorigin>
+    <link rel="dns-prefetch" href="https://loremflickr.com">
     <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="preload" href="style.css?v=1" as="style">
@@ -119,16 +119,17 @@
 
     <!-- Hero Image -->
     <div class="hero-image">
-        <img src="https://picsum.photos/seed/day-trading-vs-swing-trading-which-style/1200/600"
+        <img src="https://loremflickr.com/1200/600/day,trading"
              alt="Day Trading vs Swing Trading: Which Style Fits You?"
              loading="eager" decoding="async"
              width="1200" height="600"
              fetchpriority="high">
-        <span class="image-credit">Photo: <a href="https://picsum.photos" target="_blank" rel="noopener noreferrer">Picsum</a></span>
+        <span class="image-credit">Photo: <a href="https://loremflickr.com" target="_blank" rel="noopener noreferrer">loremflickr</a></span>
     </div>
 
     <main class="container" id="main-content">
         <article class="article-content" itemscope itemtype="https://schema.org/Article">
+                <nav class="breadcrumb" aria-label="Breadcrumb"><a href="index.html">Home</a><span class="sep">&rsaquo;</span><span class="current">Day Trading vs Swing Trading: Which Style Fits You?</span></nav>
             <header class="article-header">
                 <h1 itemprop="headline">Day Trading vs Swing Trading: Which Style Fits You?</h1>
                 <div class="article-meta">
@@ -280,6 +281,7 @@
                 <a href="https://www.reddit.com/submit?url=https://Tusharlimbasiya-200-silveroak.github.io/the-trading-blueprint/day-trading-vs-swing-trading-which-style.html&title=Day Trading vs Swing Trading: Which Style Fits You?" target="_blank" rel="noopener noreferrer" class="share-btn share-reddit">🔴 Reddit</a>
                 <a href="https://api.whatsapp.com/send?text=Day Trading vs Swing Trading: Which Style Fits You?%20https://Tusharlimbasiya-200-silveroak.github.io/the-trading-blueprint/day-trading-vs-swing-trading-which-style.html" target="_blank" rel="noopener noreferrer" class="share-btn share-whatsapp">💬 WhatsApp</a>
             </div>
+        <section class="related-articles" aria-label="Related articles"><h2>Read Next</h2><div class="related-grid" id="relatedGrid"></div></section>
         </article>
 
         <aside class="sidebar" aria-label="Sidebar">
@@ -293,9 +295,10 @@
     <footer class="site-footer" role="contentinfo">
         <div class="container">
             <p>&copy; 2026 The Trading Blueprint. All rights reserved.</p>
-            <nav aria-label="Footer navigation">
+            <nav aria-label="Footer navigation" data-enhanced="1">
                 <a href="index.html">Home</a>
                 <a href="about.html">About</a>
+                <a href="contact.html">Contact</a>
                 <a href="sitemap.xml">Sitemap</a>
             </nav>
         </div>
@@ -349,5 +352,25 @@
             .catch(e => console.log('SW failed', e));
     }
     </script>
+<script>
+/* related-articles v1 */
+(function(){
+  var grid=document.getElementById('relatedGrid'); if(!grid) return;
+  var cur=location.pathname.split('/').pop().replace(/\.html$/,'');
+  function esc(s){return (s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');}
+  fetch('articles.json').then(function(r){return r.json();}).then(function(d){
+    var idx=-1,i; for(i=0;i<d.length;i++){if(d[i].slug===cur){idx=i;break;}}
+    var others=d.filter(function(a){return a.slug!==cur;});
+    if(!others.length){grid.parentElement.style.display='none';return;}
+    var start=(idx>0?idx:0)%others.length;
+    var pick=others.slice(start).concat(others.slice(0,start)).slice(0,3);
+    grid.innerHTML=pick.map(function(a){
+      return '<article class="r-card"><h3><a href="'+a.slug+'.html">'+esc(a.title)+'</a></h3>'
+        +'<p class="r-excerpt">'+esc(a.meta_description||'')+'</p>'
+        +'<a href="'+a.slug+'.html" class="read-more">Read More \u2192</a></article>';
+    }).join('');
+  }).catch(function(){grid.parentElement.style.display='none';});
+})();
+</script>
 </body>
 </html>

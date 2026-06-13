@@ -29,7 +29,7 @@
     <meta property="og:url" content="https://Tusharlimbasiya-200-silveroak.github.io/health-wellness-daily/why-always-tired-enough-sleep.html">
     <meta property="og:site_name" content="Health Wellness Daily">
     <meta property="og:locale" content="en_US">
-    <meta property="og:image" content="https://picsum.photos/seed/why-always-tired-enough-sleep/1200/630">
+    <meta property="og:image" content="https://loremflickr.com/1200/630/always,tired">
     <meta property="og:image:width" content="1200">
     <meta property="og:image:height" content="630">
     <meta property="article:published_time" content="2026-05-25">
@@ -38,7 +38,7 @@
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Why You&#39;re Always Tired Even When You Sleep Enough">
     <meta name="twitter:description" content="Sleeping 8 hours but still exhausted? These hidden causes of chronic fatigue explain why you&#39;re tired all the time — and how to fix it.">
-    <meta name="twitter:image" content="https://picsum.photos/seed/why-always-tired-enough-sleep/1200/630">
+    <meta name="twitter:image" content="https://loremflickr.com/1200/630/always,tired">
 
     <!-- Structured Data -->
     <script type="application/ld+json">
@@ -47,7 +47,7 @@
         "@type": "Article",
         "headline": "Why You&#39;re Always Tired Even When You Sleep Enough",
         "description": "Sleeping 8 hours but still exhausted? These hidden causes of chronic fatigue explain why you&#39;re tired all the time — and how to fix it.",
-        "image": "https://picsum.photos/seed/why-always-tired-enough-sleep/1200/630",
+        "image": "https://loremflickr.com/1200/630/always,tired",
         "datePublished": "2026-05-25",
         "dateModified": "2026-05-25",
         "author": {"@type": "Organization", "name": "Health Wellness Daily"},
@@ -79,8 +79,8 @@
     <!-- Critical CSS inline + external stylesheet -->
     
     <!-- Resource Hints -->
-    <link rel="preconnect" href="https://picsum.photos" crossorigin>
-    <link rel="dns-prefetch" href="https://picsum.photos">
+    <link rel="preconnect" href="https://loremflickr.com" crossorigin>
+    <link rel="dns-prefetch" href="https://loremflickr.com">
     <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="preload" href="style.css?v=3" as="style">
@@ -127,12 +127,12 @@
 
     <!-- Hero Image -->
     <div class="hero-image">
-        <img src="https://picsum.photos/seed/why-always-tired-enough-sleep/1200/600"
+        <img src="https://loremflickr.com/1200/600/always,tired"
              alt="Why You&#39;re Always Tired Even When You Sleep Enough"
              loading="eager" decoding="async"
              width="1200" height="600"
              fetchpriority="high">
-        <span class="image-credit">Photo: <a href="https://picsum.photos" target="_blank" rel="noopener noreferrer">Picsum</a></span>
+        <span class="image-credit">Photo: <a href="https://loremflickr.com" target="_blank" rel="noopener noreferrer">loremflickr</a></span>
     </div>
 
     <!-- Header Ad -->
@@ -140,6 +140,7 @@
 
     <main class="container" id="main-content">
         <article class="article-content" itemscope itemtype="https://schema.org/Article">
+                <nav class="breadcrumb" aria-label="Breadcrumb"><a href="index.html">Home</a><span class="sep">&rsaquo;</span><span class="current">Why You&#39;re Always Tired Even When You Sleep Enough</span></nav>
             <header class="article-header">
                 <h1 itemprop="headline">Why You&#39;re Always Tired Even When You Sleep Enough</h1>
                 <div class="article-meta">
@@ -154,7 +155,7 @@
             <div class="article-body" itemprop="articleBody">
                 <p>You got your 8 hours. You didn't stay up late. You didn't drink caffeine before bed. So why do you still feel like you need a nap by 2 PM? Chronic fatigue despite adequate sleep is incredibly common — and the causes are usually not what people expect. It's rarely about sleep quantity. It's about sleep quality, nutrition, and lifestyle factors that drain your energy without you realizing it.</p>
 
-<figure class="article-image"><img src="https://picsum.photos/seed/always-tired/800/450" alt="Tired person at desk needing energy" loading="lazy" width="800" height="450"><figcaption>If you're always tired despite sleeping enough, the cause is usually NOT sleep</figcaption></figure>
+<figure class="article-image"><img src="https://loremflickr.com/800/450/always,tired" alt="Tired person at desk needing energy" loading="lazy" width="800" height="450"><figcaption>If you're always tired despite sleeping enough, the cause is usually NOT sleep</figcaption></figure>
 
 <h2>1. Dehydration</h2>
 <p>Even mild dehydration (1-2% body weight) causes fatigue, brain fog, and headaches. Most people are mildly dehydrated without knowing it. By the time you feel thirsty, you're already dehydrated. Aim for 8-10 glasses of water daily — more if you exercise or drink coffee (which is a diuretic).</p>
@@ -285,8 +286,11 @@
         <div class="container">
             
             <p>&copy; 2026 Health Wellness Daily. All rights reserved.</p>
-            <nav aria-label="Footer navigation">
+            <nav aria-label="Footer navigation" data-enhanced="1">
                 <a href="index.html">Home</a>
+                <a href="about.html">About</a>
+                <a href="contact.html">Contact</a>
+                <a href="privacy.html">Privacy</a>
                 <a href="sitemap.xml">Sitemap</a>
             </nav>
         </div>
@@ -349,5 +353,25 @@
             .catch(e => console.log('SW failed', e));
     }
     </script>
+<script>
+/* related-articles v1 */
+(function(){
+  var grid=document.getElementById('relatedGrid'); if(!grid) return;
+  var cur=location.pathname.split('/').pop().replace(/\.html$/,'');
+  function esc(s){return (s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');}
+  fetch('articles.json').then(function(r){return r.json();}).then(function(d){
+    var idx=-1,i; for(i=0;i<d.length;i++){if(d[i].slug===cur){idx=i;break;}}
+    var others=d.filter(function(a){return a.slug!==cur;});
+    if(!others.length){grid.parentElement.style.display='none';return;}
+    var start=(idx>0?idx:0)%others.length;
+    var pick=others.slice(start).concat(others.slice(0,start)).slice(0,3);
+    grid.innerHTML=pick.map(function(a){
+      return '<article class="r-card"><h3><a href="'+a.slug+'.html">'+esc(a.title)+'</a></h3>'
+        +'<p class="r-excerpt">'+esc(a.meta_description||'')+'</p>'
+        +'<a href="'+a.slug+'.html" class="read-more">Read More \u2192</a></article>';
+    }).join('');
+  }).catch(function(){grid.parentElement.style.display='none';});
+})();
+</script>
 </body>
 </html>

@@ -16,8 +16,8 @@
     <meta name="robots" content="noindex, follow">
     
     <!-- Resource Hints -->
-    <link rel="preconnect" href="https://picsum.photos" crossorigin>
-    <link rel="dns-prefetch" href="https://picsum.photos">
+    <link rel="preconnect" href="https://loremflickr.com" crossorigin>
+    <link rel="dns-prefetch" href="https://loremflickr.com">
     <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="style.css">
@@ -53,6 +53,7 @@
     </header>
     <main class="container">
         <article class="article-content" style="max-width:800px;margin:0 auto;">
+                <nav class="breadcrumb" aria-label="Breadcrumb"><a href="index.html">Home</a><span class="sep">&rsaquo;</span><span class="current">Privacy Policy</span></nav>
             <h1>Privacy Policy</h1>
             <p><em>Last updated: May 25, 2026</em></p>
 
@@ -178,10 +179,10 @@
                 <p>Join our growing community. Fresh insights delivered to your inbox every week — written by Tushar.</p>
                 <form class="newsletter-form" action="https://formsubmit.co/200203041018@silveroakuni.ac.in" method="POST">
                     <input type="email" name="email" placeholder="Your best email address" required aria-label="Email address">
-                    <input type="hidden" name="_subject" value="🎉 New Subscriber — Recipe Kitchen Usa">
+                    <input type="hidden" name="_subject" value="🎉 New Subscriber — Recipe Kitchen USA">
                     <input type="hidden" name="_captcha" value="true">
                     <input type="hidden" name="_template" value="table">
-                    <input type="hidden" name="_autoresponse" value="Hey there! 👋 Thanks for subscribing to Recipe Kitchen Usa. You'll receive our best articles every week — no spam, ever. Welcome aboard! — Tushar">
+                    <input type="hidden" name="_autoresponse" value="Hey there! 👋 Thanks for subscribing to Recipe Kitchen USA. You'll receive our best articles every week — no spam, ever. Welcome aboard! — Tushar">
                     <input type="hidden" name="_next" value="https://Tusharlimbasiya-200-silveroak.github.io/recipe-kitchen-usa/?subscribed=true">
                     <button type="submit">Subscribe Free →</button>
                 </form>
@@ -221,5 +222,25 @@
             .catch(e => console.log('SW failed', e));
     }
     </script>
+<script>
+/* related-articles v1 */
+(function(){
+  var grid=document.getElementById('relatedGrid'); if(!grid) return;
+  var cur=location.pathname.split('/').pop().replace(/\.html$/,'');
+  function esc(s){return (s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');}
+  fetch('articles.json').then(function(r){return r.json();}).then(function(d){
+    var idx=-1,i; for(i=0;i<d.length;i++){if(d[i].slug===cur){idx=i;break;}}
+    var others=d.filter(function(a){return a.slug!==cur;});
+    if(!others.length){grid.parentElement.style.display='none';return;}
+    var start=(idx>0?idx:0)%others.length;
+    var pick=others.slice(start).concat(others.slice(0,start)).slice(0,3);
+    grid.innerHTML=pick.map(function(a){
+      return '<article class="r-card"><h3><a href="'+a.slug+'.html">'+esc(a.title)+'</a></h3>'
+        +'<p class="r-excerpt">'+esc(a.meta_description||'')+'</p>'
+        +'<a href="'+a.slug+'.html" class="read-more">Read More \u2192</a></article>';
+    }).join('');
+  }).catch(function(){grid.parentElement.style.display='none';});
+})();
+</script>
 </body>
 </html>
