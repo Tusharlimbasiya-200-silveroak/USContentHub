@@ -289,7 +289,10 @@ if not DEBUG:
     SECURE_CONTENT_TYPE_NOSNIFF = True
     X_FRAME_OPTIONS = 'DENY'
     SECURE_REFERRER_POLICY = 'strict-origin-when-cross-origin'
-    SECURE_SSL_REDIRECT = os.environ.get('DJANGO_SECURE_SSL', '').lower() in ('true', '1')
+    # On by default (Vercel terminates TLS and is HTTPS-only; SECURE_PROXY_SSL_HEADER
+    # below tells Django the request was already secure, so no redirect loop).
+    # Set DJANGO_SECURE_SSL=false to opt out (e.g. behind a non-TLS internal proxy).
+    SECURE_SSL_REDIRECT = os.environ.get('DJANGO_SECURE_SSL', 'true').lower() in ('true', '1')
     SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
     SESSION_COOKIE_SECURE = True
     CSRF_COOKIE_SECURE = True
