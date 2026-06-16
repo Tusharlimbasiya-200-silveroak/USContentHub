@@ -47,7 +47,10 @@ class BodyExtractor(HTMLParser):
     def handle_starttag(self, tag, attrs):
         d = dict(attrs)
         cls = d.get("class", "")
-        if "article-body" in cls or "article-content" in cls:
+        # Capture ONLY the prose inside `.article-body`. (Previously this also
+        # matched the outer `.article-content`, which pulled the breadcrumb and
+        # header chrome into the stored body — see export_static for the inverse.)
+        if "article-body" in cls and not self.in_body:
             self.in_body = True
             self.depth = 1
             return
@@ -107,7 +110,8 @@ class Command(BaseCommand):
                     "description": site_cfg["desc"],
                     "color": site_cfg["color"],
                     "icon": site_cfg["icon"],
-                    "github_url": f"https://tusharlimbasiya-200-silveroak.github.io/{folder}/",
+                    # NOTE: `github_url` is not a field on Publication — passing it
+                    # here used to crash the create-path. Removed.
                 },
             )
 

@@ -101,6 +101,31 @@ Open http://localhost:8000 in your browser.
 python manage.py test blog
 ```
 
+## Publishing content (single source of truth)
+
+The database is the source of truth; the static GitHub Pages sites are a
+generated artifact. Publish a new article with **one command** so the Vercel
+(Neon) site and the GitHub Pages site stay in lockstep:
+
+```bash
+# Write a draft JSON (see publish.py docstring for the schema; `content` is the
+# CLEAN body HTML only — no breadcrumb/newsletter/share chrome).
+DATABASE_URL='postgres://…neon…' python3 publish.py drafts/my-article.json --commit
+git push        # deploy-sites.yml then ships the static side to gh-pages
+```
+
+`publish.py` upserts the article into the DB, then runs `export_static` to
+(re)generate the article HTML + `articles.json` entry + homepage card +
+sitemap URL for that publication. `export_static` is idempotent and
+non-lossy — it only touches the given slug and preserves the extra
+`articles.json` fields the DB does not model.
+
+- `python manage.py export_static --slug <slug> [--check]` — render specific articles from the DB.
+- `python manage.py import_blogs` — legacy static→DB bridge; also runs in CI (`sync-db.yml`) as a drift safety net. Additive (skips existing slugs).
+
+> Never paste the production `DATABASE_URL` on the command line interactively —
+> set it as a GitHub Actions secret (below) and let CI run the DB writes.
+
 ## Deployment
 
 ### Vercel (Django backend)
@@ -124,6 +149,17 @@ The Django app is deployed to Vercel via `api/index.py`. Required environment va
 ### GitHub Pages (Static sites)
 
 Each active `sites/<publication>/` folder is deployed to its own GitHub Pages repo via the `deploy-sites.yml` workflow. Triggered on any push to `sites/**`.
+
+### Database sync (`sync-db.yml`)
+
+On every push to `sites/**`, this workflow mirrors any new articles into the
+Neon database so the dynamic site never falls behind GitHub Pages. It reads
+credentials from GitHub Secrets — **never** from the repo:
+
+- `DATABASE_URL` — the Neon/PostgreSQL connection string (same value as Vercel)
+- `DJANGO_SECRET_KEY` — any strong key (only needed for Django to boot)
+
+Add them in **repo Settings → Secrets and variables → Actions**.
 
 ### Pinterest Bot
 

@@ -1,0 +1,52 @@
+# USContentHub - Sync database from static content
+#
+# Safety net for the "single source of truth" architecture: whenever article
+# content is pushed to sites/**, mirror any NEW articles into the Vercel/Neon
+# database so the dynamic site can never silently fall behind GitHub Pages
+# (the exact drift that used to require a manual import with a pasted password).
+#
+# import_blogs is additive — it skips slugs that already exist, so re-runs are
+# safe and never overwrite or delete. Credentials come from GitHub Actions
+# secrets (DATABASE_URL, DJANGO_SECRET_KEY) — never from the repo.
+
+name: Sync DB
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'sites/**/articles.json'
+      - 'sites/**/*.html'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: sync-db
+  cancel-in-progress: false
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Import new articles into the database
+        env:
+          DATABASE_URL: ${{ secrets.DATABASE_URL }}
+          DJANGO_SECRET_KEY: ${{ secrets.DJANGO_SECRET_KEY }}
+          DJANGO_DEBUG: 'False'
+        run: |
+          if [ -z "$DATABASE_URL" ]; then
+            echo "::error::DATABASE_URL secret is not set — add it in repo Settings → Secrets → Actions."
+            exit 1
+          fi
+          python manage.py import_blogs
