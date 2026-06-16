@@ -1,5 +1,115 @@
 [
   {
+    "title": "The Fed's June 2026 Decision: Why Rate-Hike Fears Are Back and How Traders Should Prepare",
+    "slug": "fed-june-2026-rate-decision-traders-guide",
+    "meta_description": "The FOMC meets June 16-17, 2026 with rates at 3.50%-3.75%. Sticky 4.2% inflation and a hot jobs report flipped the conversation from cuts to hikes. Here's what traders should watch and how to position.",
+    "date": "2026-06-16T12:00:00.000000",
+    "word_count": 1450,
+    "read_time": 7,
+    "seo_score": 95,
+    "source": "claude_research",
+    "category": "trading",
+    "tags": [
+      "federal reserve",
+      "interest rates",
+      "market analysis"
+    ],
+    "author": "The Trading Blueprint",
+    "featured": true,
+    "image": "https://live.staticflickr.com/6101/6273179400_fc4f90d0c4_b.jpg",
+    "status": "published",
+    "bucket": "main",
+    "seo_score_original": 92
+  },
+  {
+    "title": "The $1.4 Trillion Chip Crash: What the June 2026 Semiconductor Selloff Means for Traders",
+    "slug": "semiconductor-selloff-june-2026-chip-crash-traders",
+    "meta_description": "A single session erased ~$1.4 trillion across AI chip stocks in June 2026 — Broadcom fell 12.6%, Marvell 17%, and Nvidia lost $300B in a day. Here's what triggered the semiconductor crash and how traders should respond.",
+    "date": "2026-06-16T11:00:00.000000",
+    "word_count": 1450,
+    "read_time": 7,
+    "seo_score": 95,
+    "source": "claude_research",
+    "category": "trading",
+    "tags": [
+      "semiconductors",
+      "ai stocks",
+      "market analysis"
+    ],
+    "author": "The Trading Blueprint",
+    "featured": false,
+    "image": "https://live.staticflickr.com/7139/8157597157_12bca1cc99_b.jpg",
+    "status": "published",
+    "bucket": "main",
+    "seo_score_original": 92
+  },
+  {
+    "title": "Bitcoin Crashed Below $60K, Then Bounced: What June 2026's Crypto Volatility Means for Traders",
+    "slug": "bitcoin-crash-recovery-june-2026-what-it-means",
+    "meta_description": "Bitcoin plunged under $60,000 in early June 2026 — its lowest since late 2024 — triggering $2B+ in liquidations before recovering near $66,500. Here's what drove the crash and how traders should handle crypto volatility.",
+    "date": "2026-06-16T10:00:00.000000",
+    "word_count": 1450,
+    "read_time": 7,
+    "seo_score": 95,
+    "source": "claude_research",
+    "category": "trading",
+    "tags": [
+      "crypto",
+      "bitcoin",
+      "market analysis"
+    ],
+    "author": "The Trading Blueprint",
+    "featured": false,
+    "image": "https://live.staticflickr.com/1803/41633838460_bc821ed828_b.jpg",
+    "status": "published",
+    "bucket": "main",
+    "seo_score_original": 90
+  },
+  {
+    "title": "Oil Above $115 and Energy Stocks at Record Highs: Trading the US-Iran Conflict in 2026",
+    "slug": "oil-energy-stocks-record-highs-trading-iran-conflict-2026",
+    "meta_description": "Brent crude is trading $115-$119 amid the US-Iran conflict and a Strait of Hormuz blockade, and the S&P 500 energy sector is at record highs, up 27% YTD. Here's how traders should approach the energy trade — and its risks.",
+    "date": "2026-06-16T09:00:00.000000",
+    "word_count": 1450,
+    "read_time": 7,
+    "seo_score": 95,
+    "source": "claude_research",
+    "category": "trading",
+    "tags": [
+      "energy",
+      "oil",
+      "market analysis"
+    ],
+    "author": "The Trading Blueprint",
+    "featured": false,
+    "image": "https://live.staticflickr.com/7413/9096521891_f0875d38e0_b.jpg",
+    "status": "published",
+    "bucket": "main",
+    "seo_score_original": 90
+  },
+  {
+    "title": "Gold and Silver Just Corrected Hard — Is the Bull Market Over or Is This the Setup?",
+    "slug": "gold-silver-correction-2026-bull-market-over",
+    "meta_description": "Gold has fallen ~20% from its $5,589 January 2026 record and silver ~35% from its $121 peak. Is the precious-metals bull market broken, or is this a buyable pullback? Here's the case both ways — and how traders should approach it.",
+    "date": "2026-06-16T08:00:00.000000",
+    "word_count": 1450,
+    "read_time": 7,
+    "seo_score": 95,
+    "source": "claude_research",
+    "category": "trading",
+    "tags": [
+      "gold",
+      "silver",
+      "market analysis"
+    ],
+    "author": "The Trading Blueprint",
+    "featured": false,
+    "image": "https://upload.wikimedia.org/wikipedia/commons/a/af/Gold_bullion_bars.jpg",
+    "status": "published",
+    "bucket": "main",
+    "seo_score_original": 90
+  },
+  {
     "title": "Is the AI Stock Bubble About to Burst in 2026? What Every Trader Needs to Know",
     "slug": "ai-stock-bubble-2026-burst-what-traders-need-to-know",
     "meta_description": "Michael Burry is shorting Nvidia and Palantir, AI capex is heading toward $660B, and OpenAI's spending dwarfs its revenue. Here's the AI bubble bull vs bear case — and how traders should position in 2026.",
