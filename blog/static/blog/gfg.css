@@ -230,3 +230,16 @@
     font-weight: 700; font-size: .78rem;
 }
 .article-meta .article-author { font-weight: 600; color: var(--text-light); }
+
+/* ============================================================
+   FIX: article card padding (.article-full lost the padding that
+   lived on the legacy .article-content) — so the cover image
+   (margin:0 -44px) bled past the card edges. Restore padding and
+   hard-reset any transform so the cover can never tilt/overflow.
+   ============================================================ */
+.article-full { padding: 36px 44px; }
+@media (max-width: 768px) { .article-full { padding: 22px 20px; } }
+@media (max-width: 480px) { .article-full { padding: 16px 14px; } }
+
+.article-cover { transform: none !important; rotate: 0deg !important; overflow: hidden; }
+.article-cover img { transform: none !important; rotate: 0deg !important; display: block; width: 100%; }
