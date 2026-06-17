@@ -85,6 +85,7 @@
     </script>
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2673860903932624" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="{% static 'blog/style.css' %}?v=35">
+    <link rel="stylesheet" href="{% static 'blog/aurora.css' %}?v=1">
     <style>
     @media print {
         .platform-bar, .site-footer, .back-to-top, .reading-progress,
@@ -119,12 +120,16 @@
     .rating-stars .star.empty { color:var(--text-muted); }
     </style>
     <script>
-    (function(){var t=localStorage.getItem('theme');if(t)document.documentElement.setAttribute('data-theme',t);})();
+    (function(){var t=localStorage.getItem('theme')||'dark';document.documentElement.setAttribute('data-theme',t);})();
     </script>
     {% block extra_head %}{% endblock %}
 </head>
 <body>
     <a href="#main-content" class="skip-link">Skip to content</a>
+
+    <!-- Aurora Glass background (WebGL with CSS fallback) -->
+    <canvas id="aurora-bg" aria-hidden="true"></canvas>
+    <div id="aurora-fallback" aria-hidden="true"></div>
 
     <div class="reading-progress" id="readingProgress"></div>
 
@@ -461,6 +466,7 @@
 
     {% block extra_js %}{% endblock %}
 
+    <script src="{% static 'blog/aurora.js' %}?v=1" defer></script>
 
 </body>
 </html>
