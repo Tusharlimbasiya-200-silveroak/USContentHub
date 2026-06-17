@@ -21,7 +21,10 @@
 {% endblock %}
 {% block content %}
 <section class="articles-list">
-    <h2>Articles tagged "{{ tag.name }}"</h2>
+    <div class="list-head-row">
+        <h2>Articles tagged "{{ tag.name }}"</h2>
+        {% include "blog/_follow_btn.html" %}
+    </div>
     <div class="articles-grid">
         {% for article in articles %}
         <article class="article-card">

@@ -318,6 +318,33 @@
 </div>
 {% endif %}
 
+{% if user.is_authenticated and continue_reading %}
+<!-- ── Continue reading (member) ── -->
+<section class="articles-list member-rail" aria-label="Continue reading">
+    <div class="section-header">
+        <h2>⏯️ Continue reading</h2>
+        <a href="{% url 'blog:profile' %}">Your activity →</a>
+    </div>
+    <div class="articles-grid">
+        {% for a in continue_reading %}{% include "blog/_card.html" %}{% endfor %}
+    </div>
+</section>
+{% endif %}
+
+{% if user.is_authenticated and for_you %}
+<!-- ── For You (member) ── -->
+<section class="articles-list member-rail" aria-label="Recommended for you">
+    <div class="section-header">
+        <h2>✨ For You</h2>
+        {% if following_count %}<a href="{% url 'blog:profile' %}">Following {{ following_count }} →</a>
+        {% else %}<a href="{% url 'blog:explore' %}">Follow topics →</a>{% endif %}
+    </div>
+    <div class="articles-grid">
+        {% for a in for_you %}{% include "blog/_card.html" %}{% endfor %}
+    </div>
+</section>
+{% endif %}
+
 <!-- ── Articles section ── -->
 <section class="articles-list" aria-label="Articles">
     <div class="section-header">

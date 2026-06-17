@@ -1,0 +1,18 @@
+{# Follow button. Expects follow_tag OR follow_pub, plus is_following. #}
+{% if user.is_authenticated %}
+    {% if follow_tag %}
+    <button class="follow-btn{% if is_following %} following{% endif %}" type="button"
+            data-ftype="tag" data-fid="{{ follow_tag|urlencode }}">
+        <span class="fb-text">{% if is_following %}✓ Following{% else %}+ Follow{% endif %}</span>
+    </button>
+    {% elif follow_pub %}
+    <button class="follow-btn{% if is_following %} following{% endif %}" type="button"
+            data-ftype="pub" data-fid="{{ follow_pub }}">
+        <span class="fb-text">{% if is_following %}✓ Following{% else %}+ Follow{% endif %}</span>
+    </button>
+    {% endif %}
+{% else %}
+    {% if follow_tag or follow_pub %}
+    <a class="follow-btn" href="{% url 'blog:login' %}"><span class="fb-text">+ Follow</span></a>
+    {% endif %}
+{% endif %}

@@ -41,7 +41,10 @@
 {% block content %}
 {% include "blog/_topic_sidebar.html" %}
 <section class="articles-list" aria-label="Articles">
-    <h2>{{ publication.name }} Articles</h2>
+    <div class="list-head-row">
+        <h2>{{ publication.name }} Articles</h2>
+        {% include "blog/_follow_btn.html" %}
+    </div>
     <p class="articles-count">{{ total_articles }} articles published</p>
 
     <div class="articles-grid">

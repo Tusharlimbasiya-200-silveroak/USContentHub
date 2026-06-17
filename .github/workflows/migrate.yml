@@ -1,0 +1,48 @@
+# USContentHub — apply Django migrations to the Neon/Vercel database.
+#
+# Runs whenever migrations (or models) change on main, so the production
+# schema stays in lockstep with the deployed code. Credentials come from
+# GitHub Actions secrets (DATABASE_URL, DJANGO_SECRET_KEY) — never the repo.
+# manage.py migrate is idempotent: re-runs apply nothing once up to date.
+
+name: Migrate DB
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'blog/migrations/**'
+      - 'blog/models.py'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: migrate-db
+  cancel-in-progress: false
+
+jobs:
+  migrate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Apply migrations
+        env:
+          DATABASE_URL: ${{ secrets.DATABASE_URL }}
+          DJANGO_SECRET_KEY: ${{ secrets.DJANGO_SECRET_KEY }}
+          DJANGO_DEBUG: 'False'
+        run: |
+          if [ -z "$DATABASE_URL" ]; then
+            echo "::error::DATABASE_URL secret is not set — add it in repo Settings → Secrets → Actions."
+            exit 1
+          fi
+          python manage.py migrate --noinput

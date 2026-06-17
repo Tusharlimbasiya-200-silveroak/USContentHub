@@ -31,7 +31,16 @@ from .helpers import (
     send_contact_emails,
     send_newsletter_welcome,
 )
-from .models import Article, ArticleRating, Comment, NewsletterSubscriber, Publication, Tag, UserProfile
+from .models import (
+    Article,
+    ArticleRating,
+    Comment,
+    NewsletterSubscriber,
+    Publication,
+    ReadingHistory,
+    Tag,
+    UserProfile,
+)
 
 logger = logging.getLogger(__name__)
 
@@ -62,11 +71,8 @@ class HomeView(ListView):
             lambda: Article.objects.filter(status="published").count(),
         )
         if self.request.user.is_authenticated:
-            try:
-                profile = UserProfile.objects.get(user=self.request.user)
-                ctx["bookmark_count"] = profile.bookmarks.count()
-            except UserProfile.DoesNotExist:
-                ctx["bookmark_count"] = 0
+            profile, _ = UserProfile.objects.get_or_create(user=self.request.user)
+            ctx["bookmark_count"] = profile.bookmarks.count()
             ctx["featured_articles"] = cache_or_set(
                 "featured_articles_3", 300,
                 lambda: list(
@@ -76,6 +82,48 @@ class HomeView(ListView):
                     .order_by("-views")[:3]
                 ),
             )
+
+            # Member feeds — wrapped so a not-yet-migrated DB degrades gracefully
+            # (rather than 500) in the brief window before migrate CI completes.
+            try:
+                # Continue reading — most-recently-read articles for this user
+                ctx["continue_reading"] = list(
+                    Article.objects.filter(
+                        status="published",
+                        reading_history__user=self.request.user,
+                    )
+                    .select_related("publication")
+                    .order_by("-reading_history__last_read")[:4]
+                )
+
+                # "For You" — personalized by followed topics/publications,
+                # falling back to the tags of what the user bookmarked / read.
+                followed_tag_ids = set(profile.followed_tags.values_list("id", flat=True))
+                followed_pub_ids = set(profile.followed_publications.values_list("id", flat=True))
+                seed_tag_ids = set(
+                    Tag.objects.filter(
+                        Q(articles__bookmarked_by=profile)
+                        | Q(articles__reading_history__user=self.request.user)
+                    ).values_list("id", flat=True)
+                )
+                interest_tags = followed_tag_ids | seed_tag_ids
+                read_ids = list(
+                    self.request.user.reading_history.values_list("article_id", flat=True)
+                )
+                if interest_tags or followed_pub_ids:
+                    ctx["for_you"] = list(
+                        Article.objects.filter(status="published")
+                        .filter(Q(tags__in=interest_tags) | Q(publication_id__in=followed_pub_ids))
+                        .exclude(id__in=read_ids)
+                        .select_related("publication")
+                        .prefetch_related("tags")
+                        .annotate(rel=Count("tags", filter=Q(tags__in=interest_tags)))
+                        .order_by("-rel", "-published_at")
+                        .distinct()[:6]
+                    )
+                ctx["following_count"] = len(followed_tag_ids) + len(followed_pub_ids)
+            except Exception:
+                logger.warning("Member feed unavailable (schema not migrated yet?)")
         return ctx
 
 
@@ -117,6 +165,12 @@ class PublicationView(ListView):
             cache.set(tkey, topic, 600)
         ctx["topic_pub"] = topic["pub"]
         ctx["topic_tags"] = topic["tags"]
+        ctx["follow_pub"] = self.publication.slug
+        if self.request.user.is_authenticated:
+            profile, _ = UserProfile.objects.get_or_create(user=self.request.user)
+            ctx["is_following"] = profile.followed_publications.filter(
+                pk=self.publication.pk
+            ).exists()
         return ctx
 
 
@@ -138,6 +192,10 @@ class TagView(ListView):
     def get_context_data(self, **kwargs):
         ctx = super().get_context_data(**kwargs)
         ctx["tag"] = self.tag
+        ctx["follow_tag"] = self.tag.name
+        if self.request.user.is_authenticated:
+            profile, _ = UserProfile.objects.get_or_create(user=self.request.user)
+            ctx["is_following"] = profile.followed_tags.filter(pk=self.tag.pk).exists()
         return ctx
 
 
@@ -283,6 +341,11 @@ class ArticleDetailView(DetailView):
         response = super().get(request, *args, **kwargs)
         try:
             Article.objects.filter(pk=self.object.pk).update(views=F("views") + 1)
+            # Track reading history for logged-in users (member feature).
+            if request.user.is_authenticated:
+                ReadingHistory.objects.update_or_create(
+                    user=request.user, article=self.object
+                )
         except Exception:
             pass  # Best-effort; DB may be read-only on Vercel cold starts
         return response
@@ -387,8 +450,16 @@ def add_comment(request, slug):
         )
 
     article = get_object_or_404(Article, slug=slug, status="published")
-    name = escape(request.POST.get("name", "").strip()[:100])
     content = escape(request.POST.get("content", "").strip()[:2000])
+
+    # Logged-in members comment under their account name; anon must give a name.
+    comment_user = None
+    if request.user.is_authenticated:
+        profile, _ = UserProfile.objects.get_or_create(user=request.user)
+        name = escape(profile.shown_name[:100])
+        comment_user = request.user
+    else:
+        name = escape(request.POST.get("name", "").strip()[:100])
 
     if not name or not content or len(name) < 2 or len(content) < 5:
         return JsonResponse(
@@ -397,13 +468,17 @@ def add_comment(request, slug):
         )
 
     try:
-        comment = Comment.objects.create(article=article, name=name, content=content)
+        comment = Comment.objects.create(
+            article=article, user=comment_user, name=name, content=content
+        )
         bump_rate_counter(rate_key, 60)
         return JsonResponse({
             "success": True,
+            "id": comment.id,
             "name": comment.name,
             "content": comment.content,
             "created_at": comment.created_at.strftime("%b %d, %Y %H:%M"),
+            "owner": comment_user is not None,
         })
     except Exception as exc:
         logger.error(
@@ -809,6 +884,78 @@ def user_bookmarks(request):
         .prefetch_related("tags")
     )
     return render(request, "blog/user_bookmarks.html", {"articles": articles})
+
+
+# ── Member: follow topics / publications ─────────────────────────────────────
+
+@login_required
+@require_POST
+def toggle_follow_tag(request, tag_name):
+    tag = get_object_or_404(Tag, name=tag_name)
+    profile, _ = UserProfile.objects.get_or_create(user=request.user)
+    if profile.followed_tags.filter(pk=tag.pk).exists():
+        profile.followed_tags.remove(tag)
+        following = False
+    else:
+        profile.followed_tags.add(tag)
+        following = True
+    return JsonResponse({"following": following, "tag": tag.name})
+
+
+@login_required
+@require_POST
+def toggle_follow_publication(request, slug):
+    pub = get_object_or_404(Publication, slug=slug)
+    profile, _ = UserProfile.objects.get_or_create(user=request.user)
+    if profile.followed_publications.filter(pk=pub.pk).exists():
+        profile.followed_publications.remove(pub)
+        following = False
+    else:
+        profile.followed_publications.add(pub)
+        following = True
+    return JsonResponse({"following": following, "publication": pub.slug})
+
+
+# ── Member: profile ──────────────────────────────────────────────────────────
+
+@login_required
+def profile_view(request):
+    profile, _ = UserProfile.objects.get_or_create(user=request.user)
+    if request.method == "POST":
+        profile.display_name = escape(request.POST.get("display_name", "").strip()[:80])
+        profile.bio = escape(request.POST.get("bio", "").strip()[:300])
+        profile.save()
+        messages.success(request, "Profile updated.")
+        return redirect("blog:profile")
+
+    history = (
+        Article.objects.filter(status="published", reading_history__user=request.user)
+        .select_related("publication")
+        .order_by("-reading_history__last_read")[:12]
+    )
+    followed_tags = list(profile.followed_tags.all())
+    followed_publications = list(profile.followed_publications.all())
+    return render(request, "blog/profile.html", {
+        "profile": profile,
+        "badges": profile.badges(),
+        "bookmark_count": profile.bookmarks.count(),
+        "history": history,
+        "followed_tags": followed_tags,
+        "followed_publications": followed_publications,
+        "following_count": len(followed_tags) + len(followed_publications),
+    })
+
+
+# ── Member: delete own comment ───────────────────────────────────────────────
+
+@login_required
+@require_POST
+def delete_comment(request, comment_id):
+    comment = get_object_or_404(Comment, pk=comment_id)
+    if comment.user_id != request.user.id and not request.user.is_staff:
+        return JsonResponse({"success": False, "error": "Not allowed."}, status=403)
+    comment.delete()
+    return JsonResponse({"success": True})
 
 
 # ── Pinterest OAuth (one-time setup) ─────────────────────────────────────────

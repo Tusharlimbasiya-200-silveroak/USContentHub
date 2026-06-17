@@ -88,6 +88,9 @@ class Article(models.Model):
 
 class Comment(models.Model):
     article = models.ForeignKey(Article, on_delete=models.CASCADE, related_name="comments")
+    user = models.ForeignKey(
+        User, on_delete=models.SET_NULL, null=True, blank=True, related_name="comments"
+    )
     name = models.CharField(max_length=100)
     content = models.TextField(max_length=2000)
     created_at = models.DateTimeField(auto_now_add=True, db_index=True)
@@ -132,6 +135,65 @@ class ArticleRating(models.Model):
 class UserProfile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, related_name="profile")
     bookmarks = models.ManyToManyField(Article, blank=True, related_name="bookmarked_by")
+    display_name = models.CharField(max_length=80, blank=True, default="")
+    bio = models.CharField(max_length=300, blank=True, default="")
+    followed_tags = models.ManyToManyField(Tag, blank=True, related_name="followers")
+    followed_publications = models.ManyToManyField(
+        Publication, blank=True, related_name="followers"
+    )
 
     def __str__(self):
         return self.user.username
+
+    @property
+    def shown_name(self):
+        return self.display_name or self.user.username
+
+    def reads_count(self):
+        return self.user.reading_history.count()
+
+    def badges(self):
+        """Simple reading badges/streaks computed from reading history."""
+        from datetime import timedelta
+
+        qs = self.user.reading_history.all()
+        n = qs.count()
+        out = []
+        for threshold, label, icon in (
+            (1, "First Read", "🌱"),
+            (10, "Curious Reader", "📖"),
+            (25, "Bookworm", "🐛"),
+            (50, "Scholar", "🎓"),
+            (100, "Knowledge Seeker", "🧠"),
+        ):
+            if n >= threshold:
+                out.append({"label": label, "icon": icon})
+        # day streak: distinct consecutive days ending today
+        days = sorted({r.last_read.date() for r in qs}, reverse=True)
+        streak = 0
+        if days:
+            today = timezone.now().date()
+            cursor = today
+            for d in days:
+                if d == cursor:
+                    streak += 1
+                    cursor = cursor - timedelta(days=1)
+                elif d < cursor:
+                    break
+        return {"earned": out, "reads": n, "streak": streak}
+
+
+class ReadingHistory(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="reading_history")
+    article = models.ForeignKey(Article, on_delete=models.CASCADE, related_name="reading_history")
+    last_read = models.DateTimeField(auto_now=True, db_index=True)
+
+    class Meta:
+        unique_together = ("user", "article")
+        ordering = ["-last_read"]
+        indexes = [
+            models.Index(fields=["user", "-last_read"], name="idx_history_user"),
+        ]
+
+    def __str__(self):
+        return f"{self.user.username} read {self.article.title[:30]}"

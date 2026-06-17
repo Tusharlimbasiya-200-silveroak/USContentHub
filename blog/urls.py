@@ -16,6 +16,7 @@ urlpatterns = [
     path("article/<slug:slug>/comment/", views.add_comment, name="add_comment"),
     path("article/<slug:slug>/rate/", views.rate_article, name="rate_article"),
     path("article/<slug:slug>/bookmark/", views.toggle_bookmark, name="toggle_bookmark"),
+    path("comment/<int:comment_id>/delete/", views.delete_comment, name="delete_comment"),
     path("pub/<slug:slug>/", views.PublicationView.as_view(), name="publication"),
     path("tag/", views.TagView.as_view(), name="tag_query"),
     path("tag/<path:tag_name>/", views.TagView.as_view(), name="tag"),
@@ -30,6 +31,9 @@ urlpatterns = [
     path("accounts/login/", views.login_view, name="login"),
     path("accounts/logout/", views.logout_view, name="logout"),
     path("accounts/bookmarks/", views.user_bookmarks, name="user_bookmarks"),
+    path("accounts/profile/", views.profile_view, name="profile"),
+    path("follow/tag/<path:tag_name>/", views.toggle_follow_tag, name="follow_tag"),
+    path("follow/pub/<slug:slug>/", views.toggle_follow_publication, name="follow_publication"),
     # ── Pinterest OAuth (one-time setup — remove after tokens saved) ──
     path("otp/pinterest-connect/", views.pinterest_connect, name="pinterest_connect"),
     path("otp/pinterest-callback/", views.pinterest_callback, name="pinterest_callback"),

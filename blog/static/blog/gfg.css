@@ -361,3 +361,20 @@ main.container:has(.topic-sidebar) > *:not(.topic-sidebar) { grid-column: 2 !imp
 [data-theme="dark"] .article-body blockquote { color: #c4ccdb !important; border-left-color: #2f8d46 !important; }
 [data-theme="dark"] .article-body td,
 [data-theme="dark"] .article-body th { border-color: #283143 !important; color: #d6dce8; }
+
+/* ============================================================
+   MEMBER: Follow button + list header row
+   ============================================================ */
+.list-head-row { display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
+.follow-btn {
+    display: inline-flex; align-items: center; gap: 6px;
+    padding: 8px 18px; border-radius: 30px;
+    border: 1.5px solid var(--gfg-green, #2f8d46);
+    background: var(--gfg-green, #2f8d46); color: #fff !important;
+    font-weight: 700; font-size: .85rem; cursor: pointer;
+    text-decoration: none; white-space: nowrap; transition: all .18s;
+}
+.follow-btn:hover { background: var(--gfg-green-d, #1f6e35); }
+.follow-btn.following { background: transparent; color: var(--gfg-green, #2f8d46) !important; }
+.follow-btn.following:hover { background: var(--primary-light, #e7f6ec); }
+.member-rail .articles-grid { grid-template-columns: repeat(auto-fill, minmax(min(280px,100%),1fr)); }
