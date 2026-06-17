@@ -133,11 +133,13 @@
 :root:not([data-theme="dark"]) .article-body { color: #2f2f2f; font-size: 1.08rem; }
 
 /* GFG-style green section headings with left bar */
+.article-body h2 {
+    padding: 6px 0 8px 14px !important;
+    position: relative;
+}
 :root:not([data-theme="dark"]) .article-body h2 {
     color: #1a1a1a !important;
     border-bottom: 1px solid var(--gfg-line) !important;
-    padding: 6px 0 8px 14px !important;
-    position: relative;
 }
 .article-body h2::before {
     content: "" !important; position: absolute !important;
