@@ -97,7 +97,9 @@
         <h1 itemprop="headline">{{ article.title }}</h1>
         {% if article.subtitle %}<p class="article-subtitle">{{ article.subtitle }}</p>{% endif %}
         <div class="article-meta">
+            <span class="article-author" itemprop="author">✍️ USA Content Hub Team</span>
             <time datetime="{{ article.published_at|date:'Y-m-d' }}" itemprop="datePublished">📅 {{ article.published_at|date:'M d, Y' }}</time>
+            <span class="updated-on" title="Last updated">🔄 Last Updated: {{ article.updated_at|date:'M d, Y' }}</span>
             <span class="read-time">⏱️ {{ article.read_time }} min read</span>
             <span class="word-count">📝 {{ article.word_count }} words</span>
             <span class="views-count">👁️ {{ article.views }} views</span>

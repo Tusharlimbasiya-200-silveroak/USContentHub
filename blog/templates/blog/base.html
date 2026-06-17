@@ -85,6 +85,7 @@
     </script>
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2673860903932624" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="{% static 'blog/style.css' %}?v=35">
+    <link rel="stylesheet" href="{% static 'blog/gfg.css' %}?v=1">
     <style>
     @media print {
         .platform-bar, .site-footer, .back-to-top, .reading-progress,
@@ -119,7 +120,7 @@
     .rating-stars .star.empty { color:var(--text-muted); }
     </style>
     <script>
-    (function(){var t=localStorage.getItem('theme');if(t)document.documentElement.setAttribute('data-theme',t);})();
+    (function(){var t=localStorage.getItem('theme')||'light';document.documentElement.setAttribute('data-theme',t);})();
     </script>
     {% block extra_head %}{% endblock %}
 </head>
@@ -461,6 +462,7 @@
 
     {% block extra_js %}{% endblock %}
 
+    <script src="{% static 'blog/gfg.js' %}?v=1" defer></script>
 
 </body>
 </html>
