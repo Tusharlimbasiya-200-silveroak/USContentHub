@@ -167,10 +167,13 @@ class PublicationView(ListView):
         ctx["topic_tags"] = topic["tags"]
         ctx["follow_pub"] = self.publication.slug
         if self.request.user.is_authenticated:
-            profile, _ = UserProfile.objects.get_or_create(user=self.request.user)
-            ctx["is_following"] = profile.followed_publications.filter(
-                pk=self.publication.pk
-            ).exists()
+            try:
+                profile, _ = UserProfile.objects.get_or_create(user=self.request.user)
+                ctx["is_following"] = profile.followed_publications.filter(
+                    pk=self.publication.pk
+                ).exists()
+            except Exception:
+                pass
         return ctx
 
 
@@ -194,8 +197,11 @@ class TagView(ListView):
         ctx["tag"] = self.tag
         ctx["follow_tag"] = self.tag.name
         if self.request.user.is_authenticated:
-            profile, _ = UserProfile.objects.get_or_create(user=self.request.user)
-            ctx["is_following"] = profile.followed_tags.filter(pk=self.tag.pk).exists()
+            try:
+                profile, _ = UserProfile.objects.get_or_create(user=self.request.user)
+                ctx["is_following"] = profile.followed_tags.filter(pk=self.tag.pk).exists()
+            except Exception:
+                pass
         return ctx
 
 
@@ -411,8 +417,14 @@ class ArticleDetailView(DetailView):
                 ).exclude(id=article.id).order_by("-published_at")[:6]
             )
 
-        # Evaluate comments once; reuse list for both display and count
-        comments = list(article.comments.filter(is_approved=True))
+        # Evaluate comments once; reuse list for both display and count.
+        # Defensive: if the schema is behind the code (e.g. Comment.user not yet
+        # migrated in prod) degrade to no comments rather than 500 the page.
+        try:
+            comments = list(article.comments.filter(is_approved=True))
+        except Exception:
+            logger.warning("Comments unavailable (schema not migrated yet?)")
+            comments = []
         ctx["comments"] = comments
         ctx["comment_count"] = len(comments)
 
@@ -423,8 +435,11 @@ class ArticleDetailView(DetailView):
         ).exists()
         ctx["is_bookmarked"] = False
         if self.request.user.is_authenticated:
-            profile, _ = UserProfile.objects.get_or_create(user=self.request.user)
-            ctx["is_bookmarked"] = profile.bookmarks.filter(pk=article.pk).exists()
+            try:
+                profile, _ = UserProfile.objects.get_or_create(user=self.request.user)
+                ctx["is_bookmarked"] = profile.bookmarks.filter(pk=article.pk).exists()
+            except Exception:
+                logger.warning("Profile lookup unavailable (schema not migrated yet?)")
 
         # Breadcrumbs
         ctx["breadcrumbs"] = [("Home", "/")]
