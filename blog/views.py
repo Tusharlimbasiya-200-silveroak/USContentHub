@@ -99,6 +99,24 @@ class PublicationView(ListView):
         # Use object_list (already fetched by ListView) instead of calling
         # get_queryset() again — avoids a second DB hit per page load.
         ctx["total_articles"] = self.object_list.count()
+        # GFG-style topic sidebar: top topics within this publication
+        tkey = f"topic_sidebar_v1_{self.publication.pk}"
+        topic = cache.get(tkey)
+        if topic is None:
+            topic = {
+                "pub": self.publication,
+                "tags": list(
+                    Tag.objects.filter(
+                        articles__publication=self.publication,
+                        articles__status="published",
+                    )
+                    .annotate(n=Count("articles"))
+                    .order_by("-n")[:20]
+                ),
+            }
+            cache.set(tkey, topic, 600)
+        ctx["topic_pub"] = topic["pub"]
+        ctx["topic_tags"] = topic["tags"]
         return ctx
 
 
@@ -304,6 +322,31 @@ class ArticleDetailView(DetailView):
 
         ctx["related"] = related
         ctx["tags"] = article.tags.all()
+
+        # GFG-style topic sidebar: top topics in this publication + more in section
+        if article.publication:
+            tkey = f"topic_sidebar_v1_{article.publication_id}"
+            topic = cache.get(tkey)
+            if topic is None:
+                topic = {
+                    "pub": article.publication,
+                    "tags": list(
+                        Tag.objects.filter(
+                            articles__publication=article.publication,
+                            articles__status="published",
+                        )
+                        .annotate(n=Count("articles"))
+                        .order_by("-n")[:20]
+                    ),
+                }
+                cache.set(tkey, topic, 600)
+            ctx["topic_pub"] = topic["pub"]
+            ctx["topic_tags"] = topic["tags"]
+            ctx["topic_more"] = list(
+                Article.objects.filter(
+                    status="published", publication=article.publication
+                ).exclude(id=article.id).order_by("-published_at")[:6]
+            )
 
         # Evaluate comments once; reuse list for both display and count
         comments = list(article.comments.filter(is_approved=True))

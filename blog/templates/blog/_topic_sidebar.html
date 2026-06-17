@@ -1,0 +1,18 @@
+{% if topic_tags %}
+<aside class="topic-sidebar" aria-label="Topics in this section">
+    <div class="topic-sidebar-inner">
+        <div class="topic-head"><span class="topic-ic">{{ topic_pub.icon }}</span> {{ topic_pub.name }}</div>
+        <div class="topic-sub">Topics</div>
+        <nav class="topic-list" aria-label="Topic links">
+            {% for t in topic_tags %}<a href="/tag/?name={{ t.name|urlencode }}">{{ t.name }}</a>{% endfor %}
+        </nav>
+        {% if topic_more %}
+        <div class="topic-sub topic-sub-2">More in this section</div>
+        <nav class="topic-list topic-more" aria-label="More articles">
+            {% for a in topic_more %}<a href="{% url 'blog:article' a.slug %}">{{ a.title|truncatechars:52 }}</a>{% endfor %}
+        </nav>
+        {% endif %}
+        <a class="topic-allbtn" href="{% url 'blog:publication' topic_pub.slug %}">View all articles →</a>
+    </div>
+</aside>
+{% endif %}

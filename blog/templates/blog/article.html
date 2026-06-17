@@ -82,6 +82,7 @@
 {% block header %}{% endblock %}
 
 {% block content %}
+{% include "blog/_topic_sidebar.html" %}
 <article class="article-full" itemscope itemtype="https://schema.org/Article">
     <header class="article-header">
         {% if breadcrumbs %}

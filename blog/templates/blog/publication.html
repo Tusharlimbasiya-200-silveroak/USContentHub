@@ -39,6 +39,7 @@
 {% endblock %}
 
 {% block content %}
+{% include "blog/_topic_sidebar.html" %}
 <section class="articles-list" aria-label="Articles">
     <h2>{{ publication.name }} Articles</h2>
     <p class="articles-count">{{ total_articles }} articles published</p>

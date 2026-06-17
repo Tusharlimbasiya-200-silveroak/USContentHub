@@ -248,9 +248,9 @@
    GFG-STYLE LEFT TOPIC SIDEBAR (article + publication pages)
    ============================================================ */
 main.container:has(.topic-sidebar) {
-    grid-template-columns: 270px minmax(0, 1fr) !important;
-    max-width: 1440px !important;
-    gap: 36px !important;
+    grid-template-columns: 250px minmax(0, 1fr) !important;
+    max-width: 1180px !important;
+    gap: 30px !important;
     align-items: start !important;
 }
 main.container:has(.topic-sidebar) > *:not(.topic-sidebar) { grid-column: 2 !important; }
@@ -310,54 +310,3 @@ main.container:has(.topic-sidebar) > *:not(.topic-sidebar) { grid-column: 2 !imp
     main.container:has(.topic-sidebar) > *:not(.topic-sidebar) { grid-column: 1 !important; }
     .topic-sidebar { display: none !important; }
 }
-
-/* ============================================================
-   DARK MODE — eye-comfort reading experience
-   (the legacy dark body text #94a3b8 was too dim, on no card)
-   ============================================================ */
-[data-theme="dark"] body { background: #0f1420; }
-[data-theme="dark"] { --text-light: #d3dae7; --text: #eef2f8; }
-
-/* a defined reading panel instead of bare page background */
-[data-theme="dark"] .article-full {
-    background: #171d2b !important;
-    border: 1px solid #283143 !important;
-    border-radius: 10px;
-    box-shadow: 0 1px 6px rgba(0,0,0,.45);
-}
-
-/* body copy: brighter, slightly larger, relaxed line-height, off-white
-   (not pure white → avoids halation/glare) */
-[data-theme="dark"] .article-body {
-    color: #d6dce8 !important;
-    font-size: 1.09rem;
-    line-height: 1.85;
-    letter-spacing: .002em;
-}
-[data-theme="dark"] .article-body > p:first-of-type { color: #e8ecf4 !important; }
-[data-theme="dark"] .article-header h1 { color: #f4f7fb !important; }
-[data-theme="dark"] .article-subtitle { color: #aeb7c8 !important; }
-[data-theme="dark"] .article-body h2,
-[data-theme="dark"] .article-body h3 { color: #f2f5fa !important; }
-[data-theme="dark"] .article-body h2 { border-bottom-color: #2a3445 !important; }
-[data-theme="dark"] .article-body strong,
-[data-theme="dark"] .article-body b { color: #f4f7fb !important; }
-
-/* links + markers: lighter green for AA contrast on dark */
-[data-theme="dark"] .article-body a { color: #74d68d; text-decoration-color: rgba(116,214,141,.45); }
-[data-theme="dark"] .article-body a:hover { color: #93e1a8; }
-[data-theme="dark"] .article-body li::marker { color: #54c172 !important; }
-
-/* code: comfortable dark surface */
-[data-theme="dark"] .article-body pre {
-    background: #0d1117 !important;
-    border: 1px solid #283143 !important;
-    border-left: 4px solid #2f8d46 !important;
-}
-[data-theme="dark"] .article-body pre code { color: #d6dce8 !important; }
-[data-theme="dark"] .article-body code { background: #1c2536 !important; color: #84dc9c !important; }
-
-/* blockquotes / tables readable */
-[data-theme="dark"] .article-body blockquote { color: #c4ccdb !important; border-left-color: #2f8d46 !important; }
-[data-theme="dark"] .article-body td,
-[data-theme="dark"] .article-body th { border-color: #283143 !important; color: #d6dce8; }

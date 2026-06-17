@@ -248,9 +248,9 @@
    GFG-STYLE LEFT TOPIC SIDEBAR (article + publication pages)
    ============================================================ */
 main.container:has(.topic-sidebar) {
-    grid-template-columns: 270px minmax(0, 1fr) !important;
-    max-width: 1440px !important;
-    gap: 36px !important;
+    grid-template-columns: 250px minmax(0, 1fr) !important;
+    max-width: 1180px !important;
+    gap: 30px !important;
     align-items: start !important;
 }
 main.container:has(.topic-sidebar) > *:not(.topic-sidebar) { grid-column: 2 !important; }
