@@ -907,49 +907,60 @@ def user_bookmarks(request):
 @require_POST
 def toggle_follow_tag(request, tag_name):
     tag = get_object_or_404(Tag, name=tag_name)
-    profile, _ = UserProfile.objects.get_or_create(user=request.user)
-    if profile.followed_tags.filter(pk=tag.pk).exists():
-        profile.followed_tags.remove(tag)
-        following = False
-    else:
-        profile.followed_tags.add(tag)
-        following = True
-    return JsonResponse({"following": following, "tag": tag.name})
+    try:
+        profile, _ = UserProfile.objects.get_or_create(user=request.user)
+        if profile.followed_tags.filter(pk=tag.pk).exists():
+            profile.followed_tags.remove(tag)
+            following = False
+        else:
+            profile.followed_tags.add(tag)
+            following = True
+        return JsonResponse({"following": following, "tag": tag.name})
+    except Exception:
+        return JsonResponse({"error": "Following is temporarily unavailable."}, status=503)
 
 
 @login_required
 @require_POST
 def toggle_follow_publication(request, slug):
     pub = get_object_or_404(Publication, slug=slug)
-    profile, _ = UserProfile.objects.get_or_create(user=request.user)
-    if profile.followed_publications.filter(pk=pub.pk).exists():
-        profile.followed_publications.remove(pub)
-        following = False
-    else:
-        profile.followed_publications.add(pub)
-        following = True
-    return JsonResponse({"following": following, "publication": pub.slug})
+    try:
+        profile, _ = UserProfile.objects.get_or_create(user=request.user)
+        if profile.followed_publications.filter(pk=pub.pk).exists():
+            profile.followed_publications.remove(pub)
+            following = False
+        else:
+            profile.followed_publications.add(pub)
+            following = True
+        return JsonResponse({"following": following, "publication": pub.slug})
+    except Exception:
+        return JsonResponse({"error": "Following is temporarily unavailable."}, status=503)
 
 
 # ── Member: profile ──────────────────────────────────────────────────────────
 
 @login_required
 def profile_view(request):
-    profile, _ = UserProfile.objects.get_or_create(user=request.user)
-    if request.method == "POST":
-        profile.display_name = escape(request.POST.get("display_name", "").strip()[:80])
-        profile.bio = escape(request.POST.get("bio", "").strip()[:300])
-        profile.save()
-        messages.success(request, "Profile updated.")
-        return redirect("blog:profile")
+    try:
+        profile, _ = UserProfile.objects.get_or_create(user=request.user)
+        if request.method == "POST":
+            profile.display_name = escape(request.POST.get("display_name", "").strip()[:80])
+            profile.bio = escape(request.POST.get("bio", "").strip()[:300])
+            profile.save()
+            messages.success(request, "Profile updated.")
+            return redirect("blog:profile")
 
-    history = (
-        Article.objects.filter(status="published", reading_history__user=request.user)
-        .select_related("publication")
-        .order_by("-reading_history__last_read")[:12]
-    )
-    followed_tags = list(profile.followed_tags.all())
-    followed_publications = list(profile.followed_publications.all())
+        history = (
+            Article.objects.filter(status="published", reading_history__user=request.user)
+            .select_related("publication")
+            .order_by("-reading_history__last_read")[:12]
+        )
+        followed_tags = list(profile.followed_tags.all())
+        followed_publications = list(profile.followed_publications.all())
+    except Exception:
+        logger.warning("Profile unavailable (schema not migrated yet?)")
+        messages.info(request, "Member profile is being set up — please check back soon.")
+        return redirect("blog:home")
     return render(request, "blog/profile.html", {
         "profile": profile,
         "badges": profile.badges(),
@@ -966,11 +977,16 @@ def profile_view(request):
 @login_required
 @require_POST
 def delete_comment(request, comment_id):
-    comment = get_object_or_404(Comment, pk=comment_id)
-    if comment.user_id != request.user.id and not request.user.is_staff:
-        return JsonResponse({"success": False, "error": "Not allowed."}, status=403)
-    comment.delete()
-    return JsonResponse({"success": True})
+    try:
+        comment = get_object_or_404(Comment, pk=comment_id)
+        if comment.user_id != request.user.id and not request.user.is_staff:
+            return JsonResponse({"success": False, "error": "Not allowed."}, status=403)
+        comment.delete()
+        return JsonResponse({"success": True})
+    except Http404:
+        return JsonResponse({"success": False, "error": "Not found."}, status=404)
+    except Exception:
+        return JsonResponse({"success": False, "error": "Temporarily unavailable."}, status=503)
 
 
 # ── Pinterest OAuth (one-time setup) ─────────────────────────────────────────
