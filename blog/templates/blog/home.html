@@ -243,26 +243,6 @@
 </style>
 {% endblock %}
 
-{% block header %}
-<header class="aurora-hero">
-    <span class="eyebrow"><span class="dot"></span> USA Content Hub · 7 Publications</span>
-    <h1>Stories that move <span class="grad">the modern web</span></h1>
-    <p class="lede">Tech, health, finance, travel, recipes, news &amp; trading — {{ total_articles }}+ expertly researched articles, beautifully delivered.</p>
-    <div class="aurora-cta">
-        <a href="{% url 'blog:explore' %}" class="btn-aurora primary">Explore articles →</a>
-        {% if not user.is_authenticated %}
-        <a href="{% url 'blog:register' %}" class="btn-aurora ghost">Create free account</a>
-        {% endif %}
-    </div>
-    <div class="aurora-stats">
-        <div class="aurora-stat"><div class="n">{{ total_articles }}</div><div class="l">Articles</div></div>
-        <div class="aurora-stat"><div class="n">{{ publications|length }}</div><div class="l">Topics</div></div>
-        <div class="aurora-stat"><div class="n">2026</div><div class="l">Fresh daily</div></div>
-    </div>
-    <div class="aurora-scrollcue" aria-hidden="true"></div>
-</header>
-{% endblock %}
-
 {% block content %}
 
 {% if user.is_authenticated %}
