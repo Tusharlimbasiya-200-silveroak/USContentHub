@@ -9,14 +9,12 @@
 .pf-toast{background:var(--primary-light);color:var(--primary-dark);padding:11px 16px;border-radius:12px;margin-bottom:16px;font-size:.9rem;font-weight:600;border:1px solid var(--border);}
 
 /* ---- Hero banner ---- */
-/* outer is NOT clipped so the avatar can overhang; inner clips the deco circles */
-.pf-hero{position:relative;margin-bottom:70px;}
-.pf-hero-inner{position:relative;border-radius:26px;overflow:hidden;background:linear-gradient(135deg,#0f172a 0%,#1d4ed8 54%,#7c3aed 100%);box-shadow:var(--shadow-lg);padding:clamp(1.5rem,4vw,2.6rem);color:#fff;}
-.pf-hero-inner::after{content:"";position:absolute;right:-90px;top:-90px;width:260px;height:260px;border-radius:50%;background:rgba(255,255,255,.12);}
-.pf-hero-inner::before{content:"";position:absolute;left:-70px;bottom:-120px;width:240px;height:240px;border-radius:50%;background:rgba(245,158,11,.16);}
-.pf-hero-row{position:relative;display:flex;align-items:flex-end;gap:20px;flex-wrap:wrap;z-index:1;padding-left:128px;}
-@media(max-width:560px){.pf-hero-row{padding-left:0;padding-top:60px;}}
-.pf-id{flex:1;min-width:220px;}
+/* Avatar is an INLINE flex item (not an overhang), so no overflow ancestor can clip it. */
+.pf-hero{position:relative;border-radius:26px;overflow:hidden;background:linear-gradient(135deg,#0f172a 0%,#1d4ed8 54%,#7c3aed 100%);box-shadow:var(--shadow-lg);padding:clamp(1.6rem,4vw,2.6rem);color:#fff;margin-bottom:22px;}
+.pf-hero::after{content:"";position:absolute;right:-90px;top:-90px;width:260px;height:260px;border-radius:50%;background:rgba(255,255,255,.12);}
+.pf-hero::before{content:"";position:absolute;left:-80px;bottom:-110px;width:230px;height:230px;border-radius:50%;background:rgba(245,158,11,.16);}
+.pf-hero-row{position:relative;display:flex;align-items:center;gap:22px;flex-wrap:wrap;z-index:1;}
+.pf-id{flex:1;min-width:200px;}
 .pf-name{font-size:clamp(1.6rem,4vw,2.4rem);font-weight:900;letter-spacing:-.03em;margin:0;line-height:1.05;}
 .pf-handle{display:inline-block;margin-top:.35rem;font-size:.9rem;font-weight:600;color:#dbeafe;background:rgba(255,255,255,.12);padding:3px 11px;border-radius:999px;}
 .pf-bio{margin:.7rem 0 0;font-size:1rem;line-height:1.7;color:#eef2ff;max-width:620px;}
@@ -27,8 +25,9 @@
 .pf-btn-light{background:#fff;color:#1d4ed8;}
 .pf-btn-ghost{background:rgba(255,255,255,.12);color:#fff;border:1px solid rgba(255,255,255,.28);}
 
-/* big avatar overlapping the hero bottom edge */
-.pf-avatar{width:108px;height:108px;border-radius:50%;background:linear-gradient(135deg,var(--primary),#7c3aed);display:flex;align-items:center;justify-content:center;font-size:2.6rem;font-weight:900;color:#fff;border:5px solid var(--card-bg);box-shadow:var(--shadow-lg);position:absolute;left:clamp(1.5rem,4vw,2.6rem);bottom:-54px;z-index:2;}
+/* inline avatar inside the banner — always fully visible */
+.pf-avatar{flex:0 0 auto;width:96px;height:96px;border-radius:50%;background:linear-gradient(135deg,#22d3ee,#7c3aed);display:flex;align-items:center;justify-content:center;font-size:2.4rem;font-weight:900;color:#fff;border:4px solid rgba(255,255,255,.85);box-shadow:0 8px 24px rgba(0,0,0,.3);}
+@media(max-width:560px){.pf-avatar{width:78px;height:78px;font-size:2rem;}}
 
 /* ---- Stats ---- */
 .pf-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:22px;}
@@ -77,21 +76,19 @@
 
     <!-- Hero -->
     <div class="pf-hero">
-        <div class="pf-hero-inner">
-            <div class="pf-hero-row">
-                <div class="pf-id">
-                    <h1 class="pf-name">{{ profile.shown_name }}</h1>
-                    <span class="pf-handle">@{{ user.username }}</span>
-                    {% if profile.bio %}<p class="pf-bio">{{ profile.bio }}</p>{% endif %}
-                    <div class="pf-since">🗓️ Member since {{ user.date_joined|date:"F Y" }}</div>
-                </div>
-                <div class="pf-actions">
-                    <button type="button" class="pf-btn pf-btn-light" onclick="toggleEdit()">✏️ Edit profile</button>
-                    <a href="/reading-list/" class="pf-btn pf-btn-ghost">📑 Reading list</a>
-                </div>
+        <div class="pf-hero-row">
+            <div class="pf-avatar">{{ profile.shown_name|slice:":1"|upper }}</div>
+            <div class="pf-id">
+                <h1 class="pf-name">{{ profile.shown_name }}</h1>
+                <span class="pf-handle">@{{ user.username }}</span>
+                {% if profile.bio %}<p class="pf-bio">{{ profile.bio }}</p>{% endif %}
+                <div class="pf-since">🗓️ Member since {{ user.date_joined|date:"F Y" }}</div>
+            </div>
+            <div class="pf-actions">
+                <button type="button" class="pf-btn pf-btn-light" onclick="toggleEdit()">✏️ Edit profile</button>
+                <a href="/reading-list/" class="pf-btn pf-btn-ghost">📑 Reading list</a>
             </div>
         </div>
-        <div class="pf-avatar">{{ profile.shown_name|slice:":1"|upper }}</div>
     </div>
 
     <!-- Stats -->
