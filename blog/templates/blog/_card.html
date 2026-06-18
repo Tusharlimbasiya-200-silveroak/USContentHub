@@ -1,9 +1,9 @@
 {# Reusable article card. Expects `a` (Article) in context. #}
 <article class="article-card">
     <div class="card-image">
-        <img src="{{ a.cover_image|default:'https://picsum.photos/seed/usacontenthub/640/360' }}"
+        <img src="{{ a.cover_image|default:'/static/blog/card-default.png' }}"
              alt="{{ a.title }}" loading="lazy" decoding="async" width="640" height="360"
-             onerror="this.onerror=null;this.src='https://picsum.photos/seed/usacontenthub/640/360';">
+             onerror="this.onerror=null;this.src='/static/blog/card-default.png';">
     </div>
     <div class="card-body">
         {% if a.publication %}

@@ -601,7 +601,13 @@ def contact_submit(request):
 # ── Static pages ──────────────────────────────────────────────────────────────
 
 def about_page(request):
-    return render(request, "blog/about.html")
+    from .models import AUTHOR_PROFILES
+
+    team = []
+    for profile in AUTHOR_PROFILES.values():
+        parts = profile["name"].split()
+        team.append({**profile, "initials": "".join(p[0] for p in parts[:2]).upper()})
+    return render(request, "blog/about.html", {"team": team})
 
 
 def privacy_page(request):

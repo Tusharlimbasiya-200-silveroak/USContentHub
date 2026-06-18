@@ -43,10 +43,19 @@ def ads_txt(request):
     return HttpResponse(line + "\n", content_type="text/plain")
 
 
+def indexnow_key_file(request):
+    """Serve the IndexNow key so search engines can verify ownership."""
+    key = getattr(settings, "INDEXNOW_KEY", "")
+    return HttpResponse(key + "\n", content_type="text/plain")
+
+
+_INDEXNOW_KEY = getattr(settings, "INDEXNOW_KEY", "")
+
 urlpatterns = [
     path("admin/", admin.site.urls),
     path("robots.txt", robots_txt),
     path("ads.txt", ads_txt),
+    path(f"{_INDEXNOW_KEY}.txt", indexnow_key_file),
     path("sitemap.xml", sitemap, {"sitemaps": sitemaps}, name="django.contrib.sitemaps.views.sitemap"),
     path("", include("blog.urls")),
     path("accounts/", include("allauth.urls")),

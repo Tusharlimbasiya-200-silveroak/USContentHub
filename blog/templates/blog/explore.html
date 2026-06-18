@@ -155,7 +155,7 @@
         {% for article in trending %}
             {% if forloop.first %}
             <article class="explore-lead">
-                <img src="{{ article.cover_image|default:'https://picsum.photos/seed/usacontenthub/1200/630' }}" alt="{{ article.title }}" loading="eager" decoding="async" width="1200" height="630" onerror="this.onerror=null;this.src='https://picsum.photos/seed/usacontenthub/1200/630';">
+                <img src="{{ article.cover_image|default:'/static/blog/og-default.png' }}" alt="{{ article.title }}" loading="eager" decoding="async" width="1200" height="630" onerror="this.onerror=null;this.src='/static/blog/og-default.png';">
                 <div class="explore-lead-body">
                     {% if article.publication %}<span class="explore-badge">{{ article.publication.icon }} {{ article.publication.name }}</span>{% endif %}
                     <h2><a href="{% url 'blog:article' article.slug %}">{{ article.title }}</a></h2>
@@ -166,7 +166,7 @@
             <div class="explore-side-list">
             {% elif forloop.counter <= 6 %}
                 <article class="explore-mini">
-                    <img src="{{ article.cover_image|default:'https://picsum.photos/seed/usacontenthub/320/240' }}" alt="{{ article.title }}" loading="lazy" decoding="async" width="320" height="240" onerror="this.onerror=null;this.src='https://picsum.photos/seed/usacontenthub/320/240';">
+                    <img src="{{ article.cover_image|default:'/static/blog/card-sm.png' }}" alt="{{ article.title }}" loading="lazy" decoding="async" width="320" height="240" onerror="this.onerror=null;this.src='/static/blog/card-sm.png';">
                     <div>
                         {% if article.publication %}<div class="explore-mini-meta">{{ forloop.counter }} · {{ article.publication.icon }} {{ article.publication.name }}</div>{% else %}<div class="explore-mini-meta">{{ forloop.counter }}</div>{% endif %}
                         <h3><a href="{% url 'blog:article' article.slug %}">{{ article.title }}</a></h3>
@@ -192,7 +192,7 @@
         {% for article in latest_articles %}
         <article class="article-card">
             <div class="card-image">
-                <img src="{{ article.cover_image|default:'https://picsum.photos/seed/usacontenthub/640/360' }}" alt="{{ article.title }}" loading="lazy" decoding="async" width="640" height="360" onerror="this.onerror=null;this.src='https://picsum.photos/seed/usacontenthub/640/360';">
+                <img src="{{ article.cover_image|default:'/static/blog/card-default.png' }}" alt="{{ article.title }}" loading="lazy" decoding="async" width="640" height="360" onerror="this.onerror=null;this.src='/static/blog/card-default.png';">
             </div>
             <div class="card-body">
                 {% if article.publication %}<span class="explore-badge">{{ article.publication.icon }} {{ article.publication.name }}</span>{% endif %}

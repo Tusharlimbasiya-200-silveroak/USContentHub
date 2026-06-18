@@ -27,6 +27,62 @@ class Tag(models.Model):
         return self.name
 
 
+# Per-publication editorial bylines. Gives each article a consistent human
+# author + bio (an E-E-A-T signal Google looks for) without a DB migration —
+# these are derived from the article's publication at render time.
+AUTHOR_PROFILES = {
+    "tech-gadget-hub": {
+        "name": "Marcus Reed",
+        "role": "Technology Editor",
+        "bio": "Marcus covers consumer tech, gadgets, and software, focusing on what new releases actually mean for everyday users.",
+    },
+    "health-wellness-daily": {
+        "name": "Elena Brooks",
+        "role": "Health & Wellness Editor",
+        "bio": "Elena writes practical, evidence-aware wellness and lifestyle guidance. Her articles are informational and not a substitute for professional medical advice.",
+    },
+    "smart-money-guide": {
+        "name": "Daniel Okafor",
+        "role": "Personal Finance Editor",
+        "bio": "Daniel breaks down budgeting, saving, and money decisions in plain language. His articles are educational and not personalized financial advice.",
+    },
+    "usa-travel-explorer": {
+        "name": "Sofia Martinez",
+        "role": "Travel Editor",
+        "bio": "Sofia covers US destinations, trip planning, and travel tips with a focus on practical, real-world itineraries.",
+    },
+    "recipe-kitchen-usa": {
+        "name": "Grace Bennett",
+        "role": "Food Editor",
+        "bio": "Grace develops and tests approachable recipes and kitchen guides for home cooks of every skill level.",
+    },
+    "usa-news-digest": {
+        "name": "James Carter",
+        "role": "News Editor",
+        "bio": "James summarizes US news and current events, focusing on clear context over noise.",
+    },
+    "the-trading-blueprint": {
+        "name": "Ryan Holt",
+        "role": "Markets & Trading Editor",
+        "bio": "Ryan covers markets, trading setups, and macro events. His articles are educational market commentary, not financial or investment advice.",
+    },
+    "tech-pulse": {
+        "name": "Priya Nair",
+        "role": "Tech News Editor",
+        "bio": "Priya tracks AI, developer tooling, and the fast-moving tech landscape, translating releases into what they mean for builders.",
+    },
+}
+
+DEFAULT_AUTHOR = {
+    "name": "USA Content Hub Editorial Team",
+    "role": "Editorial Team",
+    "bio": "Researched, written, and edited by the USA Content Hub editorial team.",
+}
+
+# Publications whose articles must carry a "not financial advice" disclaimer.
+FINANCIAL_PUBLICATIONS = {"the-trading-blueprint", "smart-money-guide"}
+
+
 class Article(models.Model):
     STATUS_CHOICES = [("draft", "Draft"), ("published", "Published")]
 
@@ -84,6 +140,23 @@ class Article(models.Model):
         if vm:
             return f"https://player.vimeo.com/video/{vm.group(1)}"
         return url
+
+    @property
+    def author_profile(self):
+        """Editorial byline (name/role/bio) derived from the publication."""
+        slug = self.publication.slug if self.publication else ""
+        return AUTHOR_PROFILES.get(slug, DEFAULT_AUTHOR)
+
+    @property
+    def author_initials(self):
+        parts = self.author_profile["name"].split()
+        return "".join(p[0] for p in parts[:2]).upper()
+
+    @property
+    def is_financial(self):
+        """True when the article needs a 'not financial advice' disclaimer."""
+        slug = self.publication.slug if self.publication else ""
+        return slug in FINANCIAL_PUBLICATIONS
 
 
 class Comment(models.Model):

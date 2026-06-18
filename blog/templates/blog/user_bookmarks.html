@@ -13,7 +13,7 @@
         {% for article in articles %}
         <article class="article-card">
             <div class="card-image">
-                <img src="{{ article.cover_image|default:'https://picsum.photos/seed/usacontenthub/640/360' }}" alt="{{ article.title }}" loading="lazy" width="640" height="360" onerror="this.onerror=null;this.src='https://picsum.photos/seed/usacontenthub/640/360';">
+                <img src="{{ article.cover_image|default:'/static/blog/card-default.png' }}" alt="{{ article.title }}" loading="lazy" width="640" height="360" onerror="this.onerror=null;this.src='/static/blog/card-default.png';">
             </div>
             <div class="card-body">
                 <h3><a href="{% url 'blog:article' article.slug %}">{{ article.title }}</a></h3>

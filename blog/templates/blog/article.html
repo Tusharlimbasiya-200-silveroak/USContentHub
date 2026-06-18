@@ -7,10 +7,10 @@
 {% block og_description %}{{ article.meta_description|default:article.subtitle|truncatechars:200 }}{% endblock %}
 {% block og_type %}article{% endblock %}
 {% block og_url %}{{ site_url }}/article/{{ article.slug }}/{% endblock %}
-{% block og_image %}{{ article.cover_image|default:"https://picsum.photos/seed/usacontenthub/1200/630" }}{% endblock %}
+{% block og_image %}{% if article.cover_image %}{{ article.cover_image }}{% else %}{{ site_url }}/static/blog/og-default.png{% endif %}{% endblock %}
 {% block twitter_title %}{{ article.title }}{% endblock %}
 {% block twitter_description %}{{ article.meta_description|default:article.subtitle|truncatechars:200 }}{% endblock %}
-{% block twitter_image %}{{ article.cover_image|default:"https://picsum.photos/seed/usacontenthub/1200/630" }}{% endblock %}
+{% block twitter_image %}{% if article.cover_image %}{{ article.cover_image }}{% else %}{{ site_url }}/static/blog/og-default.png{% endif %}{% endblock %}
 
 {% block extra_head %}
 <meta property="article:published_time" content="{{ article.published_at|date:'c' }}">
@@ -32,7 +32,7 @@
     "dateModified": "{{ article.updated_at|date:'c' }}",
     "image": {
         "@type": "ImageObject",
-        "url": "{{ article.cover_image|default:'https://picsum.photos/seed/usacontenthub/1200/630' }}",
+        "url": "{% if article.cover_image %}{{ article.cover_image|escapejs }}{% else %}{{ site_url }}/static/blog/og-default.png{% endif %}",
         "width": 1200,
         "height": 630
     },
@@ -41,9 +41,13 @@
     {% if article.publication %}"articleSection": "{{ article.publication.name|escapejs }}",
     "keywords": "{% for tag in article.tags.all %}{{ tag.name }}{% if not forloop.last %}, {% endif %}{% endfor %}",{% endif %}
     "author": {
-        "@type": "Organization",
-        "name": "USA Content Hub",
-        "url": "{{ site_url }}/"
+        "@type": "Person",
+        "name": "{{ article.author_profile.name|escapejs }}",
+        "jobTitle": "{{ article.author_profile.role|escapejs }}",
+        "worksFor": {
+            "@type": "Organization",
+            "name": "USA Content Hub"
+        }
     },
     "publisher": {
         "@type": "Organization",
@@ -98,7 +102,7 @@
         <h1 itemprop="headline">{{ article.title }}</h1>
         {% if article.subtitle %}<p class="article-subtitle">{{ article.subtitle }}</p>{% endif %}
         <div class="article-meta">
-            <span class="article-author" itemprop="author">✍️ USA Content Hub Team</span>
+            <span class="article-author" itemprop="author" itemscope itemtype="https://schema.org/Person">✍️ By <span itemprop="name">{{ article.author_profile.name }}</span>, <span itemprop="jobTitle">{{ article.author_profile.role }}</span></span>
             <time datetime="{{ article.published_at|date:'Y-m-d' }}" itemprop="datePublished">📅 {{ article.published_at|date:'M d, Y' }}</time>
             <span class="updated-on" title="Last updated">🔄 Last Updated: {{ article.updated_at|date:'M d, Y' }}</span>
             <span class="read-time">⏱️ {{ article.read_time }} min read</span>
@@ -116,7 +120,7 @@
         <img src="{{ article.cover_image }}" alt="{{ article.title }}"
              loading="eager" decoding="async" fetchpriority="high"
              width="1200" height="630" itemprop="image"
-             onerror="this.onerror=null;this.src='https://picsum.photos/seed/usacontenthub/1200/630';">
+             onerror="this.onerror=null;this.src='{{ site_url }}/static/blog/og-default.png';">
     </div>
     {% endif %}
 
@@ -165,9 +169,26 @@
         </div>
     </div>
 
+    {% if article.is_financial %}
+    <aside class="article-disclaimer" role="note" style="margin:1.25rem 0;padding:.9rem 1.1rem;border:1px solid var(--border);border-left:4px solid #f59e0b;border-radius:10px;background:var(--bg-light);font-size:.88rem;line-height:1.65;color:var(--text-light);">
+        <strong>⚠️ Disclaimer:</strong> This article is for educational and informational purposes only and does not constitute financial, investment, or trading advice. Markets carry risk; do your own research and consult a licensed professional before making any financial decision.
+    </aside>
+    {% endif %}
+
     <div class="article-body" itemprop="articleBody">
         {{ article.content|safe }}
     </div>
+
+    <!-- Author / byline box (E-E-A-T) -->
+    <aside class="author-box" style="display:flex;gap:1rem;align-items:flex-start;margin:2rem 0 1rem;padding:1.25rem 1.4rem;border:1px solid var(--border);border-radius:16px;background:var(--card-bg);">
+        <div aria-hidden="true" style="flex:0 0 auto;width:56px;height:56px;border-radius:50%;background:linear-gradient(135deg,var(--primary),#7c3aed);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:1.15rem;">{{ article.author_initials }}</div>
+        <div style="min-width:0;">
+            <p style="margin:0;font-size:.78rem;text-transform:uppercase;letter-spacing:.06em;color:var(--text-muted);font-weight:700;">Written by</p>
+            <p style="margin:.1rem 0 .15rem;font-weight:800;font-size:1.05rem;color:var(--text);">{{ article.author_profile.name }} <span style="font-weight:600;color:var(--primary);font-size:.85rem;">· {{ article.author_profile.role }}</span></p>
+            <p style="margin:0;font-size:.92rem;line-height:1.7;color:var(--text-light);">{{ article.author_profile.bio }}</p>
+            <p style="margin:.55rem 0 0;font-size:.82rem;color:var(--text-muted);">More from <a href="{% if article.publication %}{% url 'blog:publication' article.publication.slug %}{% else %}{% url 'blog:about' %}{% endif %}" style="color:var(--primary);text-decoration:none;font-weight:600;">{% if article.publication %}{{ article.publication.name }}{% else %}USA Content Hub{% endif %}</a> · <a href="{% url 'blog:about' %}" style="color:var(--primary);text-decoration:none;font-weight:600;">About our team</a></p>
+        </div>
+    </aside>
 
     {% if tags %}
     <div class="article-tags">
@@ -296,7 +317,7 @@
         {% for r in related %}
         <article class="article-card">
             <div class="card-image">
-                <img src="{{ r.cover_image|default:'https://picsum.photos/seed/usacontenthub/640/360' }}" alt="{{ r.title }}" loading="lazy" decoding="async" width="640" height="360" onerror="this.onerror=null;this.src='https://picsum.photos/seed/usacontenthub/640/360';">
+                <img src="{{ r.cover_image|default:'/static/blog/card-default.png' }}" alt="{{ r.title }}" loading="lazy" decoding="async" width="640" height="360" onerror="this.onerror=null;this.src='/static/blog/card-default.png';">
             </div>
             <div class="card-body">
                 <h3><a href="{% url 'blog:article' r.slug %}">{{ r.title }}</a></h3>

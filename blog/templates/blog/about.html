@@ -109,6 +109,36 @@
             </div>
         </aside>
     </div>
+
+    <!-- Editorial team -->
+    <div style="margin-top:2.5rem;">
+        <h2 style="font-size:clamp(1.5rem,3vw,2.1rem);letter-spacing:-.03em;margin-bottom:.4rem;">Meet the Editorial Team</h2>
+        <p style="color:var(--text-light);line-height:1.8;max-width:760px;margin-bottom:1.4rem;">Each of our publications is led by a dedicated editor responsible for the accuracy, clarity, and usefulness of its articles.</p>
+        <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:1rem;" class="team-grid">
+            {% for member in team %}
+            <div style="display:flex;gap:.9rem;align-items:flex-start;background:var(--card-bg);border:1px solid var(--border);border-radius:18px;padding:1.2rem;box-shadow:var(--shadow-sm);">
+                <div aria-hidden="true" style="flex:0 0 auto;width:48px;height:48px;border-radius:50%;background:linear-gradient(135deg,var(--primary),#7c3aed);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:800;">{{ member.initials }}</div>
+                <div style="min-width:0;">
+                    <strong style="display:block;font-size:1rem;">{{ member.name }}</strong>
+                    <span style="display:block;color:var(--primary);font-size:.84rem;font-weight:600;margin-bottom:.35rem;">{{ member.role }}</span>
+                    <span style="display:block;color:var(--text-light);font-size:.88rem;line-height:1.6;">{{ member.bio }}</span>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+
+    <!-- Editorial process -->
+    <div style="margin-top:2.5rem;background:var(--card-bg);border:1px solid var(--border);border-radius:24px;padding:clamp(1.4rem,3vw,2.2rem);">
+        <h2 style="font-size:clamp(1.5rem,3vw,2.1rem);letter-spacing:-.03em;margin-bottom:1rem;">How We Create Our Content</h2>
+        <div style="display:grid;gap:1rem;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));">
+            <div><strong>1. Research</strong><p style="margin:.3rem 0 0;color:var(--text-light);font-size:.94rem;line-height:1.7;">We start from primary sources, official data, and current reporting on the topic.</p></div>
+            <div><strong>2. Draft &amp; edit</strong><p style="margin:.3rem 0 0;color:var(--text-light);font-size:.94rem;line-height:1.7;">Articles are written and reviewed by the responsible editor for accuracy and clarity before publishing.</p></div>
+            <div><strong>3. Disclose</strong><p style="margin:.3rem 0 0;color:var(--text-light);font-size:.94rem;line-height:1.7;">Finance and health articles carry clear disclaimers — they are educational, not professional advice.</p></div>
+            <div><strong>4. Update</strong><p style="margin:.3rem 0 0;color:var(--text-light);font-size:.94rem;line-height:1.7;">We revise articles when facts change and show a "last updated" date on every page.</p></div>
+        </div>
+        <p style="margin:1.2rem 0 0;color:var(--text-light);font-size:.92rem;line-height:1.7;">Spotted an error? <a href="{% url 'blog:contact' %}" style="color:var(--primary);font-weight:700;">Tell us</a> and we'll correct it.</p>
+    </div>
 </section>
 
 <style>

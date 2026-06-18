@@ -50,6 +50,13 @@ if not DEBUG and SECRET_KEY == 'django-insecure-dev-only-change-in-production':
 # Site URL — used in robots.txt, sitemaps, and email links
 SITE_URL = os.environ.get('SITE_URL', 'http://localhost:8000').rstrip('/')
 
+# Google AdSense publisher ID — used in ads.txt
+ADSENSE_PUBLISHER_ID = os.environ.get('ADSENSE_PUBLISHER_ID', 'pub-2673860903932624')
+
+# IndexNow key — instantly notifies Bing/Yandex/etc. when articles publish.
+# The key is served at /<key>.txt and sent with each submission ping.
+INDEXNOW_KEY = os.environ.get('INDEXNOW_KEY', 'a3f1c9e84b7d4e2fa6c0b51d9e8273f4')
+
 
 # Application definition
 

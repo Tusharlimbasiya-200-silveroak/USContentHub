@@ -295,11 +295,11 @@
         {% for article in featured_articles %}
         <a href="{% url 'blog:article' article.slug %}" class="featured-card">
             <img class="featured-card-img"
-                 src="{{ article.cover_image|default:'https://picsum.photos/seed/usacontenthub/640/360' }}"
+                 src="{{ article.cover_image|default:'/static/blog/card-default.png' }}"
                  alt="{{ article.title }}"
                  loading="{% if forloop.first %}eager{% else %}lazy{% endif %}"
                  decoding="async" width="640" height="360"
-                 onerror="this.onerror=null;this.src='https://picsum.photos/seed/usacontenthub/640/360';">
+                 onerror="this.onerror=null;this.src='/static/blog/card-default.png';">
             <div class="featured-card-overlay"></div>
             {% if forloop.first %}<span class="hot-badge">Hot</span>{% endif %}
             <div class="featured-card-body">
@@ -356,11 +356,11 @@
         {% for article in articles %}
         <article class="article-card">
             <div class="card-image">
-                <img src="{{ article.cover_image|default:'https://picsum.photos/seed/usacontenthub/640/360' }}"
+                <img src="{{ article.cover_image|default:'/static/blog/card-default.png' }}"
                      alt="{{ article.title }}"
                      loading="{% if forloop.counter <= 3 %}eager{% else %}lazy{% endif %}" decoding="async"
                      width="640" height="360"
-                     onerror="this.onerror=null;this.src='https://picsum.photos/seed/usacontenthub/640/360';">
+                     onerror="this.onerror=null;this.src='/static/blog/card-default.png';">
             </div>
             <div class="card-body">
                 {% if article.publication %}
@@ -538,7 +538,7 @@ function loadMoreArticles() {
             var card = document.createElement('article');
             card.className = 'article-card';
             card.innerHTML =
-                '<div class="card-image"><img src="'+_esc(a.cover_image||'https://picsum.photos/seed/usacontenthub/640/360')+'" alt="'+_esc(a.title)+'" loading="lazy" width="640" height="360" onerror="this.onerror=null;this.src=\'https://picsum.photos/seed/usacontenthub/640/360\';"></div>'+
+                '<div class="card-image"><img src="'+_esc(a.cover_image||'/static/blog/card-default.png')+'" alt="'+_esc(a.title)+'" loading="lazy" width="640" height="360" onerror="this.onerror=null;this.src=\'/static/blog/card-default.png\';"></div>'+
                 '<div class="card-body">'+
                 (a.publication_name?'<div style="margin-bottom:6px;"><a href="/pub/'+_esc(a.publication_slug)+'/" style="display:inline-flex;align-items:center;gap:4px;font-size:.72rem;font-weight:700;color:var(--primary);text-decoration:none;background:var(--primary-light);padding:2px 10px;border-radius:20px;">'+_esc(a.publication_icon)+' '+_esc(a.publication_name)+'</a></div>':'')+
                 '<h3><a href="/article/'+_esc(a.slug)+'/">'+_esc(a.title)+'</a></h3>'+
