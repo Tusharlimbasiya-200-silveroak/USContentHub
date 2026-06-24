@@ -374,9 +374,13 @@ a.logo:hover{color:var(--primary-dark)}
 /* ============================================================
    MAIN LAYOUT
    ============================================================ */
-main.container{display:grid;grid-template-columns:1fr 280px;gap:36px;padding-top:28px;padding-bottom:48px}
-main.container.full-width{grid-template-columns:1fr}
-main.container:has(.article-full){grid-template-columns:1fr;max-width:900px}
+main.container{display:grid;grid-template-columns:minmax(0,1fr) 280px;gap:36px;padding-top:28px;padding-bottom:48px}
+main.container.full-width{grid-template-columns:minmax(0,1fr)}
+main.container:has(.article-full){grid-template-columns:minmax(0,1fr);max-width:900px}
+/* Prevent CSS-grid blowout: grid items default to min-width:auto, which lets wide
+   <pre>/tables stretch the column past the viewport (then clipped by main's overflow).
+   min-width:0 lets the column shrink so inner content scrolls instead. */
+main.container>*{min-width:0}
 .article-full,.related-articles,.newsletter-box,.share-bar,.share-buttons{grid-column:1/-1}
 
 /* ============================================================
@@ -559,7 +563,8 @@ main.container:has(.article-full){grid-template-columns:1fr;max-width:900px}
    RESPONSIVE
    ============================================================ */
 @media(max-width:768px){
-    main.container{grid-template-columns:1fr;padding-top:18px;gap:20px}
+    main.container{grid-template-columns:minmax(0,1fr);padding-top:18px;gap:20px}
+    .article-body table{display:block;width:max-content;max-width:100%;overflow-x:auto;-webkit-overflow-scrolling:touch}
     .sidebar{position:static}
     .article-content{padding:22px 20px;border-radius:var(--radius)}
     .article-header h1{font-size:1.55rem}
