@@ -44,7 +44,18 @@
     box-shadow: 0 2px 8px rgba(47,141,70,.35);
 }
 :root:not([data-theme="dark"]) .nav-logo-usa     { color: var(--gfg-green) !important; }
-:root:not([data-theme="dark"]) .nav-logo-content { color: #1a1a1a !important; }
+/* The brand wordmark uses a gradient text-fill; recolour the gradient itself
+   (a plain `color` is ignored when -webkit-text-fill-color is transparent). */
+.nav-logo-content {
+    background: linear-gradient(90deg, #2f8d46, #1f6e35) !important;
+    -webkit-background-clip: text !important; background-clip: text !important;
+    -webkit-text-fill-color: transparent !important;
+}
+[data-theme="dark"] .nav-logo-content {
+    background: linear-gradient(90deg, #54c172, #2f8d46) !important;
+    -webkit-background-clip: text !important; background-clip: text !important;
+    -webkit-text-fill-color: transparent !important;
+}
 :root:not([data-theme="dark"]) .nav-logo-sep     { color: var(--gfg-line) !important; }
 :root:not([data-theme="dark"]) .nav-link { color: #4a4a4a !important; font-weight: 600; position: relative; }
 :root:not([data-theme="dark"]) .nav-link:hover { color: var(--gfg-green) !important; }
@@ -507,4 +518,44 @@ main.container:has(.topic-sidebar) > *:not(.topic-sidebar) { grid-column: 2 !imp
     max-width: 640px;
     margin: 8px auto 0 !important;
     color: var(--text-light) !important;
+}
+
+/* ── 8. Article byline — clean & content-first ──────────────── */
+/* Quiet, even byline; the writing should lead, not the metadata. */
+.article-full > .article-header .article-meta {
+    gap: 8px 14px !important;
+    font-size: .86rem !important;
+    color: var(--text-muted) !important;
+}
+.article-full > .article-header .article-author { color: var(--text-light) !important; }
+/* Demote the loud green "Last Updated" pill to quiet inline text */
+.article-full > .article-header .article-meta .updated-on {
+    background: none !important;
+    color: var(--text-muted) !important;
+    padding: 0 !important;
+    font-weight: 500 !important;
+    font-size: .82rem !important;
+}
+/* read-time as plain text in the byline (keep the pill on feed cards) */
+.article-full > .article-header .article-meta .read-time {
+    background: none !important;
+    padding: 0 !important;
+    color: var(--text-muted) !important;
+    font-weight: 500 !important;
+}
+/* Word count + raw view count are clutter for readers — hide them here */
+.article-full > .article-header .article-meta .word-count,
+.article-full > .article-header .article-meta .views-count {
+    display: none !important;
+}
+/* Subtle Save / Print actions */
+.article-full > .article-header .article-meta .bookmark-btn,
+.article-full > .article-header .article-meta .print-btn {
+    border-color: var(--border) !important;
+    color: var(--text-muted) !important;
+    font-weight: 600;
+}
+.article-full > .article-header .article-meta .bookmark-btn:hover {
+    border-color: var(--gfg-green, #2f8d46) !important;
+    color: var(--gfg-green-d, #1f6e35) !important;
 }
