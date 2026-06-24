@@ -133,11 +133,13 @@
 :root:not([data-theme="dark"]) .article-body { color: #2f2f2f; font-size: 1.08rem; }
 
 /* GFG-style green section headings with left bar */
+.article-body h2 {
+    padding: 6px 0 8px 14px !important;
+    position: relative;
+}
 :root:not([data-theme="dark"]) .article-body h2 {
     color: #1a1a1a !important;
     border-bottom: 1px solid var(--gfg-line) !important;
-    padding: 6px 0 8px 14px !important;
-    position: relative;
 }
 .article-body h2::before {
     content: "" !important; position: absolute !important;
@@ -361,3 +363,126 @@ main.container:has(.topic-sidebar) > *:not(.topic-sidebar) { grid-column: 2 !imp
 [data-theme="dark"] .article-body blockquote { color: #c4ccdb !important; border-left-color: #2f8d46 !important; }
 [data-theme="dark"] .article-body td,
 [data-theme="dark"] .article-body th { border-color: #283143 !important; color: #d6dce8; }
+
+/* ============================================================
+   MEMBER: Follow button + list header row
+   ============================================================ */
+.list-head-row { display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
+.follow-btn {
+    display: inline-flex; align-items: center; gap: 6px;
+    padding: 8px 18px; border-radius: 30px;
+    border: 1.5px solid var(--gfg-green, #2f8d46);
+    background: var(--gfg-green, #2f8d46); color: #fff !important;
+    font-weight: 700; font-size: .85rem; cursor: pointer;
+    text-decoration: none; white-space: nowrap; transition: all .18s;
+}
+.follow-btn:hover { background: var(--gfg-green-d, #1f6e35); }
+.follow-btn.following { background: transparent; color: var(--gfg-green, #2f8d46) !important; }
+.follow-btn.following:hover { background: var(--primary-light, #e7f6ec); }
+.member-rail .articles-grid { grid-template-columns: repeat(auto-fill, minmax(min(280px,100%),1fr)); }
+
+/* ============================================================
+   READING-EXPERIENCE REFINEMENT v7
+   A calmer, focused long-form reading layout (Medium / Substack feel):
+   comfortable line length, bigger calmer type, content leads the page.
+   Layered last so it wins the cascade over style.css + base gfg rules.
+   ============================================================ */
+
+/* ── 1. Comfortable measure ───────────────────────────────────
+   The article column previously ran ~1100px wide → 120+ chars/line.
+   Center the reading card next to the topics rail and cap it so
+   prose stays around 70–80 characters per line.
+   Scoped >=1025px so the existing 1024px single-column collapse wins. */
+@media (min-width: 1025px) {
+    main.container:has(.topic-sidebar) {
+        grid-template-columns: 256px minmax(0, 760px) !important;
+        justify-content: center !important;
+        max-width: 1120px !important;
+        gap: 56px !important;
+    }
+    /* Article page with no topics rail → narrow, centered single column */
+    main.container:has(.article-full):not(:has(.topic-sidebar)) {
+        max-width: 760px !important;
+    }
+}
+
+/* ── 2. Title & subtitle — more presence, cleaner rhythm ─────── */
+.article-header h1 {
+    font-size: clamp(1.85rem, 1.3rem + 1.7vw, 2.55rem) !important;
+    line-height: 1.2 !important;
+    letter-spacing: -.022em !important;
+    margin-bottom: 14px !important;
+}
+.article-subtitle {
+    font-size: 1.2rem !important;
+    line-height: 1.55 !important;
+    font-style: normal !important;          /* italic subtitle reads dated */
+    color: var(--text-light) !important;
+    margin-bottom: 1.1rem !important;
+}
+@media (max-width: 480px) { .article-subtitle { font-size: 1.05rem !important; } }
+
+/* ── 3. Body copy — larger, airier, easy on the eye ─────────── */
+:root:not([data-theme="dark"]) .article-body,
+.article-body {
+    font-size: 1.15rem !important;
+    line-height: 1.82 !important;
+    letter-spacing: .002em !important;
+}
+.article-body p { margin-bottom: 1.5rem !important; }
+/* Lead paragraph sets the tone */
+.article-body > p:first-of-type {
+    font-size: 1.3rem !important;
+    line-height: 1.6 !important;
+    color: var(--text) !important;
+}
+@media (max-width: 480px) {
+    .article-body { font-size: 1.05rem !important; line-height: 1.78 !important; }
+    .article-body > p:first-of-type { font-size: 1.12rem !important; }
+}
+
+/* ── 4. Let the writing lead — slim the pre-content tools ────── */
+.toc-container {
+    padding: 13px 18px !important;
+    background: var(--gfg-soft, #f6f8f7) !important;
+    font-size: .9rem;
+}
+.toc-container h3 { font-size: .9rem !important; }
+.translate-bar { padding: 6px 14px !important; font-size: .82rem; }
+.tts-player { padding: 10px 14px !important; }
+.tts-label { font-size: .82rem !important; }
+
+/* ── 5. Card polish on the feed — tighter type, calmer meta ──── */
+.article-card h3 { font-size: 1.12rem !important; line-height: 1.35 !important; letter-spacing: -.01em; }
+.article-excerpt, .card-excerpt { color: var(--text-light) !important; font-size: .9rem !important; line-height: 1.6 !important; }
+.section-header h2, .articles-list h2 { letter-spacing: -.02em; }
+
+/* ── 6. Visitor homepage hero — calm publication intro ───────── */
+.home-hero {
+    grid-column: 1 / -1;
+    padding: 6px 0 20px;
+    margin-bottom: 22px;
+    border-bottom: 1px solid var(--gfg-line, #e5e8eb);
+}
+.home-hero h1 {
+    font-size: clamp(1.7rem, 1.15rem + 1.7vw, 2.45rem);
+    line-height: 1.12;
+    letter-spacing: -.028em;
+    color: #1a1a1a;
+    margin: 0 0 10px;
+    font-weight: 800;
+}
+.home-hero h1 .accent { color: var(--gfg-green, #2f8d46); }
+.home-hero p {
+    font-size: 1.08rem;
+    line-height: 1.55;
+    color: var(--text-light, #4d4d4d);
+    max-width: 660px;
+    margin: 0;
+}
+[data-theme="dark"] .home-hero h1 { color: var(--text); }
+[data-theme="dark"] .home-hero { border-bottom-color: #283143; }
+@media (max-width: 480px) {
+    .home-hero { padding: 2px 0 16px; margin-bottom: 16px; }
+    .home-hero p { font-size: .98rem; }
+}
