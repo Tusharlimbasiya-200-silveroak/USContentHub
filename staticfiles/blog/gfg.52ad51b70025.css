@@ -486,3 +486,25 @@ main.container:has(.topic-sidebar) > *:not(.topic-sidebar) { grid-column: 2 !imp
     .home-hero { padding: 2px 0 16px; margin-bottom: 16px; }
     .home-hero p { font-size: .98rem; }
 }
+
+/* ── 7. Consistent listing-page headers (Publication, Tag) ───── */
+.list-head-row h2 {
+    font-size: clamp(1.35rem, 2.4vw, 1.75rem) !important;
+    letter-spacing: -.022em !important;
+    line-height: 1.2;
+    margin: 0;
+}
+/* Publication hero band — larger, calmer, on-brand */
+.site-header .logo {
+    font-size: clamp(1.8rem, 3vw, 2.4rem) !important;
+    letter-spacing: -.025em !important;
+    color: #1a1a1a !important;
+}
+[data-theme="dark"] .site-header .logo { color: var(--text) !important; }
+.site-header .tagline {
+    font-size: 1.02rem !important;
+    line-height: 1.55;
+    max-width: 640px;
+    margin: 8px auto 0 !important;
+    color: var(--text-light) !important;
+}
