@@ -88,6 +88,7 @@
 
 {% block content %}
 <div class="article-shell">
+<div class="article-main">
 <article class="article-full" itemscope itemtype="https://schema.org/Article">
     <header class="article-header gh-hero">
         {% if breadcrumbs %}
@@ -293,16 +294,6 @@
 </section>
 </article>
 
-<aside class="article-rail" aria-label="On this page">
-    <nav class="toc-container" id="tocContainer" style="display:none;">
-        <div class="toc-header">
-            <h3>On this page</h3>
-        </div>
-        <ol id="tocList" class="toc-list"></ol>
-    </nav>
-</aside>
-</div><!-- /.article-shell -->
-
 <!-- Comments Section -->
 <section class="comments-section" style="margin-top:2rem;">
     <h2 style="font-size:1.2rem;margin-bottom:1rem;">💬 Comments ({{ comment_count }})</h2>
@@ -384,6 +375,17 @@
     </form>
     <p id="articleNlMsg" style="display:none;margin-top:.75rem;font-weight:600;"></p>
 </div>
+</div><!-- /.article-main -->
+
+<aside class="article-rail" aria-label="On this page">
+    <nav class="toc-container" id="tocContainer" style="display:none;">
+        <div class="toc-header">
+            <h3>On this page</h3>
+        </div>
+        <ol id="tocList" class="toc-list"></ol>
+    </nav>
+</aside>
+</div><!-- /.article-shell -->
 
 {% endblock %}{# /block content #}
 
