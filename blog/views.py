@@ -33,6 +33,7 @@ from .helpers import (
 )
 from .models import (
     Article,
+    ArticleFeedback,
     ArticleRating,
     Comment,
     NewsletterSubscriber,
@@ -433,6 +434,21 @@ class ArticleDetailView(DetailView):
         ctx["user_rated"] = ArticleRating.objects.filter(
             article=article, ip_address=get_client_ip(self.request)
         ).exists()
+
+        # "Was this helpful?" feedback state
+        try:
+            ctx["helpful_percent"] = article.helpful_percent()
+            ctx["feedback_count"] = article.feedback_count()
+            ctx["user_feedback"] = (
+                ArticleFeedback.objects.filter(
+                    article=article, ip_address=get_client_ip(self.request)
+                ).values_list("helpful", flat=True).first()
+            )
+        except Exception:
+            logger.warning("Feedback unavailable (schema not migrated yet?)")
+            ctx["helpful_percent"] = 0
+            ctx["feedback_count"] = 0
+            ctx["user_feedback"] = None
         ctx["is_bookmarked"] = False
         if self.request.user.is_authenticated:
             try:
@@ -662,6 +678,52 @@ def rate_article(request, slug):
     except Exception:
         # Graceful fallback for read-only DB environments
         return JsonResponse({"success": True, "avg_rating": score, "rating_count": 1, "your_score": score})
+
+
+# ── "Was this helpful?" feedback ──────────────────────────────────────────────
+
+@require_POST
+def article_feedback(request, slug):
+    article = get_object_or_404(Article, slug=slug, status="published")
+    ip = get_client_ip(request)
+    rl_key = f"feedback_rate_{ip}"
+
+    if check_rate_limit(rl_key, 30):
+        return JsonResponse(
+            {"success": False, "error": "Too many submissions. Please try again later."},
+            status=429,
+        )
+    bump_rate_counter(rl_key, 3600)
+
+    raw = (request.POST.get("helpful") or "").strip().lower()
+    if raw not in ("1", "true", "yes", "0", "false", "no"):
+        return JsonResponse({"success": False, "error": "Invalid feedback."}, status=400)
+    helpful = raw in ("1", "true", "yes")
+
+    comment = (request.POST.get("comment") or "").strip()[:280]
+
+    try:
+        with transaction.atomic():
+            ArticleFeedback.objects.update_or_create(
+                article=article, ip_address=ip,
+                defaults={
+                    "helpful": helpful,
+                    "comment": comment,
+                    "user": request.user if request.user.is_authenticated else None,
+                },
+            )
+        return JsonResponse({
+            "success": True,
+            "helpful_percent": article.helpful_percent(),
+            "feedback_count": article.feedback_count(),
+        })
+    except Exception:
+        # Graceful fallback for read-only DB environments (mirrors rate_article)
+        return JsonResponse({
+            "success": True,
+            "helpful_percent": 100 if helpful else 0,
+            "feedback_count": 1,
+        })
 
 
 # ── Load more (AJAX pagination) ───────────────────────────────────────────────

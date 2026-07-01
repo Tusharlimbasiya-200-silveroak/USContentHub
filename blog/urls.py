@@ -15,6 +15,7 @@ urlpatterns = [
     path("article/<slug:slug>/", views.ArticleDetailView.as_view(), name="article"),
     path("article/<slug:slug>/comment/", views.add_comment, name="add_comment"),
     path("article/<slug:slug>/rate/", views.rate_article, name="rate_article"),
+    path("article/<slug:slug>/feedback/", views.article_feedback, name="article_feedback"),
     path("article/<slug:slug>/bookmark/", views.toggle_bookmark, name="toggle_bookmark"),
     path("comment/<int:comment_id>/delete/", views.delete_comment, name="delete_comment"),
     path("pub/<slug:slug>/", views.PublicationView.as_view(), name="publication"),

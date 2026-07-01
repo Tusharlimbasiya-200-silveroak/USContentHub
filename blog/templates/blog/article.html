@@ -270,6 +270,34 @@
         {% if user_rated %}<span style="color:#10b981;"> · You rated this</span>{% endif %}
     </p>
 </section>
+
+<!-- Was this helpful? -->
+<section class="feedback-section" id="feedbackSection"
+         data-voted="{% if user_feedback is not None %}1{% else %}0{% endif %}"
+         style="margin:1.5rem 0;padding:1.5rem;background:var(--bg-light);border-radius:var(--radius);text-align:center;">
+    <h3 style="margin:0 0 .75rem;font-size:1rem;">Was this article helpful?</h3>
+
+    <div id="feedbackButtons" style="display:flex;gap:.6rem;justify-content:center;flex-wrap:wrap;{% if user_feedback is not None %}display:none;{% endif %}">
+        <button type="button" class="fb-btn" data-helpful="1"
+                style="padding:9px 22px;border:1px solid var(--border);border-radius:22px;background:var(--bg);color:var(--text);cursor:pointer;font-size:.9rem;font-weight:600;">👍 Yes</button>
+        <button type="button" class="fb-btn" data-helpful="0"
+                style="padding:9px 22px;border:1px solid var(--border);border-radius:22px;background:var(--bg);color:var(--text);cursor:pointer;font-size:.9rem;font-weight:600;">👎 Not really</button>
+    </div>
+
+    <div id="feedbackNote" style="display:none;max-width:460px;margin:.9rem auto 0;">
+        <p style="font-size:.85rem;color:var(--text-light);margin:0 0 .5rem;" id="feedbackNotePrompt">Thanks! Anything we could improve? (optional)</p>
+        <textarea id="feedbackComment" maxlength="280" rows="2" placeholder="Your suggestion…"
+                  style="width:100%;padding:10px 14px;border:1px solid var(--border);border-radius:var(--radius);background:var(--bg);color:var(--text);font-size:.9rem;resize:vertical;font-family:inherit;"></textarea>
+        <button type="button" id="feedbackSend"
+                style="margin-top:.5rem;padding:8px 22px;background:var(--primary);color:#fff;border:none;border-radius:20px;cursor:pointer;font-size:.85rem;font-weight:600;">Send feedback</button>
+    </div>
+
+    <p id="feedbackThanks" style="font-size:.9rem;color:#10b981;font-weight:600;margin:.5rem 0 0;{% if user_feedback is None %}display:none;{% endif %}">✓ Thanks for your feedback!</p>
+
+    <p id="feedbackStats" style="font-size:.8rem;color:var(--text-muted);margin:.6rem 0 0;{% if not feedback_count %}display:none;{% endif %}">
+        {% if feedback_count %}{{ helpful_percent }}% of {{ feedback_count }} reader{{ feedback_count|pluralize }} found this helpful{% endif %}
+    </p>
+</section>
 </article>
 
 <!-- Comments Section -->
@@ -380,6 +408,71 @@ function submitRating(score) {
         info.innerHTML = '<span style="color:#ef4444;">' + ((d && d.error) || 'Could not save your rating. Please try again.') + '</span>';
     });
 }
+
+/* Was this helpful? */
+(function () {
+    var section = document.getElementById('feedbackSection');
+    if (!section) { return; }
+    var chosen = null;
+
+    function csrf() {
+        var el = document.querySelector('[name=csrfmiddlewaretoken]');
+        return el ? el.value : '';
+    }
+
+    function send(helpful, comment) {
+        var token = csrf();
+        var fd = new FormData();
+        fd.append('helpful', helpful);
+        if (comment) { fd.append('comment', comment); }
+        fd.append('csrfmiddlewaretoken', token);
+        return fetch('/article/{{ article.slug }}/feedback/', {
+            method: 'POST', body: fd,
+            headers: { 'X-CSRFToken': token }, credentials: 'same-origin'
+        }).then(function (r) { return r.json().then(function (d) { if (!r.ok) { throw d; } return d; }); });
+    }
+
+    function showStats(d) {
+        var stats = document.getElementById('feedbackStats');
+        if (stats && d && typeof d.feedback_count !== 'undefined') {
+            stats.textContent = d.helpful_percent + '% of ' + d.feedback_count +
+                ' reader' + (d.feedback_count === 1 ? '' : 's') + ' found this helpful';
+            stats.style.display = '';
+        }
+    }
+
+    document.querySelectorAll('#feedbackButtons .fb-btn').forEach(function (btn) {
+        btn.addEventListener('click', function () {
+            chosen = btn.getAttribute('data-helpful');
+            document.getElementById('feedbackButtons').style.display = 'none';
+            var prompt = document.getElementById('feedbackNotePrompt');
+            if (prompt) {
+                prompt.textContent = chosen === '1'
+                    ? 'Glad it helped! Anything you’d add? (optional)'
+                    : 'Sorry to hear that. How could we improve? (optional)';
+            }
+            document.getElementById('feedbackNote').style.display = 'block';
+            // Record the vote immediately; the note is an optional follow-up.
+            send(chosen, '').then(showStats).catch(function () {});
+        });
+    });
+
+    var sendBtn = document.getElementById('feedbackSend');
+    if (sendBtn) {
+        sendBtn.addEventListener('click', function () {
+            var comment = (document.getElementById('feedbackComment').value || '').trim();
+            sendBtn.disabled = true;
+            send(chosen, comment).then(function (d) {
+                document.getElementById('feedbackNote').style.display = 'none';
+                document.getElementById('feedbackThanks').style.display = '';
+                showStats(d);
+            }).catch(function () {
+                document.getElementById('feedbackNote').style.display = 'none';
+                document.getElementById('feedbackThanks').style.display = '';
+            });
+        });
+    }
+})();
 
 /* Table of Contents */
 (function(){

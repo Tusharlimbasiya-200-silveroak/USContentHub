@@ -1,6 +1,15 @@
 from django.contrib import admin
 
-from .models import Article, ArticleRating, Comment, NewsletterSubscriber, Publication, Tag, UserProfile
+from .models import (
+    Article,
+    ArticleFeedback,
+    ArticleRating,
+    Comment,
+    NewsletterSubscriber,
+    Publication,
+    Tag,
+    UserProfile,
+)
 
 
 @admin.register(Publication)
@@ -54,6 +63,15 @@ class NewsletterSubscriberAdmin(admin.ModelAdmin):
 class ArticleRatingAdmin(admin.ModelAdmin):
     list_display = ("article", "score", "ip_address", "created_at")
     list_filter = ("score",)
+
+
+@admin.register(ArticleFeedback)
+class ArticleFeedbackAdmin(admin.ModelAdmin):
+    list_display = ("article", "helpful", "comment", "user", "ip_address", "created_at")
+    list_filter = ("helpful", "created_at")
+    search_fields = ("article__title", "comment")
+    date_hierarchy = "created_at"
+    list_per_page = 50
 
 
 @admin.register(UserProfile)

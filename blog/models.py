@@ -128,6 +128,19 @@ class Article(models.Model):
     def rating_count(self):
         return self.ratings.count()
 
+    def feedback_count(self):
+        return self.feedback.count()
+
+    def helpful_count(self):
+        return self.feedback.filter(helpful=True).count()
+
+    def helpful_percent(self):
+        """Percentage of feedback votes that marked the article helpful."""
+        total = self.feedback_count()
+        if not total:
+            return 0
+        return round(self.helpful_count() * 100 / total)
+
     def embed_video_url(self):
         """Convert YouTube/Vimeo URLs to embeddable format."""
         url = self.video_url
@@ -203,6 +216,32 @@ class ArticleRating(models.Model):
 
     def __str__(self):
         return f"{self.score}/5 on {self.article.title[:30]}"
+
+
+class ArticleFeedback(models.Model):
+    """Lightweight 'Was this helpful?' signal — one vote per IP per article,
+    with an optional short free-text note. Directly tied to content quality
+    and the cheapest reader-research signal we collect."""
+
+    article = models.ForeignKey(Article, on_delete=models.CASCADE, related_name="feedback")
+    ip_address = models.GenericIPAddressField()
+    user = models.ForeignKey(
+        User, on_delete=models.SET_NULL, null=True, blank=True, related_name="feedback"
+    )
+    helpful = models.BooleanField()
+    comment = models.CharField(max_length=280, blank=True, default="")
+    created_at = models.DateTimeField(auto_now_add=True, db_index=True)
+
+    class Meta:
+        unique_together = ("article", "ip_address")
+        ordering = ["-created_at"]
+        indexes = [
+            models.Index(fields=["article", "helpful"], name="idx_feedback_article"),
+        ]
+
+    def __str__(self):
+        verdict = "helpful" if self.helpful else "not helpful"
+        return f"{verdict} on {self.article.title[:30]}"
 
 
 class UserProfile(models.Model):
