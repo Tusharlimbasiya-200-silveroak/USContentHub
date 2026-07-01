@@ -13,6 +13,7 @@
 {% block twitter_image %}{% if article.cover_image %}{{ article.cover_image }}{% else %}{{ site_url }}/static/blog/og-default.png{% endif %}{% endblock %}
 
 {% block extra_head %}
+{% if article.cover_image %}<link rel="preload" as="image" href="{{ article.cover_image }}" fetchpriority="high">{% endif %}
 <meta property="article:published_time" content="{{ article.published_at|date:'c' }}">
 <meta property="article:modified_time" content="{{ article.updated_at|date:'c' }}">
 {% if article.publication %}<meta property="article:section" content="{{ article.publication.name }}">{% endif %}
@@ -403,6 +404,7 @@ function submitRating(score) {
             stars.forEach(function(s, i) {
                 s.className = 'star ' + (i < Math.round(d.avg_rating) ? 'filled' : 'empty');
             });
+            if (window.track) track('rate_article', {score: score});
         }
     })
     .catch(function(d) {
@@ -454,6 +456,7 @@ function submitRating(score) {
                     : 'Sorry to hear that. How could we improve? (optional)';
             }
             document.getElementById('feedbackNote').style.display = 'block';
+            if (window.track) track('article_feedback', {helpful: chosen === '1'});
             // Record the vote immediately; the note is an optional follow-up.
             send(chosen, '').then(showStats).catch(function () {});
         });
@@ -534,6 +537,7 @@ function toggleBookmark(){
         if(!d)return;
         serverBookmarked=!!d.bookmarked;
         updateBookmarkUI();
+        if(window.track) track(d.bookmarked?'bookmark_add':'bookmark_remove', {slug:'{{ article.slug }}'});
     })
     .catch(function(){alert('Could not update saved article. Please try again.');})
     .finally(function(){btn.disabled=false;});
@@ -861,5 +865,40 @@ function copyShareTemplate() {
         fallbackCopy(text, onCopied);
     }
 }
+
+/* Engagement analytics: share clicks, scroll depth, read-complete */
+(function(){
+    if (!window.track) return;
+    /* Share clicks (delegated on the share bar) */
+    var bar = document.querySelector('.share-bar-btns');
+    if (bar) bar.addEventListener('click', function(e){
+        var a = e.target.closest('a, button'); if(!a) return;
+        var net = (a.getAttribute('aria-label')||a.className||'link').replace(/^Share on\s*/i,'').trim();
+        track('share', {network: net});
+    });
+    /* Scroll depth (25/50/75/100) + read-complete, each fired once */
+    var body = document.querySelector('.article-body');
+    var fired = {};
+    function pct(){
+        var el = document.documentElement;
+        var max = el.scrollHeight - el.clientHeight;
+        return max <= 0 ? 100 : Math.round(window.scrollY / max * 100);
+    }
+    var ticking = false;
+    window.addEventListener('scroll', function(){
+        if (ticking) return; ticking = true;
+        requestAnimationFrame(function(){
+            var p = pct();
+            [25,50,75,100].forEach(function(t){
+                if (p >= t && !fired[t]) { fired[t] = true; track('scroll_depth', {percent: t}); }
+            });
+            if (body && !fired.read) {
+                var end = body.getBoundingClientRect().bottom;
+                if (end <= window.innerHeight + 40) { fired.read = true; track('read_complete', {slug: '{{ article.slug }}'}); }
+            }
+            ticking = false;
+        });
+    }, {passive: true});
+})();
 </script>
 {% endblock %}{# /block extra_js #}

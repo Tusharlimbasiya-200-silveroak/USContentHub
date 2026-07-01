@@ -630,6 +630,76 @@ def privacy_page(request):
     return render(request, "blog/privacy.html")
 
 
+def offline_page(request):
+    """Fallback page shown by the service worker when the user is offline."""
+    return render(request, "blog/offline.html")
+
+
+# Service worker: served at site root so its scope covers the whole origin.
+# HTML uses network-first (never serves stale pages when online); same-origin
+# static is cache-first (assets are hash-versioned); cross-origin (ads, fonts,
+# analytics, image CDNs) is left untouched. Bump CACHE_VERSION to invalidate.
+_SERVICE_WORKER_JS = """
+const CACHE = 'uch-v1';
+const OFFLINE_URL = '/offline/';
+
+self.addEventListener('install', function (event) {
+  self.skipWaiting();
+  event.waitUntil(caches.open(CACHE).then(function (c) { return c.add(OFFLINE_URL); }));
+});
+
+self.addEventListener('activate', function (event) {
+  event.waitUntil(
+    caches.keys().then(function (keys) {
+      return Promise.all(keys.filter(function (k) { return k !== CACHE; }).map(function (k) { return caches.delete(k); }));
+    }).then(function () { return self.clients.claim(); })
+  );
+});
+
+self.addEventListener('fetch', function (event) {
+  const req = event.request;
+  if (req.method !== 'GET') { return; }
+  const url = new URL(req.url);
+  if (url.origin !== self.location.origin) { return; }  // don't touch ads/fonts/analytics/CDN
+
+  if (req.mode === 'navigate') {
+    // Network-first for pages so we never serve stale HTML when online.
+    event.respondWith(
+      fetch(req).then(function (res) {
+        const copy = res.clone();
+        caches.open(CACHE).then(function (c) { c.put(req, copy); });
+        return res;
+      }).catch(function () {
+        return caches.match(req).then(function (m) { return m || caches.match(OFFLINE_URL); });
+      })
+    );
+    return;
+  }
+
+  if (url.pathname.indexOf('/static/') === 0) {
+    // Cache-first for hash-versioned static assets.
+    event.respondWith(
+      caches.match(req).then(function (m) {
+        return m || fetch(req).then(function (res) {
+          const copy = res.clone();
+          caches.open(CACHE).then(function (c) { c.put(req, copy); });
+          return res;
+        });
+      })
+    );
+  }
+});
+"""
+
+
+def service_worker(request):
+    """Serve the service worker from the site root with root scope."""
+    resp = HttpResponse(_SERVICE_WORKER_JS, content_type="application/javascript")
+    resp["Service-Worker-Allowed"] = "/"
+    resp["Cache-Control"] = "no-cache"
+    return resp
+
+
 # ── Pinterest domain verification ─────────────────────────────────────────────
 
 def pinterest_verify(request):

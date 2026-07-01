@@ -18,10 +18,16 @@
     <meta name="theme-color" content="#2b7a44" media="(prefers-color-scheme: light)">
     <meta name="theme-color" content="#14150f" media="(prefers-color-scheme: dark)">
     <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📚</text></svg>">
+    <!-- PWA: installable + offline -->
+    <link rel="manifest" href="{% static 'blog/site.webmanifest' %}">
+    <link rel="apple-touch-icon" href="{% static 'blog/icon-192.png' %}">
+    <meta name="apple-mobile-web-app-title" content="Content Hub">
     <!-- Resource hints: preconnect for above-fold external origins, dns-prefetch for the rest -->
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400..600;1,9..144,400..500&display=swap">
+    <!-- Fraunces loaded non-render-blocking (print→all swap) to protect LCP; font-display:swap avoids invisible text -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400..600;1,9..144,400..500&display=swap" media="print" onload="this.media='all'">
+    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400..600;1,9..144,400..500&display=swap"></noscript>
     <link rel="dns-prefetch" href="https://www.googletagmanager.com">
     <link rel="dns-prefetch" href="https://www.google-analytics.com">
     <link rel="preconnect" href="https://pagead2.googlesyndication.com" crossorigin>
@@ -455,12 +461,23 @@
         })
         .then(function(r) { return r.json(); })
         .then(function(d) {
-            if (d.success) { msgEl.style.color = '#10b981'; msgEl.textContent = '✅ ' + d.message; emailInput.value = ''; }
+            if (d.success) { msgEl.style.color = '#10b981'; msgEl.textContent = '✅ ' + d.message; emailInput.value = ''; track('newsletter_subscribe', {location: 'footer'}); }
             else { msgEl.style.color = '#ef4444'; msgEl.textContent = '❌ ' + d.error; }
             msgEl.style.display = 'block';
         })
         .catch(function() { msgEl.style.color = '#ef4444'; msgEl.textContent = '❌ Something went wrong.'; msgEl.style.display = 'block'; });
         return false;
+    }
+
+    /* GA4 engagement events — safe no-op if gtag isn't loaded (e.g. ad blocker) */
+    function track(name, params){ try{ if(typeof gtag==='function'){ gtag('event', name, params||{}); } }catch(e){} }
+    window.track = track;
+
+    /* Service worker: installable + offline, HTML network-first so it can't serve stale pages */
+    if ('serviceWorker' in navigator) {
+        window.addEventListener('load', function(){
+            navigator.serviceWorker.register('/sw.js').catch(function(){});
+        });
     }
     </script>
 

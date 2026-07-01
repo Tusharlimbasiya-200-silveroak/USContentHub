@@ -39,7 +39,7 @@ class SecurityHeadersMiddleware:
             request.method in {"GET", "HEAD"}
             and response.status_code == 200
             and "Set-Cookie" not in response
-            and not request.path.startswith(("/contact/", "/csrf/", "/newsletter/", "/api/"))
+            and not request.path.startswith(("/contact/", "/csrf/", "/newsletter/", "/api/", "/sw.js"))
         ):
             response["Cache-Control"] = "public, max-age=60, s-maxage=300, stale-while-revalidate=86400"
 
