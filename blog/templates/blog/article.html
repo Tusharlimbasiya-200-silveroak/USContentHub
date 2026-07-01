@@ -86,9 +86,9 @@
 {% block header %}{% endblock %}
 
 {% block content %}
-{% include "blog/_topic_sidebar.html" %}
+<div class="article-shell">
 <article class="article-full" itemscope itemtype="https://schema.org/Article">
-    <header class="article-header">
+    <header class="article-header gh-hero">
         {% if breadcrumbs %}
         <nav class="breadcrumbs" aria-label="Breadcrumb">
             {% for label, url in breadcrumbs %}
@@ -97,17 +97,17 @@
         </nav>
         {% endif %}
         {% if article.publication %}
-        <a href="{% url 'blog:publication' article.publication.slug %}" class="pub-badge" style="color:var(--primary);text-decoration:none;font-size:.9rem;margin-bottom:.5rem;display:inline-block;">{{ article.publication.icon }} {{ article.publication.name }}</a>
+        <a href="{% url 'blog:publication' article.publication.slug %}" class="gh-badge">{{ article.publication.icon }} {{ article.publication.name }}</a>
         {% endif %}
+        <p class="gh-kicker">
+            <time datetime="{{ article.published_at|date:'Y-m-d' }}" itemprop="datePublished">{{ article.published_at|date:'M j, Y' }}</time>
+            <span class="gh-dot">·</span> {{ article.read_time }} min read
+        </p>
         <h1 itemprop="headline">{{ article.title }}</h1>
         {% if article.subtitle %}<p class="article-subtitle">{{ article.subtitle }}</p>{% endif %}
-        <div class="article-meta">
+        <div class="article-meta gh-meta">
             <span class="article-author" itemprop="author" itemscope itemtype="https://schema.org/Person">✍️ By <span itemprop="name">{{ article.author_profile.name }}</span>, <span itemprop="jobTitle">{{ article.author_profile.role }}</span></span>
-            <time datetime="{{ article.published_at|date:'Y-m-d' }}" itemprop="datePublished">📅 {{ article.published_at|date:'M d, Y' }}</time>
-            <span class="updated-on" title="Last updated">🔄 Last Updated: {{ article.updated_at|date:'M d, Y' }}</span>
-            <span class="read-time">⏱️ {{ article.read_time }} min read</span>
-            <span class="word-count">📝 {{ article.word_count }} words</span>
-            <span class="views-count">👁️ {{ article.views }} views</span>
+            <span class="updated-on" title="Last updated">🔄 Updated {{ article.updated_at|date:'M d, Y' }}</span>
             <button class="bookmark-btn" id="bookmarkBtn" onclick="toggleBookmark()" title="Save to Reading List" style="background:none;border:1px solid var(--border);border-radius:20px;padding:4px 12px;cursor:pointer;font-size:.82rem;color:var(--text-light);transition:all .2s;">
                 <span id="bookmarkIcon">🔖</span> <span id="bookmarkText">Save</span>
             </button>
@@ -130,14 +130,6 @@
     </div>
     {% endif %}
 
-    <!-- Table of Contents -->
-    <nav class="toc-container" id="tocContainer" style="display:none;">
-        <div class="toc-header" onclick="document.getElementById('tocList').classList.toggle('collapsed')">
-            <h3 style="margin:0;font-size:.95rem;font-weight:700;">📋 Table of Contents</h3>
-            <span class="toc-toggle" style="font-size:1.1rem;cursor:pointer;">▼</span>
-        </div>
-        <ol id="tocList" class="toc-list"></ol>
-    </nav>
 
     <div class="translate-bar notranslate">
         🌐 <span>Translate:</span>
@@ -299,6 +291,16 @@
     </p>
 </section>
 </article>
+
+<aside class="article-rail" aria-label="On this page">
+    <nav class="toc-container" id="tocContainer" style="display:none;">
+        <div class="toc-header">
+            <h3>On this page</h3>
+        </div>
+        <ol id="tocList" class="toc-list"></ol>
+    </nav>
+</aside>
+</div><!-- /.article-shell -->
 
 <!-- Comments Section -->
 <section class="comments-section" style="margin-top:2rem;">

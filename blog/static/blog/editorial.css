@@ -425,3 +425,84 @@ main.container:has(.article-full) { max-width: 920px !important; }
     .article-body { font-size: 1.06rem !important; }
     .card-body { padding: 16px 16px 18px !important; }
 }
+
+/* ── 13. GitHub-changelog article layout (in the green editorial brand) ──────
+   Centered hero (badge → caps meta → headline → hero image), a constrained
+   reading column, and a sticky "On this page" TOC on the right. */
+
+/* Widen the article container so the shell can breathe; beat gfg's 760 cap
+   (same selector as gfg, later source order wins). */
+main.container:has(.article-full):not(:has(.topic-sidebar)) { max-width: 1180px !important; }
+
+.article-shell {
+    display: grid;
+    grid-template-columns: minmax(0, 720px);
+    justify-content: center;
+    gap: 56px;
+    align-items: start;
+    margin: 0 auto;
+}
+/* Reserve the right rail only when the TOC is actually shown (JS flips it to
+   display:block once an article has ≥3 headings) — short posts stay centered. */
+.article-shell:has(.toc-container[style*="block"]) {
+    grid-template-columns: minmax(0, 720px) 240px;
+}
+/* Pin columns: style.css sets a global `.article-full{grid-column:1/-1}` which
+   would make the article span the rail's column too — force it back to col 1. */
+.article-shell > .article-full { min-width: 0; grid-column: 1 !important; grid-row: 1; }
+.article-rail { grid-column: 2 !important; grid-row: 1; position: sticky; top: 92px; align-self: start; }
+.article-shell:not(:has(.toc-container[style*="block"])) .article-rail { display: none; }
+
+@media (max-width: 1024px) {
+    .article-shell,
+    .article-shell:has(.toc-container[style*="block"]) { grid-template-columns: minmax(0, 1fr); max-width: 760px; }
+    .article-rail { display: none !important; }
+}
+
+/* Centered hero */
+.gh-hero { text-align: center; border-bottom: 1px solid var(--border);
+    padding-bottom: 1.9rem; margin-bottom: 2.1rem; }
+.gh-hero .breadcrumbs { display: flex; justify-content: center; flex-wrap: wrap;
+    gap: 2px; margin-bottom: 1.3rem; }
+.gh-badge { display: inline-block; text-decoration: none;
+    font-family: var(--font-sans); font-weight: 700; font-size: .72rem;
+    text-transform: uppercase; letter-spacing: .09em;
+    color: var(--primary-dark); background: var(--primary-light);
+    padding: 5px 14px; border-radius: 999px; margin-bottom: 1.1rem; }
+.gh-badge:hover { filter: brightness(.97); }
+.gh-kicker { font-family: var(--font-sans); font-size: .78rem; font-weight: 600;
+    text-transform: uppercase; letter-spacing: .1em; color: var(--text-muted);
+    margin: 0 0 1rem; }
+.gh-kicker .gh-dot { margin: 0 .35em; }
+.gh-hero h1 { margin-left: auto; margin-right: auto; max-width: 20ch; text-wrap: balance; }
+.gh-hero .article-subtitle { margin-left: auto; margin-right: auto; text-align: center; }
+.gh-meta { justify-content: center !important; margin-top: 1.3rem !important; }
+
+/* Hero cover framed to the reading column */
+.article-shell .article-cover { margin: 0 0 2rem !important; }
+
+/* Right rail — "On this page" (GitHub-style hairline list) */
+.article-rail .toc-container {
+    margin: 0 !important; padding: 0 0 0 20px !important; background: none !important;
+    border: none !important; border-left: 1px solid var(--border) !important;
+    border-radius: 0 !important; }
+.article-rail .toc-header { cursor: default; margin: 0 0 .7rem !important; padding: 0 !important;
+    display: block !important; }
+.article-rail .toc-header h3 { font-family: var(--font-sans) !important; font-weight: 700 !important;
+    font-size: .72rem !important; text-transform: uppercase; letter-spacing: .09em;
+    color: var(--text-muted) !important; margin: 0 !important; }
+.article-rail .toc-list { list-style: none !important; padding: 0 !important; margin: 0 !important;
+    display: flex; flex-direction: column; gap: 1px; }
+.article-rail .toc-list li { margin: 0 !important; }
+.article-rail .toc-list a { display: block; padding: 5px 0 5px 12px; margin-left: -21px;
+    font-size: .85rem; line-height: 1.4; color: var(--text-light) !important;
+    text-decoration: none !important; border-left: 2px solid transparent;
+    transition: color .15s, border-color .15s; }
+.article-rail .toc-list a:hover { color: var(--primary-dark) !important;
+    border-left-color: var(--primary) !important; }
+
+/* Keep below-article sections aligned to the reading column */
+main.container:has(.article-full) > .comments-section,
+main.container:has(.article-full) > .related-articles,
+main.container:has(.article-full) > .newsletter-box {
+    max-width: 720px; margin-left: auto; margin-right: auto; width: 100%; }
